@@ -1,12 +1,13 @@
 // ----------------------------------------------------------------------
 
-// function path(root, sublink) {
-//   return `${root}${sublink}`;
-// }
+function path(root, sublink) {
+  return `${root}${sublink}`;
+}
 
 const ROOTS_DASHBOARD = "/";
 const ROOTS_ASSETS = "/assets";
 const ROOTS_PROFILE = "/profile";
+const ROOTS_NEW = "/new";
 
 // ----------------------------------------------------------------------
 
@@ -16,6 +17,7 @@ export const PATH_AUTH = {
 
 export const PATH_DASHBOARD = {
   root: ROOTS_DASHBOARD,
+  one: path(ROOTS_DASHBOARD, "/one"),
 };
 
 export const PATH_ASSETS = {
@@ -24,6 +26,12 @@ export const PATH_ASSETS = {
 
 export const PATH_PROFILE = {
   root: ROOTS_PROFILE,
+};
+
+export const PATH_NEW = {
+  root: ROOTS_NEW,
+  id: path(ROOTS_NEW, "/[id]"),
+  edit: path(ROOTS_NEW, "/edit"), // '/new/edit'
 };
 
 export const BOTTOM_NAVIGATION_OPTIONS = [
@@ -61,6 +69,11 @@ export const BOTTOM_NAVIGATION_OPTIONS = [
   {
     path: PATH_PROFILE.root,
     label: "Profile",
+    icon: "eva:person-outline",
+  },
+  {
+    path: PATH_NEW.root,
+    label: "New",
     icon: "eva:person-outline",
   },
 ];
