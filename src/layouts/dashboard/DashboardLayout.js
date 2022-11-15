@@ -39,7 +39,7 @@ export default function DashboardLayout({ pageTitle, children }) {
           display: { lg: "flex" },
           minHeight: { lg: 1 },
         }}>
-        <BottomNavigation />
+        {/* <BottomNavigation /> */}
 
         <Main>{children}</Main>
       </Box>

@@ -1,3 +1,4 @@
+import HomeContent from "@components/HomeContent";
 import Page from "@components/Page";
 import DashboardLayout from "@layouts/dashboard/DashboardLayout";
 
@@ -8,5 +9,9 @@ Home.getLayout = (page) => (
 );
 
 export default function Home() {
-  return <Page title={PAGE_TITLE}>Wallet Page</Page>;
+  return (
+    <Page title={PAGE_TITLE}>
+      <HomeContent />
+    </Page>
+  );
 }
