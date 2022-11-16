@@ -24,7 +24,7 @@ const styles = {
   },
 };
 
-export default function HomeContent() {
+export default function Login() {
   const theme = useTheme();
   const router = useRouter();
   const { addToken } = useAppAuthContext();

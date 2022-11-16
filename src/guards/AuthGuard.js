@@ -12,12 +12,9 @@ import { LoginPage } from "@components/LoginPage";
 
 // ----------------------------------------------------------------------
 
-console.log("AuthGuard");
 AuthGuard.propTypes = {
   children: PropTypes.node,
 };
-
-const certainCondition = true;
 
 // Wrap this for all pages that require authentication
 
@@ -30,9 +27,8 @@ export default function AuthGuard({ children }) {
   // redirect to login page if not authenticated
 
   const { isAuthenticated, isInitialized } = useAppAuthContext();
-  console.log("isAuthenticated", isAuthenticated);
 
-  const { pathname, push } = useRouter();
+  // const { pathname, push } = useRouter();
 
   // const [requestedLocation, setRequestedLocation] = useState(null);
 
@@ -53,8 +49,8 @@ export default function AuthGuard({ children }) {
     // if (pathname !== requestedLocation) {
     //   setRequestedLocation(pathname);
     // }
+    // return typeof window !== "undefined" && push("/auth/login");
     return <LoginPage />;
   }
-
   return <>{children}</>;
 }

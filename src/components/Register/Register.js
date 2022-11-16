@@ -16,7 +16,7 @@ import EmailIcon from "@mui/icons-material/Email";
 import CallIcon from "@mui/icons-material/Call";
 import PrimaryButton from "@components/Button/PrimaryButton";
 
-const PAGE_TITLE = "profileInfo";
+const PAGE_TITLE = "Registers";
 
 const handleSubmit = () => {
   return console.log("submit entered");
@@ -30,7 +30,7 @@ export default function ProfileInfo() {
         Let's get you all set up so you can verify your personal account
       </Typography>
       <Box sx={{ p: 3 }}>
-        <Grid container xs={12} spacing={3}>
+        <Grid container item xs={12} spacing={3}>
           <Grid item xs={10} md={7}>
             <InputLabel> Full name</InputLabel>
 
