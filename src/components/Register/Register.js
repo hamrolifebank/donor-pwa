@@ -24,14 +24,14 @@ const handleSubmit = () => {
 
 export default function ProfileInfo() {
   return (
-    <Container sx={{ maxWidth: "90%" }} maxWidth={false}>
+    <Container>
       <Typography variant="h3">Register</Typography>
       <Typography variant="subtitle1">
         Let's get you all set up so you can verify your personal account
       </Typography>
-      <Box sx={{ p: 3 }}>
-        <Grid container xs={12} spacing={3}>
-          <Grid item xs={10} md={7}>
+      <Box sx={{ p: 2 }}>
+        <Grid container xs={12} spacing={2}>
+          <Grid item={true} xs={12} md={7}>
             <InputLabel> Full name</InputLabel>
 
             <TextField
@@ -48,14 +48,14 @@ export default function ProfileInfo() {
               }}
             />
           </Grid>
-          <Grid item xs={10} md={3}>
+          <Grid item={true} xs={12} md={3}>
             <InputLabel> Gender</InputLabel>
             <Select id="select" value="male" size="small" fullWidth>
               <MenuItem value="male">Male</MenuItem>
               <MenuItem value="female">Female</MenuItem>
             </Select>
           </Grid>
-          <Grid item xs={10} md={7}>
+          <Grid item={true} xs={12} md={7}>
             <InputLabel> Phone number</InputLabel>
             <TextField
               id="phone"
@@ -71,11 +71,11 @@ export default function ProfileInfo() {
               }}
             />
           </Grid>
-          <Grid item xs={10} md={7}>
+          <Grid item={true} xs={12} md={7}>
             <InputLabel> Date of Birth</InputLabel>
             <TextField id="dob" type="date" size="small" fullWidth />
           </Grid>
-          <Grid item xs={10} md={3}>
+          <Grid item={true} xs={12} md={3}>
             <InputLabel> Blood Group </InputLabel>
             <Select id="select" value="A+" size="small" fullWidth>
               <MenuItem value="A+">A+</MenuItem>
@@ -88,7 +88,7 @@ export default function ProfileInfo() {
               <MenuItem value="AB-">AB-</MenuItem>
             </Select>
           </Grid>
-          <Grid item xs={10} md={7}>
+          <Grid item={true} xs={12} md={7}>
             <InputLabel> E-mail</InputLabel>
             <TextField
               id="email"
@@ -104,7 +104,7 @@ export default function ProfileInfo() {
               }}
             />
           </Grid>
-          <Grid item xs={10} md={7}>
+          <Grid item={true} xs={12} md={7}>
             <PrimaryButton func={handleSubmit}>Submit</PrimaryButton>
           </Grid>
         </Grid>
