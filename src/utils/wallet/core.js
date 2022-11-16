@@ -16,11 +16,14 @@ const library = {
 
   async encryptWallet(passCode, wallet) {
     const encryptedWallet = await wallet.encrypt(passCode);
-    return encryptedWallet ;
+    return encryptedWallet;
   },
 
   async restoreFromEncryptedWallet(encryptedWallet, passCode) {
-    const wallet = await ethers.Wallet.fromEncryptedWallet(encryptedWallet, passCode);
+    const wallet = await ethers.Wallet.fromEncryptedWallet(
+      encryptedWallet,
+      passCode
+    );
   },
 };
 

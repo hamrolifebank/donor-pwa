@@ -12,6 +12,7 @@ import { LoginPage } from "@components/LoginPage";
 
 // ----------------------------------------------------------------------
 
+console.log("AuthGuard");
 AuthGuard.propTypes = {
   children: PropTypes.node,
 };
@@ -29,28 +30,29 @@ export default function AuthGuard({ children }) {
   // redirect to login page if not authenticated
 
   const { isAuthenticated, isInitialized } = useAppAuthContext();
+  console.log("isAuthenticated", isAuthenticated);
 
   const { pathname, push } = useRouter();
 
-  const [requestedLocation, setRequestedLocation] = useState(null);
+  // const [requestedLocation, setRequestedLocation] = useState(null);
 
-  useEffect(() => {
-    if (requestedLocation && pathname !== requestedLocation) {
-      push(requestedLocation);
-    }
-    if (isAuthenticated) {
-      setRequestedLocation(null);
-    }
-  }, [isAuthenticated, pathname, push, requestedLocation]);
+  // useEffect(() => {
+  //   if (requestedLocation && pathname !== requestedLocation) {
+  //     push(requestedLocation);
+  //   }
+  //   if (isAuthenticated) {
+  //     setRequestedLocation(null);
+  //   }
+  // }, [isAuthenticated, pathname, push, requestedLocation]);
 
-  if (!isInitialized) {
-    return <LoadingScreen />;
-  }
+  // if (!isInitialized) {
+  //   return <LoadingScreen />;
+  // }
 
   if (!isAuthenticated) {
-    if (pathname !== requestedLocation) {
-      setRequestedLocation(pathname);
-    }
+    // if (pathname !== requestedLocation) {
+    //   setRequestedLocation(pathname);
+    // }
     return <LoginPage />;
   }
 

@@ -11,7 +11,7 @@ import {
 } from "../utils/sessionManager";
 
 // ----------------------------------------------------------------------
-
+console.log("AppAuthProvider");
 const initialState = {
   isAuthenticated: false, // should be false by default,
   isInitialized: false,
@@ -35,12 +35,14 @@ AppAuthProvider.propTypes = {
 const localToken = getAccessToken();
 
 function AppAuthProvider({ children }) {
+  console.log("AppAuthProviderko vitra ko function");
   const [authState, setAuthState] = useState(initialState);
 
   const addToken = (payload) => {
-    if (!isValid(payload)) {
-      return "Invalid token";
-    }
+    console.log("payload", payload);
+    // if (!isValid(payload)) {
+    //   return "Invalid token";
+    // }
     if (payload) {
       setAuthState((prev) => ({ ...prev, token: payload }));
       saveAccessToken(payload);
@@ -51,7 +53,9 @@ function AppAuthProvider({ children }) {
     const initialize = async () => {
       setAuthState((prev) => ({ ...prev, isInitialized: true }));
       try {
-        if (localToken && isValidToken(localToken)) {
+        // console.log("localToken", localToken, isValidToken(localToken));
+        // if (localToken && isValidToken(localToken)) {
+        if (localToken) {
           setAuthState((prev) => ({
             ...prev,
             isAuthenticated: true,
