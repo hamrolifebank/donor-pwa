@@ -56,16 +56,16 @@ export default function ProfileInfo() {
             </Select>
           </Grid>
           <Grid item xs={10} md={7}>
-            <InputLabel> E-mail</InputLabel>
+            <InputLabel> Phone number</InputLabel>
             <TextField
-              id="email"
-              type="text"
+              id="phone"
+              type="number"
               size="small"
               fullWidth
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    <EmailIcon />
+                    <CallIcon />
                   </InputAdornment>
                 ),
               }}
@@ -89,16 +89,16 @@ export default function ProfileInfo() {
             </Select>
           </Grid>
           <Grid item xs={10} md={7}>
-            <InputLabel> Phone number</InputLabel>
+            <InputLabel> E-mail</InputLabel>
             <TextField
-              id="phone"
-              type="number"
+              id="email"
+              type="text"
               size="small"
               fullWidth
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    <CallIcon />
+                    <EmailIcon />
                   </InputAdornment>
                 ),
               }}
