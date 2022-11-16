@@ -1,3 +1,4 @@
+import Page from "@components/Page";
 import { Register } from "@components/Register";
 import { useAppAuthContext } from "@contexts/AuthContext";
 import PropTypes from "prop-types";
@@ -6,7 +7,12 @@ const UserGuard = ({ children }) => {
   const { user } = useAppAuthContext();
 
   if (!user) {
-    return <Register />;
+    const PAGE_TITLE = "Register";
+    return (
+      <Page title={PAGE_TITLE}>
+        <Register />;
+      </Page>
+    );
   }
   return <>{children}</>;
 };

@@ -9,6 +9,7 @@ import Login from "@pages/auth/login";
 import { useAppAuthContext } from "@contexts/AuthContext";
 
 import { LoginPage } from "@components/LoginPage";
+import Page from "@components/Page";
 
 // ----------------------------------------------------------------------
 
@@ -50,7 +51,12 @@ export default function AuthGuard({ children }) {
     //   setRequestedLocation(pathname);
     // }
     // return typeof window !== "undefined" && push("/auth/login");
-    return <LoginPage />;
+    const PAGE_TITLE = "Login";
+    return (
+      <Page title={PAGE_TITLE}>
+        <Login />;
+      </Page>
+    );
   }
   return <>{children}</>;
 }
