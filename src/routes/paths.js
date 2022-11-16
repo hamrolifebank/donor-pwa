@@ -28,12 +28,6 @@ export const PATH_PROFILE = {
   root: ROOTS_PROFILE,
 };
 
-export const PATH_NEW = {
-  root: ROOTS_NEW,
-  id: path(ROOTS_NEW, "/[id]"),
-  edit: path(ROOTS_NEW, "/edit"), // '/new/edit'
-};
-
 export const BOTTOM_NAVIGATION_OPTIONS = [
   {
     path: PATH_DASHBOARD.root,
@@ -69,11 +63,6 @@ export const BOTTOM_NAVIGATION_OPTIONS = [
   {
     path: PATH_PROFILE.root,
     label: "Profile",
-    icon: "eva:person-outline",
-  },
-  {
-    path: PATH_NEW.root,
-    label: "New",
     icon: "eva:person-outline",
   },
 ];
