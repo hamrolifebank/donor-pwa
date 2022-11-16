@@ -3,7 +3,7 @@ require("dotenv").config();
 const { RS_NETWORK } = process.env;
 const provider = new ethers.providers.JsonRpcProvider(RS_NETWORK);
 
-const library = {
+const core = {
   async createWallet() {
     const wallet = await ethers.Wallet.createRandom();
     return wallet;
@@ -16,12 +16,15 @@ const library = {
 
   async encryptWallet(passCode, wallet) {
     const encryptedWallet = await wallet.encrypt(passCode);
-    return encryptedWallet ;
+    return encryptedWallet;
   },
 
   async restoreFromEncryptedWallet(encryptedWallet, passCode) {
-    const wallet = await ethers.Wallet.fromEncryptedWallet(encryptedWallet, passCode);
+    const wallet = await ethers.Wallet.fromEncryptedWallet(
+      encryptedWallet,
+      passCode
+    );
   },
 };
 
-module.exports = library;
+module.exports = core;
