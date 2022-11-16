@@ -3,9 +3,14 @@ import React from "react";
 import { Container } from "@mui/system";
 import { Icon } from "@iconify/react";
 import { useTheme } from "@emotion/react";
+import PrimaryButton from "@components/Button/PrimaryButton";
+import SecondaryButton from "@components/Button/SecondaryButton";
 
 const handleCreateWallet = () => {
   return console.log("Created");
+};
+const seedPhrase = () => {
+  return console.log("seedphrased");
 };
 
 const handleRestoreWallet = () => {
@@ -34,19 +39,14 @@ export default function HomeContent() {
           borderRadius: 1,
         }}
       >
-        <Button
-          variant="contained"
-          sx={{ mt: 2, mb: 2 }}
-          fullWidth
-          onClick={handleCreateWallet}
-        >
+        <PrimaryButton func={handleCreateWallet}>
           <Icon
             icon="fluent:wallet-credit-card-24-filled"
             height={30}
             width={40}
           />
           Create new wallet
-        </Button>
+        </PrimaryButton>
       </Box>
       <hr />
       <Typography variant="h5" sx={{ mt: 2, pb: 2 }}>
@@ -59,15 +59,7 @@ export default function HomeContent() {
           borderRadius: 1,
         }}
       >
-        <Button
-          sx={{
-            mt: 2,
-            border: 1,
-            color: "common.black",
-          }}
-          fullWidth
-          onClick={handleRestoreWallet}
-        >
+        <SecondaryButton func={seedPhrase}>
           <Icon
             icon="bi:file-earmark-text-fill"
             height={30}
@@ -75,17 +67,9 @@ export default function HomeContent() {
             color={theme.palette.secondary.main}
           />
           Seed phrase
-        </Button>
+        </SecondaryButton>
 
-        <Button
-          sx={{
-            mt: 2,
-            border: 1,
-            color: "common.black",
-          }}
-          fullWidth
-          onClick={handleRestoreWallet}
-        >
+        <SecondaryButton func={handleRestoreWallet}>
           <Icon
             icon="akar-icons:google-fill"
             height={30}
@@ -93,7 +77,7 @@ export default function HomeContent() {
             color={theme.palette.primary.lighter}
           />
           Google drive
-        </Button>
+        </SecondaryButton>
       </Box>
     </Container>
   );

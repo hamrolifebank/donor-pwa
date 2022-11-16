@@ -1,5 +1,5 @@
-import LandingPage from "@components/LandingPage/LandingPage";
 import Page from "@components/Page";
+import { Register } from "@components/Register";
 import DashboardLayout from "@layouts/dashboard/DashboardLayout";
 
 const PAGE_TITLE = "Home";
@@ -11,7 +11,7 @@ Home.getLayout = (page) => (
 export default function Home() {
   return (
     <Page title={PAGE_TITLE}>
-      <LandingPage />
+      <Register />
     </Page>
   );
 }
