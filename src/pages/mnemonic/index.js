@@ -1,17 +1,17 @@
+import { Mnemonic } from "@components/Mnemonic";
 import Page from "@components/Page";
-import { Register } from "@components/Register";
 import DashboardLayout from "@layouts/dashboard/DashboardLayout";
 
-const PAGE_TITLE = "Register";
+const PAGE_TITLE = "Mnemonic";
 
-register.getLayout = (page) => (
+mnemonic.getLayout = (page) => (
   <DashboardLayout pageTitle={PAGE_TITLE}>{page}</DashboardLayout>
 );
 
-export default function register() {
+export default function mnemonic() {
   return (
     <Page title={PAGE_TITLE}>
-      <Register />
+      <Mnemonic />
     </Page>
   );
 }
