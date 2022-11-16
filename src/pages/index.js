@@ -1,6 +1,8 @@
 import LandingPage from "@components/LandingPage/LandingPage";
 import Page from "@components/Page";
+import AuthGuard from "@guards/AuthGuard";
 import DashboardLayout from "@layouts/dashboard/DashboardLayout";
+import Login from "./auth/login";
 
 const PAGE_TITLE = "Home";
 
@@ -10,8 +12,10 @@ Home.getLayout = (page) => (
 
 export default function Home() {
   return (
-    <Page title={PAGE_TITLE}>
-      <LandingPage />
-    </Page>
+    <AuthGuard>
+      <Page title={PAGE_TITLE}>
+        <Login />
+      </Page>
+    </AuthGuard>
   );
 }

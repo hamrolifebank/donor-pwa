@@ -7,6 +7,7 @@ import LoadingScreen from "../components/LoadingScreen";
 //
 import Login from "@pages/auth/login";
 import { useAppAuthContext } from "@contexts/AuthContext";
+import HomeContent from "@components/HomeContent";
 
 // ----------------------------------------------------------------------
 
@@ -26,31 +27,31 @@ export default function AuthGuard({ children }) {
 
   // redirect to login page if not authenticated
 
-  // const { isAuthenticated, isInitialized } = useAppAuthContext();
+  const { isAuthenticated, isInitialized } = useAppAuthContext();
 
-  // const { pathname, push } = useRouter();
+  const { pathname, push } = useRouter();
 
-  // const [requestedLocation, setRequestedLocation] = useState(null);
+  const [requestedLocation, setRequestedLocation] = useState(null);
 
-  // useEffect(() => {
-  //   if (requestedLocation && pathname !== requestedLocation) {
-  //     push(requestedLocation);
-  //   }
-  //   if (isAuthenticated) {
-  //     setRequestedLocation(null);
-  //   }
-  // }, [isAuthenticated, pathname, push, requestedLocation]);
+  useEffect(() => {
+    if (requestedLocation && pathname !== requestedLocation) {
+      push(requestedLocation);
+    }
+    if (isAuthenticated) {
+      setRequestedLocation(null);
+    }
+  }, [isAuthenticated, pathname, push, requestedLocation]);
 
-  // if (!isInitialized) {
-  //   return <LoadingScreen />;
-  // }
+  if (!isInitialized) {
+    return <LoadingScreen />;
+  }
 
-  // if (!isAuthenticated) {
-  //   if (pathname !== requestedLocation) {
-  //     setRequestedLocation(pathname);
-  //   }
-  //   return <Login />;
-  // }
+  if (!isAuthenticated) {
+    if (pathname !== requestedLocation) {
+      setRequestedLocation(pathname);
+    }
+    return <HomeContent />;
+  }
 
   return <>{children}</>;
 }
