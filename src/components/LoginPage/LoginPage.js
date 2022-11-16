@@ -5,10 +5,8 @@ import { Icon } from "@iconify/react";
 import { useTheme } from "@emotion/react";
 import PrimaryButton from "@components/Button/PrimaryButton";
 import SecondaryButton from "@components/Button/SecondaryButton";
+import { useAppAuthContext } from "@contexts/AuthContext";
 
-const handleCreateWallet = () => {
-  return console.log("Created");
-};
 const seedPhrase = () => {
   return console.log("seedphrased");
 };
@@ -26,6 +24,12 @@ const styles = {
 
 export default function HomeContent() {
   const theme = useTheme();
+  const context = useAppAuthContext();
+  console.log(context);
+
+  const handleCreateWallet = () => {
+    return console.log("Created");
+  };
 
   return (
     <Container>

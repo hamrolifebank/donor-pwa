@@ -1,5 +1,6 @@
-import LandingPage from "@components/LandingPage/LandingPage";
+import LandingPage from "@components/LoginPage/LoginPage";
 import Page from "@components/Page";
+import { Register } from "@components/Register";
 import AuthGuard from "@guards/AuthGuard";
 import DashboardLayout from "@layouts/dashboard/DashboardLayout";
 import Login from "./auth/login";
@@ -14,7 +15,7 @@ export default function Home() {
   return (
     <AuthGuard>
       <Page title={PAGE_TITLE}>
-        <Login />
+        <Register />
       </Page>
     </AuthGuard>
   );

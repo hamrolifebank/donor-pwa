@@ -8,7 +8,7 @@ import LoadingScreen from "../components/LoadingScreen";
 import Login from "@pages/auth/login";
 import { useAppAuthContext } from "@contexts/AuthContext";
 
-import { LandingPage } from "@components/LandingPage";
+import { LoginPage } from "@components/LoginPage";
 
 // ----------------------------------------------------------------------
 
@@ -51,7 +51,7 @@ export default function AuthGuard({ children }) {
     if (pathname !== requestedLocation) {
       setRequestedLocation(pathname);
     }
-    return <LandingPage />;
+    return <LoginPage />;
   }
 
   return <>{children}</>;
