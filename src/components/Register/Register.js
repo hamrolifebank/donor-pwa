@@ -8,21 +8,33 @@ import {
   Button,
   Grid,
 } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import { Box } from "@mui/system";
 import InputAdornment from "@mui/material/InputAdornment";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import EmailIcon from "@mui/icons-material/Email";
 import CallIcon from "@mui/icons-material/Call";
 import PrimaryButton from "@components/Button/PrimaryButton";
+import { useAppAuthContext } from "@contexts/AuthContext";
 
 const PAGE_TITLE = "Registers";
 
-const handleSubmit = () => {
-  return console.log("submit entered");
-};
+export default function Register() {
+  const [user, setUser] = useState({
+    fullname: "",
+    email: "",
+    phone: "",
+    gender: "",
+    bloodGroup: "",
+    dob: "",
+  });
 
-export default function ProfileInfo() {
+  const { addUser } = useAppAuthContext();
+
+  const handleSubmit = () => {
+    console.log(user);
+    addUser(user);
+  };
   return (
     <Container sx={{ maxWidth: "90%" }} maxWidth={false}>
       <Typography variant="h3">Register</Typography>
@@ -36,6 +48,8 @@ export default function ProfileInfo() {
 
             <TextField
               id="fullname"
+              value={user.fullname}
+              onChange={(e) => setUser({ ...user, fullname: e.target.value })}
               type="text"
               size="small"
               fullWidth
@@ -50,7 +64,13 @@ export default function ProfileInfo() {
           </Grid>
           <Grid item xs={10} md={3}>
             <InputLabel> Gender</InputLabel>
-            <Select id="select" value="male" size="small" fullWidth>
+            <Select
+              id="select"
+              size="small"
+              value={user.gender}
+              onChange={(e) => setUser({ ...user, gender: e.target.value })}
+              fullWidth
+            >
               <MenuItem value="male">Male</MenuItem>
               <MenuItem value="female">Female</MenuItem>
             </Select>
@@ -59,8 +79,10 @@ export default function ProfileInfo() {
             <InputLabel> E-mail</InputLabel>
             <TextField
               id="email"
-              type="text"
+              type="email"
               size="small"
+              value={user.emailEmail}
+              onChange={(e) => setUser({ ...user, email: e.target.value })}
               fullWidth
               InputProps={{
                 startAdornment: (
@@ -73,11 +95,25 @@ export default function ProfileInfo() {
           </Grid>
           <Grid item xs={10} md={7}>
             <InputLabel> Date of Birth</InputLabel>
-            <TextField id="dob" type="date" size="small" fullWidth />
+            <TextField
+              id="dob"
+              type="date"
+              value={user.dob}
+              onChange={(e) => setUser({ ...user, dob: e.target.value })}
+              size="small"
+              fullWidth
+            />
           </Grid>
           <Grid item xs={10} md={3}>
             <InputLabel> Blood Group </InputLabel>
-            <Select id="select" value="A+" size="small" fullWidth>
+            <Select
+              id="select"
+              placeholder="Blood Group"
+              value={user.bloodGroup}
+              onChange={(e) => setUser({ ...user, bloodGroup: e.target.value })}
+              size="small"
+              fullWidth
+            >
               <MenuItem value="A+">A+</MenuItem>
               <MenuItem value="A-">A-</MenuItem>
               <MenuItem value="B+">B+</MenuItem>
@@ -94,6 +130,8 @@ export default function ProfileInfo() {
               id="phone"
               type="number"
               size="small"
+              value={user.phone}
+              onChange={(e) => setUser({ ...user, phone: e.target.value })}
               fullWidth
               InputProps={{
                 startAdornment: (

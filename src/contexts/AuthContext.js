@@ -8,6 +8,7 @@ import {
   saveAccessToken,
   getAccessToken,
   deleteAccessToken,
+  saveCurrentUser,
 } from "../utils/sessionManager";
 
 // ----------------------------------------------------------------------
@@ -51,6 +52,16 @@ function AppAuthProvider({ children }) {
     }
   };
 
+  const addUser = (payload) => {
+    if (payload) {
+      setAuthState((prev) => ({
+        ...prev,
+        user: payload,
+      }));
+      saveCurrentUser(payload);
+    }
+  };
+
   useEffect(() => {
     const initialize = async () => {
       setAuthState((prev) => ({ ...prev, isInitialized: true }));
@@ -85,6 +96,7 @@ function AppAuthProvider({ children }) {
     ...authState,
     deleteToken,
     addToken,
+    addUser,
   };
 
   return (
