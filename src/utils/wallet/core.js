@@ -6,6 +6,7 @@ const provider = new ethers.providers.JsonRpcProvider(RS_NETWORK);
 const core = {
   async createWallet() {
     const wallet = await ethers.Wallet.createRandom();
+
     return wallet;
   },
 

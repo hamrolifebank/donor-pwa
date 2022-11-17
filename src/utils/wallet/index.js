@@ -1,2 +1,2 @@
-import core from "./core.js";
-export default core;
+const core = require("./core.js");
+module.exports = core;
