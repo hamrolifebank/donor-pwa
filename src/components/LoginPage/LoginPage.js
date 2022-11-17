@@ -5,10 +5,10 @@ import { Icon } from "@iconify/react";
 import { useTheme } from "@emotion/react";
 import PrimaryButton from "@components/Button/PrimaryButton";
 import SecondaryButton from "@components/Button/SecondaryButton";
+import { useAppAuthContext } from "@contexts/AuthContext";
+import library from "@utils/wallet";
+import { useRouter } from "next/router";
 
-const handleCreateWallet = () => {
-  return console.log("Created");
-};
 const seedPhrase = () => {
   return console.log("seedphrased");
 };
@@ -24,8 +24,16 @@ const styles = {
   },
 };
 
-export default function HomeContent() {
+export default function Login() {
   const theme = useTheme();
+  const router = useRouter();
+  const { addToken, addWallet } = useAppAuthContext();
+
+  const handleCreateWallet = async () => {
+    const wallet = await library.createWallet();
+    addToken(wallet.address);
+    addWallet(wallet);
+  };
 
   return (
     <Container>

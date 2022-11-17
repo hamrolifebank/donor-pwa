@@ -1,6 +1,11 @@
-import LandingPage from "@components/LandingPage/LandingPage";
+import { BottomNavigation } from "@components/bottom-navigation";
+import LandingPage from "@components/LoginPage/LoginPage";
+import { Mnemonic } from "@components/Mnemonic";
 import Page from "@components/Page";
+import { Register } from "@components/Register";
 import AuthGuard from "@guards/AuthGuard";
+// import MnemonicGuard from "@guards/MnemonicGuard";
+import UserGuard from "@guards/UserGuard";
 import DashboardLayout from "@layouts/dashboard/DashboardLayout";
 import Login from "./auth/login";
 
@@ -12,10 +17,8 @@ Home.getLayout = (page) => (
 
 export default function Home() {
   return (
-    <AuthGuard>
-      <Page title={PAGE_TITLE}>
-        <Login />
-      </Page>
-    </AuthGuard>
+    <Page title={PAGE_TITLE}>
+      <h1>This is home page</h1>
+    </Page>
   );
 }

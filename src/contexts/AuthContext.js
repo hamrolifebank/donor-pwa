@@ -8,6 +8,8 @@ import {
   saveAccessToken,
   getAccessToken,
   deleteAccessToken,
+  saveCurrentUser,
+  getCurrentUser,
 } from "../utils/sessionManager";
 
 // ----------------------------------------------------------------------
@@ -15,6 +17,8 @@ import {
 const initialState = {
   isAuthenticated: false, // should be false by default,
   isInitialized: false,
+  isMnemonicWritten: false,
+  wallet: null,
   token: null,
   user: null,
 };
@@ -23,6 +27,7 @@ const AppAuthContext = createContext({
   ...initialState,
   method: "jwt",
   addToken: () => {},
+  addWallet: () => {},
   deleteToken: () => {},
 });
 
@@ -33,17 +38,39 @@ AppAuthProvider.propTypes = {
 };
 
 const localToken = getAccessToken();
+const localUser = getCurrentUser();
 
 function AppAuthProvider({ children }) {
   const [authState, setAuthState] = useState(initialState);
 
+  const addWallet = (payload) => {
+    setAuthState((prev) => ({
+      ...prev,
+      wallet: payload,
+    }));
+  };
+
   const addToken = (payload) => {
-    if (!isValid(payload)) {
-      return "Invalid token";
-    }
+    // if (!isValid(payload)) {
+    //   return "Invalid token";
+    // }
     if (payload) {
-      setAuthState((prev) => ({ ...prev, token: payload }));
+      setAuthState((prev) => ({
+        ...prev,
+        isAuthenticated: true,
+        token: payload,
+      }));
       saveAccessToken(payload);
+    }
+  };
+
+  const addUser = (payload) => {
+    if (payload) {
+      setAuthState((prev) => ({
+        ...prev,
+        user: payload,
+      }));
+      saveCurrentUser(payload);
     }
   };
 
@@ -51,7 +78,9 @@ function AppAuthProvider({ children }) {
     const initialize = async () => {
       setAuthState((prev) => ({ ...prev, isInitialized: true }));
       try {
-        if (localToken && isValidToken(localToken)) {
+        // console.log("localToken", localToken, isValidToken(localToken));
+        // if (localToken && isValidToken(localToken)) {
+        if (localToken) {
           setAuthState((prev) => ({
             ...prev,
             isAuthenticated: true,
@@ -62,6 +91,13 @@ function AppAuthProvider({ children }) {
           //  const { user } = response.data;
         } else {
           setAuthState((prev) => ({ ...prev, isAuthenticated: false }));
+        }
+
+        if (localUser) {
+          setAuthState((prev) => ({
+            ...prev,
+            user: localUser,
+          }));
         }
       } catch (err) {
         console.error(err);
@@ -78,7 +114,9 @@ function AppAuthProvider({ children }) {
   const contextProps = {
     ...authState,
     deleteToken,
+    addWallet,
     addToken,
+    addUser,
   };
 
   return (

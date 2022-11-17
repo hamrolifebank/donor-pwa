@@ -1,10 +1,15 @@
 import jwtDecode from "jwt-decode";
 
+
+
 export const getCurrentUser = () => {
-  let user = null;
-  const data = localStorage.getItem("currentUser");
-  if (data) user = JSON.parse(data);
-  return user;
+  // let user = null;
+  // const data = localStorage.getItem("currentUser");
+  // if (data) user = JSON.parse(data);
+  // return user;
+  return typeof window !== "undefined"
+    ? localStorage.getItem("currentUser")
+    : "";
 };
 
 export const saveCurrentUser = (userData) =>

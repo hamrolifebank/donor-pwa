@@ -1,7 +1,7 @@
 var { ethers } = require("ethers");
-require("dotenv").config();
-const { RS_NETWORK } = process.env;
-const provider = new ethers.providers.JsonRpcProvider(RS_NETWORK);
+// require("dotenv").config();
+// const { RS_NETWORK } = process.env;
+// const provider = new ethers.providers.JsonRpcProvider(RS_NETWORK);
 
 const core = {
   async createWallet() {
