@@ -27,9 +27,9 @@ export default function AuthGuard({ children }) {
 
   // redirect to login page if not authenticated
 
-  const { isAuthenticated, isInitialized } = useAppAuthContext();
+  const { isAuthenticated, isInitialized, user } = useAppAuthContext();
 
-  // const { pathname, push } = useRouter();
+  const { pathname, push } = useRouter();
 
   // const [requestedLocation, setRequestedLocation] = useState(null);
 
@@ -42,21 +42,29 @@ export default function AuthGuard({ children }) {
   //   }
   // }, [isAuthenticated, pathname, push, requestedLocation]);
 
-  if (!isInitialized) {
-    return <LoadingScreen />;
-  }
+  useEffect(() => {
+    if (!isAuthenticated) {
+      // if (pathname !== requestedLocation) {
+      //   setRequestedLocation(pathname);
+      // }
+      // typeof window !== "undefined" && push("/auth/login");
+      push("/auth/login");
+      // const PAGE_TITLE = "Login";
+      // return (
+      //   <Page title={PAGE_TITLE}>
+      //     <Login />;
+      //   </Page>
+      // );
+    } else if (!user) {
+      push("/register");
+    } else {
+      push("/");
+    }
+  }, [isAuthenticated, user]);
 
-  if (!isAuthenticated) {
-    // if (pathname !== requestedLocation) {
-    //   setRequestedLocation(pathname);
-    // }
-    // return typeof window !== "undefined" && push("/auth/login");
-    const PAGE_TITLE = "Login";
-    return (
-      <Page title={PAGE_TITLE}>
-        <Login />;
-      </Page>
-    );
-  }
+  // if (!isInitialized) {
+  //   return <LoadingScreen />;
+  // }
+
   return <>{children}</>;
 }
