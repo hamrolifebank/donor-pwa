@@ -15,8 +15,7 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import EmailIcon from "@mui/icons-material/Email";
 import CallIcon from "@mui/icons-material/Call";
 import PrimaryButton from "@components/Button/PrimaryButton";
-
-const PAGE_TITLE = "profileInfo";
+import SecondaryButton from "@components/Button/SecondaryButton";
 
 const handleSubmit = () => {
   return console.log("submit entered");
@@ -92,7 +91,7 @@ export default function ProfileInfo() {
             <InputLabel> E-mail</InputLabel>
             <TextField
               id="email"
-              type="text"
+              type="email"
               size="small"
               fullWidth
               InputProps={{
@@ -106,6 +105,9 @@ export default function ProfileInfo() {
           </Grid>
           <Grid item={true} xs={12} md={7}>
             <PrimaryButton func={handleSubmit}>Submit</PrimaryButton>
+          </Grid>
+          <Grid item={true} xs={12} md={7}>
+            <SecondaryButton>Cancel</SecondaryButton>
           </Grid>
         </Grid>
       </Box>
