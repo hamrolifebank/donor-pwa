@@ -16,20 +16,22 @@ const BottomNavigationBar = () => {
   return (
     <Paper
       sx={{ position: "fixed", bottom: 0, left: 0, right: 0 }}
-      elevation={4}>
+      elevation={4}
+    >
       <BottomNavigation
         showLabels
         value={value}
         onChange={(event, newValue) => {
           setValue(newValue);
           router.push(newValue);
-        }}>
+        }}
+      >
         {BOTTOM_NAVIGATION_OPTIONS.map((option, index) => (
           <BottomNavigationAction
             icon={
               option.icon ? (
                 <Iconify
-                  sx={{ transform: "scale(1.1)", mb: 0.09 }}
+                  sx={{ transform: "scale(1.2)", mb: 0.05 }}
                   {...option?.iconStyle}
                   icon={option.icon}
                 />

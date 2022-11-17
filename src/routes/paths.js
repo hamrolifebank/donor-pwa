@@ -31,25 +31,25 @@ export const PATH_PROFILE = {
 export const BOTTOM_NAVIGATION_OPTIONS = [
   {
     path: PATH_DASHBOARD.root,
-    label: "Home",
-    icon: "eva:home-outline",
+    // label: "Home",
+    icon: "eva:home-fill",
     // icon: <DashboardIcon />,
   },
   {
     path: PATH_ASSETS.root,
-    label: "Assets",
-    icon: "eva:briefcase-outline",
+    label: "",
+    icon: "eva:calendar-fill",
     sx: {},
   },
   {
     path: PATH_ASSETS.root,
-    label: "",
+    label: "scan",
     icon: "fluent:qr-code-24-filled",
     sx: {
       fontWeight: "fontWeightBold",
-      // borderRadius: '50%',
-      backgroundColor: "primary.main",
-      color: "primary.contrastText",
+      // borderRadius: "50%",
+      // backgroundColor: "primary.main",
+      // color: "primary.contrastText",
     },
     iconStyle: {
       transform: "scale(2)",
@@ -57,12 +57,13 @@ export const BOTTOM_NAVIGATION_OPTIONS = [
   },
   {
     path: PATH_ASSETS.root,
-    label: "Vault",
-    icon: "eva:file-outline",
+    // label: "Donations",
+    icon: "eva:droplet-fill",
+    sx: {},
   },
   {
     path: PATH_PROFILE.root,
-    label: "Profile",
-    icon: "eva:person-outline",
+    // label: "Profile",
+    icon: "eva:person-fill",
   },
 ];
