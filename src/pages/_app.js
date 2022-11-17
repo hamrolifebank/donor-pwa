@@ -10,6 +10,8 @@ import createEmotionCache from "../utils/createEmotionCache";
 import ThemeProvider from "../theme";
 import { SettingsProvider } from "@components/settings";
 import { AppAuthProvider } from "@contexts/AuthContext";
+import UserGuard from "@guards/UserGuard";
+import AuthGuard from "@guards/AuthGuard";
 
 // locales
 // components
@@ -37,13 +39,15 @@ export default function MyApp(props) {
   return (
     <CacheProvider value={emotionCache}>
       <Head>
-        <meta name='viewport' content='initial-scale=1, width=device-width' />
+        <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
       <AppAuthProvider>
         <SettingsProvider>
           {/* <AuthProvider> */}
           <ThemeProvider>
-            {getLayout(<Component {...pageProps} />)}
+            <AuthGuard>
+              <UserGuard>{getLayout(<Component {...pageProps} />)}</UserGuard>
+            </AuthGuard>
           </ThemeProvider>
           {/* </AuthProvider> */}
         </SettingsProvider>

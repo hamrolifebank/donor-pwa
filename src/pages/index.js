@@ -17,12 +17,8 @@ Home.getLayout = (page) => (
 
 export default function Home() {
   return (
-    <AuthGuard>
-      <UserGuard>
-        <Page title={PAGE_TITLE}>
-          <h1>Home</h1>
-        </Page>
-      </UserGuard>
-    </AuthGuard>
+    <Page title={PAGE_TITLE}>
+      <h1>This is home page</h1>
+    </Page>
   );
 }

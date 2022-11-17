@@ -5,6 +5,7 @@ import PrimaryButton from "@components/Button/PrimaryButton";
 import SecondaryButton from "@components/Button/SecondaryButton";
 import { useAppAuthContext } from "@contexts/AuthContext";
 import { useRouter } from "next/router";
+import Login from "@components/LoginPage/LoginPage";
 
 export default function Mnemonic() {
   const { wallet } = useAppAuthContext();
