@@ -130,7 +130,7 @@ export default function Register() {
             <InputLabel> E-mail</InputLabel>
             <TextField
               id="email"
-              type="text"
+              type="email"
               size="small"
               value={user.phone}
               onChange={(e) => setUser({ ...user, phone: e.target.value })}
@@ -146,6 +146,9 @@ export default function Register() {
           </Grid>
           <Grid item={true} xs={12} md={7}>
             <PrimaryButton func={handleSubmit}>Submit</PrimaryButton>
+          </Grid>
+          <Grid item={true} xs={12} md={7}>
+            <SecondaryButton>Cancel</SecondaryButton>
           </Grid>
         </Grid>
       </Box>

@@ -29,34 +29,35 @@ export default function AuthGuard({ children }) {
 
   const { isAuthenticated, isInitialized } = useAppAuthContext();
 
-  // const { pathname, push } = useRouter();
+  const { pathname, push } = useRouter();
 
-  // const [requestedLocation, setRequestedLocation] = useState(null);
+  const [requestedLocation, setRequestedLocation] = useState(null);
 
-  // useEffect(() => {
-  //   if (requestedLocation && pathname !== requestedLocation) {
-  //     push(requestedLocation);
-  //   }
-  //   if (isAuthenticated) {
-  //     setRequestedLocation(null);
-  //   }
-  // }, [isAuthenticated, pathname, push, requestedLocation]);
+  useEffect(() => {
+    if (requestedLocation && pathname !== requestedLocation) {
+      push(requestedLocation);
+    }
+    if (isAuthenticated) {
+      setRequestedLocation(null);
+    }
+  }, [isAuthenticated, pathname, push, requestedLocation]);
 
   if (!isInitialized) {
     return <LoadingScreen />;
   }
 
   if (!isAuthenticated) {
-    // if (pathname !== requestedLocation) {
-    //   setRequestedLocation(pathname);
-    // }
-    // return typeof window !== "undefined" && push("/auth/login");
-    const PAGE_TITLE = "Login";
-    return (
-      <Page title={PAGE_TITLE}>
-        <Login />;
-      </Page>
-    );
+    if (pathname !== requestedLocation) {
+      setRequestedLocation(pathname);
+    }
+    return <Login />;
+    // return push("/home");
+    // // const PAGE_TITLE = "Login";
+    // // return (
+    // //   <Page title={PAGE_TITLE}>
+    // //     <Login />;
+    // //   </Page>
+    // // );
   }
   return <>{children}</>;
 }
