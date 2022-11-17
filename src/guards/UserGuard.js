@@ -4,7 +4,10 @@ import { useAppAuthContext } from "@contexts/AuthContext";
 import PropTypes from "prop-types";
 
 const UserGuard = ({ children }) => {
-  const { user } = useAppAuthContext();
+  const { user, isInitialized } = useAppAuthContext();
+  if (!isInitialized) {
+    return <LoadingScreen />;
+  }
 
   if (!user) {
     const PAGE_TITLE = "Register";
@@ -17,8 +20,7 @@ const UserGuard = ({ children }) => {
   return <>{children}</>;
 };
 
-export default UserGuard;
-
 UserGuard.propTypes = {
   children: PropTypes.node,
 };
+export default UserGuard;

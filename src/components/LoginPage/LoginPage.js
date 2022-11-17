@@ -27,11 +27,12 @@ const styles = {
 export default function Login() {
   const theme = useTheme();
   const router = useRouter();
-  const { addToken } = useAppAuthContext();
+  const { addToken, addWallet } = useAppAuthContext();
 
   const handleCreateWallet = async () => {
     const wallet = await library.createWallet();
     addToken(wallet.address);
+    addWallet(wallet);
   };
 
   return (

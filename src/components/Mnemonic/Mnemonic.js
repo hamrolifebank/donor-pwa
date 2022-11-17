@@ -3,12 +3,21 @@ import React from "react";
 import { Grid, InputLabel, TextField, Typography } from "@mui/material";
 import PrimaryButton from "@components/Button/PrimaryButton";
 import SecondaryButton from "@components/Button/SecondaryButton";
-
-let numarr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+import { useAppAuthContext } from "@contexts/AuthContext";
+import { useRouter } from "next/router";
 
 export default function Mnemonic() {
+  const { wallet } = useAppAuthContext();
+  const words = wallet && wallet.mnemonic.phrase.split(" ");
+
+  const { push } = useRouter();
+
+  if (!wallet) {
+    return <Login />;
+  }
+
   const handlewritten = () => {
-    return console.log("handlewritten");
+    push("/");
   };
   const handlecancel = () => {
     return console.log("handlecancel");
@@ -21,11 +30,11 @@ export default function Mnemonic() {
       </Typography>
       <Box sx={{ p: 3 }}>
         <Grid container xs={12} spacing={2}>
-          {numarr.map((num, index) => {
+          {words.map((word, index) => {
             return (
               <Grid item xs={6} md={4} lg={3} key={index}>
-                <InputLabel> word {num}</InputLabel>
-                <TextField size="small" />
+                <InputLabel> word {index + 1}</InputLabel>
+                <TextField size="small" placeholder={word} />
               </Grid>
             );
           })}

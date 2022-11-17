@@ -9,6 +9,7 @@ import {
   getAccessToken,
   deleteAccessToken,
   saveCurrentUser,
+  getCurrentUser,
 } from "../utils/sessionManager";
 
 // ----------------------------------------------------------------------
@@ -16,6 +17,8 @@ import {
 const initialState = {
   isAuthenticated: false, // should be false by default,
   isInitialized: false,
+  isMnemonicWritten: false,
+  wallet: null,
   token: null,
   user: null,
 };
@@ -24,6 +27,7 @@ const AppAuthContext = createContext({
   ...initialState,
   method: "jwt",
   addToken: () => {},
+  addWallet: () => {},
   deleteToken: () => {},
 });
 
@@ -34,9 +38,17 @@ AppAuthProvider.propTypes = {
 };
 
 const localToken = getAccessToken();
+const localUser = getCurrentUser();
 
 function AppAuthProvider({ children }) {
   const [authState, setAuthState] = useState(initialState);
+
+  const addWallet = (payload) => {
+    setAuthState((prev) => ({
+      ...prev,
+      wallet: payload,
+    }));
+  };
 
   const addToken = (payload) => {
     // if (!isValid(payload)) {
@@ -80,6 +92,13 @@ function AppAuthProvider({ children }) {
         } else {
           setAuthState((prev) => ({ ...prev, isAuthenticated: false }));
         }
+
+        if (localUser) {
+          setAuthState((prev) => ({
+            ...prev,
+            user: localUser,
+          }));
+        }
       } catch (err) {
         console.error(err);
       }
@@ -95,6 +114,7 @@ function AppAuthProvider({ children }) {
   const contextProps = {
     ...authState,
     deleteToken,
+    addWallet,
     addToken,
     addUser,
   };

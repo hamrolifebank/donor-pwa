@@ -16,6 +16,7 @@ import EmailIcon from "@mui/icons-material/Email";
 import CallIcon from "@mui/icons-material/Call";
 import PrimaryButton from "@components/Button/PrimaryButton";
 import { useAppAuthContext } from "@contexts/AuthContext";
+import { useRouter } from "next/router";
 
 const PAGE_TITLE = "Registers";
 
@@ -30,10 +31,11 @@ export default function Register() {
   });
 
   const { addUser } = useAppAuthContext();
+  const { push } = useRouter();
 
   const handleSubmit = () => {
-    console.log(user);
     addUser(user);
+    push("/mnemonic");
   };
   return (
     <Container>
@@ -42,7 +44,7 @@ export default function Register() {
         Let's get you all set up so you can verify your personal account
       </Typography>
       <Box sx={{ p: 2 }}>
-        <Grid container xs={12} spacing={2}>
+        <Grid container item xs={12} spacing={2}>
           <Grid item={true} xs={12} md={7}>
             <InputLabel> Full name</InputLabel>
 
@@ -79,7 +81,7 @@ export default function Register() {
             <InputLabel> Phone number</InputLabel>
             <TextField
               id="email"
-              type="email"
+              type="number"
               size="small"
               value={user.emailEmail}
               onChange={(e) => setUser({ ...user, email: e.target.value })}

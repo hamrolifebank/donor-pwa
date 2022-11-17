@@ -42,9 +42,9 @@ export default function AuthGuard({ children }) {
   //   }
   // }, [isAuthenticated, pathname, push, requestedLocation]);
 
-  // if (!isInitialized) {
-  //   return <LoadingScreen />;
-  // }
+  if (!isInitialized) {
+    return <LoadingScreen />;
+  }
 
   if (!isAuthenticated) {
     // if (pathname !== requestedLocation) {
