@@ -68,7 +68,7 @@ export default function Register() {
           <Grid item={true} xs={12} md={3}>
             <InputLabel> Gender</InputLabel>
             <Select
-              id="select"
+              id="selectG"
               size="small"
               value={user.gender}
               onChange={(e) => setUser({ ...user, gender: e.target.value })}
@@ -81,7 +81,7 @@ export default function Register() {
           <Grid item={true} xs={12} md={7}>
             <InputLabel> Phone number</InputLabel>
             <TextField
-              id="email"
+              id="phnumber"
               type="number"
               size="small"
               value={user.emailEmail}
@@ -110,7 +110,7 @@ export default function Register() {
           <Grid item={true} xs={12} md={3}>
             <InputLabel> Blood Group </InputLabel>
             <Select
-              id="select"
+              id="selectBG"
               placeholder="Blood Group"
               value={user.bloodGroup}
               onChange={(e) => setUser({ ...user, bloodGroup: e.target.value })}
