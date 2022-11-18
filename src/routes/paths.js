@@ -6,8 +6,11 @@ function path(root, sublink) {
 
 const ROOTS_DASHBOARD = "/";
 const ROOTS_ASSETS = "/assets";
+
+const ROOTS_EVENTS = "/events";
+const ROOTS_DONATIONS = "/donations";
 const ROOTS_PROFILE = "/profile";
-const ROOTS_NEW = "/new";
+// const ROOTS_NEW = "/new";
 
 // ----------------------------------------------------------------------
 
@@ -20,6 +23,12 @@ export const PATH_DASHBOARD = {
   one: path(ROOTS_DASHBOARD, "/one"),
 };
 
+export const PATH_EVENTS = {
+  root: ROOTS_EVENTS,
+};
+export const PATH_DONATIONS = {
+  root: ROOTS_DONATIONS,
+};
 export const PATH_ASSETS = {
   root: ROOTS_ASSETS,
 };
@@ -36,7 +45,7 @@ export const BOTTOM_NAVIGATION_OPTIONS = [
     // icon: <DashboardIcon />,
   },
   {
-    path: PATH_ASSETS.root,
+    path: PATH_EVENTS.root,
     label: "",
     icon: "eva:calendar-outline",
     sx: {},
@@ -47,16 +56,22 @@ export const BOTTOM_NAVIGATION_OPTIONS = [
     icon: "fluent:qr-code-24-filled",
     sx: {
       fontWeight: "fontWeightBold",
-      // borderRadius: "50%",
-      // backgroundColor: "primary.main",
-      // color: "primary.contrastText",
+      background: "#ffffff",
+      borderRadius: "50%",
+      height: "80px",
+      top: "-35px",
+      boxShadow:5,
+     "&:hover": {
+        border:"1px solid red"
+      },
     },
+
     iconStyle: {
       transform: "scale(2)",
     },
   },
   {
-    path: PATH_ASSETS.root,
+    path: PATH_DONATIONS.root,
     // label: "Donations",
     icon: "eva:droplet-outline",
     sx: {},

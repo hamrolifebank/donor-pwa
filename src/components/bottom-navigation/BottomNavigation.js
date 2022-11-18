@@ -27,7 +27,7 @@ const BottomNavigationBar = () => {
       elevation={4}
     >
       <BottomNavigation
-        sx={{ backgroundColor: theme.palette.grey[300] }}
+        sx={{ backgroundColor: theme.palette.grey[200] }}
         showLabels
         value={value}
         onChange={(event, newValue) => {
