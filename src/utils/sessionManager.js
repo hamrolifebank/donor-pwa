@@ -1,6 +1,14 @@
 import jwtDecode from "jwt-decode";
 
+export const saveWallet = (wallet) => {
+  return typeof window !== "undefined"
+    ? localStorage.setItem("wallet", wallet)
+    : "";
+};
 
+export const getWallet = () => {
+  return typeof window !== "undefined" ? localStorage.getItem("wallet") : "";
+};
 
 export const getCurrentUser = () => {
   // let user = null;
@@ -17,12 +25,12 @@ export const saveCurrentUser = (userData) =>
     ? localStorage.setItem("currentUser", JSON.stringify(userData))
     : "";
 
-export const getAccessToken = () =>
-  typeof window !== "undefined" ? localStorage.getItem("accessToken") : "";
+export const getPublicAddress = () =>
+  typeof window !== "undefined" ? localStorage.getItem("public-address") : "";
 
-export const saveAccessToken = (accessToken) =>
+export const savePublicAddress = (address) =>
   typeof window !== "undefined"
-    ? localStorage.setItem("accessToken", accessToken)
+    ? localStorage.setItem("public-address", address)
     : null;
 
 export const deleteAccessToken = () =>

@@ -13,6 +13,7 @@ const ROOTS_NEW = "/new";
 
 export const PATH_AUTH = {
   login: "/auth/login",
+  register: "/register",
 };
 
 export const PATH_DASHBOARD = {

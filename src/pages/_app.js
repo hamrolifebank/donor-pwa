@@ -25,6 +25,8 @@ import AuthGuard from "@guards/AuthGuard";
 
 const clientSideEmotionCache = createEmotionCache();
 
+console.log("in main app");
+
 MyApp.propTypes = {
   Component: PropTypes.elementType,
   pageProps: PropTypes.object,

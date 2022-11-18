@@ -14,7 +14,9 @@ Login.getLayout = (page) => (
 export default function Login() {
   return (
     <Page title={PAGE_TITLE}>
-      <LoginPage />
+      <GuestGuard>
+        <LoginPage />
+      </GuestGuard>
     </Page>
   );
 }

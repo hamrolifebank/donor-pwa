@@ -6,6 +6,7 @@ import SecondaryButton from "@components/Button/SecondaryButton";
 import { useAppAuthContext } from "@contexts/AuthContext";
 import { useRouter } from "next/router";
 import Login from "@components/LoginPage/LoginPage";
+import { PATH_DASHBOARD } from "@routes/paths";
 
 export default function Mnemonic() {
   const { wallet } = useAppAuthContext();
@@ -13,12 +14,8 @@ export default function Mnemonic() {
 
   const { push } = useRouter();
 
-  if (!wallet) {
-    return <Login />;
-  }
-
   const handlewritten = () => {
-    push("/");
+    push(PATH_DASHBOARD.root);
   };
   const handlecancel = () => {
     return console.log("handlecancel");
@@ -30,7 +27,7 @@ export default function Mnemonic() {
         Please save this 12 word mnemonic safely.
       </Typography>
       <Box sx={{ p: 3 }}>
-        <Grid container xs={12} spacing={2}>
+        <Grid container item xs={12} spacing={2}>
           {words.map((word, index) => {
             return (
               <Grid item xs={6} md={4} lg={3} key={index}>
@@ -41,7 +38,7 @@ export default function Mnemonic() {
           })}
         </Grid>
         <Box pt={5}>
-          <Grid container xs={12} spacing={2}>
+          <Grid container item xs={12} spacing={2}>
             <Grid item xs={12} md={6}>
               <PrimaryButton func={handlewritten}>
                 {" "}
