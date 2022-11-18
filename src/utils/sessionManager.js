@@ -36,6 +36,9 @@ export const savePublicAddress = (address) =>
 export const deleteAccessToken = () =>
   typeof window !== "undefined" ? localStorage.removeItem("accessToken") : null;
 
+export const deleteWalletFromLocal = () =>
+  typeof window !== "undefined" ? localStorage.removeItem("wallet") : null;
+
 export const isValidToken = (accessToken) => {
   if (!accessToken) {
     return false;

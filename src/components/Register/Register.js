@@ -17,6 +17,7 @@ import CallIcon from "@mui/icons-material/Call";
 import PrimaryButton from "@components/Button/PrimaryButton";
 import { useAppAuthContext } from "@contexts/AuthContext";
 import { useRouter } from "next/router";
+import { PATH_WALLET } from "@routes/paths";
 
 const PAGE_TITLE = "Registers";
 
@@ -35,7 +36,12 @@ export default function Register() {
 
   const handleSubmit = () => {
     addUser(user);
-    push("/mnemonic");
+    push(PATH_WALLET.mnemonic);
+  };
+
+  const handleInput = (e) => {
+    const { name, value } = e.target;
+    setUser({ ...user, [name]: value });
   };
   return (
     <Container>
@@ -51,7 +57,8 @@ export default function Register() {
             <TextField
               id="fullname"
               value={user.fullname}
-              onChange={(e) => setUser({ ...user, fullname: e.target.value })}
+              name="fullname"
+              onChange={handleInput}
               type="text"
               size="small"
               fullWidth
@@ -70,7 +77,8 @@ export default function Register() {
               id="select"
               size="small"
               value={user.gender}
-              onChange={(e) => setUser({ ...user, gender: e.target.value })}
+              name="gender"
+              onChange={handleInput}
               fullWidth
             >
               <MenuItem value="male">Male</MenuItem>
@@ -80,11 +88,12 @@ export default function Register() {
           <Grid item={true} xs={12} md={7}>
             <InputLabel> Phone number</InputLabel>
             <TextField
-              id="email"
+              id="phone"
               type="number"
               size="small"
-              value={user.emailEmail}
-              onChange={(e) => setUser({ ...user, email: e.target.value })}
+              value={user.phone}
+              name="phone"
+              onChange={handleInput}
               fullWidth
               InputProps={{
                 startAdornment: (
@@ -101,7 +110,8 @@ export default function Register() {
               id="dob"
               type="date"
               value={user.dob}
-              onChange={(e) => setUser({ ...user, dob: e.target.value })}
+              name="dob"
+              onChange={handleInput}
               size="small"
               fullWidth
             />
@@ -112,7 +122,8 @@ export default function Register() {
               id="select"
               placeholder="Blood Group"
               value={user.bloodGroup}
-              onChange={(e) => setUser({ ...user, bloodGroup: e.target.value })}
+              name="bloodGroup"
+              onChange={handleInput}
               size="small"
               fullWidth
             >
@@ -132,8 +143,9 @@ export default function Register() {
               id="email"
               type="text"
               size="small"
-              value={user.phone}
-              onChange={(e) => setUser({ ...user, phone: e.target.value })}
+              value={user.email}
+              name="email"
+              onChange={handleInput}
               fullWidth
               InputProps={{
                 startAdornment: (

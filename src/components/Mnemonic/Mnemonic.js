@@ -5,16 +5,20 @@ import PrimaryButton from "@components/Button/PrimaryButton";
 import SecondaryButton from "@components/Button/SecondaryButton";
 import { useAppAuthContext } from "@contexts/AuthContext";
 import { useRouter } from "next/router";
-import Login from "@components/LoginPage/LoginPage";
+
 import { PATH_DASHBOARD } from "@routes/paths";
+import { deleteWalletFromLocal } from "@utils/sessionManager";
 
 export default function Mnemonic() {
+  const { push } = useRouter();
   const { wallet } = useAppAuthContext();
+  if (!wallet) {
+    return push("/");
+  }
   const words = wallet && wallet.mnemonic.phrase.split(" ");
 
-  const { push } = useRouter();
-
   const handlewritten = () => {
+    deleteWalletFromLocal();
     push(PATH_DASHBOARD.root);
   };
   const handlecancel = () => {

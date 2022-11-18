@@ -16,6 +16,9 @@ export const PATH_AUTH = {
   register: "/register",
 };
 
+export const PATH_WALLET = {
+  mnemonic: "/mnemonic",
+};
 export const PATH_DASHBOARD = {
   root: ROOTS_DASHBOARD,
   one: path(ROOTS_DASHBOARD, "/one"),
