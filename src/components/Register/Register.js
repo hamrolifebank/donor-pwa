@@ -17,6 +17,7 @@ import CallIcon from "@mui/icons-material/Call";
 import PrimaryButton from "@components/Button/PrimaryButton";
 import { useAppAuthContext } from "@contexts/AuthContext";
 import { useRouter } from "next/router";
+import SecondaryButton from "@components/Button/SecondaryButton";
 
 const PAGE_TITLE = "Registers";
 
