@@ -8,17 +8,26 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { BOTTOM_NAVIGATION_OPTIONS } from "@routes/paths";
 import Iconify from "@components/iconify";
+import { useTheme } from "@emotion/react";
+import { Container } from "@mui/system";
 
 const BottomNavigationBar = () => {
   const [value, setValue] = useState(0);
   const router = useRouter();
+  const theme = useTheme();
 
   return (
     <Paper
-      sx={{ position: "fixed", bottom: 0, left: 0, right: 0 }}
+      sx={{
+        position: "fixed",
+        bottom: 0,
+        left: 0,
+        right: 0,
+      }}
       elevation={4}
     >
       <BottomNavigation
+        sx={{ backgroundColor: theme.palette.grey[300] }}
         showLabels
         value={value}
         onChange={(event, newValue) => {

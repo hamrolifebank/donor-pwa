@@ -32,13 +32,13 @@ export const BOTTOM_NAVIGATION_OPTIONS = [
   {
     path: PATH_DASHBOARD.root,
     // label: "Home",
-    icon: "eva:home-fill",
+    icon: "eva:home-outline",
     // icon: <DashboardIcon />,
   },
   {
     path: PATH_ASSETS.root,
     label: "",
-    icon: "eva:calendar-fill",
+    icon: "eva:calendar-outline",
     sx: {},
   },
   {
@@ -58,12 +58,12 @@ export const BOTTOM_NAVIGATION_OPTIONS = [
   {
     path: PATH_ASSETS.root,
     // label: "Donations",
-    icon: "eva:droplet-fill",
+    icon: "eva:droplet-outline",
     sx: {},
   },
   {
     path: PATH_PROFILE.root,
     // label: "Profile",
-    icon: "eva:person-fill",
+    icon: "eva:person-outline",
   },
 ];
