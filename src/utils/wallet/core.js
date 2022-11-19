@@ -5,7 +5,7 @@ var { ethers } = require("ethers");
 
 const core = {
   async createWallet() {
-    const wallet = await ethers.Wallet.createRandom();
+    const wallet = ethers.Wallet.createRandom();
     return wallet;
   },
 
@@ -24,6 +24,7 @@ const core = {
       encryptedWallet,
       passCode
     );
+    return wallet;
   },
 };
 
