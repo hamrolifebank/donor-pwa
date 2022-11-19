@@ -16,6 +16,7 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import EmailIcon from "@mui/icons-material/Email";
 import CallIcon from "@mui/icons-material/Call";
 import PrimaryButton from "@components/Button/PrimaryButton";
+import SecondaryButton from "@components/Button/SecondaryButton";
 import { useAppAuthContext } from "@contexts/AuthContext";
 import { useRouter } from "next/router";
 import { PATH_WALLET } from "@routes/paths";
@@ -142,7 +143,7 @@ export default function Register() {
             <InputLabel> E-mail</InputLabel>
             <TextField
               id="email"
-              type="text"
+              type="email"
               size="small"
               value={user.email}
               name="email"
@@ -159,6 +160,9 @@ export default function Register() {
           </Grid>
           <Grid item={true} xs={12} md={7}>
             <PrimaryButton func={handleSubmit}>Submit</PrimaryButton>
+          </Grid>
+          <Grid item={true} xs={12} md={7}>
+            <SecondaryButton>Cancel</SecondaryButton>
           </Grid>
         </Grid>
       </Box>

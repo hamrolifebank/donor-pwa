@@ -51,7 +51,10 @@ export default function Mnemonic() {
               </PrimaryButton>
             </Grid>
             <Grid item xs={12} md={4}>
-              <SecondaryButton func={handlecancel}> Cancel</SecondaryButton>
+              <SecondaryButton func={handlecancel}>
+                {" "}
+                Copy all mnemonics{" "}
+              </SecondaryButton>
             </Grid>
           </Grid>
         </Box>

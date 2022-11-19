@@ -6,7 +6,6 @@ const SecondaryButton = ({ children, func }) => {
     <>
       <Button
         sx={{
-          mt: 2,
           border: 1,
           color: "common.black",
         }}
