@@ -1,24 +1,26 @@
 import jwtDecode from "jwt-decode";
+import localData from " ./utils/localData";
 
 export const getCurrentUser = () => {
   let user = null;
-  const data = localStorage.getItem("currentUser");
-  if (data) user = JSON.parse(data);
+  const data = localStorage.getFromStorage(key);
+  if (data) user = data;
+
+  // if (data) user = JSON.parse(data);
   return user;
 };
 
-export const saveCurrentUser = (userData) =>
-  typeof window !== "undefined"
-    ? localStorage.setItem("currentUser", JSON.stringify(userData))
-    : "";
+export const setCurrentUser = (value) => {
+  localData.getFromStorage(key);
+};
 
-export const getAccessToken = () =>
-  typeof window !== "undefined" ? localStorage.getItem("accessToken") : "";
+export const getPublicKey = () => {
+  return localData.getFromStorage(key);
+};
 
-export const saveAccessToken = (accessToken) =>
-  typeof window !== "undefined"
-    ? localStorage.setItem("accessToken", accessToken)
-    : null;
+export const setPublicKey = (value) => {
+  localData.setInStorage(key, value);
+};
 
 export const deleteAccessToken = () =>
   typeof window !== "undefined" ? localStorage.removeItem("accessToken") : null;
