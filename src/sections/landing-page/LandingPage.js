@@ -3,8 +3,8 @@ import React from "react";
 import { Container } from "@mui/system";
 import { Icon } from "@iconify/react";
 import { useTheme } from "@emotion/react";
-import PrimaryButton from "@components/button/PrimaryButton";
-import SecondaryButton from "@components/button/SecondaryButton";
+import {PrimaryButton,SecondaryButton} from "@components/button";
+
 
 const handleCreateWallet = () => {
   return console.log("Created");

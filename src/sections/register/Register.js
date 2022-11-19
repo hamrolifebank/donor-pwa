@@ -14,8 +14,7 @@ import InputAdornment from "@mui/material/InputAdornment";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import EmailIcon from "@mui/icons-material/Email";
 import CallIcon from "@mui/icons-material/Call";
-import PrimaryButton from "@components/button/PrimaryButton";
-import SecondaryButton from "@components/button/SecondaryButton";
+import { PrimaryButton, SecondaryButton } from "@components/button";
 
 const handleSubmit = () => {
   return console.log("submit entered");

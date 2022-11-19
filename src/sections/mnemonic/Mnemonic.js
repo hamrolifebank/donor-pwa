@@ -1,8 +1,10 @@
 import { Box, Container } from "@mui/system";
 import React from "react";
 import { Grid, InputLabel, TextField, Typography } from "@mui/material";
-import PrimaryButton from "@components/button/PrimaryButton";
-import SecondaryButton from "@components/button/SecondaryButton";
+import {
+  PrimaryButton,
+  SecondaryButton,
+} from "@components/button";
 
 let numarr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
