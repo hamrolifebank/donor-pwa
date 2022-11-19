@@ -1,5 +1,6 @@
 import Page from "@components/Page";
 import DashboardlayoutwithFooter from "@layouts/dashboard/DashboardlayoutwithFooter";
+import { Home } from "@sections/home";
 
 const PAGE_TITLE = "Home";
 
@@ -10,5 +11,9 @@ HomePage.getLayout = (page) => (
 );
 
 export default function HomePage() {
-  return <Page title={PAGE_TITLE}>Wallet Page</Page>;
+  return (
+    <Page title={PAGE_TITLE}>
+      <Home />
+    </Page>
+  );
 }
