@@ -1,3 +1,4 @@
+/* eslint-disable react/display-name */
 import PropTypes from "prop-types";
 import { forwardRef } from "react";
 // @mui
@@ -11,7 +12,7 @@ const Page = forwardRef(({ children, title = "", meta, ...other }, ref) => (
   <>
     <Head>
       <title>{`${title} | ${APP_NAME}`}</title>
-      <meta name='viewport' content='initial-scale=1, width=device-width' />
+      <meta name="viewport" content="initial-scale=1, width=device-width" />
 
       {meta}
     </Head>

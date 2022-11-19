@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import PropTypes from "prop-types";
 // @mui
 import { useTheme } from "@mui/material/styles";
@@ -29,6 +30,7 @@ export default function Header({ pageTitle, onOpenNav }) {
         src="https://assets.rumsan.com/esatya/hlb-navbar-logo.png"
         height={60}
         width={110}
+        alt="logo"
       />
       {/* <BackButton />
       {pageTitle} */}

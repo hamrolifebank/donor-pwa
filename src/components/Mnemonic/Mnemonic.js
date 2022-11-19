@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import { Box, Container } from "@mui/system";
 import React from "react";
 import { Grid, InputLabel, TextField, Typography } from "@mui/material";

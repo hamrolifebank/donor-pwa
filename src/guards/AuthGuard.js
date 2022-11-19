@@ -1,15 +1,13 @@
 import PropTypes from "prop-types";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 // next
 import { useRouter } from "next/router";
 // components
 import LoadingScreen from "../components/LoadingScreen";
 //
-import Login from "@pages/auth/login";
+
 import { useAppAuthContext } from "@contexts/AuthContext";
 
-import { LoginPage } from "@components/LoginPage";
-import Page from "@components/Page";
 import { PATH_AUTH } from "@routes/paths";
 
 // ----------------------------------------------------------------------
@@ -29,6 +27,7 @@ export default function AuthGuard({ children }) {
     if (!isAuthenticated && isInitialized) {
       push(PATH_AUTH.login);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAuthenticated, isInitialized]);
 
   if (!isInitialized) {
