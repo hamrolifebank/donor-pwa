@@ -1,8 +1,8 @@
 import { Box, Container } from "@mui/system";
 import React from "react";
 import { Grid, InputLabel, TextField, Typography } from "@mui/material";
-import PrimaryButton from "@components/Button/PrimaryButton";
-import SecondaryButton from "@components/Button/SecondaryButton";
+import PrimaryButton from "@components/button/PrimaryButton";
+import SecondaryButton from "@components/button/SecondaryButton";
 
 let numarr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
@@ -33,13 +33,13 @@ export default function Mnemonic() {
         <Box pt={5}>
           <Grid container xs={12} spacing={2}>
             <Grid item xs={12} md={6}>
-              <PrimaryButton func={handlewritten}>
+              <PrimaryButton onClick={handlewritten}>
                 {" "}
                 Yes, I've written down
               </PrimaryButton>
             </Grid>
             <Grid item xs={12} md={4}>
-              <SecondaryButton func={handlecancel}>
+              <SecondaryButton onClick={handlecancel}>
                 {" "}
                 Copy all mnemonics{" "}
               </SecondaryButton>

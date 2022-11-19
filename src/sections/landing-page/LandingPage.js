@@ -3,8 +3,8 @@ import React from "react";
 import { Container } from "@mui/system";
 import { Icon } from "@iconify/react";
 import { useTheme } from "@emotion/react";
-import PrimaryButton from "@components/Button/PrimaryButton";
-import SecondaryButton from "@components/Button/SecondaryButton";
+import PrimaryButton from "@components/button/PrimaryButton";
+import SecondaryButton from "@components/button/SecondaryButton";
 
 const handleCreateWallet = () => {
   return console.log("Created");
@@ -15,13 +15,6 @@ const seedPhrase = () => {
 
 const handleRestoreWallet = () => {
   return console.log("Restored");
-};
-
-const styles = {
-  image: {
-    backgroundImage: `url(${"https://assets.rumsan.com/esatya/hlb-navbar-logo.png"})`,
-    opacity: 0.1,
-  },
 };
 
 export default function HomeContent() {
@@ -39,7 +32,7 @@ export default function HomeContent() {
           borderRadius: 1,
         }}
       >
-        <PrimaryButton func={handleCreateWallet}>
+        <PrimaryButton onClick={handleCreateWallet}>
           <Icon
             icon="fluent:wallet-credit-card-24-filled"
             height={30}
@@ -59,7 +52,7 @@ export default function HomeContent() {
           borderRadius: 1,
         }}
       >
-        <SecondaryButton func={seedPhrase}>
+        <SecondaryButton onClick={seedPhrase}>
           <Icon
             icon="bi:file-earmark-text-fill"
             height={30}
@@ -69,7 +62,7 @@ export default function HomeContent() {
           Seed phrase
         </SecondaryButton>
 
-        <SecondaryButton func={handleRestoreWallet}>
+        <SecondaryButton onClick={handleRestoreWallet}>
           <Icon
             icon="akar-icons:google-fill"
             height={30}

@@ -1,4 +1,4 @@
-import { Mnemonic } from "@components/Mnemonic";
+import { Mnemonic } from "@sections/mnemonic";
 import Page from "@components/Page";
 import DashboardLayout from "@layouts/dashboard/DashboardLayout";
 

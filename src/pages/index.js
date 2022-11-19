@@ -1,5 +1,5 @@
-import LandingPage from "@components/LandingPage/LandingPage";
 import Page from "@components/Page";
+import LandingPage from "@sections/landing-page/LandingPage";
 import DashboardLayout from "@layouts/dashboard/DashboardLayout";
 
 const PAGE_TITLE = "Home";

@@ -14,8 +14,8 @@ import InputAdornment from "@mui/material/InputAdornment";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import EmailIcon from "@mui/icons-material/Email";
 import CallIcon from "@mui/icons-material/Call";
-import PrimaryButton from "@components/Button/PrimaryButton";
-import SecondaryButton from "@components/Button/SecondaryButton";
+import PrimaryButton from "@components/button/PrimaryButton";
+import SecondaryButton from "@components/button/SecondaryButton";
 
 const handleSubmit = () => {
   return console.log("submit entered");
@@ -104,7 +104,7 @@ export default function ProfileInfo() {
             />
           </Grid>
           <Grid item={true} xs={12} md={7}>
-            <PrimaryButton func={handleSubmit}>Submit</PrimaryButton>
+            <PrimaryButton onClick={handleSubmit}>Submit</PrimaryButton>
           </Grid>
           <Grid item={true} xs={12} md={7}>
             <SecondaryButton>Cancel</SecondaryButton>
