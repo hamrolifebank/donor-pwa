@@ -26,10 +26,9 @@ export default function GuestGuard({ children }) {
     if (isAuthenticated && !user) {
       push(PATH_AUTH.register);
     }
-    // if (isAuthenticated && user) {
-    //   deleteWalletFromLocal();
-    //   push(PATH_DASHBOARD.root);
-    // }
+    if (isAuthenticated && user) {
+      push(PATH_DASHBOARD.root);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAuthenticated, user]);
 
