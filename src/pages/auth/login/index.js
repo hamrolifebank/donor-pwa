@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import GuestGuard from "@guards/GuestGuard";
-import { LoginPage } from "@components/LoginPage";
+import { LoginPage } from "@sections/landing-page";
 import DashboardLayout from "@layouts/dashboard/DashboardLayout";
 import Page from "@components/Page";
 

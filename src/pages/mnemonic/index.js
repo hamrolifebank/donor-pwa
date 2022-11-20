@@ -1,4 +1,4 @@
-import { Mnemonic } from "@components/Mnemonic";
+import { MnemonicPage } from "@sections/mnemonic";
 import Page from "@components/Page";
 import DashboardLayout from "@layouts/dashboard/DashboardLayout";
 
@@ -11,7 +11,7 @@ mnemonic.getLayout = (page) => (
 export default function mnemonic() {
   return (
     <Page title={PAGE_TITLE}>
-      <Mnemonic />
+      <MnemonicPage />
     </Page>
   );
 }

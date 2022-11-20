@@ -1,5 +1,5 @@
 import Page from "@components/Page";
-import { RegisterPage } from "@components/Register";
+import { RegisterPage } from "@sections/register";
 import DashboardLayout from "@layouts/dashboard/DashboardLayout";
 
 const PAGE_TITLE = "Register";
