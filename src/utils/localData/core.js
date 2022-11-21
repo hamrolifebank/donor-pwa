@@ -19,7 +19,7 @@ const getFromStorageType = (key, storage) => {
           ? JSON.parse(localStorage.getItem(`${key}`))
           : ""
         : "";
-    return;
+    return stored;
   }
 };
 
