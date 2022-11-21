@@ -31,8 +31,8 @@ const core = {
   },
 
   async getFromStorage(key, storage = STORAGE.LOCAL_STORAGE) {
-    const walletFromLocal = getFromStorageType(key, storage);
-    if (walletFromLocal) {
+    const dataFromLocal = getFromStorageType(key, storage);
+    if (dataFromLocal) {
       return true;
     } else return null;
   },
