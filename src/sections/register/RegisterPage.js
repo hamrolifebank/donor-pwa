@@ -173,9 +173,6 @@ export default function Register() {
           <Grid item={true} xs={12} md={7}>
             <SecondaryButton onClick={handleCancel}>Cancel</SecondaryButton>
           </Grid>
-          <Grid item={true} xs={12} md={7}>
-            <SecondaryButton>Cancel</SecondaryButton>
-          </Grid>
         </Grid>
       </Box>
     </Container>
