@@ -1,19 +1,17 @@
+import { MnemonicPage } from "@sections/mnemonic";
 import Page from "@components/Page";
-
-// import MnemonicGuard from "@guards/MnemonicGuard";
-
 import DashboardLayout from "@layouts/dashboard/DashboardLayout";
 
-const PAGE_TITLE = "Home";
+const PAGE_TITLE = "Mnemonic";
 
-Home.getLayout = (page) => (
+mnemonic.getLayout = (page) => (
   <DashboardLayout pageTitle={PAGE_TITLE}>{page}</DashboardLayout>
 );
 
-export default function Home() {
+export default function mnemonic() {
   return (
     <Page title={PAGE_TITLE}>
-      <h1>This is home page</h1>
+      <MnemonicPage />
     </Page>
   );
 }

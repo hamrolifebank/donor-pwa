@@ -11,6 +11,8 @@ import ThemeProvider from "../theme";
 import { SettingsProvider } from "@components/settings";
 import { AppAuthProvider } from "@contexts/AuthContext";
 
+import AuthGuard from "@guards/AuthGuard";
+
 // locales
 // components
 
@@ -22,6 +24,8 @@ import { AppAuthProvider } from "@contexts/AuthContext";
 // ----------------------------------------------------------------------
 
 const clientSideEmotionCache = createEmotionCache();
+
+console.log("in main app");
 
 MyApp.propTypes = {
   Component: PropTypes.elementType,
@@ -37,13 +41,13 @@ export default function MyApp(props) {
   return (
     <CacheProvider value={emotionCache}>
       <Head>
-        <meta name='viewport' content='initial-scale=1, width=device-width' />
+        <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
       <AppAuthProvider>
         <SettingsProvider>
           {/* <AuthProvider> */}
           <ThemeProvider>
-            {getLayout(<Component {...pageProps} />)}
+            <AuthGuard>{getLayout(<Component {...pageProps} />)}</AuthGuard>
           </ThemeProvider>
           {/* </AuthProvider> */}
         </SettingsProvider>

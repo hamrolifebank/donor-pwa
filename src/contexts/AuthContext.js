@@ -5,9 +5,11 @@ import { createContext, useContext, useEffect, useState } from "react";
 // import { isValidToken, setSession } from '../utils/jwt';
 import {
   isValidToken,
-  saveAccessToken,
-  getAccessToken,
+  setPublicKey,
+  getPublicKey,
   deleteAccessToken,
+  getCurrentUser,
+  setCurrentUser,
 } from "../utils/sessionManager";
 
 // ----------------------------------------------------------------------
@@ -15,14 +17,17 @@ import {
 const initialState = {
   isAuthenticated: false, // should be false by default,
   isInitialized: false,
-  token: null,
+  isMnemonicWritten: false,
+  wallet: null,
+  publicAddress: null,
   user: null,
 };
 
 const AppAuthContext = createContext({
   ...initialState,
   method: "jwt",
-  addToken: () => {},
+  addPublicAddress: () => {},
+  addWallet: () => {},
   deleteToken: () => {},
 });
 
@@ -32,18 +37,50 @@ AppAuthProvider.propTypes = {
   children: PropTypes.node,
 };
 
-const localToken = getAccessToken();
+const localToken = getPublicKey();
+const localUser = getCurrentUser();
+const wallet = getWallet();
 
 function AppAuthProvider({ children }) {
   const [authState, setAuthState] = useState(initialState);
 
-  const addToken = (payload) => {
-    if (!isValid(payload)) {
-      return "Invalid token";
-    }
+  const addWallet = (payload) => {
+    setAuthState((prev) => ({
+      ...prev,
+      wallet: payload,
+    }));
+    saveWallet(payload);
+  };
+
+  const addPublicAddress = (payload) => {
     if (payload) {
-      setAuthState((prev) => ({ ...prev, token: payload }));
-      saveAccessToken(payload);
+      setAuthState((prev) => ({
+        ...prev,
+        isAuthenticated: true,
+        publicAddress: payload,
+      }));
+      setPublicKey(payload);
+    }
+  };
+  const deleteWallet = () => {
+    setAuthState((prev) => ({
+      ...prev,
+      isAuthenticated: false,
+      publicAddress: null,
+      wallet: null,
+    }));
+    console.log("deletePublicAddress");
+    deletePublicAddressLocal();
+    deleteWalletFromLocal();
+  };
+
+  const addUser = (payload) => {
+    if (payload) {
+      setAuthState((prev) => ({
+        ...prev,
+        user: payload,
+      }));
+      setCurrentUser(payload);
     }
   };
 
@@ -51,17 +88,26 @@ function AppAuthProvider({ children }) {
     const initialize = async () => {
       setAuthState((prev) => ({ ...prev, isInitialized: true }));
       try {
-        if (localToken && isValidToken(localToken)) {
+        if (localPublicAddress) {
           setAuthState((prev) => ({
             ...prev,
             isAuthenticated: true,
-            token: localToken,
+            publicAddress: localPublicAddress,
           }));
-
-          //  const response = await axios.get('/api/account/my-account');
-          //  const { user } = response.data;
         } else {
           setAuthState((prev) => ({ ...prev, isAuthenticated: false }));
+        }
+        if (wallet) {
+          setAuthState((prev) => ({
+            ...prev,
+            wallet: wallet,
+          }));
+        }
+        if (localUser) {
+          setAuthState((prev) => ({
+            ...prev,
+            user: localUser,
+          }));
         }
       } catch (err) {
         console.error(err);
@@ -78,7 +124,10 @@ function AppAuthProvider({ children }) {
   const contextProps = {
     ...authState,
     deleteToken,
-    addToken,
+    addWallet,
+    addPublicAddress,
+    deleteWallet,
+    addUser,
   };
 
   return (

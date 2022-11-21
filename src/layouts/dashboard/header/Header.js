@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import PropTypes from "prop-types";
 // @mui
 import { useTheme } from "@mui/material/styles";
@@ -25,17 +26,24 @@ export default function Header({ pageTitle, onOpenNav }) {
 
   const renderContent = (
     <>
-      <BackButton />
-      {pageTitle}
+      <img
+        src="https://assets.rumsan.com/esatya/hlb-navbar-logo.png"
+        height={60}
+        width={110}
+        alt="logo"
+      />
+      {/* <BackButton />
+      {pageTitle} */}
       <Stack
         flexGrow={1}
-        direction='row'
-        alignItems='center'
-        justifyContent='flex-end'
-        spacing={{ xs: 0.5, sm: 1.5 }}>
-        <NotificationsPopover />
-
-        <AccountPopover />
+        direction="row"
+        alignItems="center"
+        justifyContent="flex-end"
+        spacing={{ xs: 0.5, sm: 1.5 }}
+      >
+        {/* <NotificationsPopover /> */}
+        {/* 
+        <AccountPopover /> */}
       </Stack>
     </>
   );
@@ -46,12 +54,14 @@ export default function Header({ pageTitle, onOpenNav }) {
         boxShadow: "none",
         height: HEADER.H_MOBILE,
         zIndex: theme.zIndex.appBar + 1,
-      }}>
+      }}
+    >
       <Toolbar
         sx={{
           height: 1,
           px: { lg: 5 },
-        }}>
+        }}
+      >
         {renderContent}
       </Toolbar>
     </AppBar>

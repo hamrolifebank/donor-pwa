@@ -1,19 +1,17 @@
 import Page from "@components/Page";
-
-// import MnemonicGuard from "@guards/MnemonicGuard";
-
+import { RegisterPage } from "@sections/register";
 import DashboardLayout from "@layouts/dashboard/DashboardLayout";
 
-const PAGE_TITLE = "Home";
+const PAGE_TITLE = "Register";
 
-Home.getLayout = (page) => (
+register.getLayout = (page) => (
   <DashboardLayout pageTitle={PAGE_TITLE}>{page}</DashboardLayout>
 );
 
-export default function Home() {
+export default function register() {
   return (
     <Page title={PAGE_TITLE}>
-      <h1>This is home page</h1>
+      <RegisterPage />
     </Page>
   );
 }

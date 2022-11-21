@@ -1,27 +1,24 @@
 import jwtDecode from "jwt-decode";
+import localData from "./localData";
 
 export const getCurrentUser = () => {
   let user = null;
-  const data = localStorage.getItem("currentUser");
-  if (data) user = JSON.parse(data);
+  const data = localData.getFromStorage("user");
+  if (data) user = data;
   return user;
 };
 
-export const saveCurrentUser = (userData) =>
-  typeof window !== "undefined"
-    ? localStorage.setItem("currentUser", JSON.stringify(userData))
-    : "";
+export const setCurrentUser = (value) => {
+  localData.setInStorage("user", value);
+};
 
-export const getAccessToken = () =>
-  typeof window !== "undefined" ? localStorage.getItem("accessToken") : "";
+export const setPublicKey = (value) => {
+  localData.setInStorage("publicKey", value);
+};
 
-export const saveAccessToken = (accessToken) =>
-  typeof window !== "undefined"
-    ? localStorage.setItem("accessToken", accessToken)
-    : null;
-
-export const deleteAccessToken = () =>
-  typeof window !== "undefined" ? localStorage.removeItem("accessToken") : null;
+export const getPublicKey = () => {
+  return localData.getFromStorage("publicKey");
+};
 
 export const isValidToken = (accessToken) => {
   if (!accessToken) {
@@ -33,3 +30,20 @@ export const isValidToken = (accessToken) => {
 
   return decoded.exp > currentTime;
 };
+
+export const setWallet = (wallet) => {
+  localData.setInStorage("wallet", wallet);
+};
+
+export const getWallet = () => {
+  return localData.getFromStorage("wallet");
+};
+
+export const deletePublicAddressLocal = () =>
+  typeof window !== "undefined" ? localStorage.removeItem("publicKey") : "";
+
+export const deleteUserLocal = () =>
+  typeof window !== "undefined" ? localStorage.removeItem("user") : null;
+
+export const deleteWalletFromLocal = () =>
+  typeof window !== "undefined" ? localStorage.removeItem("wallet") : null;
