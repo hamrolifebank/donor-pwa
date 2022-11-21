@@ -33,7 +33,7 @@ const core = {
   async getFromStorage(key, storage = STORAGE.LOCAL_STORAGE) {
     const dataFromLocal = getFromStorageType(key, storage);
     if (dataFromLocal) {
-      return true;
+      return dataFromLocal;
     } else return null;
   },
 };
