@@ -3,7 +3,7 @@ import localData from "./localData";
 
 export const getCurrentUser = () => {
   let user = null;
-  const data = localStorage.getFromStorage("user");
+  const data = localData.getFromStorage("user");
   if (data) user = data;
   return user;
 };
