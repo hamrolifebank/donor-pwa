@@ -19,6 +19,7 @@ export const setPublicKey = (value) => {
 export const getPublicKey = () => {
   return localData.getFromStorage("publicKey");
 };
+
 export const isValidToken = (accessToken) => {
   if (!accessToken) {
     return false;
@@ -36,14 +37,6 @@ export const setWallet = (wallet) => {
 
 export const getWallet = () => {
   return localData.getFromStorage("wallet");
-};
-
-export const getPublicAddress = () => {
-  return localData.getFromStorage("public-address");
-};
-
-export const setPublicAddress = (address) => {
-  return localData.setInStorage("public-address", address);
 };
 
 export const deletePublicAddressLocal = () =>
