@@ -48,7 +48,7 @@ export default function Login() {
           borderRadius: 1,
         }}
       >
-        <PrimaryButton func={handleCreateWallet}>
+        <PrimaryButton onClick={handleCreateWallet}>
           <Icon
             icon="fluent:wallet-credit-card-24-filled"
             height={30}
@@ -78,7 +78,7 @@ export default function Login() {
           Seed phrase
         </SecondaryButton>
 
-        <SecondaryButton func={handleRestoreWallet}>
+        <SecondaryButton onClick={handleRestoreWallet}>
           <Icon
             icon="akar-icons:google-fill"
             height={30}

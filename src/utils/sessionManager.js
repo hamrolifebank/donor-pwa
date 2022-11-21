@@ -33,6 +33,11 @@ export const savePublicAddress = (address) =>
     ? localStorage.setItem("public-address", address)
     : null;
 
+export const deletePublicAddressLocal = () =>
+  typeof window !== "undefined"
+    ? localStorage.removeItem("public-address")
+    : "";
+
 export const deleteAccessToken = () =>
   typeof window !== "undefined" ? localStorage.removeItem("accessToken") : null;
 

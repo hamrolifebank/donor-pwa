@@ -10,6 +10,7 @@ import {
   deleteAccessToken,
   saveCurrentUser,
   getCurrentUser,
+  deletePublicAddressLocal,
   saveWallet,
   getWallet,
 } from "../utils/sessionManager";
@@ -64,6 +65,15 @@ function AppAuthProvider({ children }) {
       savePublicAddress(payload);
     }
   };
+  const deletePublicAddress = () => {
+    setAuthState((prev) => ({
+      ...prev,
+      isAuthenticated: false,
+      publicAddress: null,
+    }));
+    console.log("deletePublicAddress");
+    deletePublicAddressLocal();
+  };
 
   const addUser = (payload) => {
     if (payload) {
@@ -117,6 +127,7 @@ function AppAuthProvider({ children }) {
     deleteToken,
     addWallet,
     addPublicAddress,
+    deletePublicAddress,
     addUser,
   };
 

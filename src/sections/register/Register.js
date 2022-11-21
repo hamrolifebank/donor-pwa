@@ -19,7 +19,7 @@ import PrimaryButton from "@components/Button/PrimaryButton";
 import SecondaryButton from "@components/Button/SecondaryButton";
 import { useAppAuthContext } from "@contexts/AuthContext";
 import { useRouter } from "next/router";
-import { PATH_WALLET } from "@routes/paths";
+import { PATH_AUTH, PATH_WALLET } from "@routes/paths";
 
 const PAGE_TITLE = "Registers";
 
@@ -33,12 +33,17 @@ export default function Register() {
     dob: "",
   });
 
-  const { addUser } = useAppAuthContext();
+  const { addUser, deletePublicAddress } = useAppAuthContext();
   const { push } = useRouter();
 
   const handleSubmit = () => {
     addUser(user);
     push(PATH_WALLET.mnemonic);
+  };
+
+  const handleCancel = () => {
+    deletePublicAddress();
+    push(PATH_AUTH.login);
   };
 
   const handleInput = (e) => {
@@ -159,10 +164,10 @@ export default function Register() {
             />
           </Grid>
           <Grid item={true} xs={12} md={7}>
-            <PrimaryButton func={handleSubmit}>Submit</PrimaryButton>
+            <PrimaryButton onClick={handleSubmit}>Submit</PrimaryButton>
           </Grid>
           <Grid item={true} xs={12} md={7}>
-            <SecondaryButton>Cancel</SecondaryButton>
+            <SecondaryButton onClick={handleCancel}>Cancel</SecondaryButton>
           </Grid>
         </Grid>
       </Box>

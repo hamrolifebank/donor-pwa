@@ -15,7 +15,7 @@ export default function Mnemonic() {
   const { wallet } = useAppAuthContext();
   if (!wallet.mnemonic || wallet.mnemonic.length === 0) {
     console.log("No mnemonic found");
-    push("/");
+    push(PATH_DASHBOARD.root);
   } else {
     const words = wallet && wallet.mnemonic.phrase.split(" ");
 
