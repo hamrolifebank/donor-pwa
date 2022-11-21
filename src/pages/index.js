@@ -1,13 +1,8 @@
-import { BottomNavigation } from "@components/bottom-navigation";
-import LandingPage from "@components/LoginPage/LoginPage";
-import { Mnemonic } from "@components/Mnemonic";
 import Page from "@components/Page";
-import { Register } from "@components/Register";
-import AuthGuard from "@guards/AuthGuard";
+
 // import MnemonicGuard from "@guards/MnemonicGuard";
-import UserGuard from "@guards/UserGuard";
+
 import DashboardLayout from "@layouts/dashboard/DashboardLayout";
-import Login from "./auth/login";
 
 const PAGE_TITLE = "Home";
 

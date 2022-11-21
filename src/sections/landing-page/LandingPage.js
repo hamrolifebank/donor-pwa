@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import { Button, Box, Typography, Paper } from "@mui/material";
 import React from "react";
 import { Container } from "@mui/system";
@@ -27,11 +28,11 @@ const styles = {
 export default function Login() {
   const theme = useTheme();
   const router = useRouter();
-  const { addToken, addWallet } = useAppAuthContext();
+  const { addPublicAddress, addWallet } = useAppAuthContext();
 
   const handleCreateWallet = async () => {
     const wallet = await library.createWallet();
-    addToken(wallet.address);
+    addPublicAddress(wallet.address);
     addWallet(wallet);
   };
 
@@ -47,7 +48,7 @@ export default function Login() {
           borderRadius: 1,
         }}
       >
-        <PrimaryButton func={handleCreateWallet}>
+        <PrimaryButton onClick={handleCreateWallet}>
           <Icon
             icon="fluent:wallet-credit-card-24-filled"
             height={30}
@@ -77,7 +78,7 @@ export default function Login() {
           Seed phrase
         </SecondaryButton>
 
-        <SecondaryButton func={handleRestoreWallet}>
+        <SecondaryButton onClick={handleRestoreWallet}>
           <Icon
             icon="akar-icons:google-fill"
             height={30}

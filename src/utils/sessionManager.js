@@ -20,8 +20,16 @@ export const setPublicKey = (value) => {
   localData.setInStorage("publicKey", value);
 };
 
+export const deletePublicAddressLocal = () =>
+  typeof window !== "undefined"
+    ? localStorage.removeItem("public-address")
+    : "";
+
 export const deleteAccessToken = () =>
   typeof window !== "undefined" ? localStorage.removeItem("accessToken") : null;
+
+export const deleteWalletFromLocal = () =>
+  typeof window !== "undefined" ? localStorage.removeItem("wallet") : null;
 
 export const isValidToken = (accessToken) => {
   if (!accessToken) {

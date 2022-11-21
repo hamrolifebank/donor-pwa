@@ -12,7 +12,8 @@
       "@services/*": ["src/services/*"],
       "@assets/*": ["src/assets/*"],
       "@contexts/*": ["src/contexts/*"],
-      "@guards/*": ["src/guards/*"]
+      "@guards/*": ["src/guards/*"],
+      "@sections/*": ["src/sections/*"]
     }
   },
   "include": ["src/**/*"],

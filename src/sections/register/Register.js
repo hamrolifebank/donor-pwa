@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import {
   Container,
   Select,
@@ -15,9 +16,10 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import EmailIcon from "@mui/icons-material/Email";
 import CallIcon from "@mui/icons-material/Call";
 import PrimaryButton from "@components/Button/PrimaryButton";
+import SecondaryButton from "@components/Button/SecondaryButton";
 import { useAppAuthContext } from "@contexts/AuthContext";
 import { useRouter } from "next/router";
-import SecondaryButton from "@components/Button/SecondaryButton";
+import { PATH_AUTH, PATH_WALLET } from "@routes/paths";
 
 const PAGE_TITLE = "Registers";
 
@@ -31,12 +33,22 @@ export default function Register() {
     dob: "",
   });
 
-  const { addUser } = useAppAuthContext();
+  const { addUser, deleteWallet } = useAppAuthContext();
   const { push } = useRouter();
 
   const handleSubmit = () => {
     addUser(user);
-    push("/mnemonic");
+    push(PATH_WALLET.mnemonic);
+  };
+
+  const handleCancel = () => {
+    deleteWallet();
+    push(PATH_AUTH.login);
+  };
+
+  const handleInput = (e) => {
+    const { name, value } = e.target;
+    setUser({ ...user, [name]: value });
   };
   return (
     <Container>
@@ -52,7 +64,8 @@ export default function Register() {
             <TextField
               id="fullname"
               value={user.fullname}
-              onChange={(e) => setUser({ ...user, fullname: e.target.value })}
+              name="fullname"
+              onChange={handleInput}
               type="text"
               size="small"
               fullWidth
@@ -71,7 +84,8 @@ export default function Register() {
               id="selectG"
               size="small"
               value={user.gender}
-              onChange={(e) => setUser({ ...user, gender: e.target.value })}
+              name="gender"
+              onChange={handleInput}
               fullWidth
             >
               <MenuItem value="male">Male</MenuItem>
@@ -81,11 +95,12 @@ export default function Register() {
           <Grid item={true} xs={12} md={7}>
             <InputLabel> Phone number</InputLabel>
             <TextField
-              id="phnumber"
+              id="phone"
               type="number"
               size="small"
-              value={user.emailEmail}
-              onChange={(e) => setUser({ ...user, email: e.target.value })}
+              value={user.phone}
+              name="phone"
+              onChange={handleInput}
               fullWidth
               InputProps={{
                 startAdornment: (
@@ -102,7 +117,8 @@ export default function Register() {
               id="dob"
               type="date"
               value={user.dob}
-              onChange={(e) => setUser({ ...user, dob: e.target.value })}
+              name="dob"
+              onChange={handleInput}
               size="small"
               fullWidth
             />
@@ -113,7 +129,8 @@ export default function Register() {
               id="selectBG"
               placeholder="Blood Group"
               value={user.bloodGroup}
-              onChange={(e) => setUser({ ...user, bloodGroup: e.target.value })}
+              name="bloodGroup"
+              onChange={handleInput}
               size="small"
               fullWidth
             >
@@ -133,8 +150,9 @@ export default function Register() {
               id="email"
               type="email"
               size="small"
-              value={user.phone}
-              onChange={(e) => setUser({ ...user, phone: e.target.value })}
+              value={user.email}
+              name="email"
+              onChange={handleInput}
               fullWidth
               InputProps={{
                 startAdornment: (
@@ -146,7 +164,10 @@ export default function Register() {
             />
           </Grid>
           <Grid item={true} xs={12} md={7}>
-            <PrimaryButton func={handleSubmit}>Submit</PrimaryButton>
+            <PrimaryButton onClick={handleSubmit}>Submit</PrimaryButton>
+          </Grid>
+          <Grid item={true} xs={12} md={7}>
+            <SecondaryButton onClick={handleCancel}>Cancel</SecondaryButton>
           </Grid>
           <Grid item={true} xs={12} md={7}>
             <SecondaryButton>Cancel</SecondaryButton>
