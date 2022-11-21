@@ -1,37 +1,50 @@
 import jwtDecode from "jwt-decode";
+import localData from "./localData";
 
-export const saveWallet = (wallet) => {
-  return typeof window !== "undefined"
-    ? localStorage.setItem("wallet", wallet)
-    : "";
+export const getCurrentUser = () => {
+  let user = null;
+  const data = localData.getFromStorage("user");
+  if (data) user = data;
+  return user;
+};
+
+export const setCurrentUser = (value) => {
+  localData.setInStorage("user", value);
+};
+
+export const setPublicKey = (value) => {
+  localData.setInStorage("publicKey", value);
+};
+
+export const getPublicKey = () => {
+  return localData.getFromStorage("publicKey");
+};
+export const isValidToken = (accessToken) => {
+  if (!accessToken) {
+    return false;
+  }
+  const decoded = jwtDecode(accessToken);
+
+  const currentTime = Date.now() / 1000;
+
+  return decoded.exp > currentTime;
+};
+
+export const setWallet = (wallet) => {
+  localData.setInStorage("wallet", wallet);
 };
 
 export const getWallet = () => {
-  return typeof window !== "undefined" ? localStorage.getItem("wallet") : "";
+  return localData.getFromStorage("wallet");
 };
 
-export const getCurrentUser = () => {
-  // let user = null;
-  // const data = localStorage.getItem("currentUser");
-  // if (data) user = JSON.parse(data);
-  // return user;
-  return typeof window !== "undefined"
-    ? localStorage.getItem("currentUser")
-    : "";
+export const getPublicAddress = () => {
+  return localData.getFromStorage("public-address");
 };
 
-export const saveCurrentUser = (userData) =>
-  typeof window !== "undefined"
-    ? localStorage.setItem("currentUser", JSON.stringify(userData))
-    : "";
-
-export const getPublicAddress = () =>
-  typeof window !== "undefined" ? localStorage.getItem("public-address") : "";
-
-export const savePublicAddress = (address) =>
-  typeof window !== "undefined"
-    ? localStorage.setItem("public-address", address)
-    : null;
+export const setPublicAddress = (address) => {
+  return localData.setInStorage("public-address", address);
+};
 
 export const deletePublicAddressLocal = () =>
   typeof window !== "undefined"
@@ -43,14 +56,3 @@ export const deleteAccessToken = () =>
 
 export const deleteWalletFromLocal = () =>
   typeof window !== "undefined" ? localStorage.removeItem("wallet") : null;
-
-export const isValidToken = (accessToken) => {
-  if (!accessToken) {
-    return false;
-  }
-  const decoded = jwtDecode(accessToken);
-
-  const currentTime = Date.now() / 1000;
-
-  return decoded.exp > currentTime;
-};

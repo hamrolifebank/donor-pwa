@@ -80,7 +80,7 @@ export default function Register() {
           <Grid item={true} xs={12} md={3}>
             <InputLabel> Gender</InputLabel>
             <Select
-              id="select"
+              id="selectG"
               size="small"
               value={user.gender}
               name="gender"
@@ -172,6 +172,9 @@ export default function Register() {
           </Grid>
           <Grid item={true} xs={12} md={7}>
             <SecondaryButton onClick={handleCancel}>Cancel</SecondaryButton>
+          </Grid>
+          <Grid item={true} xs={12} md={7}>
+            <SecondaryButton>Cancel</SecondaryButton>
           </Grid>
         </Grid>
       </Box>

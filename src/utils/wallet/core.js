@@ -3,9 +3,9 @@ var { ethers } = require("ethers");
 // const { RS_NETWORK } = process.env;
 // const provider = new ethers.providers.JsonRpcProvider(RS_NETWORK);
 
-const library = {
+const core = {
   async createWallet() {
-    const wallet = await ethers.Wallet.createRandom();
+    const wallet = ethers.Wallet.createRandom();
     return wallet;
   },
 
@@ -24,7 +24,8 @@ const library = {
       encryptedWallet,
       passCode
     );
+    return wallet;
   },
 };
 
-module.exports = library;
+module.exports = core;

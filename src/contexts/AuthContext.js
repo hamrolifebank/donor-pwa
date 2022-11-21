@@ -4,9 +4,8 @@ import { createContext, useContext, useEffect, useState } from "react";
 // utils
 // import { isValidToken, setSession } from '../utils/jwt';
 import {
-  isValidToken,
-  setPublicAddress,
-  getPublicAddress,
+  setPublicKey,
+  getPublicKey,
   deleteAccessToken,
   setCurrentUser,
   getCurrentUser,
@@ -41,7 +40,7 @@ AppAuthProvider.propTypes = {
   children: PropTypes.node,
 };
 
-const localPublicAddress = getPublicAddress();
+const localToken = getPublicKey();
 const localUser = getCurrentUser();
 const wallet = getWallet();
 
@@ -63,7 +62,7 @@ function AppAuthProvider({ children }) {
         isAuthenticated: true,
         publicAddress: payload,
       }));
-      setPublicAddress(payload);
+      setPublicKey(payload);
     }
   };
   const deleteWallet = () => {
