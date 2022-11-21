@@ -15,7 +15,7 @@ import InputAdornment from "@mui/material/InputAdornment";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import EmailIcon from "@mui/icons-material/Email";
 import CallIcon from "@mui/icons-material/Call";
-import { PrimaryButton, SecondaryButton } from "@components/button";
+import { PrimaryButton, SecondaryButton } from "@components/Button";
 import { useAppAuthContext } from "@contexts/AuthContext";
 import { useRouter } from "next/router";
 import { PATH_AUTH, PATH_WALLET } from "@routes/paths";

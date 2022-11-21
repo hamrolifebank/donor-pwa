@@ -4,7 +4,7 @@ import React from "react";
 import { Container } from "@mui/system";
 import { Icon } from "@iconify/react";
 import { useTheme } from "@emotion/react";
-import { PrimaryButton, SecondaryButton } from "@components/button";
+import { PrimaryButton, SecondaryButton } from "@components/Button";
 
 import { useAppAuthContext } from "@contexts/AuthContext";
 import library from "@utils/wallet";

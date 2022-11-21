@@ -2,8 +2,8 @@
 import { Box, Container } from "@mui/system";
 import React from "react";
 import { Grid, InputLabel, TextField, Typography } from "@mui/material";
-import PrimaryButton from "@components/Button/PrimaryButton";
-import SecondaryButton from "@components/Button/SecondaryButton";
+import { PrimaryButton, SecondaryButton } from "@components/Button";
+
 import { useAppAuthContext } from "@contexts/AuthContext";
 import { useRouter } from "next/router";
 
