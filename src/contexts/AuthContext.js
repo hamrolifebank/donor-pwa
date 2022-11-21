@@ -5,13 +5,13 @@ import { createContext, useContext, useEffect, useState } from "react";
 // import { isValidToken, setSession } from '../utils/jwt';
 import {
   isValidToken,
-  savePublicAddress,
+  setPublicAddress,
   getPublicAddress,
   deleteAccessToken,
-  saveCurrentUser,
+  setCurrentUser,
   getCurrentUser,
   deletePublicAddressLocal,
-  saveWallet,
+  setWallet,
   getWallet,
   deleteWalletFromLocal,
 } from "../utils/sessionManager";
@@ -53,7 +53,7 @@ function AppAuthProvider({ children }) {
       ...prev,
       wallet: payload,
     }));
-    saveWallet(payload);
+    setWallet(payload);
   };
 
   const addPublicAddress = (payload) => {
@@ -63,7 +63,7 @@ function AppAuthProvider({ children }) {
         isAuthenticated: true,
         publicAddress: payload,
       }));
-      savePublicAddress(payload);
+      setPublicAddress(payload);
     }
   };
   const deleteWallet = () => {
@@ -84,7 +84,7 @@ function AppAuthProvider({ children }) {
         ...prev,
         user: payload,
       }));
-      saveCurrentUser(payload);
+      setCurrentUser(payload);
     }
   };
 
