@@ -33,7 +33,7 @@ export default function Register() {
     dob: "",
   });
 
-  const { addUser, deletePublicAddress } = useAppAuthContext();
+  const { addUser, deleteWallet } = useAppAuthContext();
   const { push } = useRouter();
 
   const handleSubmit = () => {
@@ -42,7 +42,7 @@ export default function Register() {
   };
 
   const handleCancel = () => {
-    deletePublicAddress();
+    deleteWallet();
     push(PATH_AUTH.login);
   };
 

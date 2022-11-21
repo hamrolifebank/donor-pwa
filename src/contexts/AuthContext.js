@@ -13,6 +13,7 @@ import {
   deletePublicAddressLocal,
   saveWallet,
   getWallet,
+  deleteWalletFromLocal,
 } from "../utils/sessionManager";
 
 // ----------------------------------------------------------------------
@@ -65,14 +66,16 @@ function AppAuthProvider({ children }) {
       savePublicAddress(payload);
     }
   };
-  const deletePublicAddress = () => {
+  const deleteWallet = () => {
     setAuthState((prev) => ({
       ...prev,
       isAuthenticated: false,
       publicAddress: null,
+      wallet: null,
     }));
     console.log("deletePublicAddress");
     deletePublicAddressLocal();
+    deleteWalletFromLocal();
   };
 
   const addUser = (payload) => {
@@ -127,7 +130,7 @@ function AppAuthProvider({ children }) {
     deleteToken,
     addWallet,
     addPublicAddress,
-    deletePublicAddress,
+    deleteWallet,
     addUser,
   };
 
