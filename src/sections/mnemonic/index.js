@@ -1,1 +1,1 @@
-export { default as MnemonicPage } from "./Mnemonic";
+export { default as Mnemonic } from "./Mnemonic";
