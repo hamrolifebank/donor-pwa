@@ -5,11 +5,11 @@ import { createContext, useContext, useEffect, useState } from "react";
 // import { isValidToken, setSession } from '../utils/jwt';
 import {
   isValidToken,
-  saveAccessToken,
-  getAccessToken,
+  setPublicKey,
+  getPublicKey,
   deleteAccessToken,
-  saveCurrentUser,
   getCurrentUser,
+  setCurrentUser,
 } from "../utils/sessionManager";
 
 // ----------------------------------------------------------------------
@@ -37,7 +37,7 @@ AppAuthProvider.propTypes = {
   children: PropTypes.node,
 };
 
-const localToken = getAccessToken();
+const localToken = getPublicKey();
 const localUser = getCurrentUser();
 
 function AppAuthProvider({ children }) {
@@ -60,7 +60,7 @@ function AppAuthProvider({ children }) {
         isAuthenticated: true,
         token: payload,
       }));
-      saveAccessToken(payload);
+      setPublicKey(payload);
     }
   };
 
@@ -70,7 +70,7 @@ function AppAuthProvider({ children }) {
         ...prev,
         user: payload,
       }));
-      saveCurrentUser(payload);
+      setCurrentUser(payload);
     }
   };
 

@@ -1,7 +1,5 @@
 import jwtDecode from "jwt-decode";
-import localData from " ./utils/localData";
-
-
+import localData from "./localData";
 
 export const getCurrentUser = () => {
   let user = null;
