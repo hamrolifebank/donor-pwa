@@ -6,7 +6,6 @@ const PrimaryButton = ({ children, ...props }) => {
     <>
       <Button
         variant="contained"
-        sx={{ marginTop: 2, marginBottom: 2 }}
         fullWidth
         {...props}
       >

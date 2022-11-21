@@ -6,7 +6,6 @@ const SecondaryButton = ({ children, ...props }) => {
     <>
       <Button
         sx={{
-          marginTop: 2,
           border: 1,
           color: "common.black",
           mb: 2,
