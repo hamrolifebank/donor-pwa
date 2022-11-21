@@ -3,23 +3,21 @@ import localData from "./localData";
 
 export const getCurrentUser = () => {
   let user = null;
-  const data = localStorage.getFromStorage(key);
+  const data = localStorage.getFromStorage("user");
   if (data) user = data;
-
-  // if (data) user = JSON.parse(data);
   return user;
 };
 
 export const setCurrentUser = (value) => {
-  localData.getFromStorage(key);
+  localData.setInStorage("user", value);
 };
 
 export const getPublicKey = () => {
-  return localData.getFromStorage(key);
+  return localData.getFromStorage("publicKey");
 };
 
 export const setPublicKey = (value) => {
-  localData.setInStorage(key, value);
+  localData.setInStorage("publicKey", value);
 };
 
 export const deleteAccessToken = () =>
