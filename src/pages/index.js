@@ -1,14 +1,13 @@
 import Page from "@components/Page";
-
-// import MnemonicGuard from "@guards/MnemonicGuard";
+import DashboardlayoutwithFooter from "@layouts/dashboard/DashboardlayoutwithFooter";
 import { Home } from "@sections/home";
-
-import DashboardLayout from "@layouts/dashboard/DashboardLayout";
 
 const PAGE_TITLE = "Home";
 
 HomePage.getLayout = (page) => (
-  <DashboardLayout pageTitle={PAGE_TITLE}>{page}</DashboardLayout>
+  <DashboardlayoutwithFooter pageTitle={PAGE_TITLE}>
+    {page}
+  </DashboardlayoutwithFooter>
 );
 
 export default function HomePage() {
