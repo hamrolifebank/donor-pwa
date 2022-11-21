@@ -40,7 +40,7 @@ AppAuthProvider.propTypes = {
   children: PropTypes.node,
 };
 
-const localToken = getPublicKey();
+const localPublicAddress = getPublicKey();
 const localUser = getCurrentUser();
 const wallet = getWallet();
 

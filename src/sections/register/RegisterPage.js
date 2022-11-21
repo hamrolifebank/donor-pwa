@@ -20,7 +20,7 @@ import { useAppAuthContext } from "@contexts/AuthContext";
 import { useRouter } from "next/router";
 import { PATH_AUTH, PATH_WALLET } from "@routes/paths";
 
-const PAGE_TITLE = "Registers";
+const PAGE_TITLE = "Register";
 
 export default function Register() {
   const [user, setUser] = useState({
