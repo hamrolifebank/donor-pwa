@@ -12,12 +12,38 @@ export const setCurrentUser = (value) => {
   localData.setInStorage("user", value);
 };
 
+export const setPublicKey = (value) => {
+  localData.setInStorage("publicKey", value);
+};
+
 export const getPublicKey = () => {
   return localData.getFromStorage("publicKey");
 };
+export const isValidToken = (accessToken) => {
+  if (!accessToken) {
+    return false;
+  }
+  const decoded = jwtDecode(accessToken);
 
-export const setPublicKey = (value) => {
-  localData.setInStorage("publicKey", value);
+  const currentTime = Date.now() / 1000;
+
+  return decoded.exp > currentTime;
+};
+
+export const setWallet = (wallet) => {
+  localData.setInStorage("wallet", wallet);
+};
+
+export const getWallet = () => {
+  return localData.getFromStorage("wallet");
+};
+
+export const getPublicAddress = () => {
+  return localData.getFromStorage("public-address");
+};
+
+export const setPublicAddress = (address) => {
+  return localData.setInStorage("public-address", address);
 };
 
 export const deletePublicAddressLocal = () =>
@@ -30,14 +56,3 @@ export const deleteAccessToken = () =>
 
 export const deleteWalletFromLocal = () =>
   typeof window !== "undefined" ? localStorage.removeItem("wallet") : null;
-
-export const isValidToken = (accessToken) => {
-  if (!accessToken) {
-    return false;
-  }
-  const decoded = jwtDecode(accessToken);
-
-  const currentTime = Date.now() / 1000;
-
-  return decoded.exp > currentTime;
-};
