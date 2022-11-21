@@ -4,7 +4,12 @@ import React from "react";
 const PrimaryButton = ({ children, ...props }) => {
   return (
     <>
-      <Button variant="contained" fullWidth {...props}>
+      <Button
+        variant="contained"
+        sx={{ marginTop: 2, marginBottom: 2 }}
+        fullWidth
+        {...props}
+      >
         {children}
       </Button>
     </>

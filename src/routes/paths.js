@@ -6,8 +6,11 @@ function path(root, sublink) {
 
 const ROOTS_DASHBOARD = "/";
 const ROOTS_ASSETS = "/assets";
+
+const ROOTS_EVENTS = "/events";
+const ROOTS_DONATIONS = "/donations";
 const ROOTS_PROFILE = "/profile";
-const ROOTS_NEW = "/new";
+// const ROOTS_NEW = "/new";
 
 // ----------------------------------------------------------------------
 
@@ -20,6 +23,12 @@ export const PATH_DASHBOARD = {
   one: path(ROOTS_DASHBOARD, "/one"),
 };
 
+export const PATH_EVENTS = {
+  root: ROOTS_EVENTS,
+};
+export const PATH_DONATIONS = {
+  root: ROOTS_DONATIONS,
+};
 export const PATH_ASSETS = {
   root: ROOTS_ASSETS,
 };
@@ -28,52 +37,48 @@ export const PATH_PROFILE = {
   root: ROOTS_PROFILE,
 };
 
-export const PATH_NEW = {
-  root: ROOTS_NEW,
-  id: path(ROOTS_NEW, "/[id]"),
-  edit: path(ROOTS_NEW, "/edit"), // '/new/edit'
-};
-
 export const BOTTOM_NAVIGATION_OPTIONS = [
   {
     path: PATH_DASHBOARD.root,
-    label: "Home",
+    // label: "Home",
     icon: "eva:home-outline",
     // icon: <DashboardIcon />,
   },
   {
-    path: PATH_ASSETS.root,
-    label: "Assets",
-    icon: "eva:briefcase-outline",
+    path: PATH_EVENTS.root,
+    label: "",
+    icon: "eva:calendar-outline",
     sx: {},
   },
   {
     path: PATH_ASSETS.root,
-    label: "",
+    label: "scan",
     icon: "fluent:qr-code-24-filled",
     sx: {
       fontWeight: "fontWeightBold",
-      // borderRadius: '50%',
-      backgroundColor: "primary.main",
-      color: "primary.contrastText",
+      background: "#ffffff",
+      borderRadius: "50%",
+      height: "80px",
+      top: "-35px",
+      boxShadow:5,
+     "&:hover": {
+        border:"1px solid red"
+      },
     },
+
     iconStyle: {
       transform: "scale(2)",
     },
   },
   {
-    path: PATH_ASSETS.root,
-    label: "Vault",
-    icon: "eva:file-outline",
+    path: PATH_DONATIONS.root,
+    // label: "Donations",
+    icon: "eva:droplet-outline",
+    sx: {},
   },
   {
     path: PATH_PROFILE.root,
-    label: "Profile",
-    icon: "eva:person-outline",
-  },
-  {
-    path: PATH_NEW.root,
-    label: "New",
+    // label: "Profile",
     icon: "eva:person-outline",
   },
 ];

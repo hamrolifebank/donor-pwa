@@ -13,7 +13,8 @@
       "@assets/*": ["src/assets/*"],
       "@contexts/*": ["src/contexts/*"],
       "@guards/*": ["src/guards/*"],
-      "@sections/*":["src/sections/*"]
+      "@sections/*": ["src/sections/*"]
+
     }
   },
   "include": ["src/**/*"],
