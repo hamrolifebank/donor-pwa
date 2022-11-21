@@ -1,5 +1,3 @@
-const { WindowSharp } = require("@mui/icons-material");
-var { ethers } = require("ethers");
 import { STORAGE } from "@config";
 
 const setInStorageType = (key, value, storage) => {
