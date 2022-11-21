@@ -27,8 +27,8 @@ export default function Register() {
     fullname: "",
     email: "",
     phone: "",
-    gender: "",
-    bloodGroup: "",
+    gender: "Choose gender",
+    bloodGroup: "Choose group",
     dob: "",
   });
 
@@ -87,6 +87,9 @@ export default function Register() {
               onChange={handleInput}
               fullWidth
             >
+              <MenuItem value="Choose gender" disabled>
+                Choose gender
+              </MenuItem>
               <MenuItem value="male">Male</MenuItem>
               <MenuItem value="female">Female</MenuItem>
             </Select>
@@ -126,13 +129,15 @@ export default function Register() {
             <InputLabel> Blood Group </InputLabel>
             <Select
               id="select"
-              placeholder="Blood Group"
               value={user.bloodGroup}
               name="bloodGroup"
               onChange={handleInput}
               size="small"
               fullWidth
             >
+              <MenuItem value="Choose group" disabled>
+                Choose group
+              </MenuItem>
               <MenuItem value="A+">A+</MenuItem>
               <MenuItem value="A-">A-</MenuItem>
               <MenuItem value="B+">B+</MenuItem>
