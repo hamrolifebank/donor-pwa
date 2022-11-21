@@ -13,7 +13,7 @@ import { deleteWalletFromLocal } from "@utils/sessionManager";
 export default function Mnemonic() {
   const { push } = useRouter();
   const { wallet } = useAppAuthContext();
-  if (!wallet.mnemonic || wallet.mnemonic.length === 0) {
+  if (!wallet || !wallet.mnemonic || wallet.mnemonic.length === 0) {
     console.log("No mnemonic found");
     push(PATH_DASHBOARD.root);
   } else {
@@ -46,13 +46,13 @@ export default function Mnemonic() {
           <Box pt={5}>
             <Grid container item xs={12} spacing={2}>
               <Grid item xs={12} md={6}>
-                <PrimaryButton func={handlewritten}>
+                <PrimaryButton onClick={handlewritten}>
                   {" "}
                   Yes, I've written down
                 </PrimaryButton>
               </Grid>
               <Grid item xs={12} md={4}>
-                <SecondaryButton func={handlecancel}>
+                <SecondaryButton onClick={handlecancel}>
                   {" "}
                   Copy all mnemonics{" "}
                 </SecondaryButton>
