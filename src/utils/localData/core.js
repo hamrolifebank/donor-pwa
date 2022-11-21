@@ -16,10 +16,10 @@ const getFromStorageType = (key, storage) => {
     const stored =
       storage === STORAGE.LOCAL_STORAGE
         ? typeof window !== "undefined"
-          ? localStorage.getItem(`${key}`)
+          ? JSON.parse(localStorage.getItem(`${key}`))
           : ""
         : "";
-    return JSON.parse(stored);
+    return stored;
   }
 };
 
