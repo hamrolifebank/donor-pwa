@@ -40,12 +40,10 @@ export const getWallet = () => {
 };
 
 export const deletePublicAddressLocal = () =>
-  typeof window !== "undefined"
-    ? localStorage.removeItem("public-address")
-    : "";
+  typeof window !== "undefined" ? localStorage.removeItem("publicKey") : "";
 
-export const deleteAccessToken = () =>
-  typeof window !== "undefined" ? localStorage.removeItem("accessToken") : null;
+export const deleteUserLocal = () =>
+  typeof window !== "undefined" ? localStorage.removeItem("user") : null;
 
 export const deleteWalletFromLocal = () =>
   typeof window !== "undefined" ? localStorage.removeItem("wallet") : null;
