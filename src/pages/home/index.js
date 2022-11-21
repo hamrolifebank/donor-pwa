@@ -1,10 +1,19 @@
-import React from "react";
-import PropTypes from "prop-types";
+import Page from "@components/Page";
+import DashboardlayoutwithFooter from "@layouts/dashboard/DashboardlayoutwithFooter";
+import { Home } from "@sections/home";
 
-const Home = (props) => {
-  return <div>Home</div>;
-};
+const PAGE_TITLE = "Home";
 
-Home.propTypes = {};
+HomePage.getLayout = (page) => (
+  <DashboardlayoutwithFooter pageTitle={PAGE_TITLE}>
+    {page}
+  </DashboardlayoutwithFooter>
+);
 
-export default Home;
+export default function HomePage() {
+  return (
+    <Page title={PAGE_TITLE}>
+      <Home />
+    </Page>
+  );
+}

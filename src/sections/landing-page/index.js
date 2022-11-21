@@ -1,1 +1,1 @@
-export { default as LoginPage } from "./LandingPage";
+export { default as LandingPage } from "./LandingPage";

@@ -4,12 +4,15 @@ import { createContext, useContext, useEffect, useState } from "react";
 // utils
 // import { isValidToken, setSession } from '../utils/jwt';
 import {
-  isValidToken,
   setPublicKey,
   getPublicKey,
   deleteAccessToken,
-  getCurrentUser,
   setCurrentUser,
+  getCurrentUser,
+  deletePublicAddressLocal,
+  setWallet,
+  getWallet,
+  deleteWalletFromLocal,
 } from "../utils/sessionManager";
 
 // ----------------------------------------------------------------------
@@ -49,7 +52,7 @@ function AppAuthProvider({ children }) {
       ...prev,
       wallet: payload,
     }));
-    saveWallet(payload);
+    setWallet(payload);
   };
 
   const addPublicAddress = (payload) => {

@@ -8,7 +8,7 @@ import { Box } from "@mui/material";
 
 // ----------------------------------------------------------------------
 
-const Iconify = forwardRef(({ icon, width = 20, sx, ...other }, ref) => (
+const Iconify = forwardRef(({ icon, width = 25, sx, ...other }, ref) => (
   <Box
     ref={ref}
     component={Icon}

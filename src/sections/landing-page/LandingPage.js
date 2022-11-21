@@ -4,8 +4,8 @@ import React from "react";
 import { Container } from "@mui/system";
 import { Icon } from "@iconify/react";
 import { useTheme } from "@emotion/react";
-import PrimaryButton from "@components/Button/PrimaryButton";
-import SecondaryButton from "@components/Button/SecondaryButton";
+import { PrimaryButton, SecondaryButton } from "@components/Button";
+
 import { useAppAuthContext } from "@contexts/AuthContext";
 import library from "@utils/wallet";
 import { useRouter } from "next/router";
@@ -68,7 +68,7 @@ export default function Login() {
           borderRadius: 1,
         }}
       >
-        <SecondaryButton func={seedPhrase}>
+        <SecondaryButton onClick={seedPhrase}>
           <Icon
             icon="bi:file-earmark-text-fill"
             height={30}
