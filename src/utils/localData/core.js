@@ -24,11 +24,11 @@ const getFromStorageType = (key, storage) => {
 };
 
 const core = {
-  async setInStorage(key, value, storage = STORAGE.LOCAL_STORAGE) {
+  setInStorage(key, value, storage = STORAGE.LOCAL_STORAGE) {
     return setInStorageType(key, value, storage);
   },
 
-  async getFromStorage(key, storage = STORAGE.LOCAL_STORAGE) {
+  getFromStorage(key, storage = STORAGE.LOCAL_STORAGE) {
     const dataFromLocal = getFromStorageType(key, storage);
     if (dataFromLocal) {
       return dataFromLocal;
