@@ -41,9 +41,6 @@ const Home = () => {
       >
         <Box display="flex" justifyContent="center">
           {/* <canvas ref={inputRef} /> */}
-          <Typography variant="h6" sx={{ mt: 2 }}>
-            This is qr
-          </Typography>
         </Box>
         <Box display="flex" justifyContent="center">
           <Typography variant="subtitle3" sx={{ pb: 2 }}>
