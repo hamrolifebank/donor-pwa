@@ -13,7 +13,8 @@ EventDetails.getLayout = (page) => (
 export default function EventDetails() {
   return (
     <Page title={PAGE_TITLE}>
-      <DisplayGraph />
+      {/* <DisplayGraph /> */}
+      This is event details page
     </Page>
   );
 }

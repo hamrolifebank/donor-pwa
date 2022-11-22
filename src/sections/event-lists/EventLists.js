@@ -5,6 +5,7 @@ import DashboardlayoutwithFooter from "@layouts/dashboard/DashboardlayoutwithFoo
 import { EventCard } from "@components/event-card";
 import { Container, Typography } from "@mui/material";
 import { useAppContext } from "@contexts/AppContext";
+import Link from "next/link";
 
 export default function EventsPage(props) {
   const { events } = useAppContext();
@@ -25,7 +26,9 @@ export default function EventsPage(props) {
 
       {events.map((event) => (
         <div key={event.id}>
-          <EventCard event={event} />
+          <Link href={`/events/${event.id}`} style={{ textDecoration: "none" }}>
+            <EventCard event={event} />
+          </Link>
         </div>
       ))}
       <Typography

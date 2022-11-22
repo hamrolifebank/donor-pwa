@@ -1,1 +1,1 @@
-export { default as EventLists } from "./EventLists";
+export { default as EventPage } from "./EventLists";
