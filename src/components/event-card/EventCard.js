@@ -11,10 +11,7 @@ const EventCard = ({ event }) => {
     email: "lfjsdlksfls@jflsdjf",
     phone: "9801230045",
     bloodGroup: "A+",
-    registeredEvents: [
-      { id: "634fc82ab6256678c904c82b" },
-      { id: "634fc82ab6256678c904c82c" },
-    ],
+    registeredEvents: [{ id: "634fc82ab6256678c904c82b" }],
   };
 
   const theme = useTheme();
