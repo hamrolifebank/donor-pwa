@@ -12,6 +12,7 @@ import { SettingsProvider } from "@components/settings";
 import { AppAuthProvider } from "@contexts/AuthContext";
 
 import AuthGuard from "@guards/AuthGuard";
+import { AppProvider } from "@contexts/AppContext";
 
 // locales
 // components
@@ -44,12 +45,14 @@ export default function MyApp(props) {
         <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
       <AppAuthProvider>
+        <AppProvider />
         <SettingsProvider>
           {/* <AuthProvider> */}
           <ThemeProvider>
             <AuthGuard>{getLayout(<Component {...pageProps} />)}</AuthGuard>
           </ThemeProvider>
           {/* </AuthProvider> */}
+          <AppProvider />
         </SettingsProvider>
       </AppAuthProvider>
     </CacheProvider>
