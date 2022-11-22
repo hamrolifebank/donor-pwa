@@ -1,6 +1,6 @@
+import React from "react";
 import { Box } from "@mui/system";
 import { useAppAuthContext } from "@contexts/AuthContext";
-import React from "react";
 import {
   CircularProgressbar,
   CircularProgressbarWithChildren,
@@ -12,6 +12,7 @@ const percentage = 90;
 const Donations = () => {
   const { user } = useAppAuthContext();
   const { events } = user;
+  console.log("hello", events);
   return (
     <>
       <Box width={100} height={100}>
