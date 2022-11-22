@@ -1,17 +1,31 @@
 import React from "react";
 import { Box } from "@mui/material";
 import { PieChart } from "react-minimal-pie-chart";
+import { useTheme } from "@emotion/react";
 
 const PieChartView = (props) => {
-  const data = [
-    { title: "One", value: 10, color: "#E38627" },
-    { title: "Two", value: 15, color: "#C13C37" },
-    { title: "Three", value: 20, color: "#6A2135" },
-  ];
-
+  const theme = useTheme();
   return (
     <Box>
-      <PieChart data={data} />
+      <PieChart
+        data={props.data}
+        label={({ dataEntry }) => `${Math.round(dataEntry.percentage)} %`}
+        labelStyle={(index) => ({
+          fill: theme.palette.grey[0],
+          fontSize: "0.3em",
+        })}
+        segmentsTabIndex={4}
+        segmentsStyle={(segmentsIndex) => {
+          fill: theme.palette.grey[800];
+        }}
+        labelPosition={55}
+        animate
+        animationDuration={500}
+        animationEasing="linear"
+        center={[50, 50]}
+        radius={30}
+        viewBoxSize={[100, 100]}
+      />
     </Box>
   );
 };

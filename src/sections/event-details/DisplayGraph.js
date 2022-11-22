@@ -5,7 +5,9 @@ import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import { Container, Box } from "@mui/system";
 import { PieChart } from "@components/charts";
-
+import { useTheme } from "@emotion/react";
+import { Grid } from "@mui/material";
+import { LegendButton } from "@components/Button";
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -40,10 +42,36 @@ function a11yProps(index) {
 }
 
 export default function DisplayGraph() {
+  const theme = useTheme();
   const [value, setValue] = React.useState(0);
+  const [chartData, setChartData] = React.useState([
+    { title: "A+", value: 15, color: "#FFAB00" },
+    { title: "A-", value: 40, color: "#CF3D3C" },
+    { title: "B+", value: 35, color: "#00B8D9" },
+    { title: "O-", value: 10, color: "#FF5630" },
+  ]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
+    if (newValue === 0) {
+      setChartData([
+        { title: "A+", value: 15, color: "#FFAB00" },
+        { title: "A-", value: 40, color: "#CF3D3C" },
+        { title: "B+", value: 35, color: "#00B8D9" },
+        { title: "O-", value: 10, color: "#FF5630" },
+      ]);
+    } else if (newValue === 1) {
+      setChartData([
+        { title: "A+", value: 15, color: "#FFAB00" },
+        { title: "A-", value: 40, color: "#CF3D3C" },
+      ]);
+    } else {
+      setChartData([
+        { title: "A+", value: 45, color: "#FFAB00" },
+        { title: "A-", value: 25, color: "#CF3D3C" },
+        { title: "B+", value: 30, color: "#00B8D9" },
+      ]);
+    }
   };
 
   return (
@@ -62,14 +90,48 @@ export default function DisplayGraph() {
         </Box>
         <TabPanel value={value} index={0}>
           <Box>
-            <PieChart />
+            <PieChart data={chartData} />
+          </Box>
+          <Box sx={{ textAlign: "center" }}>
+            <Box>
+              <Grid container spacing={2}>
+                {chartData.map((data, index) => {
+                  return (
+                    <Grid item key={index}>
+                      <LegendButton bgcolor={data.color} />
+                      <Typography variant="subtitle3">{data.title}</Typography>
+                    </Grid>
+                  );
+                })}
+              </Grid>
+            </Box>
           </Box>
         </TabPanel>
         <TabPanel value={value} index={1}>
-          Age Group
+          <PieChart data={chartData} />
+          <Grid container spacing={2}>
+            {chartData.map((data, index) => {
+              return (
+                <Grid item key={index}>
+                  <LegendButton bgcolor={data.color} />
+                  <Typography variant="subtitle3">{data.title}</Typography>
+                </Grid>
+              );
+            })}
+          </Grid>
         </TabPanel>
         <TabPanel value={value} index={2}>
-          Gender
+          <PieChart data={chartData} />
+          <Grid container spacing={2}>
+            {chartData.map((data, index) => {
+              return (
+                <Grid item key={index}>
+                  <LegendButton bgcolor={data.color} />
+                  <Typography variant="subtitle3">{data.title}</Typography>
+                </Grid>
+              );
+            })}
+          </Grid>
         </TabPanel>
       </Box>
     </Container>
