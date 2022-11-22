@@ -1,13 +1,13 @@
 import Page from "@components/Page";
-import DashboardLayoutwithFooter from "@layouts/dashboard/DashboardLayoutwithFooter";
+import DashboardlayoutwithFooter from "@layouts/dashboard/DashboardlayoutwithFooter";
 import { Donations } from "@sections/donations";
 
-const PAGE_TITLE = "DonationsPage";
+const PAGE_TITLE = "Donations";
 
 DonationsPage.getLayout = (page) => (
-  <DashboardLayoutwithFooter pageTitle={PAGE_TITLE}>
+  <DashboardlayoutwithFooter pageTitle={PAGE_TITLE}>
     {page}
-  </DashboardLayoutwithFooter>
+  </DashboardlayoutwithFooter>
 );
 
 export default function DonationsPage() {
