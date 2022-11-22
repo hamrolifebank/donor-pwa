@@ -34,23 +34,23 @@ const Donations = () => {
       </Grid>
 
       <hr style={{ border: "0.5px dashed black" }} />
-      <Breadcrumbs display="flex" gap={2} justify-content="center">
-        <Link underline="hover">
-          <Icon icon="material-symbols:event-note" />
-          My events{" "}
+      <Breadcrumbs separator="|">
+        <Link underline="hover" display="flex" gap={1}>
+          <Icon icon="material-symbols:event-note" height={22} />
+          <Typography variant="h6">My events</Typography>
         </Link>
-        <Link underline="hover">
-          <Typography>
-            <Icon icon="material-symbols:event-available" />
-            Past events
-          </Typography>
+
+        <Link underline="hover" display="flex" gap={1}>
+          <Icon icon="material-symbols:event-available" height={22} />
+          <Typography variant="h6">Past events</Typography>
         </Link>
       </Breadcrumbs>
+
       <Box>
         {events.map((event) => (
           <Paper
             key={event.id}
-            sx={{ m: 1, p: 2, background: theme.palette.grey[300] }}
+            sx={{ m: 1, p: 2, background: theme.palette.grey[200] }}
           >
             <div>{event.name}</div>
             <div>{event.date}</div>
