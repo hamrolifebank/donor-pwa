@@ -1,7 +1,7 @@
 import React from "react";
 import { useAppAuthContext } from "@contexts/AuthContext";
 import { Button, Alert, Box, Typography, Paper } from "@mui/material";
-import { useQRCode } from "react-qrcodes";
+// import { useQRCode } from "react-qrcodes";
 
 import { Container } from "@mui/system";
 import shadows from "src/theme/shadows";
@@ -9,15 +9,15 @@ import shadows from "src/theme/shadows";
 const Home = () => {
   const { publicAddress, user } = useAppAuthContext();
 
-  const [inputRef] = useQRCode({
-    text: `${publicAddress}`,
-    options: {
-      level: "M",
-      margin: 7,
-      scale: 1,
-      width: 260,
-    },
-  });
+  // const [inputRef] = useQRCode({
+  //   text: `${publicAddress}`,
+  //   options: {
+  //     level: "M",
+  //     margin: 7,
+  //     scale: 1,
+  //     width: 260,
+  //   },
+  // });
 
   return (
     <Container>
@@ -40,7 +40,7 @@ const Home = () => {
         }}
       >
         <Box display="flex" justifyContent="center">
-          <canvas ref={inputRef} />
+          {/* <canvas ref={inputRef} /> */}
         </Box>
         <Box display="flex" justifyContent="center">
           <Typography variant="subtitle3" sx={{ pb: 2 }}>
