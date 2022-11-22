@@ -1,8 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
+import DashboardlayoutwithFooter from "@layouts/dashboard/DashboardlayoutwithFooter";
+
 import { EventCard } from "@components/event-card";
 
-const TestPage = (props) => {
+const PAGE_TITLE = "Events";
+EventsPage.getLayout = (page) => (
+  <DashboardlayoutwithFooter pageTitle={PAGE_TITLE}>
+    {page}
+  </DashboardlayoutwithFooter>
+);
+export default function EventsPage(props) {
   const events = [
     {
       is_closed: false,
@@ -84,8 +92,4 @@ const TestPage = (props) => {
       ))}
     </div>
   );
-};
-
-TestPage.propTypes = {};
-
-export default TestPage;
+}
