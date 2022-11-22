@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { Box, Button, Paper, Typography } from "@mui/material";
 import { useTheme } from "@emotion/react";
 import { Icon } from "@iconify/react";
+import { PrimaryButton } from "@components/Button";
 
 const EventCard = ({ event }) => {
   const user = {
@@ -22,12 +23,12 @@ const EventCard = ({ event }) => {
       <Paper
         sx={{
           display: "flex",
-
+          mb: 2,
           justifyContent: "space-between",
 
           padding: "12px 20px 12px 12px",
 
-          backgroundColor: theme.palette.background.paper,
+          backgroundColor: "grey.200",
         }}
       >
         <Box sx={{}}>
@@ -45,6 +46,7 @@ const EventCard = ({ event }) => {
               fontSize: "subtitle2.fontSize",
               color: "grey.600",
               display: "flex",
+              alignItems: "center",
               gap: "5px",
             }}
           >
@@ -57,6 +59,7 @@ const EventCard = ({ event }) => {
               fontSize: "subtitle2.fontSize",
               display: "flex",
               gap: "5px",
+              alignItems: "center",
               textDecoration: "underline",
               color: "primary.main",
             }}
@@ -67,46 +70,18 @@ const EventCard = ({ event }) => {
         </Box>
 
         {user.registeredEvents.find((e) => e.id === event.id) ? (
-          <Box sx={{ mr: 3 }}>
-            <Button
-              variant="contained"
-              sx={{
-                display: "flex",
-
-                //   justifyContent: "center",
-                //   alignItems: "center",
-                //   padding: "4px 10px",
-                gap: "8px",
-
-                //   height: "30px",
-                backgroundColor: "grey.600",
-                borderRadius: "8px",
-              }}
-            >
+          <Box>
+            <PrimaryButton disabled>
               <Icon icon="material-symbols:arrow-circle-left" />
               Registered
-            </Button>
+            </PrimaryButton>
           </Box>
         ) : (
-          <Box sx={{ mr: 3 }}>
-            <Button
-              variant="contained"
-              sx={{
-                display: "flex",
-
-                //   justifyContent: "center",
-                //   alignItems: "center",
-                //   padding: "4px 10px",
-                gap: "8px",
-
-                // height: "30px",
-
-                borderRadius: "8px",
-              }}
-            >
+          <Box>
+            <PrimaryButton>
               <Icon icon="material-symbols:arrow-circle-left" />
               Register
-            </Button>
+            </PrimaryButton>
           </Box>
         )}
       </Paper>
