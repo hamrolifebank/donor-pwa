@@ -85,8 +85,6 @@ const initialState = {
     },
   ],
   isGraphDataAvailable: false,
-  changeChartData: () => {},
-  chartData: [],
 };
 const AppContext = createContext({ ...initialState });
 

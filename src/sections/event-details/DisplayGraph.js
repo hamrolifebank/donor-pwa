@@ -46,14 +46,8 @@ export default function DisplayGraph(props) {
           })
         ) : (
           <Box>
-            <Typography
-              variant="h6"
-              textAlign="center"
-              alignItems="center"
-              justifyContent="center"
-              display="flex"
-            >
-              Data not available
+            <Typography variant="h6" mt={10} ml={10}>
+              Data coming soon...
             </Typography>
           </Box>
         )}
