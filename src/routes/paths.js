@@ -22,6 +22,11 @@ export const PATH_AUTH = {
 export const PATH_WALLET = {
   mnemonic: "/mnemonic",
 };
+
+export const PATH_ADDDONATION = {
+  addDonations: "/donations/addDonations",
+};
+
 export const PATH_DASHBOARD = {
   root: ROOTS_DASHBOARD,
   one: path(ROOTS_DASHBOARD, "/one"),
@@ -64,9 +69,9 @@ export const BOTTOM_NAVIGATION_OPTIONS = [
       borderRadius: "50%",
       height: "80px",
       top: "-35px",
-      boxShadow:5,
-     "&:hover": {
-        border:"1px solid red"
+      boxShadow: 5,
+      "&:hover": {
+        border: "1px solid red",
       },
     },
 
