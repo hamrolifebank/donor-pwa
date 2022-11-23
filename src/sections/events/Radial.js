@@ -1,99 +1,59 @@
-import React, { useState } from "react";
-import ReactApexChart from "react-apexcharts";
+// @mui
+import { useTheme } from "@mui/material/styles";
+// utils
+import { fNumber } from "@utils/formatNumber";
+// components
+import Chart, { useChart } from "@components/chart";
 
-const Radial = () => {
-  const [options, setOptions] = useState({
+// ----------------------------------------------------------------------
+
+const series = [44];
+
+export default function ChartRadialBar() {
+  const theme = useTheme();
+
+  const chartOptions = useChart({
     chart: {
-      height: 350,
-      type: "radialBar",
-      toolbar: {
-        show: true,
-      },
-    },
-    plotOptions: {
-      radialBar: {
-        startAngle: -135,
-        endAngle: 225,
-        hollow: {
-          margin: 0,
-          size: "70%",
-          background: "#fff",
-          image: undefined,
-          imageOffsetX: 0,
-          imageOffsetY: 0,
-          position: "front",
-          dropShadow: {
-            enabled: true,
-            top: 3,
-            left: 0,
-            blur: 4,
-            opacity: 0.24,
-          },
-        },
-        track: {
-          background: "#fff",
-          strokeWidth: "67%",
-          margin: 0, // margin is in pixels
-          dropShadow: {
-            enabled: true,
-            top: -3,
-            left: 0,
-            blur: 4,
-            opacity: 0.35,
-          },
-        },
-
-        dataLabels: {
-          show: true,
-          name: {
-            offsetY: -10,
-            show: true,
-            color: "#888",
-            fontSize: "17px",
-          },
-          value: {
-            formatter: function (val) {
-              return parseInt(val);
-            },
-            color: "#111",
-            fontSize: "36px",
-            show: true,
-          },
-        },
-      },
+      width: "1000",
     },
     fill: {
       type: "gradient",
       gradient: {
-        shade: "dark",
-        type: "horizontal",
-        shadeIntensity: 0.5,
-        gradientToColors: ["#00FF00"],
-        inverseColors: true,
-        opacityFrom: 1,
-        opacityTo: 1,
-        stops: [0, 100],
+        colorStops: [[{ offset: 0, color: "#5BE584" }]],
       },
     },
-    stroke: {
-      lineCap: "round",
+    legend: {
+      show: false,
     },
-    labels: ["Pints"],
+    plotOptions: {
+      radialBar: {
+        hollow: {
+          size: "45%",
+        },
+        dataLabels: {
+          enabled: false,
+          name: {
+            show: false,
+          },
+          value: {
+            offsetY: 5,
+            fontSize: 12,
+          },
+          total: {
+            formatter: () => fNumber(2324),
+          },
+        },
+      },
+    },
   });
-  const [series, setSeries] = useState([75]);
-  const [labels, setLabels] = useState("Pints");
-  return (
-    <div className="mixed-chart">
-      {typeof window !== "undefined" && (
-        <ReactApexChart
-          options={options}
-          series={series}
-          type="radialBar"
-          width={500}
-        />
-      )}
-    </div>
-  );
-};
 
-export default Radial;
+  return (
+    <Chart
+      type="radialBar"
+      series={series}
+      options={chartOptions}
+      height={125}
+      width={125}
+    />
+  );
+}

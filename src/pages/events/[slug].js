@@ -1,6 +1,7 @@
 import Page from "@components/Page";
 import DashboardlayoutwithFooter from "@layouts/dashboard/DashboardlayoutwithFooter";
 import { DisplayGraph } from "@sections/event-details";
+import { EventInformation } from "@sections/events";
 
 const PAGE_TITLE = "Event Details";
 
@@ -13,6 +14,7 @@ EventDetails.getLayout = (page) => (
 export default function EventDetails() {
   return (
     <Page title={PAGE_TITLE}>
+      <EventInformation />
       <DisplayGraph />
     </Page>
   );

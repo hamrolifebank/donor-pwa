@@ -1,1 +1,1 @@
-export { default as EventPage } from "./EventPage";
+export { default as EventInformation } from "./EventInformation";
