@@ -1,11 +1,9 @@
 import React from "react";
 import { useAppAuthContext } from "@contexts/AuthContext";
 import { Alert, Box, Typography } from "@mui/material";
-import { PATH_AUTH } from "@routes/paths";
 import { useRouter } from "next/router";
 import QRCode from "react-qr-code";
 import { Container } from "@mui/system";
-import shadows from "src/theme/shadows";
 
 const Home = () => {
   const { publicAddress, user } = useAppAuthContext();
@@ -13,13 +11,11 @@ const Home = () => {
 
   return (
     <Container>
-      {/* {user.isVerified === null ? (
-        push(PATH_AUTH.login)
-      ) : user.isVerified === true ? (
-        <Alert severity="info">You will be able to donate in</Alert>
-      ) : ( */}
-      <Alert severity="warning">Click here to verify phone number</Alert>
-      {/* )} */}
+      {user?.isPhoneVerified === true ? (
+        <Alert severity="info">You can now donate</Alert>
+      ) : (
+        <Alert severity="warning">Click here to verify phone number</Alert>
+      )}
 
       <Box
         sx={{
@@ -48,9 +44,7 @@ const Home = () => {
       </Box>
 
       <Box display="flex" justifyContent="center">
-        <Typography variant="h3" sx={{}}>
-          {user.fullname}
-        </Typography>
+        <Typography variant="h3">{user?.fullname}</Typography>
       </Box>
     </Container>
   );
