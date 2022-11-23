@@ -67,15 +67,6 @@ export default function Register() {
         isDonated: true,
         isVerified: true,
       },
-      {
-        id: "079poir45cclfkfdclkejr1250",
-        name: "HLB center",
-        date: "16/08/2022",
-        location: "Jhamsikhel1111",
-        isRegistered: false,
-        isDonated: true,
-        isVerified: false,
-      },
     ],
     isPhoneVerified: false,
   });
