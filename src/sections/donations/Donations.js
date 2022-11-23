@@ -26,7 +26,6 @@ const Donations = () => {
   const { push } = useRouter();
   const { user } = useAppAuthContext();
   const { events } = user;
-  console.log(events);
 
   const [value, setValue] = React.useState("1");
 
