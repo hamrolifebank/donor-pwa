@@ -13,13 +13,13 @@ const Home = () => {
 
   return (
     <Container>
-      {user.isVerified === null ? (
+      {/* {user.isVerified === null ? (
         push(PATH_AUTH.login)
       ) : user.isVerified === true ? (
         <Alert severity="info">You will be able to donate in</Alert>
-      ) : (
-        <Alert severity="warning">Click here to verify phone number</Alert>
-      )}
+      ) : ( */}
+      <Alert severity="warning">Click here to verify phone number</Alert>
+      {/* )} */}
 
       <Box
         sx={{
