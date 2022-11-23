@@ -1,55 +1,54 @@
 import React from "react";
 import { useAppAuthContext } from "@contexts/AuthContext";
-import { Button, Alert, Box, Typography, Paper } from "@mui/material";
-// import { useQRCode } from "react-qrcodes";
-
+import { Alert, Box, Typography } from "@mui/material";
+import { PATH_AUTH } from "@routes/paths";
+import { useRouter } from "next/router";
+import QRCode from "react-qr-code";
 import { Container } from "@mui/system";
 import shadows from "src/theme/shadows";
 
 const Home = () => {
   const { publicAddress, user } = useAppAuthContext();
-
-  // const [inputRef] = useQRCode({
-  //   text: `${publicAddress}`,
-  //   options: {
-  //     level: "M",
-  //     margin: 7,
-  //     scale: 1,
-  //     width: 260,
-  //   },
-  // });
+  const { push } = useRouter();
 
   return (
     <Container>
-      {user.isVerified === true ? (
+      {/* {user.isVerified === null ? (
+        push(PATH_AUTH.login)
+      ) : user.isVerified === true ? (
         <Alert severity="info">You will be able to donate in</Alert>
-      ) : (
-        <Alert severity="warning">Click here to verify phone number</Alert>
-      )}
+      ) : ( */}
+      <Alert severity="warning">Click here to verify phone number</Alert>
+      {/* )} */}
+
       <Box
-        justifyContent="center"
-        width={500}
-        boxShadow={25}
-        // height={300}
         sx={{
           border: 0.1,
-
-          p: 1,
           borderRadius: 1,
-          // ml: 7,
+          p: 1,
         }}
       >
         <Box display="flex" justifyContent="center">
-          {/* <canvas ref={inputRef} /> */}
+          <QRCode
+            title="GeeksForGeeks"
+            value={`${publicAddress}`}
+            level="M"
+            bgColor={"#FFFFFF"}
+            fgColor={"#000000"}
+            size={150}
+            padding={1}
+          />
         </Box>
+
         <Box display="flex" justifyContent="center">
-          <Typography variant="subtitle3" sx={{ pb: 2 }}>
+          <Typography variant="caption" sx={{}}>
             {publicAddress}
           </Typography>
         </Box>
       </Box>
+
       <Box display="flex" justifyContent="center">
-        <Typography variant="h3" sx={{ pb: 2 }}>
+        <Typography variant="h3" sx={{}}>
           {user.fullname}
         </Typography>
       </Box>
