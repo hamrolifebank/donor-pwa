@@ -1,19 +1,19 @@
 import Page from "@components/Page";
 import DashboardlayoutwithFooter from "@layouts/dashboard/DashboardlayoutwithFooter";
-import { EventPage } from "@sections/event-lists";
+import { Donations } from "@sections/donations";
 
-const PAGE_TITLE = "Events";
+const PAGE_TITLE = "Donations";
 
-Events.getLayout = (page) => (
+DonationsPage.getLayout = (page) => (
   <DashboardlayoutwithFooter pageTitle={PAGE_TITLE}>
     {page}
   </DashboardlayoutwithFooter>
 );
 
-export default function Events() {
+export default function DonationsPage() {
   return (
     <Page title={PAGE_TITLE}>
-      <EventPage />
+      <Donations />
     </Page>
   );
 }
