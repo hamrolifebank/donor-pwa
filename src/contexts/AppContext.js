@@ -1,5 +1,6 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useMemo, useState } from "react";
 import PropTypes from "prop-types";
+import { arEG } from "date-fns/locale";
 
 const events = [
   {
@@ -49,7 +50,47 @@ const events = [
     id: "6378c13301aecf4f771ca914",
   },
 ];
-const initialState = { events: events };
+
+const initialState = {
+  events: events,
+  stats: [
+    {
+      groupBy: "bloodGroup",
+      label: "Blood Group",
+      data: [
+        { count: 4, label: "A+" },
+        { count: 1, label: "B+" },
+        { count: 4, label: "AB+" },
+        { count: 3, label: "O+" },
+      ],
+    },
+    {
+      groupBy: "age",
+      label: "Age Group",
+      data: [
+        { label: "Under 18", count: 0 },
+        { count: 6, label: "18 - 29" },
+        { count: 3, label: "30 - 39" },
+        { count: 2, label: "40 - 49" },
+        { count: 1, label: "50 - 59" },
+        { label: "Over 60", count: 0 },
+        { label: "Unknown", count: 0 },
+      ],
+    },
+    {
+      groupBy: "gender",
+      label: "Genderwise",
+      data: [
+        { count: 7, label: "M", display: "Male" },
+        { count: 5, label: "F", display: "Female" },
+        { label: "O", count: 0, display: "Other" },
+        { label: "U", count: 0, display: "Unknown" },
+      ],
+    },
+  ],
+  isGraphDataAvailable: false,
+  changeChartData: () => {},
+};
 const AppContext = createContext({ ...initialState });
 
 AppProvider.propTypes = {
@@ -58,7 +99,14 @@ AppProvider.propTypes = {
 
 function AppProvider({ children }) {
   const [appState, setAppState] = useState(initialState);
-  const contextProps = { ...appState };
+  const [chartData, setChartData] = useState({ ...appState.stats[0] });
+
+  const contextProps = {
+    ...appState,
+    setChartData,
+    appState,
+    setAppState,
+  };
   return (
     <AppContext.Provider value={contextProps}>{children}</AppContext.Provider>
   );
