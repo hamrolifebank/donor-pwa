@@ -2,13 +2,28 @@ import React from "react";
 import PropTypes from "prop-types";
 import DashboardlayoutwithFooter from "@layouts/dashboard/DashboardlayoutwithFooter";
 
-import { EventCard } from "@components/event-card";
+import {
+  EventCardRegistered,
+  EventCardNotRegistered,
+} from "@components/event-card";
 import { Container, Typography } from "@mui/material";
 import { useAppContext } from "@contexts/AppContext";
 import Link from "next/link";
+import { useAppAuthContext } from "@contexts/AuthContext";
 
 export default function EventsPage(props) {
   const { events } = useAppContext();
+  const { user } = useAppAuthContext();
+  console.log(user);
+
+  const registeredEvents = events.filter((event) => {
+    return user.events.includes(event.id);
+  });
+  const notRegisteredEvents = events.filter((event) => {
+    return !user.events.includes(event.id);
+  });
+  console.log(registeredEvents, notRegisteredEvents);
+
   return (
     <Container display="flex">
       <Typography
@@ -24,10 +39,22 @@ export default function EventsPage(props) {
         Events near you
       </Typography>
 
-      {events.map((event) => (
+      {registeredEvents.length > 0 &&
+        registeredEvents.map((event) => {
+          <div key={event.id}>
+            <Link
+              href={`/events/${event.id}`}
+              style={{ textDecoration: "none" }}
+            >
+              <EventCardRegistered event={event} />
+            </Link>
+          </div>;
+        })}
+
+      {notRegisteredEvents.map((event) => (
         <div key={event.id}>
           <Link href={`/events/${event.id}`} style={{ textDecoration: "none" }}>
-            <EventCard event={event} />
+            <EventCardNotRegistered event={event} />
           </Link>
         </div>
       ))}

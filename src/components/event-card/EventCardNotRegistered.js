@@ -5,16 +5,9 @@ import { useTheme } from "@emotion/react";
 import { Icon } from "@iconify/react";
 import { PrimaryButton } from "@components/Button";
 
-const EventCard = ({ event }) => {
-  const user = {
-    name: "sudesh",
-    email: "lfjsdlksfls@jflsdjf",
-    phone: "9801230045",
-    bloodGroup: "A+",
-    registeredEvents: [{ id: "634fc82ab6256678c904c82b" }],
-  };
-
+const EventCardNotRegistered = ({ event }) => {
   const theme = useTheme();
+
   return (
     <>
       <Paper
@@ -65,27 +58,19 @@ const EventCard = ({ event }) => {
             {event.location}
           </Typography>
         </Box>
-
-        {user.registeredEvents.find((e) => e.id === event.id) ? (
-          <Box>
-            <PrimaryButton disabled>
-              <Icon icon="material-symbols:arrow-circle-left" />
-              Registered
-            </PrimaryButton>
-          </Box>
-        ) : (
-          <Box>
-            <PrimaryButton>
-              <Icon icon="material-symbols:arrow-circle-left" />
-              Register
-            </PrimaryButton>
-          </Box>
-        )}
+        <Box>
+          <PrimaryButton>
+            <Icon icon="material-symbols:arrow-circle-left" />
+            Register
+          </PrimaryButton>
+        </Box>
       </Paper>
     </>
   );
 };
 
-EventCard.propTypes = {};
+EventCardNotRegistered.propTypes = {
+  event: PropTypes.object.isRequired,
+};
 
-export default EventCard;
+export default EventCardNotRegistered;
