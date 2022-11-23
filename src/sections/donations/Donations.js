@@ -11,14 +11,24 @@ import {
 } from "@mui/material";
 import { PrimaryButton } from "@components/Button";
 import { useTheme } from "@emotion/react";
-import { Icon } from "@iconify/react";
-import RadialChart from "./RadialChart";
+// import { Icon } from "@iconify/react";
+// import RadialChart from "./RadialChart";
 import ChartRadialBar from "./Radial";
+import Tab from "@mui/material/Tab";
+import TabContext from "@mui/lab/TabContext";
+import TabList from "@mui/lab/TabList";
+import TabPanel from "@mui/lab/TabPanel";
 
 const Donations = () => {
   const theme = useTheme();
   const { user } = useAppAuthContext();
   const { events } = user;
+
+  const [value, setValue] = React.useState([]);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
 
   return (
     <Container>
@@ -35,7 +45,7 @@ const Donations = () => {
       </Grid>
 
       <hr style={{ border: "0.5px dashed black" }} />
-      <Breadcrumbs separator="|">
+      {/* <Breadcrumbs separator="|">
         <Link underline="hover" display="flex" gap={1}>
           <Icon icon="material-symbols:event-note" height={22} />
           <Typography variant="h6">My events</Typography>
@@ -45,19 +55,42 @@ const Donations = () => {
           <Icon icon="material-symbols:event-available" height={22} />
           <Typography variant="h6">Past events</Typography>
         </Link>
-      </Breadcrumbs>
-
-      <Box>
-        {events.map((event) => (
-          <Paper
-            key={event.id}
-            sx={{ m: 1, p: 2, background: theme.palette.grey[200] }}
-          >
-            <div>{event.name}</div>
-            <div>{event.date}</div>
-            <div>{event.location}</div>
-          </Paper>
-        ))}
+      </Breadcrumbs> */}
+      <Box sx={{ width: "100%", typography: "body1" }}>
+        <TabContext value={value}>
+          <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+            <TabList onChange={handleChange}>
+              <Tab label="My events" value="1" />
+              <Tab label="Past events" value="2" />
+            </TabList>
+          </Box>
+          <TabPanel value="1">
+            {events.map((event) => (
+              <Paper
+                key={event.id}
+                sx={{ mb: 1, p: 2, background: theme.palette.grey[200] }}
+              >
+                <div>{event.name}</div>
+                <div>{event.date}</div>
+                <div>{event.location}</div>
+              </Paper>
+            ))}
+          </TabPanel>
+          <TabPanel value="2">
+            {events.map((event) =>
+              event.isVerified ? (
+                <Paper
+                  key={event.id}
+                  sx={{ mb: 1, p: 2, background: theme.palette.grey[200] }}
+                >
+                  <div>{event.name}</div>
+                  <div>{event.date}</div>
+                  <div>{event.location}</div>
+                </Paper>
+              ) : null
+            )}
+          </TabPanel>
+        </TabContext>
       </Box>
     </Container>
   );
