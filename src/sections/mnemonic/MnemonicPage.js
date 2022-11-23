@@ -20,7 +20,6 @@ export default function Mnemonic() {
     const words = wallet && wallet.mnemonic.phrase.split(" ");
 
     const handlewritten = () => {
-      deleteWalletFromLocal();
       push(PATH_DASHBOARD.root);
     };
     const handlecancel = () => {
