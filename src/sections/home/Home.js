@@ -4,6 +4,7 @@ import { Alert, Box, Typography } from "@mui/material";
 import { useRouter } from "next/router";
 import QRCode from "react-qr-code";
 import { Container } from "@mui/system";
+import { EventPage } from "../event-lists";
 
 const Home = () => {
   const { publicAddress, user } = useAppAuthContext();
@@ -44,8 +45,11 @@ const Home = () => {
       </Box>
 
       <Box display="flex" justifyContent="center">
-        <Typography variant="h3">{user?.fullname}</Typography>
+        <Typography variant="h3" sx={{ pb: 1 }}>
+          {user?.fullname}
+        </Typography>
       </Box>
+      <EventPage />
     </Container>
   );
 };
