@@ -30,6 +30,8 @@ export default function Register() {
     gender: "Choose gender",
     bloodGroup: "Choose group",
     dob: "",
+    isPhoneVerified: false,
+    events: [],
   });
 
   const { addUser, deleteWallet } = useAppAuthContext();
