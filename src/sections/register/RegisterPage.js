@@ -68,6 +68,7 @@ export default function Register() {
         isVerified: true,
       },
     ],
+    isPhoneVerified: false,
   });
 
   const { addUser, deleteWallet } = useAppAuthContext();
