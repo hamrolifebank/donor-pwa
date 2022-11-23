@@ -44,14 +44,19 @@ export const STORAGE = {
 };
 
 //COLORS
-export const PIECHARTCOLORS = {
-  "A+": "#FFAB00",
-  "B+": "#CF3D3C",
-  "AB+": "#00B8D9",
-  "O+": "#FF5630",
-  "Under 18": "#FFAB00",
-  "18-29": "#CF3D3C",
-  "30 - 39": "#00B8D9",
-  "40 - 49": "#FF5630",
-  "50 - 59": "#FF4579",
-};
+// export const PIECHARTCOLORS = {
+//   "A+": "#FFAB00",
+//   "B+": "#CF3D3C",
+//   "AB+": "#00B8D9",
+//   "O+": "#FF5630",
+//   "Under 18": "#FFAB00",
+//   "18 - 29": "#CF3D3C",
+//   "30 - 39": "#00B8D9",
+//   "40 - 49": "#FF5630",
+//   "50 - 59": "#FF4579",
+//   Male: "#FFAB00",
+//   Female: "#CF3D3C",
+//   Others: "#FF4579",
+//   Unknown: "#00B8D9",
+//   default: "#000000",
+// };
