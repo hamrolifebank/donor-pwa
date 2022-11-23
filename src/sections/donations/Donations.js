@@ -1,18 +1,10 @@
 import React from "react";
 import { Box } from "@mui/system";
 import { useAppAuthContext } from "@contexts/AuthContext";
-import {
-  Breadcrumbs,
-  Container,
-  Grid,
-  Link,
-  Paper,
-  Typography,
-} from "@mui/material";
+import { Container, Grid, Paper, Typography } from "@mui/material";
 import { PrimaryButton } from "@components/Button";
 import { useTheme } from "@emotion/react";
-// import { Icon } from "@iconify/react";
-// import RadialChart from "./RadialChart";
+import { Icon } from "@iconify/react";
 import ChartRadialBar from "./Radial";
 import Tab from "@mui/material/Tab";
 import TabContext from "@mui/lab/TabContext";
@@ -30,7 +22,6 @@ const Donations = () => {
   const [value, setValue] = React.useState("1");
 
   const handleChange = (event, newValue) => {
-    console.log(event);
     setValue(newValue);
   };
 
@@ -55,23 +46,25 @@ const Donations = () => {
       </Grid>
 
       <hr style={{ border: "0.5px dashed black" }} />
-      {/* <Breadcrumbs separator="|">
-        <Link underline="hover" display="flex" gap={1}>
-          <Icon icon="material-symbols:event-note" height={22} />
-          <Typography variant="h6">My events</Typography>
-        </Link>
-
-        <Link underline="hover" display="flex" gap={1}>
-          <Icon icon="material-symbols:event-available" height={22} />
-          <Typography variant="h6">Past events</Typography>
-        </Link>
-      </Breadcrumbs> */}
       <Box sx={{ width: "100%", typography: "body1" }}>
         <TabContext value={value}>
           <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
             <TabList onChange={handleChange}>
-              <Tab label="My events" value="1" />
-              <Tab label="Past events" value="2" />
+              <Tab
+                label="My events"
+                value="1"
+                icon={<Icon icon="material-symbols:event-note" height={22} />}
+                iconPosition="start"
+              />
+
+              <Tab
+                label="Past events"
+                value="2"
+                icon={
+                  <Icon icon="material-symbols:event-available" height={22} />
+                }
+                iconPosition="start"
+              />
             </TabList>
           </Box>
           <TabPanel value="1">
