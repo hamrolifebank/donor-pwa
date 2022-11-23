@@ -31,18 +31,32 @@ export default function DisplayGraph(props) {
             })}
           </TabList>
         </Box>
-        {stats.map((group, index) => {
-          return (
-            <TabPanel key={index} value={group.groupBy}>
-              <Box sx={{ display: "flex", justifyContent: "center" }}>
-                <PieChart
-                  data={group.data.map((data) => data.value)}
-                  labels={group.data.map((data) => data.label)}
-                />
-              </Box>
-            </TabPanel>
-          );
-        })}
+        {isGraphDataAvailable ? (
+          stats.map((group, index) => {
+            return (
+              <TabPanel key={index} value={group.groupBy}>
+                <Box sx={{ display: "flex", justifyContent: "center" }}>
+                  <PieChart
+                    data={group.data.map((data) => data.value)}
+                    labels={group.data.map((data) => data.label)}
+                  />
+                </Box>
+              </TabPanel>
+            );
+          })
+        ) : (
+          <Box>
+            <Typography
+              variant="h6"
+              textAlign="center"
+              alignItems="center"
+              justifyContent="center"
+              display="flex"
+            >
+              Data not available
+            </Typography>
+          </Box>
+        )}
       </TabContext>
     </Container>
   );
