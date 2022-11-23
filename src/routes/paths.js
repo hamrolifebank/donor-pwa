@@ -8,7 +8,7 @@ const ROOTS_DASHBOARD = "/";
 const ROOTS_ASSETS = "/assets";
 
 const ROOTS_EVENTS = "/events";
-const ROOTS_DONATIONS = "/donations-page";
+const ROOTS_DONATIONS = "/donations";
 const ROOTS_PROFILE = "/profile";
 // const ROOTS_NEW = "/new";
 
@@ -22,6 +22,11 @@ export const PATH_AUTH = {
 export const PATH_WALLET = {
   mnemonic: "/mnemonic",
 };
+
+export const PATH_ADDDONATION = {
+  addDonations: "/donations/addDonations",
+};
+
 export const PATH_DASHBOARD = {
   root: ROOTS_DASHBOARD,
   one: path(ROOTS_DASHBOARD, "/one"),

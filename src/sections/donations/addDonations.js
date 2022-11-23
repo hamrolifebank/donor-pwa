@@ -16,13 +16,20 @@ import VolunteerActivismIcon from "@mui/icons-material/VolunteerActivism";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import { PrimaryButton } from "@components/Button";
 import { useState } from "react";
+import { useRouter } from "next/router";
+import { PATH_DONATIONS } from "@routes/paths";
 
 const AddDonations = () => {
+  const { push } = useRouter();
   const [type, setType] = useState("text");
+
+  const arrowBack = () => {
+    push(PATH_DONATIONS.root);
+  };
 
   return (
     <Container>
-      <IconButton color="primary">
+      <IconButton color="primary" onClick={arrowBack}>
         <ArrowBackIosIcon />
       </IconButton>
       <Typography variant="h2" sx={{ pl: 2 }}>
