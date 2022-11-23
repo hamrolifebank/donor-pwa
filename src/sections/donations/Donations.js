@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Box } from "@mui/system";
 import { useAppAuthContext } from "@contexts/AuthContext";
 import {
@@ -23,6 +23,7 @@ const Donations = () => {
   const theme = useTheme();
   const { user } = useAppAuthContext();
   const { events } = user;
+  console.log(events);
 
   const [value, setValue] = React.useState("1");
 
@@ -78,7 +79,7 @@ const Donations = () => {
           </TabPanel>
           <TabPanel value="2">
             {events.map((event) =>
-              event.isVerified ? (
+              event.manuallyAdded ? (
                 <Paper
                   key={event.id}
                   sx={{ mb: 1, p: 2, background: theme.palette.grey[200] }}
