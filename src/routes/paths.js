@@ -8,7 +8,7 @@ const ROOTS_DASHBOARD = "/";
 const ROOTS_ASSETS = "/assets";
 
 const ROOTS_EVENTS = "/events";
-const ROOTS_DONATIONS = "/donations";
+const ROOTS_DONATIONS = "/donations-page";
 const ROOTS_PROFILE = "/profile";
 // const ROOTS_NEW = "/new";
 
@@ -64,9 +64,9 @@ export const BOTTOM_NAVIGATION_OPTIONS = [
       borderRadius: "50%",
       height: "80px",
       top: "-35px",
-      boxShadow:5,
-     "&:hover": {
-        border:"1px solid red"
+      boxShadow: 5,
+      "&:hover": {
+        border: "1px solid red",
       },
     },
 

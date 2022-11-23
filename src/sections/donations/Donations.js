@@ -13,6 +13,7 @@ import { PrimaryButton } from "@components/Button";
 import { useTheme } from "@emotion/react";
 import { Icon } from "@iconify/react";
 import RadialChart from "./RadialChart";
+import ChartRadialBar from "./Radial";
 
 const Donations = () => {
   const theme = useTheme();
@@ -21,15 +22,15 @@ const Donations = () => {
 
   return (
     <Container>
-      <Grid container item xs={12} gap={6} margin={1}>
-        <Grid item xs={6}>
+      <Grid container item xs={12} gap={2}>
+        <Grid item xs={7} sx={{ mt: 5 }}>
           <Typography variant="h3" sx={{ mb: 2 }}>
             Pints Donated
           </Typography>
-          <PrimaryButton> Add donation </PrimaryButton>
+          <PrimaryButton sx={{ width: 130 }}> Add donation </PrimaryButton>
         </Grid>
-        <Grid item xs={3}>
-          <RadialChart />
+        <Grid item xs={4}>
+          <ChartRadialBar />
         </Grid>
       </Grid>
 
