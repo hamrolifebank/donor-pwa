@@ -24,7 +24,7 @@ const Donations = () => {
   const { user } = useAppAuthContext();
   const { events } = user;
 
-  const [value, setValue] = React.useState([]);
+  const [value, setValue] = React.useState("1");
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
