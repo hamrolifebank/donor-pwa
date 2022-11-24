@@ -18,10 +18,31 @@ import { PrimaryButton } from "@components/Button";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import { PATH_DONATIONS } from "@routes/paths";
+import { useAppAuthContext } from "@contexts/AuthContext";
 
 const AddDonations = () => {
+  const { user } = useAppAuthContext();
   const { push } = useRouter();
   const [type, setType] = useState("text");
+  const [manuallyAddedEvent, setManuallyAddedEvent] = useState({
+    id: "",
+    name: "",
+    date: "",
+    location: "",
+    isRegistered: false,
+    isDonated: true,
+    isVerified: false,
+    manuallyAdded: true,
+  });
+
+  const handleInputField = (e) => {
+    const { name, value } = e.target;
+    setManuallyAddedEvent({ ...manuallyAddedEvent, [name]: value });
+  };
+
+  const handleSubmit = () => {
+    user.events.push(manuallyAddedEvent);
+  };
 
   const arrowBack = () => {
     push(PATH_DONATIONS.root);
@@ -40,8 +61,10 @@ const AddDonations = () => {
           <Grid container item xs={12} spacing={2}>
             <Grid item={true} xs={12} md={7}>
               <TextField
-                id="eventname"
-                name="eventname"
+                id="name"
+                name="name"
+                value={manuallyAddedEvent.name}
+                onChange={handleInputField}
                 label="Event name"
                 type="text"
                 size="small"
@@ -57,9 +80,11 @@ const AddDonations = () => {
             </Grid>
             <Grid item={true} xs={12} md={7}>
               <TextField
-                id="eventdate"
+                id="date"
                 label="Event date"
-                name="eventdate"
+                name="date"
+                value={manuallyAddedEvent.date}
+                onChange={handleInputField}
                 type={type}
                 onFocus={() => setType("date")}
                 size="small"
@@ -75,9 +100,10 @@ const AddDonations = () => {
             </Grid>
             <Grid item={true} xs={12} md={7}>
               <TextField
-                id="eventaddress"
-                label="Event address"
-                name="eventaddress"
+                id="location"
+                label="Event location"
+                name="location"
+                value={manuallyAddedEvent.location}
                 size="small"
                 fullWidth
                 InputProps={{
@@ -89,7 +115,7 @@ const AddDonations = () => {
                 }}
               />
             </Grid>
-            <Grid item={true} xs={12} md={7}>
+            {/* <Grid item={true} xs={12} md={7}>
               <TextField
                 id="pintsdonated"
                 label="Pints donated"
@@ -104,9 +130,9 @@ const AddDonations = () => {
                   ),
                 }}
               />
-            </Grid>
+            </Grid> */}
             <Grid item={true} xs={12} md={7}>
-              <PrimaryButton>Add</PrimaryButton>
+              <PrimaryButton onClick={handleSubmit}>Add</PrimaryButton>
             </Grid>
           </Grid>
         </Box>
