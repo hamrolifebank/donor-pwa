@@ -8,12 +8,8 @@ export const getCurrentUser = () => {
   return user;
 };
 
-export const setUserData = (value) => {
-  const user = localData.getFromStorage("user");
-  if (user) {
-    console.log(user.events);
-    user.events.push(value);
-  }
+export const setUserEvents = (value) => {
+  localData.setInStorage("events", value);
 };
 
 export const setCurrentUser = (value) => {
