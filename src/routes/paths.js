@@ -24,7 +24,7 @@ export const PATH_WALLET = {
 };
 
 export const PATH_ADDDONATION = {
-  addDonations: "/donations/addDonations",
+  addDonations: "/add-donation-form",
 };
 
 export const PATH_DASHBOARD = {
