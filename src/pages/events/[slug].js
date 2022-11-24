@@ -15,7 +15,7 @@ export default function EventDetails() {
   return (
     <Page title={PAGE_TITLE}>
       <EventInformation />
-      {/* <DisplayGraph /> */}
+      <DisplayGraph />
     </Page>
   );
 }
