@@ -52,8 +52,8 @@ export default function ChartRadialBar() {
       type="radialBar"
       series={series}
       options={chartOptions}
-      height={125}
-      width={125}
+      height={150}
+      fullwidth
     />
   );
 }
