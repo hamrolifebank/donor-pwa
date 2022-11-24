@@ -109,6 +109,7 @@ export default function Register() {
 
   const handleSubmit = () => {
     addUser(user);
+
     push(PATH_WALLET.mnemonic);
   };
 
