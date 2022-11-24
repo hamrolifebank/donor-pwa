@@ -1,33 +1,75 @@
-// import React from "react";
-// import { Box } from "@mui/material";
-// import { PieChart } from "react-minimal-pie-chart";
-// import { useTheme } from "@emotion/react";
+import merge from "lodash/merge";
+// components
+import ReactApexChart, { BaseOptionChart } from "@components/chart";
 
-// const PieChartView = (props) => {
-//   const theme = useTheme();
-//   return (
-//     <Box>
-//       <PieChart
-//         data={props.data}
-//         label={({ dataEntry }) => `${Math.round(dataEntry.percentage)} %`}
-//         labelStyle={(index) => ({
-//           fill: theme.palette.grey[0],
-//           fontSize: "0.3em",
-//         })}
-//         segmentsTabIndex={4}
-//         segmentsStyle={(segmentsIndex) => {
-//           fill: theme.palette.grey[800];
-//         }}
-//         labelPosition={55}
-//         animate
-//         animationDuration={500}
-//         animationEasing="linear"
-//         center={[50, 50]}
-//         radius={30}
-//         viewBoxSize={[100, 100]}
-//       />
-//     </Box>
-//   );
-// };
+export default function ChartPie({ data, labels }) {
+  const CHART_DATA = data;
+  const chartOptions = merge(BaseOptionChart(), {
+    labels: labels,
+    legend: {
+      show: true,
+      showForSingleSeries: false,
+      showForNullSeries: true,
+      showForZeroSeries: true,
+      position: "bottom",
+      horizontalAlign: "center",
+      floating: false,
+      fontSize: "14px",
+      fontFamily: "Helvetica, Arial",
+      fontWeight: 400,
+      formatter: undefined,
+      inverseOrder: false,
+      width: undefined,
+      height: undefined,
+      tooltipHoverFormatter: undefined,
+      customLegendItems: [],
+      offsetX: 0,
+      offsetY: 0,
+      labels: {
+        colors: undefined,
+        useSeriesColors: false,
+      },
+      markers: {
+        width: 12,
+        height: 12,
+        strokeWidth: 0,
+        strokeColor: "#fff",
+        fillColors: undefined,
+        radius: 12,
+        customHTML: undefined,
+        onClick: undefined,
+        offsetX: 0,
+        offsetY: 0,
+      },
+      itemMargin: {
+        horizontal: 5,
+        vertical: 0,
+      },
+    },
+    stroke: { show: false },
+    dataLabels: {
+      enabled: true,
+      enabledOnSeries: undefined,
+      textAnchor: "middle",
+      distributed: false,
+      offsetX: 0,
+      offsetY: 0,
+      style: {
+        fontSize: "0.8rem",
+        fontWeight: "bold",
+      },
+    },
+    plotOptions: {
+      pie: { donut: { labels: { show: false } } },
+    },
+  });
 
-// export default PieChartView;
+  return (
+    <ReactApexChart
+      type="pie"
+      series={CHART_DATA}
+      options={chartOptions}
+      width={250}
+    />
+  );
+}

@@ -21,8 +21,8 @@ export default function EventDetails() {
 
   return (
     <Page title={PAGE_TITLE}>
-      <EventInformation clickedEvents={clickedEvents} />
-      {/* <DisplayGraph /> */}
+      <EventInformation clickedEvents={clickedEvents}/>
+      <DisplayGraph />
     </Page>
   );
 }
