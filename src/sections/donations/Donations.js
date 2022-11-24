@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Box } from "@mui/system";
 import { useAppAuthContext } from "@contexts/AuthContext";
-import { Container, Grid, Paper, Typography } from "@mui/material";
+import { Container, Grid, Paper, Typography, Button } from "@mui/material";
 import { PrimaryButton } from "@components/Button";
 import { useTheme } from "@emotion/react";
 import { Icon } from "@iconify/react";
@@ -20,6 +20,11 @@ const Donations = () => {
   const { events } = user;
 
   const [value, setValue] = React.useState("1");
+  const [next, setNext] = React.useState(4);
+
+  const loadMore = () => {
+    setNext(next + 10);
+  };
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -68,7 +73,7 @@ const Donations = () => {
             </TabList>
           </Box>
           <TabPanel value="1">
-            {events.map((event) =>
+            {events?.slice(0, next)?.map((event) =>
               event.isRegistered ? (
                 <Paper
                   key={event.id}
@@ -80,9 +85,14 @@ const Donations = () => {
                 </Paper>
               ) : null
             )}
+            <Box display="flex" justifyContent="center">
+              {next < events?.length && (
+                <Button onClick={loadMore}> Load more.. </Button>
+              )}
+            </Box>
           </TabPanel>
           <TabPanel value="2">
-            {events.map((event) =>
+            {events?.slice(0, next)?.map((event) =>
               event.manuallyAdded ? (
                 <Paper
                   key={event.id}
@@ -95,6 +105,11 @@ const Donations = () => {
                 </Paper>
               ) : null
             )}
+            <Box display="flex" justifyContent="center">
+              {next < events?.length && (
+                <Button onClick={loadMore}> Load more.. </Button>
+              )}
+            </Box>
           </TabPanel>
         </TabContext>
       </Box>
