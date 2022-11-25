@@ -9,7 +9,7 @@ import CancelRoundedIcon from "@mui/icons-material/CancelRounded";
 
 export default function TabPanel2() {
   const { user } = useAppAuthContext();
-  const { events } = user;
+  let { events } = user;
   const [next, setNext] = useState(10);
 
   const loadMore = () => {
@@ -17,6 +17,8 @@ export default function TabPanel2() {
   };
 
   const currDate = new Date();
+
+  events = events.sort((a, b) => b.isVerified - a.isVerified);
 
   return (
     <div>

@@ -1,6 +1,5 @@
 import React from "react";
 import { Box } from "@mui/system";
-import { useAppAuthContext } from "@contexts/AuthContext";
 import { Container, Grid, Typography, Tab } from "@mui/material";
 import { PrimaryButton } from "@components/Button";
 import { Icon } from "@iconify/react";
