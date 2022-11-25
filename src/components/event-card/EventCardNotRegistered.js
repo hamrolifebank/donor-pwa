@@ -9,22 +9,10 @@ import Link from "next/link";
 
 const EventCardNotRegistered = ({ event }) => {
   const theme = useTheme();
-  const { user, addUser } = useAppAuthContext();
+  const { user, addUser,addEventInUser } = useAppAuthContext();
 
   const handleRegister = (event) => {
-    // event.currentTarget == event.target
-
-    const eventDetail = {
-      id: event.id,
-      name: event.name,
-      date: event.date,
-      location: event.location,
-      isRegistered: true,
-      isDonated: false,
-      isVerified: false,
-    };
-    user.events.push(eventDetail);
-    addUser(user);
+   addEventInUser(event)
   };
   return (
     <>
