@@ -84,7 +84,7 @@ const initialState = {
       ],
     },
   ],
-  isGraphDataAvailable: false,
+  isGraphDataAvailable: true,
 };
 const AppContext = createContext({ ...initialState });
 
