@@ -27,9 +27,11 @@ const AddDonations = () => {
   const { push } = useRouter();
   const [type, setType] = useState("text");
   const [manuallyAddedEvent, setManuallyAddedEvent] = useState({
+    id: "",
     name: "",
     date: "",
     location: "",
+    pintsDonated: "",
     isRegistered: false,
     isDonated: true,
     isVerified: false,
@@ -59,67 +61,67 @@ const AddDonations = () => {
       <Typography variant="h2" sx={{ pl: 2 }}>
         Add donation event{" "}
       </Typography>
-      {/* <FormControl> */}
-      <Box sx={{ p: 2 }}>
-        <Grid container item xs={12} spacing={2}>
-          <Grid item={true} xs={12} md={7}>
-            <TextField
-              id="name"
-              name="name"
-              value={manuallyAddedEvent.name}
-              onChange={handleInputField}
-              label="Event name"
-              type="text"
-              size="small"
-              fullWidth
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <AccountCircleIcon />
-                  </InputAdornment>
-                ),
-              }}
-            />
-          </Grid>
-          <Grid item={true} xs={12} md={7}>
-            <TextField
-              id="date"
-              label="Event date"
-              name="date"
-              value={manuallyAddedEvent.date}
-              onChange={handleInputField}
-              type={type}
-              onFocus={() => setType("date")}
-              size="small"
-              fullWidth
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <CalendarMonthIcon />
-                  </InputAdornment>
-                ),
-              }}
-            />
-          </Grid>
-          <Grid item={true} xs={12} md={7}>
-            <TextField
-              id="location"
-              label="Event location"
-              name="location"
-              value={manuallyAddedEvent.location}
-              onChange={handleInputField}
-              size="small"
-              fullWidth
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <LocationOnIcon />
-                  </InputAdornment>
-                ),
-              }}
-            />
-          </Grid>
-          {/* <Grid item={true} xs={12} md={7}>
+      <FormControl>
+        <Box sx={{ p: 2 }}>
+          <Grid container item xs={12} spacing={2}>
+            <Grid item={true} xs={12} md={7}>
+              <TextField
+                id="name"
+                name="name"
+                value={manuallyAddedEvent.name}
+                onChange={handleInputField}
+                label="Event name"
+                type="text"
+                size="small"
+                fullWidth
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <AccountCircleIcon />
+                    </InputAdornment>
+                  ),
+                }}
+              />
+            </Grid>
+            <Grid item={true} xs={12} md={7}>
+              <TextField
+                id="date"
+                label="Event date"
+                name="date"
+                value={manuallyAddedEvent.date}
+                onChange={handleInputField}
+                type={type}
+                onFocus={() => setType("date")}
+                size="small"
+                fullWidth
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <CalendarMonthIcon />
+                    </InputAdornment>
+                  ),
+                }}
+              />
+            </Grid>
+            <Grid item={true} xs={12} md={7}>
+              <TextField
+                id="location"
+                label="Event location"
+                name="location"
+                value={manuallyAddedEvent.location}
+                onChange={handleInputField}
+                size="small"
+                fullWidth
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <LocationOnIcon />
+                    </InputAdornment>
+                  ),
+                }}
+              />
+            </Grid>
+            <Grid item={true} xs={12} md={7}>
               <TextField
                 id="pintsdonated"
                 label="Pints donated"
@@ -134,13 +136,13 @@ const AddDonations = () => {
                   ),
                 }}
               />
-            </Grid> */}
-          <Grid item={true} xs={12} md={7}>
-            <PrimaryButton onClick={handleSubmit}>Add</PrimaryButton>
+            </Grid>
+            <Grid item={true} xs={12} md={7}>
+              <PrimaryButton onClick={handleSubmit}>Add</PrimaryButton>
+            </Grid>
           </Grid>
-        </Grid>
-      </Box>
-      {/* </FormControl> */}
+        </Box>
+      </FormControl>
     </Container>
   );
 };
