@@ -1,38 +1,21 @@
-import React, { useState } from "react";
+import React from "react";
 import { Box } from "@mui/system";
 import { useAppAuthContext } from "@contexts/AuthContext";
-import {
-  Container,
-  Grid,
-  Paper,
-  Typography,
-  Button,
-  Tab,
-  IconButton,
-} from "@mui/material";
+import { Container, Grid, Typography, Tab } from "@mui/material";
 import { PrimaryButton } from "@components/Button";
 import { Icon } from "@iconify/react";
 import ChartRadialBar from "./Radial";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
-import TabPanel from "@mui/lab/TabPanel";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import { PATH_ADDDONATION } from "@routes/paths";
-import { EventCardRegistered } from "@components/event-card";
-import CancelRoundedIcon from "@mui/icons-material/CancelRounded";
+import TabPanel1 from "./TabPanel1";
+import TabPanel2 from "./TabPanel2";
 
 const Donations = () => {
   const { push } = useRouter();
-  const { user } = useAppAuthContext();
-  const { events } = user;
 
   const [value, setValue] = React.useState("1");
-  const [next, setNext] = useState(10);
-
-  const loadMore = () => {
-    setNext(next + 10);
-  };
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -41,8 +24,6 @@ const Donations = () => {
   const onAddDonation = () => {
     push(PATH_ADDDONATION.addDonations);
   };
-
-  const currDate = new Date();
 
   return (
     <Container>
@@ -81,99 +62,8 @@ const Donations = () => {
               />
             </TabList>
           </Box>
-          <TabPanel value="1" sx={{ p: "10px" }}>
-            {events?.slice(0, next)?.map((event) =>
-              event.isRegistered ? (
-                <div key={event.id}>
-                  <Link
-                    href={`/events/${event.id}`}
-                    style={{ textDecoration: "none" }}
-                  >
-                    <EventCardRegistered event={event} />
-                  </Link>
-                </div>
-              ) : null
-            )}
-            <Box display="flex" justifyContent="center">
-              {next < events?.length && (
-                <Button onClick={loadMore}> Load more.. </Button>
-              )}
-            </Box>
-          </TabPanel>
-          <TabPanel value="2" sx={{ p: "10px" }}>
-            {events?.slice(0, next)?.map((event) =>
-              new Date(event.date) < currDate ? (
-                <div key={event.id}>
-                  <Link
-                    href={`/events/${event.id}`}
-                    style={{ textDecoration: "none" }}
-                  >
-                    <Paper
-                      sx={{
-                        mb: 2,
-                        p: "10px 0px 10px 10px",
-                        backgroundColor: "grey.200",
-                      }}
-                    >
-                      <Grid container item xs={12} gap={1}>
-                        <Grid item xs={1}>
-                          <Icon
-                            icon="material-symbols:verified"
-                            color={event.isVerified ? "blue" : "grey"}
-                            height="22px"
-                          />
-                        </Grid>
-                        <Grid item xs={8}>
-                          <Typography variant="subtitle1">
-                            {event.name}
-                          </Typography>
-
-                          <Typography
-                            sx={{
-                              fontSize: "subtitle2.fontSize",
-                              color: "grey.600",
-                              display: "flex",
-                              alignItems: "center",
-                              gap: 1,
-                            }}
-                          >
-                            <Icon icon="mdi:clock-time-eight-outline" />
-                            {event.date.slice(0, 10)}
-                          </Typography>
-
-                          <Typography
-                            sx={{
-                              fontSize: "subtitle2.fontSize",
-                              display: "flex",
-                              gap: 1,
-                              alignItems: "center",
-                              textDecoration: "underline",
-                              color: "primary.main",
-                            }}
-                          >
-                            <Icon icon="material-symbols:location-on" />
-                            {event.location}
-                          </Typography>
-                        </Grid>
-                        <Grid item xs={1}>
-                          {event.manuallyAdded ? (
-                            <IconButton sx={{ height: 10 }}>
-                              <CancelRoundedIcon />
-                            </IconButton>
-                          ) : null}
-                        </Grid>
-                      </Grid>
-                    </Paper>
-                  </Link>
-                </div>
-              ) : null
-            )}
-            <Box display="flex" justifyContent="center">
-              {next < events?.length && (
-                <Button onClick={loadMore}> Load more.. </Button>
-              )}
-            </Box>
-          </TabPanel>
+          <TabPanel1 />
+          <TabPanel2 />
         </TabContext>
       </Box>
     </Container>

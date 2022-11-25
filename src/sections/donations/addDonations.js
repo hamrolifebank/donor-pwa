@@ -19,11 +19,9 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import { PATH_DONATIONS } from "@routes/paths";
 import { useAppAuthContext } from "@contexts/AuthContext";
-import { setUserData } from "@utils/sessionManager";
 
 const AddDonations = () => {
   const { user, addUser } = useAppAuthContext();
-  // console.log(user.events);
   const { push } = useRouter();
   const [type, setType] = useState("text");
   const [manuallyAddedEvent, setManuallyAddedEvent] = useState({
