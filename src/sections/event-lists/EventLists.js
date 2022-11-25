@@ -22,7 +22,7 @@ export default function EventsPage(props) {
 
   const registeredEvents = events
     .filter((event) => {
-      const found = user?.events.find((userEvent) => userEvent.id === event.id);
+      const found = user?.events?.find((userEvent) => userEvent.id === event.id);
       if (found) {
         return true;
       } else {
@@ -35,7 +35,7 @@ export default function EventsPage(props) {
 
   const notRegisteredEvents = events
     .filter((event) => {
-      const found = user?.events.find((userEvent) => userEvent.id === event.id);
+      const found = user?.events?.find((userEvent) => userEvent.id === event.id);
       if (found) {
         return false;
       } else {
