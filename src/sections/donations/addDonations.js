@@ -22,12 +22,11 @@ import { useAppAuthContext } from "@contexts/AuthContext";
 import { setUserData } from "@utils/sessionManager";
 
 const AddDonations = () => {
-  const { user } = useAppAuthContext();
+  const { user, addUser } = useAppAuthContext();
   // console.log(user.events);
   const { push } = useRouter();
   const [type, setType] = useState("text");
   const [manuallyAddedEvent, setManuallyAddedEvent] = useState({
-    id: "fjghoiff5255862221aafg",
     name: "",
     date: "",
     location: "",
@@ -43,7 +42,8 @@ const AddDonations = () => {
   };
 
   const handleSubmit = () => {
-    setUserData(manuallyAddedEvent);
+    user.events.push(manuallyAddedEvent);
+    addUser(user);
     push(PATH_DONATIONS.root);
   };
 
