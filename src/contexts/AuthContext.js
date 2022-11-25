@@ -73,7 +73,7 @@ function AppAuthProvider({ children }) {
       publicAddress: null,
       wallet: null,
     }));
-    console.log("deletePublicAddress");
+
     deletePublicAddressLocal();
     deleteWalletFromLocal();
   };

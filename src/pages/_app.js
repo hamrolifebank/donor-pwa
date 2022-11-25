@@ -26,8 +26,6 @@ import { AppProvider } from "@contexts/AppContext";
 
 const clientSideEmotionCache = createEmotionCache();
 
-console.log("in main app");
-
 MyApp.propTypes = {
   Component: PropTypes.elementType,
   pageProps: PropTypes.object,
