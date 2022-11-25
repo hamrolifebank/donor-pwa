@@ -6,7 +6,6 @@ import {
 } from "@mui/material";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
-// import { QrReader } from "react-qr-reader";
 
 import { BOTTOM_NAVIGATION_OPTIONS } from "@routes/paths";
 import Iconify from "@components/iconify";
@@ -15,31 +14,8 @@ import { Container } from "@mui/system";
 
 const BottomNavigationBar = () => {
   const [value, setValue] = useState(0);
-  const [data, setData] = useState("No data found");
-
   const router = useRouter();
   const theme = useTheme();
-  const handleQR = (icon) => {
-    return (
-      <>
-        {/* <QrReader
-          delay={100}
-          onResult={(result, error) => {
-            if (!!result) {
-              setData(result?.text);
-            }
-
-            if (!!error) {
-              console.info(error);
-            }
-          }}
-          style={{ width: "100%" }}
-        /> */}
-        <p>{data}</p>
-      </>
-    );
-    return icon;
-  };
 
   return (
     <Paper
@@ -67,12 +43,7 @@ const BottomNavigationBar = () => {
                 <Iconify
                   sx={{ transform: "scale(1.2)", mb: 0.05 }}
                   {...option?.iconStyle}
-                  icon={
-                    // option.icon === "fluent:qr-code-24-filled"
-                    //   ? handleQR(option.icon)
-                    //   :
-                    option.icon
-                  }
+                  icon={option.icon}
                 />
               ) : (
                 ""

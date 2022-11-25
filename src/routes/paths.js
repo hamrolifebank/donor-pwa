@@ -6,7 +6,7 @@ function path(root, sublink) {
 
 const ROOTS_DASHBOARD = "/";
 const ROOTS_ASSETS = "/assets";
-
+const ROOTS_SCANNER = "/scanner";
 const ROOTS_EVENTS = "/events";
 const ROOTS_DONATIONS = "/donations";
 const ROOTS_PROFILE = "/profile";
@@ -42,6 +42,10 @@ export const PATH_ASSETS = {
   root: ROOTS_ASSETS,
 };
 
+export const PATH_SCANNER = {
+  root: ROOTS_SCANNER,
+};
+
 export const PATH_PROFILE = {
   root: ROOTS_PROFILE,
 };
@@ -53,14 +57,14 @@ export const BOTTOM_NAVIGATION_OPTIONS = [
     icon: "eva:home-outline",
     // icon: <DashboardIcon />,
   },
+  // {
+  //   path: "/assets",
+  //   label: "",
+  //   icon: "eva:calendar-outline",
+  //   sx: {},
+  // },
   {
-    path: PATH_EVENTS.root,
-    label: "",
-    icon: "eva:calendar-outline",
-    sx: {},
-  },
-  {
-    path: PATH_ASSETS.root,
+    path: PATH_SCANNER.root,
     label: "scan",
     icon: "fluent:qr-code-24-filled",
     sx: {
