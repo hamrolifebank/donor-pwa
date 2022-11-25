@@ -22,7 +22,7 @@ export default function EventsPage(props) {
 
   const registeredEvents = events
     .filter((event) => {
-      const found = user?.events.find((userEvent) => userEvent.id === event.id);
+      const found = user?.events?.find((userEvent) => userEvent.id === event.id);
       if (found) {
         return true;
       } else {
@@ -35,7 +35,7 @@ export default function EventsPage(props) {
 
   const notRegisteredEvents = events
     .filter((event) => {
-      const found = user?.events.find((userEvent) => userEvent.id === event.id);
+      const found = user?.events?.find((userEvent) => userEvent.id === event.id);
       if (found) {
         return false;
       } else {
@@ -63,13 +63,17 @@ export default function EventsPage(props) {
       </Typography>
       {registeredEvents.map((event) => (
         <div key={event.id}>
-          <EventCardRegistered event={event} />
+          <Link href={`/events/${event.id}`} style={{ textDecoration: "none" }}>
+            <EventCardRegistered event={event} />
+          </Link>
         </div>
       ))}
 
       {notRegisteredEvents.map((event) => (
         <div key={event.id}>
-          <EventCardNotRegistered event={event} />
+          <Link href={`/events/${event.id}`} style={{ textDecoration: "none" }}>
+            <EventCardNotRegistered event={event} />
+          </Link>
         </div>
       ))}
       <Typography

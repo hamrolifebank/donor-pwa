@@ -22,44 +22,42 @@ const EventCardRegistered = ({ event }) => {
         }}
       >
         <Box>
-          <Link href={`/events/${event.id}`} style={{ textDecoration: "none" }}>
-            <Typography
-              sx={{
-                color: "black",
-                fontSize: "subtitle1.fontSize",
-                fontWeight: "subtitle1.fontWeight",
-                lineHeight: "subtitle1.lineHeight",
-              }}
-            >
-              {event.name}
-            </Typography>
-            <Typography
-              sx={{
-                fontSize: "subtitle2.fontSize",
-                color: "grey.600",
-                display: "flex",
-                alignItems: "center",
-                gap: "5px",
-              }}
-            >
-              <Icon icon="mdi:clock-time-eight-outline" />
-              {event.date.slice(0, 10)}
-            </Typography>
+          <Typography
+            sx={{
+              color: "black",
+              fontSize: "subtitle1.fontSize",
+              fontWeight: "subtitle1.fontWeight",
+              lineHeight: "subtitle1.lineHeight",
+            }}
+          >
+            {event.name}
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: "subtitle2.fontSize",
+              color: "grey.600",
+              display: "flex",
+              alignItems: "center",
+              gap: "5px",
+            }}
+          >
+            <Icon icon="mdi:clock-time-eight-outline" />
+            {event.date.slice(0, 10)}
+          </Typography>
 
-            <Typography
-              sx={{
-                fontSize: "subtitle2.fontSize",
-                display: "flex",
-                gap: "5px",
-                alignItems: "center",
-                textDecoration: "underline",
-                color: "primary.main",
-              }}
-            >
-              <Icon icon="material-symbols:location-on" />
-              {event.location}
-            </Typography>
-          </Link>
+          <Typography
+            sx={{
+              fontSize: "subtitle2.fontSize",
+              display: "flex",
+              gap: "5px",
+              alignItems: "center",
+              textDecoration: "underline",
+              color: "primary.main",
+            }}
+          >
+            <Icon icon="material-symbols:location-on" />
+            {event.location}
+          </Typography>
         </Box>
         <Box>
           <PrimaryButton disabled>

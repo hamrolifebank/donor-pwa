@@ -31,3 +31,5 @@ export const ProfileContextProvider = ({ children }) => {
 };
 
 export const useProfileContext = () => useContext(ProfileContext);
+
+export default function context() {}
