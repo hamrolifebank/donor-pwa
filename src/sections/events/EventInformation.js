@@ -5,8 +5,6 @@ import { Box, Container, display } from "@mui/system";
 import React, { useState } from "react";
 import Radial from "./Radial";
 import { Icon } from "@iconify/react";
-import { setUserEvents } from "@utils/sessionManager";
-import { useRouter } from "next/router";
 
 const handleRegister = (value) => {
   console.log("handle registered clicked");
@@ -52,7 +50,7 @@ const EventInformation = () => {
 
         <Box display="flex" justifyContent="flex-end">
           <PrimaryButton
-            onClick={handleRegister()}
+            onClick={handleRegister}
             sx={{ m: "7px 0px 10px 30px", p: "3px 11px" }}
           >
             Register

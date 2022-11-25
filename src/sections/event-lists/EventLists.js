@@ -17,14 +17,10 @@ export default function EventsPage(props) {
   console.log(user);
 
   const registeredEvents = events.filter((event) => {
-    if (user) {
-      return event.phone === user.phone;
-    }
+    return user.events.includes(event.id);
   });
   const notRegisteredEvents = events.filter((event) => {
-    if (user) {
-      return event.phone !== user.phone;
-    }
+    return !user.events.includes(event.id);
   });
   console.log(registeredEvents, notRegisteredEvents);
 

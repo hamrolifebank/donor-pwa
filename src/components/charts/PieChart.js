@@ -1,33 +1,56 @@
-// import React from "react";
-// import { Box } from "@mui/material";
-// import { PieChart } from "react-minimal-pie-chart";
-// import { useTheme } from "@emotion/react";
+import merge from "lodash/merge";
+// components
+import ReactApexChart, { BaseOptionChart } from "@components/chart";
 
-// const PieChartView = (props) => {
-//   const theme = useTheme();
-//   return (
-//     <Box>
-//       <PieChart
-//         data={props.data}
-//         label={({ dataEntry }) => `${Math.round(dataEntry.percentage)} %`}
-//         labelStyle={(index) => ({
-//           fill: theme.palette.grey[0],
-//           fontSize: "0.3em",
-//         })}
-//         segmentsTabIndex={4}
-//         segmentsStyle={(segmentsIndex) => {
-//           fill: theme.palette.grey[800];
-//         }}
-//         labelPosition={55}
-//         animate
-//         animationDuration={500}
-//         animationEasing="linear"
-//         center={[50, 50]}
-//         radius={30}
-//         viewBoxSize={[100, 100]}
-//       />
-//     </Box>
-//   );
-// };
+export default function ChartPie({ data, labels }) {
+  const CHART_DATA = data;
+  const chartOptions = merge(BaseOptionChart(), {
+    labels: labels,
+    legend: {
+      show: true,
+      showForSingleSeries: false,
+      position: "bottom",
+      horizontalAlign: "center",
+      floating: false,
+      fontSize: "subtitle3",
+      customLegendItems: [],
+      offsetX: 0,
+      offsetY: 0,
+      labels: {
+        useSeriesColors: true,
+      },
+      markers: {
+        width: 15,
+        height: 15,
+        strokeWidth: 0,
+        strokeColor: "#fff",
+        radius: 0,
+        offsetX: 0,
+        offsetY: 0,
+      },
+      itemMargin: {
+        horizontal: 5,
+        vertical: 0,
+      },
+    },
+    stroke: { show: false },
+    dataLabels: {
+      enabled: true,
+      style: {
+        fontSize: "0.7rem",
+      },
+    },
+    plotOptions: {
+      pie: { dataLabels: { offset: -15 }, donut: { labels: { show: false } } },
+    },
+  });
 
-// export default PieChartView;
+  return (
+    <ReactApexChart
+      type="pie"
+      series={CHART_DATA}
+      options={chartOptions}
+      width={250}
+    />
+  );
+}

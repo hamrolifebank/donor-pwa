@@ -31,6 +31,7 @@ const AppAuthContext = createContext({
   method: "jwt",
   addPublicAddress: () => {},
   addWallet: () => {},
+  addUser: () => {},
   deleteToken: () => {},
 });
 

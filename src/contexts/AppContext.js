@@ -1,5 +1,6 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import PropTypes from "prop-types";
+import { arEG } from "date-fns/locale";
 
 const events = [
   {
@@ -27,6 +28,52 @@ const events = [
   },
   {
     is_closed: false,
+    _id: "634fc82ab6256678c904c82b",
+    name: "Red Cross Blood Donation Camp",
+    team: "5c5b1806cb2d0f8f688d7428",
+    contactname: "Hamro LifeBank",
+    phone: "9801230045",
+    target: "10",
+    date: "2022-12-09T00:00:00.000Z",
+    startTime: "11:00",
+    endTime: "14:00",
+    location: "Sanepa, Lalitpur ",
+    beneficiary: "5bb6067fd59b444c803c4003",
+    slug: "2022-11-04-hlb-donor-center-18",
+    owner: "5bb752fac800bb022cee5abe",
+    created_by: "5c5fceb6306cb25f1174396b",
+    updated_by: "5c5fceb6306cb25f1174396b",
+    acl: [],
+    created_at: "2022-10-19T09:49:30.574Z",
+    updated_at: "2022-11-02T06:40:10.703Z",
+    v: 0,
+    id: "634fc82ab6256678c904c820",
+  },
+  {
+    is_closed: false,
+    _id: "634fc82ab6256678c904c82b",
+    name: "Lions club Blood Donation Camp",
+    team: "5c5b1806cb2d0f8f688d7428",
+    contactname: "Hamro LifeBank",
+    phone: "9801230045",
+    target: "10",
+    date: "2022-12-09T00:00:00.000Z",
+    startTime: "11:00",
+    endTime: "14:00",
+    location: "Sanepa, Lalitpur ",
+    beneficiary: "5bb6067fd59b444c803c4003",
+    slug: "2022-11-04-hlb-donor-center-18",
+    owner: "5bb752fac800bb022cee5abe",
+    created_by: "5c5fceb6306cb25f1174396b",
+    updated_by: "5c5fceb6306cb25f1174396b",
+    acl: [],
+    created_at: "2022-10-19T09:49:30.574Z",
+    updated_at: "2022-11-02T06:40:10.703Z",
+    v: 0,
+    id: "634fc82ab6256678c904c830",
+  },
+  {
+    is_closed: false,
     _id: "6378c13301aecf4f771ca914",
     name: "Sweta Blood Donation",
     contactname: "Sweta shrestha",
@@ -49,7 +96,42 @@ const events = [
     id: "6378c13301aecf4f771ca914",
   },
 ];
-const initialState = { events: events };
+
+const initialState = {
+  events: events,
+  stats: [
+    {
+      groupBy: "bloodGroup",
+      label: "Blood Group",
+      data: [
+        { value: 4, label: "A+", color: "#FFAB00" },
+        { value: 1, label: "B+", color: "#CF3D3C" },
+        { value: 4, label: "AB+", color: "#00B8D9" },
+        { value: 3, label: "O+", color: "#FF5630" },
+      ],
+    },
+    {
+      groupBy: "age",
+      label: "Age Group",
+      data: [
+        { value: 6, label: "18 - 29", color: "#FFAB00" },
+        { value: 3, label: "30 - 39", color: "#CF3D3C" },
+        { value: 2, label: "40 - 49", color: "#FFDC00" },
+        { value: 1, label: "50 - 59", color: "#FF5630" },
+      ],
+    },
+    {
+      groupBy: "gender",
+      label: "Genderwise",
+      data: [
+        { value: 7, label: "Male", display: "Male", color: "#FFAB00" },
+        { value: 5, label: "Female", display: "Female", color: "#FF5630" },
+        { label: "Others", value: 2, display: "Other", color: "#FFDC00" },
+      ],
+    },
+  ],
+  isGraphDataAvailable: true,
+};
 const AppContext = createContext({ ...initialState });
 
 AppProvider.propTypes = {
@@ -58,7 +140,12 @@ AppProvider.propTypes = {
 
 function AppProvider({ children }) {
   const [appState, setAppState] = useState(initialState);
-  const contextProps = { ...appState };
+
+  const contextProps = {
+    ...appState,
+    appState,
+    setAppState,
+  };
   return (
     <AppContext.Provider value={contextProps}>{children}</AppContext.Provider>
   );
