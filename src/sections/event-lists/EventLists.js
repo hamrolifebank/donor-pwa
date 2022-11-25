@@ -63,13 +63,17 @@ export default function EventsPage(props) {
       </Typography>
       {registeredEvents.map((event) => (
         <div key={event.id}>
-          <EventCardRegistered event={event} />
+          <Link href={`/events/${event.id}`} style={{ textDecoration: "none" }}>
+            <EventCardRegistered event={event} />
+          </Link>
         </div>
       ))}
 
       {notRegisteredEvents.map((event) => (
         <div key={event.id}>
-          <EventCardNotRegistered event={event} />
+          <Link href={`/events/${event.id}`} style={{ textDecoration: "none" }}>
+            <EventCardNotRegistered event={event} />
+          </Link>
         </div>
       ))}
       <Typography
