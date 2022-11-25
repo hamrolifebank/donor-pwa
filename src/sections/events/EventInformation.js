@@ -9,8 +9,7 @@ import { setUserEvents } from "@utils/sessionManager";
 import { useRouter } from "next/router";
 
 const handleRegister = (value) => {
-  // console.log("handle registered clicked");
-  setUserEvents(value);
+  console.log("handle registered clicked");
 };
 
 const EventInformation = () => {
@@ -26,9 +25,6 @@ const EventInformation = () => {
     month: "long",
     day: "numeric",
   };
-
-  // const specificEvent = events.filter((event) => event.id === query);
-  // console.log(specificEvent);
 
   let chipLabel = !events[0].is_closed ? "Active" : "Closed";
   let chipColor = chipLabel === "Active" ? "success" : "grey";
