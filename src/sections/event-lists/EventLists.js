@@ -20,9 +20,18 @@ export default function EventsPage(props) {
     return Number(dateArray[0] + dateArray[1] + dateArray[2]);
   };
 
-  const registeredEvents = events
+  const filteredEvents = events.filter((event) => {
+    return (
+      convertDateToNumber(event.date) >=
+      convertDateToNumber(new Date().toISOString())
+    );
+  });
+
+  const registeredEvents = filteredEvents
     .filter((event) => {
-      const found = user?.events?.find((userEvent) => userEvent.id === event.id);
+      const found = user?.events?.find(
+        (userEvent) => userEvent.id === event.id
+      );
       if (found) {
         return true;
       } else {
@@ -33,9 +42,11 @@ export default function EventsPage(props) {
       return convertDateToNumber(a.date) - convertDateToNumber(b.date);
     });
 
-  const notRegisteredEvents = events
+  const notRegisteredEvents = filteredEvents
     .filter((event) => {
-      const found = user?.events?.find((userEvent) => userEvent.id === event.id);
+      const found = user?.events?.find(
+        (userEvent) => userEvent.id === event.id
+      );
       if (found) {
         return false;
       } else {
