@@ -6,7 +6,6 @@ import { createContext, useContext, useEffect, useState } from "react";
 import {
   setPublicKey,
   getPublicKey,
-  deleteAccessToken,
   setCurrentUser,
   getCurrentUser,
   deletePublicAddressLocal,
@@ -122,7 +121,6 @@ function AppAuthProvider({ children }) {
   }, []);
 
   const deleteToken = () => {
-    deleteAccessToken();
     setAuthState((prev) => ({ ...prev, isInitialized: true, token: "" }));
   };
   const contextProps = {
