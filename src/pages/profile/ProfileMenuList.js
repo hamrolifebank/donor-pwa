@@ -20,7 +20,6 @@ const ProfileMenu = (props) => {
     const newChecked = [...checked];
 
     if (value === "themeMode") {
-      console.log("value", value);
       onToggleMode();
     }
 
@@ -40,9 +39,9 @@ const ProfileMenu = (props) => {
           {/* <ListItemIcon>
             <WifiIcon />
           </ListItemIcon> */}
-          <ListItemText id='switch-list-label-themeMode' primary='Dark Mode' />
+          <ListItemText id="switch-list-label-themeMode" primary="Dark Mode" />
           <Switch
-            edge='end'
+            edge="end"
             onChange={handleToggle("themeMode")}
             checked={checked.indexOf("themeMode") !== -1}
             inputProps={{
@@ -54,22 +53,22 @@ const ProfileMenu = (props) => {
           {/* <ListItemIcon>
             <WifiIcon />
           </ListItemIcon> */}
-          <ListItemText id='switch-list-label-wifi' primary='Backup Wallet' />
-          <Iconify icon='akar-icons:chevron-right' />
+          <ListItemText id="switch-list-label-wifi" primary="Backup Wallet" />
+          <Iconify icon="akar-icons:chevron-right" />
         </ListItemButton>
         <ListItemButton>
           {/* <ListItemIcon>
             <WifiIcon />
           </ListItemIcon> */}
-          <ListItemText id='switch-list-label-wifi' primary='Current Network' />
-          <Iconify icon='akar-icons:chevron-right' />
+          <ListItemText id="switch-list-label-wifi" primary="Current Network" />
+          <Iconify icon="akar-icons:chevron-right" />
         </ListItemButton>
         <ListItemButton>
           {/* <ListItemIcon>
             <WifiIcon />
           </ListItemIcon> */}
-          <ListItemText id='switch-list-label-wifi' primary='Settings' />
-          <Iconify icon='akar-icons:chevron-right' />
+          <ListItemText id="switch-list-label-wifi" primary="Settings" />
+          <Iconify icon="akar-icons:chevron-right" />
         </ListItemButton>
       </List>
     </>

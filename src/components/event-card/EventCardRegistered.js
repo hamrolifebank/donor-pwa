@@ -8,25 +8,6 @@ import { useAppAuthContext } from "@contexts/AuthContext";
 import Link from "next/link";
 
 const EventCardRegistered = ({ event }) => {
-  const theme = useTheme();
-  const { user, addUser } = useAppAuthContext();
-
-  const handleRegister = (e) => {
-    // event.currentTarget == event.target
-
-    console.log(user);
-    const eventDetail = {
-      id: event.id,
-      name: event.name,
-      date: event.date,
-      location: event.location,
-      isRegistered: true,
-      isDonated: false,
-      isVerified: false,
-    };
-    user.events.push(eventDetail);
-    addUser(user);
-  };
   return (
     <>
       <Paper

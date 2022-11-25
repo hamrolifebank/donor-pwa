@@ -11,10 +11,9 @@ const EventCardNotRegistered = ({ event }) => {
   const theme = useTheme();
   const { user, addUser } = useAppAuthContext();
 
-  const handleRegister = (e) => {
+  const handleRegister = (event) => {
     // event.currentTarget == event.target
 
-    console.log(user);
     const eventDetail = {
       id: event.id,
       name: event.name,
@@ -81,7 +80,7 @@ const EventCardNotRegistered = ({ event }) => {
           </Link>
         </Box>
         <Box>
-          <PrimaryButton onClick={handleRegister}>
+          <PrimaryButton onClick={() => handleRegister(event)}>
             <Icon icon="material-symbols:arrow-circle-left" />
             Register
           </PrimaryButton>
