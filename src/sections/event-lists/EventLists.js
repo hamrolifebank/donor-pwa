@@ -14,15 +14,38 @@ import { useAppAuthContext } from "@contexts/AuthContext";
 export default function EventsPage(props) {
   const { events } = useAppContext();
   const { user } = useAppAuthContext();
-  console.log(user);
 
-  const registeredEvents = events.filter((event) => {
-    return user.events.includes(event.id);
-  });
-  const notRegisteredEvents = events.filter((event) => {
-    return !user.events.includes(event.id);
-  });
-  console.log(registeredEvents, notRegisteredEvents);
+  const convertDateToNumber = (date) => {
+    const dateArray = date.split("T")[0].split("-");
+    return Number(dateArray[0] + dateArray[1] + dateArray[2]);
+  };
+
+  const registeredEvents = events
+    .filter((event) => {
+      const found = user?.events.find((userEvent) => userEvent.id === event.id);
+      if (found) {
+        return true;
+      } else {
+        return false;
+      }
+    })
+    .sort((a, b) => {
+      return convertDateToNumber(a.date) - convertDateToNumber(b.date);
+    });
+
+  const notRegisteredEvents = events
+    .filter((event) => {
+      const found = user?.events.find((userEvent) => userEvent.id === event.id);
+      if (found) {
+        return false;
+      } else {
+        return true;
+      }
+    })
+    .sort((a, b) => {
+      return convertDateToNumber(a.date) - convertDateToNumber(b.date);
+    });
+  // console.log(registeredEvents, notRegisteredEvents);
 
   return (
     <Container display="flex">
@@ -38,24 +61,15 @@ export default function EventsPage(props) {
       >
         Events near you
       </Typography>
-
-      {registeredEvents.length > 0 &&
-        registeredEvents.map((event) => {
-          <div key={event.id}>
-            <Link
-              href={`/events/${event.id}`}
-              style={{ textDecoration: "none" }}
-            >
-              <EventCardRegistered event={event} />
-            </Link>
-          </div>;
-        })}
+      {registeredEvents.map((event) => (
+        <div key={event.id}>
+          <EventCardRegistered event={event} />
+        </div>
+      ))}
 
       {notRegisteredEvents.map((event) => (
         <div key={event.id}>
-          <Link href={`/events/${event.id}`} style={{ textDecoration: "none" }}>
-            <EventCardNotRegistered event={event} />
-          </Link>
+          <EventCardNotRegistered event={event} />
         </div>
       ))}
       <Typography
