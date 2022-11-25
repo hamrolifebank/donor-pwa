@@ -22,7 +22,7 @@ const BottomNavigationBar = () => {
   const handleQR = (icon) => {
     return (
       <>
-        <QrReader
+        {/* <QrReader
           delay={100}
           onResult={(result, error) => {
             if (!!result) {
@@ -34,7 +34,7 @@ const BottomNavigationBar = () => {
             }
           }}
           style={{ width: "100%" }}
-        />
+        /> */}
         <p>{data}</p>
       </>
     );

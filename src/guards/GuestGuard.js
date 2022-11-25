@@ -22,7 +22,6 @@ export default function GuestGuard({ children }) {
   const { isAuthenticated, isInitialized, user } = useAppAuthContext();
 
   useEffect(() => {
-    console.log("in useeffect of guestguard");
     if (isAuthenticated && !user) {
       push(PATH_AUTH.register);
     }
