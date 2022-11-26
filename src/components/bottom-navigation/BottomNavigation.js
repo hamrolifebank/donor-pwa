@@ -45,7 +45,7 @@ const BottomNavigationBar = () => {
     <Paper
       sx={{
         position: "fixed",
-        zIndex: 1000,
+        zIndex: 100,
         bottom: 0,
         left: 0,
         right: 0,
