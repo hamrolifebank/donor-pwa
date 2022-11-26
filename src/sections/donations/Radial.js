@@ -4,23 +4,46 @@ import { useTheme } from "@mui/material/styles";
 import { fNumber } from "../../utils/formatNumber";
 // components
 import Chart, { useChart } from "../../components/chart";
+import { useAppAuthContext } from "@contexts/AuthContext";
 
 // ----------------------------------------------------------------------
 
-const series = [90, 65];
-
 export default function ChartRadialBar() {
   const theme = useTheme();
+  const { user } = useAppAuthContext();
+  const { events } = user;
+
+  let pintsOfVerified = [];
+  let pintsOfUnVerified = [];
+
+  const allPintsVerified = () => {
+    events.map((event) =>
+      event.isVerified ? pintsOfVerified.push(event.pints) : null
+    );
+  };
+  const allPintsUnVerified = () => {
+    events.map((event) =>
+      event.manuallyAdded ? pintsOfUnVerified.push(event.pints) : null
+    );
+  };
+  allPintsVerified();
+  allPintsUnVerified();
+
+  const totalVerifiedPints = pintsOfVerified.reduce((a, b) => a + b);
+  const totalUnVerifiedPints = pintsOfUnVerified.reduce((a, b) => a + b);
+  const total = totalUnVerifiedPints + totalVerifiedPints;
+
+  const series = [totalVerifiedPints, totalUnVerifiedPints];
 
   const chartOptions = useChart({
-    labels: ["Donation", "Pints"],
+    labels: ["Verified", "Unverified"],
     fill: {
       type: "gradient",
       gradient: {
         colorStops: [
           [
             { offset: 0, color: theme.palette.primary.light },
-            { offset: 100, color: theme.palette.primary.main },
+            { offset: 1000, color: theme.palette.primary.main },
           ],
           [
             { offset: 0, color: theme.palette.info.light },
@@ -41,11 +64,14 @@ export default function ChartRadialBar() {
           value: {
             offsetY: 5,
             fontSize: 10,
+            formatter: function (val) {
+              const percent = val / 1;
+              return percent.toFixed(0);
+            },
           },
 
           total: {
-            label: "5000",
-            formatter: () => fNumber(2324),
+            formatter: () => fNumber(total),
           },
         },
       },
