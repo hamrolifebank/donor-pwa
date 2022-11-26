@@ -15,12 +15,6 @@ export default function TabPanel2() {
     setNext(next + 10);
   };
 
-  // const selectedId = (id) => {
-  //   console.log("clicked: ", id);
-  // };
-
-  // selectedId();
-
   const deleteManaullyAddedEvent = (id) => {
     const filteredEvents = user.events.filter((event) => event.id !== id);
     user.events.splice(0, user.events.length, ...filteredEvents);
