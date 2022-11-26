@@ -123,7 +123,7 @@ const AddDonations = () => {
               <TextField
                 id="pintsdonated"
                 label="Pints donated"
-                name="pintsdonated"
+                name="pintsDonated"
                 size="small"
                 fullWidth
                 InputProps={{

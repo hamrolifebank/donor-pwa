@@ -16,6 +16,12 @@ export default function TabPanel2() {
     setNext(next + 10);
   };
 
+  const deleteManaullyAddedEvent = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    console.log("clicked");
+  };
+
   const currDate = new Date();
 
   events = events.sort((a, b) => b.isVerified - a.isVerified);
@@ -77,7 +83,10 @@ export default function TabPanel2() {
                     </Grid>
                     <Grid item xs={1}>
                       {event.manuallyAdded ? (
-                        <IconButton sx={{ height: 10 }}>
+                        <IconButton
+                          sx={{ height: 10 }}
+                          onClick={deleteManaullyAddedEvent}
+                        >
                           <CancelRoundedIcon />
                         </IconButton>
                       ) : null}
