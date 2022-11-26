@@ -19,13 +19,16 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import { PATH_DONATIONS } from "@routes/paths";
 import { useAppAuthContext } from "@contexts/AuthContext";
+import { v4 as uuidv4 } from "uuid";
 
 const AddDonations = () => {
   const { user, addUser } = useAppAuthContext();
   const { push } = useRouter();
   const [type, setType] = useState("text");
+
+  const id = uuidv4();
   const [manuallyAddedEvent, setManuallyAddedEvent] = useState({
-    id: "",
+    id,
     name: "",
     date: "",
     location: "",
@@ -123,7 +126,9 @@ const AddDonations = () => {
               <TextField
                 id="pintsdonated"
                 label="Pints donated"
-                name="pintsdonated"
+                name="pintsDonated"
+                value={manuallyAddedEvent.pintsDonated}
+                onChange={handleInputField}
                 size="small"
                 fullWidth
                 InputProps={{

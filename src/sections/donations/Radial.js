@@ -4,27 +4,55 @@ import { useTheme } from "@mui/material/styles";
 import { fNumber } from "../../utils/formatNumber";
 // components
 import Chart, { useChart } from "../../components/chart";
+import { useAppAuthContext } from "@contexts/AuthContext";
+import { useEffect } from "react";
 
 // ----------------------------------------------------------------------
 
-const series = [90, 65];
-
 export default function ChartRadialBar() {
+  const { user } = useAppAuthContext();
+  const { events } = user;
+
+  const varifiedPints = [];
+  const unVerifiedPints = [];
+
+  const allVerifiedPints = () => {
+    return events.map(
+      (event) =>
+        event.isVerified ? varifiedPints.push(event.pintsDonated) : null
+      // console.log(event.pintsDonated)
+    );
+  };
+
+  const allUnVerifiedPints = () => {
+    return events.map(
+      (event) =>
+        event.manuallyAdded ? unVerifiedPints.push(event.pintsDonated) : null
+      // console.log(event.pintsDonated)
+    );
+  };
+
+  allVerifiedPints();
+  allUnVerifiedPints();
+
+  console.log(varifiedPints);
+  console.log(unVerifiedPints);
+  const series = [varifiedPints, 65];
   const theme = useTheme();
 
   const chartOptions = useChart({
-    labels: ["Donation", "Pints"],
+    labels: ["verified", "unVerified"],
     fill: {
       type: "gradient",
       gradient: {
         colorStops: [
           [
-            { offset: 0, color: theme.palette.primary.light },
-            { offset: 100, color: theme.palette.primary.main },
+            { offset: 0, color: theme.palette.secondary.light },
+            { offset: 100, color: theme.palette.secondary.main },
           ],
           [
-            { offset: 0, color: theme.palette.info.light },
-            { offset: 100, color: theme.palette.info.main },
+            { offset: 0, color: theme.palette.grey[200] },
+            { offset: 100, color: theme.palette.grey[800] },
           ],
         ],
       },
@@ -44,8 +72,7 @@ export default function ChartRadialBar() {
           },
 
           total: {
-            label: "5000",
-            formatter: () => fNumber(2324),
+            // formatter: () => fNumber(2324),
           },
         },
       },
