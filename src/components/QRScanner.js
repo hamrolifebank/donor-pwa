@@ -1,70 +1,5 @@
-// import React, { useState } from "react";
-// import { QrReader } from "react-qr-reader";
-
-// import { Container } from "@mui/system";
-
-// import { QrCodeScanner } from "@mui/icons-material";
-
-// export default function QRScanner() {
-//   const [data, setData] = useState("No data found");
-//   return (
-//     <>
-//       {/* <QrCodeScanner> */}
-//       <QrReader
-//         delay={100}
-//         onResult={(result, error) => {
-//           if (!!result) {
-//             setData(result?.text);
-//           }
-
-//           if (!!error) {
-//             console.info(error);
-//           }
-//         }}
-//       />
-//       <p>{data}</p>
-//     </>
-//     // </QrCodeScanner>
-//   );
-// }
-
-// import React, { Component } from "react";
-// import dynamic from "next/dynamic";
-// const QrReader = dynamic(
-//   () => import("react-qr-reader").then((mod) => mod.QrReader),
-//   { ssr: false }
-// );
-// class QRScanner extends Component {
-//   state = {
-//     result: "No result",
-//   };
-
-//   handleScan = (data) => {
-//     if (data) {
-//       this.setState({
-//         result: data,
-//       });
-//     }
-//   };
-//   handleError = (err) => {
-//     console.error(err);
-//   };
-//   render() {
-//     return (
-//       <div>
-//         <QrReader
-//           delay={300}
-//           onError={this.handleError}
-//           onScan={this.handleScan}
-//           style={{ width: "100%" }}
-//         />
-//         <p>{this.state.result}</p>
-//       </div>
-//     );
-//   }
-// }
-// export default QRScanner;
-import { Typography } from "@mui/material";
+import { Container, Typography } from "@mui/material";
+import { Box } from "@mui/system";
 import React, { useState } from "react";
 import { QrReader } from "react-qr-reader";
 
@@ -72,7 +7,10 @@ export default function QRScanner(props) {
   const [data, setData] = useState("No result");
 
   return (
-    <>
+    <Container>
+      <Typography variant="h3" display="flex" justifyContent="center">
+        Scan QR
+      </Typography>
       <QrReader
         delay={100}
         onResult={(result, error) => {
@@ -84,9 +22,13 @@ export default function QRScanner(props) {
             console.info(error);
           }
         }}
-        style={{ width: "auto - fit" }}
+        style={{ width: 1 }}
       />
-      <Typography variant="h7">{data}</Typography>
-    </>
+      <Box display="flex" justifyContent="center">
+        <Typography sx={{ pl: 2 }} variant="h7">
+          {data}
+        </Typography>
+      </Box>
+    </Container>
   );
 }

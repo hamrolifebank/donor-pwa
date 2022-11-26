@@ -10,7 +10,6 @@ const ROOTS_SCANNER = "/scanner";
 const ROOTS_EVENTS = "/events";
 const ROOTS_DONATIONS = "/donations";
 const ROOTS_PROFILE = "/profile";
-// const ROOTS_NEW = "/new";
 
 // ----------------------------------------------------------------------
 
@@ -57,12 +56,12 @@ export const BOTTOM_NAVIGATION_OPTIONS = [
     icon: "eva:home-outline",
     // icon: <DashboardIcon />,
   },
-  // {
-  //   path: "/assets",
-  //   label: "",
-  //   icon: "eva:calendar-outline",
-  //   sx: {},
-  // },
+  {
+    path: PATH_EVENTS.root,
+    label: "",
+    icon: "eva:calendar-outline",
+    sx: {},
+  },
   {
     path: PATH_SCANNER.root,
     label: "scan",
