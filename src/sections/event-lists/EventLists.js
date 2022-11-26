@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
-import DashboardlayoutwithFooter from "@layouts/dashboard/DashboardlayoutwithFooter";
 
 import {
   EventCardRegistered,
@@ -11,6 +9,7 @@ import { useAppContext } from "@contexts/AppContext";
 import Link from "next/link";
 import { useAppAuthContext } from "@contexts/AuthContext";
 import { useRouter } from "next/router";
+import { PATH_EVENTS } from "@routes/paths";
 
 export default function EventsPage(props) {
   let NO_OF_EVENTS_TO_SHOW = 5;
@@ -63,9 +62,6 @@ export default function EventsPage(props) {
     .sort((a, b) => {
       return convertDateToNumber(a.date) - convertDateToNumber(b.date);
     });
-  // console.log(registeredEvents, notRegisteredEvents);
-
-  const combinedEvents = [...registeredEvents, ...notRegisteredEvents];
 
   return (
     <Container display="flex">
@@ -106,19 +102,12 @@ export default function EventsPage(props) {
         )
         .slice(0, noOfEventsToDisplay)}
 
-      {/* {notRegisteredEvents.map((event) => (
-        <div key={event.id}>
-          <Link href={`/events/${event.id}`} style={{ textDecoration: "none" }}>
-            <EventCardNotRegistered event={event} />
-          </Link>
-        </div>
-      ))} */}
       {props.page === "home" ? (
         <Typography
           variant="h6"
           component="h2"
           sx={{ color: "primary.main", textAlign: "center" }}
-          onClick={() => push("/events")}
+          onClick={() => push(PATH_EVENTS.root)}
         >
           Load more events
         </Typography>
