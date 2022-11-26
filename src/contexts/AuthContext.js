@@ -6,7 +6,6 @@ import { createContext, useContext, useEffect, useState } from "react";
 import {
   setPublicKey,
   getPublicKey,
-  deleteAccessToken,
   setCurrentUser,
   getCurrentUser,
   deletePublicAddressLocal,
@@ -33,6 +32,7 @@ const AppAuthContext = createContext({
   addWallet: () => {},
   addUser: () => {},
   deleteToken: () => {},
+  addEventInUser: () => {},
 });
 
 // ----------------------------------------------------------------------
@@ -87,6 +87,22 @@ function AppAuthProvider({ children }) {
       setCurrentUser(payload);
     }
   };
+  const addEventInUser = (event) => {
+    // event.currentTarget == event.target
+
+    const eventDetail = {
+      id: event.id,
+      name: event.name,
+      date: event.date,
+      location: event.location,
+      isRegistered: true,
+      isDonated: false,
+      isVerified: false,
+    };
+    const user = getCurrentUser();
+    user.events.push(eventDetail);
+    addUser(user);
+  };
 
   useEffect(() => {
     const initialize = async () => {
@@ -122,7 +138,6 @@ function AppAuthProvider({ children }) {
   }, []);
 
   const deleteToken = () => {
-    deleteAccessToken();
     setAuthState((prev) => ({ ...prev, isInitialized: true, token: "" }));
   };
   const contextProps = {
@@ -132,6 +147,7 @@ function AppAuthProvider({ children }) {
     addPublicAddress,
     deleteWallet,
     addUser,
+    addEventInUser,
   };
 
   return (

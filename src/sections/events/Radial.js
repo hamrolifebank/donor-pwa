@@ -53,7 +53,7 @@ export default function ChartRadialBar() {
       series={series}
       options={chartOptions}
       height={150}
-      fullwidth
+      fullwidth="true"
     />
   );
 }

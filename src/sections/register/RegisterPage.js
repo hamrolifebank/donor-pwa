@@ -6,7 +6,6 @@ import {
   Typography,
   MenuItem,
   InputLabel,
-  Button,
   Grid,
 } from "@mui/material";
 import React, { useState } from "react";
@@ -51,6 +50,7 @@ export default function Register() {
         isRegistered: true,
         isDonated: true,
         isVerified: true,
+        pints: 50,
         manuallyAdded: false,
       },
       {
@@ -73,6 +73,7 @@ export default function Register() {
         isRegistered: true,
         isDonated: true,
         isVerified: true,
+        pints: 50,
         manuallyAdded: false,
       },
       {
@@ -84,6 +85,7 @@ export default function Register() {
         isRegistered: false,
         isDonated: false,
         isVerified: false,
+        pints: 80,
         manuallyAdded: true,
       },
       {
@@ -95,6 +97,7 @@ export default function Register() {
         isRegistered: false,
         isDonated: false,
         isVerified: false,
+        pints: 40,
         manuallyAdded: true,
       },
       {
@@ -106,6 +109,7 @@ export default function Register() {
         isRegistered: true,
         isDonated: true,
         isVerified: true,
+        pints: 70,
         manuallyAdded: false,
       },
     ],
