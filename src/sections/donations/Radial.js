@@ -43,7 +43,7 @@ export default function ChartRadialBar() {
         colorStops: [
           [
             { offset: 0, color: theme.palette.primary.light },
-            { offset: 1000, color: theme.palette.primary.main },
+            { offset: 100, color: theme.palette.primary.main },
           ],
           [
             { offset: 0, color: theme.palette.info.light },

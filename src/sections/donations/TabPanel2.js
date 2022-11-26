@@ -8,23 +8,28 @@ import { Icon } from "@iconify/react";
 import CancelRoundedIcon from "@mui/icons-material/CancelRounded";
 
 export default function TabPanel2() {
-  const { user } = useAppAuthContext();
-  let { events } = user;
+  const { user, addUser } = useAppAuthContext();
   const [next, setNext] = useState(10);
 
   const loadMore = () => {
     setNext(next + 10);
   };
 
-  const deleteManaullyAddedEvent = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    console.log("clicked");
+  // const selectedId = (id) => {
+  //   console.log("clicked: ", id);
+  // };
+
+  // selectedId();
+
+  const deleteManaullyAddedEvent = (id) => {
+    const filteredEvents = user.events.filter((event) => event.id !== id);
+    user.events.splice(0, user.events.length, ...filteredEvents);
+    addUser(user);
   };
 
   const currDate = new Date();
 
-  events = events.sort((a, b) => b.isVerified - a.isVerified);
+  let events = user.events.sort((a, b) => b.isVerified - a.isVerified);
 
   return (
     <div>
@@ -85,7 +90,11 @@ export default function TabPanel2() {
                       {event.manuallyAdded ? (
                         <IconButton
                           sx={{ height: 10 }}
-                          onClick={deleteManaullyAddedEvent}
+                          onClick={(e) => {
+                            e.preventDefault(),
+                              e.stopPropagation(),
+                              deleteManaullyAddedEvent(event.id);
+                          }}
                         >
                           <CancelRoundedIcon />
                         </IconButton>
