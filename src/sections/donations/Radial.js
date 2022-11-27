@@ -32,8 +32,10 @@ export default function ChartRadialBar() {
   const totalVerifiedPints = pintsOfVerified.reduce((a, b) => a + b);
   const totalUnVerifiedPints = pintsOfUnVerified.reduce((a, b) => a + b);
   const total = totalUnVerifiedPints + totalVerifiedPints;
+  const percentOfVerified = ((totalVerifiedPints / total) * 100).toFixed(2);
+  const percentOfUnVerified = ((totalUnVerifiedPints / total) * 100).toFixed(2);
 
-  const series = [totalVerifiedPints, totalUnVerifiedPints];
+  const series = [percentOfVerified, percentOfUnVerified];
 
   const chartOptions = useChart({
     labels: ["Verified", "Unverified"],
@@ -64,10 +66,10 @@ export default function ChartRadialBar() {
           value: {
             offsetY: 5,
             fontSize: 10,
-            formatter: function (val) {
-              const percent = val / 1;
-              return percent.toFixed(0);
-            },
+            // formatter: function (val) {
+            //   const percent = val / 1;
+            //   return percent.toFixed(0);
+            // },
           },
 
           total: {
