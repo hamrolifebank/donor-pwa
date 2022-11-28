@@ -21,18 +21,18 @@ export default function DisplayGraph(props) {
 
   return (
     <Container>
-      <TabContext value={value}>
-        <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-          <TabList onChange={handleChange} aria-label="lab API tabs example">
-            {stats.map((group, index) => {
-              return (
-                <Tab key={index} label={group.label} value={group.groupBy} />
-              );
-            })}
-          </TabList>
-        </Box>
-        {isGraphDataAvailable ? (
-          stats.map((group, index) => {
+      {isGraphDataAvailable ? (
+        <TabContext value={value}>
+          <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+            <TabList onChange={handleChange} aria-label="lab API tabs example">
+              {stats.map((group, index) => {
+                return (
+                  <Tab key={index} label={group.label} value={group.groupBy} />
+                );
+              })}
+            </TabList>
+          </Box>
+          {stats.map((group, index) => {
             return (
               <TabPanel key={index} value={group.groupBy}>
                 <Box sx={{ display: "flex", justifyContent: "center" }}>
@@ -43,15 +43,11 @@ export default function DisplayGraph(props) {
                 </Box>
               </TabPanel>
             );
-          })
-        ) : (
-          <Box>
-            <Typography variant="h6" mt={10} ml={10}>
-              Data coming soon...
-            </Typography>
-          </Box>
-        )}
-      </TabContext>
+          })}
+        </TabContext>
+      ) : (
+        <Box></Box>
+      )}
     </Container>
   );
 }

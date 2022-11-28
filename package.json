@@ -38,7 +38,8 @@
     "react-dom": "18.2.0",
     "react-minimal-pie-chart": "^8.4.0",
     "react-qr-code": "^2.0.8",
-    "simplebar-react": "^2.4.3"
+    "simplebar-react": "^2.4.3",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.5",
