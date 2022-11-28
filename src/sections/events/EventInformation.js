@@ -1,15 +1,17 @@
 import { PrimaryButton } from "@components/Button";
 import { Typography, Grid, CircularProgress, Chip } from "@mui/material";
 import { Box, Container, display } from "@mui/system";
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Radial from "./Radial";
 import { Icon } from "@iconify/react";
 import { useAppAuthContext } from "@contexts/AuthContext";
+import { useAppContext } from "@contexts/AppContext";
 
 const EventInformation = ({ clickedEvents }) => {
   const { addEventInUser } = useAppAuthContext();
   const [register, setRegister] = useState("Register");
   const [registerColor, setRegisterColor] = useState("primary.main");
+  const { changeGraphData } = useAppContext();
 
   const handleRegister = (selectedEvent) => {
     setRegister("Registered");
@@ -42,6 +44,11 @@ const EventInformation = ({ clickedEvents }) => {
     if (alreadyRegistered) {
       setRegister("Registered");
       setRegisterColor("grey.400");
+    }
+    if (currentDate >= eventdate) {
+      events.is_closed = true;
+    } else {
+      changeGraphData();
     }
   }, []);
 
