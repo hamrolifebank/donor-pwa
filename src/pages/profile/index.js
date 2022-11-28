@@ -1,38 +1,19 @@
 import Page from "@components/Page";
-import DashboardLayout from "@layouts/dashboard";
-import { Card, Container } from "@mui/material";
-import { useEffect } from "react";
-import { ProfileContextProvider, useProfileContext } from "./context";
-import ProfileInfo from "./ProfileInfo";
-import ProfileMenu from "./ProfileMenuList";
+import DashboardlayoutwithFooter from "@layouts/dashboard/DashboardlayoutwithFooter";
+import { Profile } from "@sections/profile";
 
 const PAGE_TITLE = "Profile";
 
-Profile.getLayout = (page) => (
-  <DashboardLayout pageTitle={PAGE_TITLE}>{page}</DashboardLayout>
+ProfilePage.getLayout = (page) => (
+  <DashboardlayoutwithFooter pageTitle={PAGE_TITLE}>
+    {page}
+  </DashboardlayoutwithFooter>
 );
 
-export default function Profile() {
-  //Follow this pattern for all pages
-
-  const { testFunction, intialValue } = useProfileContext();
-
-  useEffect(() => {
-    testFunction();
-  }, [testFunction]);
-
-  // console.log("intialValue", intialValue);
-
+export default function ProfilePage() {
   return (
-    <ProfileContextProvider>
-      <Page title={PAGE_TITLE}>
-        <Container maxWidth={"xl"}>
-          <Card sx={{ p: 2 }}>
-            <ProfileInfo />
-            <ProfileMenu />
-          </Card>
-        </Container>
-      </Page>
-    </ProfileContextProvider>
+    <Page title={PAGE_TITLE}>
+      <Profile />
+    </Page>
   );
 }
