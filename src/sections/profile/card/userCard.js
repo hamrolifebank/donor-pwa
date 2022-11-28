@@ -30,7 +30,7 @@ export default function UserCard({ user }) {
     user;
 
   return (
-    <Card sx={{ textAlign: "center" }}>
+    <Card sx={{ textAlign: "center", borderRadius: 0 }}>
       <Box sx={{ position: "relative" }}>
         <SvgColor
           src="/assets/shape_avatar.svg"
