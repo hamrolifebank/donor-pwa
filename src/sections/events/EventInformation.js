@@ -5,10 +5,10 @@ import {
   CircularProgress,
   Chip,
   IconButton,
-  Button
+  Button,
 } from "@mui/material";
 import { Box, Container, display } from "@mui/system";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Radial from "./Radial";
 import { Icon } from "@iconify/react";
 import { useAppAuthContext } from "@contexts/AuthContext";
@@ -18,13 +18,15 @@ import { PATH_EVENTS } from "@routes/paths";
 import { useRouter } from "next/router";
 
 const EventInformation = ({ clickedEvents }) => {
-  const { push } = useRouter();
-  // const { changeisGraphDataAvailable, isGraphDataAvailable } = useAppContext();
-  // const { changeGraphDataAvailable } = useAppContext();
-
+  const { events } = useAppContext();
+  if (!clickedEvents) {
+    let eventFromStorage = JSON.parse(localStorage.getItem("slugID"));
+    clickedEvents = events.find((event) => event.id === eventFromStorage);
+  }
   const { addEventInUser } = useAppAuthContext();
   const [register, setRegister] = useState("Register");
   const [registerColor, setRegisterColor] = useState("primary.main");
+  const { changeGraphData } = useAppContext();
 
   // console.log("the eventgrapghdta functgion", isGraphDataAvailable);
   // console.log("the change functgion", changeisGraphDataAvailable());
@@ -43,7 +45,7 @@ const EventInformation = ({ clickedEvents }) => {
     selectedEvent.is_closed = true;
   } else {
     console.log("entered in else");
-    // console.log(changeGraphDataAvailable()); 
+    // console.log(changeGraphDataAvailable());
   }
 
   var options = {
@@ -67,6 +69,11 @@ const EventInformation = ({ clickedEvents }) => {
     if (alreadyRegistered) {
       setRegister("Registered");
       setRegisterColor("grey.400");
+    }
+    if (currentDate >= eventdate) {
+      events.is_closed = true;
+    } else {
+      changeGraphData();
     }
   }, []);
   const arrowBack = () => {
