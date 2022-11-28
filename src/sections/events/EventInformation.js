@@ -1,15 +1,33 @@
 import { PrimaryButton } from "@components/Button";
-import { Typography, Grid, CircularProgress, Chip } from "@mui/material";
+import {
+  Typography,
+  Grid,
+  CircularProgress,
+  Chip,
+  IconButton,
+  Button
+} from "@mui/material";
 import { Box, Container, display } from "@mui/system";
 import React, { useEffect, useState } from "react";
 import Radial from "./Radial";
 import { Icon } from "@iconify/react";
 import { useAppAuthContext } from "@contexts/AuthContext";
+import { useAppContext } from "@contexts/AppContext";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import { PATH_EVENTS } from "@routes/paths";
+import { useRouter } from "next/router";
 
 const EventInformation = ({ clickedEvents }) => {
+  const { push } = useRouter();
+  // const { changeisGraphDataAvailable, isGraphDataAvailable } = useAppContext();
+  // const { changeGraphDataAvailable } = useAppContext();
+
   const { addEventInUser } = useAppAuthContext();
   const [register, setRegister] = useState("Register");
   const [registerColor, setRegisterColor] = useState("primary.main");
+
+  // console.log("the eventgrapghdta functgion", isGraphDataAvailable);
+  // console.log("the change functgion", changeisGraphDataAvailable());
 
   const handleRegister = (selectedEvent) => {
     setRegister("Registered");
@@ -20,9 +38,14 @@ const EventInformation = ({ clickedEvents }) => {
   const selectedEvent = clickedEvents;
   const currentDate = new Date();
   const eventdate = new Date(selectedEvent.date);
-  if (currentDate >= eventdate) {
+  if (currentDate > eventdate) {
+    console.log("The if entered in eventinform");
     selectedEvent.is_closed = true;
+  } else {
+    console.log("entered in else");
+    // console.log(changeGraphDataAvailable()); 
   }
+
   var options = {
     weekday: "long",
     year: "numeric",
@@ -35,6 +58,8 @@ const EventInformation = ({ clickedEvents }) => {
   let chipTextColor = chipLabel === "Active" ? "grey.0" : "grey.800";
 
   useEffect(() => {
+    console.log("the useeffect entered");
+
     let alreadyRegistered = JSON.parse(
       localStorage.getItem("user")
     ).events?.find((event) => event.id === selectedEvent.id);
@@ -44,9 +69,15 @@ const EventInformation = ({ clickedEvents }) => {
       setRegisterColor("grey.400");
     }
   }, []);
+  const arrowBack = () => {
+    push(PATH_EVENTS.root);
+  };
 
   return (
     <Container>
+      <IconButton color="primary" onClick={arrowBack}>
+        <ArrowBackIosIcon />
+      </IconButton>
       <Box sx={{ display: "flex", justifyContent: "space-between" }} mb={1}>
         <Typography variant="h6">{selectedEvent.name}</Typography>{" "}
         <Chip
