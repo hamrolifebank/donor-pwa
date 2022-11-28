@@ -43,15 +43,15 @@ export default function MyApp(props) {
         <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
       <AppAuthProvider>
-        <AppProvider />
-        <SettingsProvider>
-          {/* <AuthProvider> */}
-          <ThemeProvider>
-            <AuthGuard>{getLayout(<Component {...pageProps} />)}</AuthGuard>
-          </ThemeProvider>
-          {/* </AuthProvider> */}
-          <AppProvider />
-        </SettingsProvider>
+        <AppProvider>
+          <SettingsProvider>
+            {/* <AuthProvider> */}
+            <ThemeProvider>
+              <AuthGuard>{getLayout(<Component {...pageProps} />)}</AuthGuard>
+            </ThemeProvider>
+            {/* </AuthProvider> */}
+          </SettingsProvider>
+        </AppProvider>
       </AppAuthProvider>
     </CacheProvider>
   );
