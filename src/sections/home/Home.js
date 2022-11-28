@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useAppAuthContext } from "@contexts/AuthContext";
 import {
   Alert,
@@ -21,12 +21,16 @@ import { PrimaryButton } from "@components/Button";
 import { set } from "date-fns";
 
 const Home = () => {
-  const { publicAddress, user } = useAppAuthContext();
   const { push } = useRouter();
+
+  const { publicAddress, user } = useAppAuthContext();
   const [open, setOpen] = useState(false);
-  const [otpNotification, setotpNotification] = useState(
-    `Enter the OTP we sent to +${user.phone}`
-  );
+  const [otpNotification, setotpNotification] = useState("");
+  useEffect(() => {
+    if (user) {
+      setotpNotification(`Enter the OTP we sent +${user.phone}`);
+    }
+  }, []);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -38,7 +42,9 @@ const Home = () => {
   };
   const handleClose = () => {
     setOpen(false);
-    setotpNotification(`Enter the OTP we sent to +${user.phone}`);
+    if (user) {
+      setotpNotification(`Enter the OTP we sent to +${user.phone}`);
+    }
   };
   return (
     <Container>
