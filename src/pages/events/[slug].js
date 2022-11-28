@@ -17,6 +17,10 @@ export default function EventDetails() {
   const { events } = useAppContext();
   const router = useRouter();
   const { slug } = router.query;
+  if (slug) {
+    localStorage.setItem("slugID", JSON.stringify(slug));
+  }
+
   let clickedEvents = events.find((event) => event.id === String(slug));
 
   return (

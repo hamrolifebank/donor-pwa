@@ -8,6 +8,11 @@ import { useAppAuthContext } from "@contexts/AuthContext";
 import { useAppContext } from "@contexts/AppContext";
 
 const EventInformation = ({ clickedEvents }) => {
+  const { events } = useAppContext();
+  if (!clickedEvents) {
+    let eventFromStorage = JSON.parse(localStorage.getItem("slugID"));
+    clickedEvents = events.find((event) => event.id === eventFromStorage);
+  }
   const { addEventInUser } = useAppAuthContext();
   const [register, setRegister] = useState("Register");
   const [registerColor, setRegisterColor] = useState("primary.main");
