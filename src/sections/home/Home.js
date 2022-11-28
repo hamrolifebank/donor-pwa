@@ -111,7 +111,7 @@ const Home = () => {
           {user?.fullname}
         </Typography>
       </Box>
-      <EventPage />
+      <EventPage page="home" />
     </Container>
   );
 };

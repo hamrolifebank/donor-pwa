@@ -1,4 +1,11 @@
-import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import PropTypes from "prop-types";
 import { arEG } from "date-fns/locale";
 
@@ -97,6 +104,52 @@ const events = [
   },
   {
     is_closed: false,
+    _id: "634fc82ab6256678c904c82b",
+    name: "Raju club Blood Donation Camp",
+    team: "5c5b1806cb2d0f8f688d7428",
+    contactname: "Hamro LifeBank",
+    phone: "9801230045",
+    target: "10",
+    date: "2022-12-11T00:00:00.000Z",
+    startTime: "11:00",
+    endTime: "14:00",
+    location: "Sanepa, Lalitpur ",
+    beneficiary: "5bb6067fd59b444c803c4003",
+    slug: "2022-11-04-hlb-donor-center-18",
+    owner: "5bb752fac800bb022cee5abe",
+    created_by: "5c5fceb6306cb25f1174396b",
+    updated_by: "5c5fceb6306cb25f1174396b",
+    acl: [],
+    created_at: "2022-10-19T09:49:30.574Z",
+    updated_at: "2022-11-02T06:40:10.703Z",
+    v: 0,
+    id: "634fc82ab6256678c904c8684",
+  },
+  {
+    is_closed: false,
+    _id: "634fc82ab6256678c904c82b",
+    name: "Raju club Blood Donation Camp",
+    team: "5c5b1806cb2d0f8f688d7428",
+    contactname: "Hamro LifeBank",
+    phone: "9801230045",
+    target: "10",
+    date: "2022-12-11T00:00:00.000Z",
+    startTime: "11:00",
+    endTime: "14:00",
+    location: "Sanepa, Lalitpur ",
+    beneficiary: "5bb6067fd59b444c803c4003",
+    slug: "2022-11-04-hlb-donor-center-18",
+    owner: "5bb752fac800bb022cee5abe",
+    created_by: "5c5fceb6306cb25f1174396b",
+    updated_by: "5c5fceb6306cb25f1174396b",
+    acl: [],
+    created_at: "2022-10-19T09:49:30.574Z",
+    updated_at: "2022-11-02T06:40:10.703Z",
+    v: 0,
+    id: "634fc82ab6256678c904c8699",
+  },
+  {
+    is_closed: false,
     _id: "6378c13301aecf4f771ca914",
     name: "Sweta Blood Donation",
     contactname: "Sweta shrestha",
@@ -155,7 +208,7 @@ const initialState = {
   ],
   isGraphDataAvailable: true,
 };
-const AppContext = createContext({ ...initialState });
+const AppContext = createContext(initialState);
 
 AppProvider.propTypes = {
   children: PropTypes.node,
@@ -163,14 +216,16 @@ AppProvider.propTypes = {
 
 function AppProvider({ children }) {
   const [appState, setAppState] = useState(initialState);
-
-  const contextProps = {
+  const changeGraphData = useCallback(() => {
+    setAppState((prev) => ({ ...prev, isGraphDataAvailable: false }));
+  }, []);
+  const contextValue = {
     ...appState,
-    appState,
-    setAppState,
+    changeGraphData,
   };
+
   return (
-    <AppContext.Provider value={contextProps}>{children}</AppContext.Provider>
+    <AppContext.Provider value={contextValue}>{children}</AppContext.Provider>
   );
 }
 export { AppContext, AppProvider };

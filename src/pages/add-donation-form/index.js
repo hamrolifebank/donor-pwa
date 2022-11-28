@@ -2,7 +2,7 @@ import Page from "@components/Page";
 import DashboardlayoutwithFooter from "@layouts/dashboard/DashboardlayoutwithFooter";
 import AddDonations from "@sections/donations/addDonations";
 
-const PAGE_TITLE = "Donations";
+const PAGE_TITLE = "addDonations";
 
 addDonationsPage.getLayout = (page) => (
   <DashboardlayoutwithFooter pageTitle={PAGE_TITLE}>
