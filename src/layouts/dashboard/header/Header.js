@@ -13,6 +13,8 @@ import AccountPopover from "./AccountPopover";
 
 import BackButton from "./BackButton";
 import NotificationsPopover from "./NotificationsPopover";
+import hlblogo from "../../../../public/icon-512x512.png";
+import Image from "next/image";
 
 // ----------------------------------------------------------------------
 
@@ -26,12 +28,7 @@ export default function Header({ pageTitle, onOpenNav }) {
 
   const renderContent = (
     <>
-      <img
-        src="https://assets.rumsan.com/esatya/hlb-navbar-logo.png"
-        height={60}
-        width={110}
-        alt="logo"
-      />
+      <Image src={hlblogo} height={60} width={110} alt="hlb" priority={true} />
       {/* <BackButton />
       {pageTitle} */}
       <Stack
