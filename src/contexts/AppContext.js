@@ -1,4 +1,11 @@
-import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import PropTypes from "prop-types";
 import { arEG } from "date-fns/locale";
 
@@ -132,7 +139,7 @@ const initialState = {
   ],
   isGraphDataAvailable: true,
 };
-const AppContext = createContext({ ...initialState });
+const AppContext = createContext(initialState);
 
 AppProvider.propTypes = {
   children: PropTypes.node,
@@ -140,14 +147,16 @@ AppProvider.propTypes = {
 
 function AppProvider({ children }) {
   const [appState, setAppState] = useState(initialState);
-
-  const contextProps = {
+  const changeGraphData = useCallback(() => {
+    setAppState((prev) => ({ ...prev, isGraphDataAvailable: false }));
+  }, []);
+  const contextValue = {
     ...appState,
-    appState,
-    setAppState,
+    changeGraphData,
   };
+
   return (
-    <AppContext.Provider value={contextProps}>{children}</AppContext.Provider>
+    <AppContext.Provider value={contextValue}>{children}</AppContext.Provider>
   );
 }
 export { AppContext, AppProvider };

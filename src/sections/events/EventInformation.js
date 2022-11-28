@@ -2,22 +2,31 @@ import { PrimaryButton } from "@components/Button";
 import { useAppContext } from "@contexts/AppContext";
 import { Typography, Grid, CircularProgress, Chip } from "@mui/material";
 import { Box, Container, display } from "@mui/system";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Radial from "./Radial";
 import { Icon } from "@iconify/react";
 import { useRouter } from "next/router";
+import { PropaneSharp } from "@mui/icons-material";
 
 const handleRegister = () => {
   console.log("handle registered clicked");
 };
 
 const EventInformation = ({ clickedEvents }) => {
+  const { changeGraphData, isGraphDataAvailable } = useAppContext();
+
+  useEffect(() => {
+    if (currentDate >= eventdate) {
+      events.is_closed = true;
+    } else {
+      changeGraphData();
+    }
+  }, []);
   const events = clickedEvents;
   const currentDate = new Date();
   const eventdate = new Date(events.date);
-  if (currentDate >= eventdate) {
-    events.is_closed = true;
-  }
+  console.log(currentDate >= eventdate);
+
   var options = {
     weekday: "long",
     year: "numeric",
