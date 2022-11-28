@@ -6,7 +6,6 @@ import {
   Typography,
   MenuItem,
   InputLabel,
-  Button,
   Grid,
 } from "@mui/material";
 import React, { useState } from "react";
@@ -30,7 +29,85 @@ export default function Register() {
     gender: "Choose gender",
     bloodGroup: "Choose group",
     dob: "",
-    events: [],
+    events: [
+      {
+        id: "0014768dfad5fddlkejr1250",
+        name: "HLB center",
+        date: "09/11/2023",
+        location: "Labim mall check",
+        pintsDonated: null,
+        isRegistered: true,
+        isDonated: false,
+        isVerified: false,
+        manuallyAdded: false,
+      },
+      {
+        id: "02568fgrb1g25frdlkejr1250",
+        name: "Sweta blood donation jj",
+        date: "09/12/2022",
+        location: "Boudha stupa check",
+        isRegistered: true,
+        isDonated: true,
+        isVerified: true,
+        pints: 50,
+        manuallyAdded: false,
+      },
+      {
+        id: "524aasg4rdy53frrykt56f1250",
+        name: "Sweta blood donation",
+        date: "05/11/2023",
+        location: "Chabahil stupa",
+        pintsDonated: null,
+        isRegistered: true,
+        isDonated: false,
+        isVerified: false,
+        manuallyAdded: false,
+      },
+      {
+        id: "079poir45cclfkfdclkejr1250",
+        name: "HLB center 11",
+        date: "07/08/2022",
+        location: "Jhamsikhel",
+        isRegistered: true,
+        isDonated: true,
+        isVerified: true,
+        pints: 50,
+        manuallyAdded: false,
+      },
+      {
+        id: "0014768dfa09kjfddlkejr1250",
+        name: "HLB center",
+        date: "08/09/2021",
+        location: "Civil mall",
+        isRegistered: false,
+        isDonated: false,
+        isVerified: false,
+        pints: 80,
+        manuallyAdded: true,
+      },
+      {
+        id: "0014768dfa15fgjfddlkejr1250",
+        name: "Red cross",
+        date: "01/04/2021",
+        location: "Basantapur",
+        isRegistered: false,
+        isDonated: false,
+        isVerified: false,
+        pints: 40,
+        manuallyAdded: true,
+      },
+      {
+        id: "0014768dfad5fddlkejr1255",
+        name: "HLB center",
+        date: "09/02/2018",
+        location: "Bhaktapur",
+        isRegistered: true,
+        isDonated: true,
+        isVerified: true,
+        pints: 70,
+        manuallyAdded: false,
+      },
+    ],
     isPhoneVerified: false,
   });
 
@@ -39,6 +116,7 @@ export default function Register() {
 
   const handleSubmit = () => {
     addUser(user);
+
     push(PATH_WALLET.mnemonic);
   };
 

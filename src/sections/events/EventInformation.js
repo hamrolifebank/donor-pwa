@@ -58,16 +58,13 @@ const EventInformation = ({ clickedEvents }) => {
         <Typography variant="h6">{selectedEvent.name}</Typography>{" "}
         <Chip
           label={chipLabel}
-          sx={{
-            p: "0px 6px",
-            backgroundColor: `${chipColor}`,
-            color: `${chipTextColor}`,
-          }}
+          color={chipColor}
+          sx={{ m: "3px 0px 0px 40px", p: "0px 6px" }}
         />
       </Box>
-      <Grid container item xs={12} sx={{ justifyContent: "space-between" }}>
+      <Grid container item xs={12}>
         <Grid item xs={8}>
-          <Typography variant="body2">
+          <Typography variant="body2" sx={{ m: "0px 20px auto" }}>
             {eventdate.toLocaleDateString("en-US", options)}
           </Typography>
           <Typography variant="body2">
@@ -93,15 +90,8 @@ const EventInformation = ({ clickedEvents }) => {
           )}
         </Box>
       </Grid>
-      <Grid
-        container
-        item
-        xs={12}
-        justifyContent="space-between"
-        alignItems="center"
-      >
-        {" "}
-        <Grid item xs={8}>
+      <Grid container item xs={12}>
+        <Grid item xs={8} sx={{ p: "28px 0px 0px 25px" }}>
           <Typography variant="h4">Total pints collected</Typography>
         </Grid>
         <Grid item xs={4}>
@@ -109,7 +99,7 @@ const EventInformation = ({ clickedEvents }) => {
         </Grid>
       </Grid>
 
-      <Grid container item xs={12}>
+      <Grid container item xs={12} sx={{ pl: "10px" }}>
         <Grid item xs={6}>
           <Typography>
             {" "}
