@@ -9,23 +9,10 @@ import Link from "next/link";
 
 const EventCardNotRegistered = ({ event }) => {
   const theme = useTheme();
-  const { user, addUser } = useAppAuthContext();
+  const { user, addUser,addEventInUser } = useAppAuthContext();
 
-  const handleRegister = (e) => {
-    // event.currentTarget == event.target
-
-    console.log(user);
-    const eventDetail = {
-      id: event.id,
-      name: event.name,
-      date: event.date,
-      location: event.location,
-      isRegistered: true,
-      isDonated: false,
-      isVerified: false,
-    };
-    user.events.push(eventDetail);
-    addUser(user);
+  const handleRegister = (event) => {
+   addEventInUser(event)
   };
   return (
     <>
@@ -41,47 +28,51 @@ const EventCardNotRegistered = ({ event }) => {
         }}
       >
         <Box>
-          <Link href={`/events/${event.id}`} style={{ textDecoration: "none" }}>
-            <Typography
-              sx={{
-                color: "black",
-                fontSize: "subtitle1.fontSize",
-                fontWeight: "subtitle1.fontWeight",
-                lineHeight: "subtitle1.lineHeight",
-              }}
-            >
-              {event.name}
-            </Typography>
-            <Typography
-              sx={{
-                fontSize: "subtitle2.fontSize",
-                color: "grey.600",
-                display: "flex",
-                alignItems: "center",
-                gap: "5px",
-              }}
-            >
-              <Icon icon="mdi:clock-time-eight-outline" />
-              {event.date.slice(0, 10)}
-            </Typography>
+          <Typography
+            sx={{
+              color: "black",
+              fontSize: "subtitle1.fontSize",
+              fontWeight: "subtitle1.fontWeight",
+              lineHeight: "subtitle1.lineHeight",
+            }}
+          >
+            {event.name}
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: "subtitle2.fontSize",
+              color: "grey.600",
+              display: "flex",
+              alignItems: "center",
+              gap: "5px",
+            }}
+          >
+            <Icon icon="mdi:clock-time-eight-outline" />
+            {event.date.slice(0, 10)}
+          </Typography>
 
-            <Typography
-              sx={{
-                fontSize: "subtitle2.fontSize",
-                display: "flex",
-                gap: "5px",
-                alignItems: "center",
-                textDecoration: "underline",
-                color: "primary.main",
-              }}
-            >
-              <Icon icon="material-symbols:location-on" />
-              {event.location}
-            </Typography>
-          </Link>
+          <Typography
+            sx={{
+              fontSize: "subtitle2.fontSize",
+              display: "flex",
+              gap: "5px",
+              alignItems: "center",
+              textDecoration: "underline",
+              color: "primary.main",
+            }}
+          >
+            <Icon icon="material-symbols:location-on" />
+            {event.location}
+          </Typography>
         </Box>
         <Box>
-          <PrimaryButton onClick={handleRegister}>
+          <PrimaryButton
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              handleRegister(event);
+            }}
+          >
             <Icon icon="material-symbols:arrow-circle-left" />
             Register
           </PrimaryButton>

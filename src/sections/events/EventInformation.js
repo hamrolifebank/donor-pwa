@@ -1,32 +1,30 @@
 import { PrimaryButton } from "@components/Button";
-import { useAppContext } from "@contexts/AppContext";
 import { Typography, Grid, CircularProgress, Chip } from "@mui/material";
 import { Box, Container, display } from "@mui/system";
 import React, { useContext, useEffect, useState } from "react";
 import Radial from "./Radial";
 import { Icon } from "@iconify/react";
-import { useRouter } from "next/router";
-import { PropaneSharp } from "@mui/icons-material";
-
-const handleRegister = () => {
-  console.log("handle registered clicked");
-};
+import { useAppAuthContext } from "@contexts/AuthContext";
+import { useAppContext } from "@contexts/AppContext";
 
 const EventInformation = ({ clickedEvents }) => {
-  const { changeGraphData, isGraphDataAvailable } = useAppContext();
+  const { addEventInUser } = useAppAuthContext();
+  const [register, setRegister] = useState("Register");
+  const [registerColor, setRegisterColor] = useState("primary.main");
+  const { changeGraphData } = useAppContext();
 
-  useEffect(() => {
-    if (currentDate >= eventdate) {
-      events.is_closed = true;
-    } else {
-      changeGraphData();
-    }
-  }, []);
-  const events = clickedEvents;
+  const handleRegister = (selectedEvent) => {
+    setRegister("Registered");
+    setRegisterColor("grey.400");
+    addEventInUser(selectedEvent);
+  };
+
+  const selectedEvent = clickedEvents;
   const currentDate = new Date();
-  const eventdate = new Date(events.date);
-  console.log(currentDate >= eventdate);
-
+  const eventdate = new Date(selectedEvent.date);
+  if (currentDate >= eventdate) {
+    selectedEvent.is_closed = true;
+  }
   var options = {
     weekday: "long",
     year: "numeric",
@@ -34,14 +32,30 @@ const EventInformation = ({ clickedEvents }) => {
     day: "numeric",
   };
 
-  let chipLabel = events.is_closed ? "Closed" : "Active";
+  let chipLabel = selectedEvent.is_closed ? "Closed" : "Active";
   let chipColor = chipLabel === "Active" ? "success.main" : "warning.main";
   let chipTextColor = chipLabel === "Active" ? "grey.0" : "grey.800";
+
+  useEffect(() => {
+    let alreadyRegistered = JSON.parse(
+      localStorage.getItem("user")
+    ).events?.find((event) => event.id === selectedEvent.id);
+
+    if (alreadyRegistered) {
+      setRegister("Registered");
+      setRegisterColor("grey.400");
+    }
+    if (currentDate >= eventdate) {
+      events.is_closed = true;
+    } else {
+      changeGraphData();
+    }
+  }, []);
 
   return (
     <Container>
       <Box sx={{ display: "flex", justifyContent: "space-between" }} mb={1}>
-        <Typography variant="h6">{events.name}</Typography>{" "}
+        <Typography variant="h6">{selectedEvent.name}</Typography>{" "}
         <Chip
           label={chipLabel}
           sx={{
@@ -57,13 +71,26 @@ const EventInformation = ({ clickedEvents }) => {
             {eventdate.toLocaleDateString("en-US", options)}
           </Typography>
           <Typography variant="body2">
-            {events.startTime} - {events.endTime}
+            {selectedEvent.startTime} - {selectedEvent.endTime}
           </Typography>
         </Grid>
         <Box>
-          <PrimaryButton onClick={handleRegister} sx={{ p: "3px 11px" }}>
-            Register
-          </PrimaryButton>
+          {selectedEvent.is_closed ? (
+            ""
+          ) : (
+            <PrimaryButton
+              onClick={() => handleRegister(selectedEvent)}
+              sx={{
+                p: "3px 11px",
+                backgroundColor: `${registerColor}`,
+                "&:hover": {
+                  backgroundColor: `${registerColor}`,
+                },
+              }}
+            >
+              {register}
+            </PrimaryButton>
+          )}
         </Box>
       </Grid>
       <Grid
@@ -87,28 +114,28 @@ const EventInformation = ({ clickedEvents }) => {
           <Typography>
             {" "}
             <Icon icon="material-symbols:person" />
-            {" " + events.contactname}
+            {" " + selectedEvent.contactname}
           </Typography>
         </Grid>
 
         <Grid item xs={6}>
           <Typography>
             <Icon icon="material-symbols:call-sharp" />
-            {" " + events.phone}
+            {" " + selectedEvent.phone}
           </Typography>
         </Grid>
 
         <Grid item xs={6}>
           <Typography>
             <Icon icon="zondicons:target" />
-            {" " + events.target}
+            {" " + selectedEvent.target}
           </Typography>
         </Grid>
 
         <Grid item xs={6}>
           <Typography>
             <Icon icon="mdi:locations" />
-            {" " + events.location}
+            {" " + selectedEvent.location}
           </Typography>
         </Grid>
 
