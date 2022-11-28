@@ -19,7 +19,6 @@ import { useRouter } from "next/router";
 
 const EventInformation = ({ clickedEvents }) => {
   const { push } = useRouter();
-
   const { events } = useAppContext();
   if (!clickedEvents) {
     let eventFromStorage = JSON.parse(localStorage.getItem("slugID"));
