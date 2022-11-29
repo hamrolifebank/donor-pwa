@@ -1,4 +1,3 @@
-import { HOST_API } from "../../config";
 const axios = require("axios");
 
 const baseURL = `https://donation.hamrolifebank.com/api/v1/events`;
