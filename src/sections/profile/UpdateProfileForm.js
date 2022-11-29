@@ -1,9 +1,9 @@
 import { useState, useRef, useEffect } from "react";
 // form
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 // @mui
-import { Stack, Grid, Container } from "@mui/material";
+import { Stack, Grid, Container, Box, TextField } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import { DatePicker } from "@mui/x-date-pickers";
 // components
@@ -23,20 +23,20 @@ export default function ReactHookForm() {
   });
 
   const {
-    watch,
+    // watch,
     reset,
     resetField,
     handleSubmit,
     formState: { errors, isSubmitting },
   } = methods;
 
-  const values = watch();
+  // const values = watch();
 
-  useEffect(() => {
-    if (values.editor === "<p><br></p>") {
-      resetField("editor");
-    }
-  }, [resetField, values.editor]);
+  // useEffect(() => {
+  //   if (values.editor === "<p><br></p>") {
+  //     resetField("editor");
+  //   }
+  // }, [resetField, values.editor]);
 
   const onSubmit = async (data) => {
     await new Promise((resolve) => setTimeout(resolve, 500));
@@ -44,9 +44,7 @@ export default function ReactHookForm() {
       JSON.stringify(
         {
           ...data,
-          photo: data.photo,
-          startDate: data.startDate && fTimestamp(data.startDate),
-          endDate: data.endDate && fTimestamp(data.endDate),
+          birthDate: data.birthDate && fTimestamp(data.birthDate),
         },
         null,
         2
@@ -59,26 +57,80 @@ export default function ReactHookForm() {
   return (
     <Container>
       <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
-        <Grid container spacing={3}>
+        <Grid container spacing={2}>
           <Grid item xs={12} md={12}>
             <Stack spacing={3}>
               <RHFTextField name="fullName" label="Full Name" />
-
               {/* <RHFTextField type="select" name="Blood Group" /> */}
               <ListSelectFilter label="Blood Group" />
-
-              <RHFTextField name="age" label="Age" />
+              <Box
+                display="flex"
+                gap={3}
+                justifyContent="center"
+                alignItems="center"
+              >
+                <Iconify
+                  icon="eva:phone-call-fill"
+                  sx={{ color: "primary.main" }}
+                ></Iconify>
+                <RHFTextField name="phone" label="9860365404" />
+              </Box>
+              <Box
+                display="flex"
+                gap={3}
+                justifyContent="space-between"
+                alignItems="center"
+              >
+                <Iconify
+                  icon="material-symbols:mail"
+                  sx={{ color: "primary.main" }}
+                ></Iconify>
+                <RHFTextField name="email" label="something@gmail.com" />
+              </Box>
+              <Box
+                display="flex"
+                gap={3}
+                justifyContent="space-between"
+                alignItems="center"
+              >
+                <Iconify
+                  icon="game-icons:candles"
+                  sx={{ color: "primary.main" }}
+                ></Iconify>
+                {/* <Controller
+                  name="birthDate"
+                  render={() => (
+                    <DatePicker
+                      label="1/02/2022"
+                      inputFormat="dd/MM/yyyy"
+                      // renderInput={(params) => <TextField fullWidth />}
+                    />
+                  )}
+                /> */}
+              </Box>
+              <Box
+                display="flex"
+                gap={3}
+                justifyContent="space-between"
+                alignItems="center"
+              >
+                <Iconify
+                  icon="mdi:gender-male-female-variant"
+                  sx={{ color: "primary.main" }}
+                ></Iconify>
+                <ListSelectFilter label="Choose Gender" />
+              </Box>
+              <LoadingButton
+                fullWidth
+                color="info"
+                size="large"
+                type="submit"
+                variant="contained"
+                loading={isSubmitting}
+              >
+                Submit
+              </LoadingButton>
             </Stack>
-            <LoadingButton
-              fullWidth
-              color="info"
-              size="large"
-              type="submit"
-              variant="contained"
-              loading={isSubmitting}
-            >
-              Submit
-            </LoadingButton>
           </Grid>
         </Grid>
       </FormProvider>

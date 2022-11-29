@@ -6,6 +6,8 @@ import { fData } from "@utils/formatNumber";
 
 export const defaultValues = {
   fullName: "",
+  phone: "",
+  birthDate: "",
   email: "",
   age: "",
   startDate: null,
@@ -25,6 +27,7 @@ export const FormSchema = Yup.object().shape({
     .required("Full name is required")
     .min(8, "Mininum 6 characters")
     .max(24, "Maximum 15 characters"),
+  phone: Yup.number().required("Phone number is required").min(8, "Mininum 10"),
   email: Yup.string()
     .required("Email is required")
     .email("That is not an email"),
@@ -34,6 +37,7 @@ export const FormSchema = Yup.object().shape({
     .integer()
     .moreThan(18, "Age must be greater than or equal to 18")
     .lessThan(120, "Age must be less than or equal to 120"),
+  birthDate: Yup.date().nullable().required("birthDate is required"),
   startDate: Yup.date().nullable().required("Start date is required"),
   endDate: Yup.date()
     .required("End date is required")
