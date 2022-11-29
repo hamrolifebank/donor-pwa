@@ -19,11 +19,13 @@ import { Container } from "@mui/system";
 import { EventPage } from "../event-lists";
 import { PrimaryButton } from "@components/Button";
 import { set } from "date-fns";
+import { sendRequestForOTP } from "@services/otp/otp";
 
 const Home = () => {
   const { push } = useRouter();
 
   const { publicAddress, user } = useAppAuthContext();
+
   const [open, setOpen] = useState(false);
   const [otpNotification, setotpNotification] = useState("");
   useEffect(() => {
@@ -32,7 +34,8 @@ const Home = () => {
     }
   }, []);
 
-  const handleClickOpen = () => {
+  const handleClickOpen = (phoneNum) => {
+    sendRequestForOTP(phoneNum);
     setOpen(true);
   };
 
@@ -52,7 +55,7 @@ const Home = () => {
         <Alert severity="info">You can now donate</Alert>
       ) : (
         <Container>
-          <Button onClick={handleClickOpen}>
+          <Button onClick={() => handleClickOpen(user.phone)}>
             {" "}
             <Alert severity="warning">Click here to verify phone number</Alert>
           </Button>
