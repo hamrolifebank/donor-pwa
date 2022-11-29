@@ -26,30 +26,31 @@ export default function Main({ children, sx, ...other }) {
 
   const isDesktop = useResponsive("up", "lg");
 
-  if (isNavHorizontal) {
-    return (
-      <Box
-        component='main'
-        sx={{
-          pt: `${HEADER.H_MOBILE + SPACING}px`,
-          pb: `${HEADER.H_MOBILE + SPACING}px`,
-          ...(isDesktop && {
-            px: 2,
-            pt: `${HEADER.H_DASHBOARD_DESKTOP + 80}px`,
-            pb: `${HEADER.H_DASHBOARD_DESKTOP + SPACING}px`,
-          }),
-        }}>
-        {children}
-      </Box>
-    );
-  }
+  // if (isNavHorizontal) {
+  //   return (
+  //     <Box
+  //       component="main"
+  //       sx={{
+  //         // pt: `${HEADER.H_MOBILE + SPACING}px`,
+  //         pb: `${HEADER.H_MOBILE + SPACING}px`,
+  //         ...(isDesktop && {
+  //           px: 2,
+  //           pt: `${HEADER.H_DASHBOARD_DESKTOP + 80}px`,
+  //           pb: `${HEADER.H_DASHBOARD_DESKTOP + SPACING}px`,
+  //         }),
+  //       }}
+  //     >
+  //       {children}
+  //     </Box>
+  //   );
+  // }
 
   return (
     <Box
-      component='main'
+      component="main"
       sx={{
         flexGrow: 1,
-        py: `${HEADER.H_MOBILE + SPACING}px`,
+        py: `${HEADER.H_MOBILE}px`,
         ...(isDesktop && {
           px: 2,
           py: `${HEADER.H_DASHBOARD_DESKTOP + SPACING}px`,
@@ -60,7 +61,8 @@ export default function Main({ children, sx, ...other }) {
         }),
         ...sx,
       }}
-      {...other}>
+      {...other}
+    >
       {children}
     </Box>
   );
