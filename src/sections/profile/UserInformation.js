@@ -1,43 +1,48 @@
 import React from "react";
-import PropTypes from "prop-types";
+
 import Iconify from "@components/iconify";
 import { Box, Container, Grid, Stack, Typography } from "@mui/material";
 
-const UserInformation = (props) => {
+const UserInformation = ({ user }) => {
+  const { email, phone, gender, dob } = user;
   return (
-    <Container>
+    <Container sx={{ minHeight: 300 }}>
       <Grid container sx={{ display: "flex", justifyContent: "center" }}>
         <Grid item display="flex" justifyContent="center">
           <Box display="flex" justifyContent="center" gap={2}>
             <Box display="flex" flexDirection="column">
               <Iconify
-                icon="eva:phone-call-fill"
-                sx={{ color: "primary.main", mb: 2 }}
+                icon="material-symbols:mail"
+                sx={{ color: "primary.main", mb: 1 }}
               ></Iconify>
               <Iconify
-                icon="material-symbols:mail"
-                sx={{ color: "primary.main", mb: 2 }}
+                icon="eva:phone-call-fill"
+                sx={{ color: "primary.main", mb: 1 }}
               ></Iconify>
+
               <Iconify
                 icon="game-icons:candles"
-                sx={{ color: "primary.main", mb: 2 }}
+                sx={{ color: "primary.main", mb: 1 }}
               ></Iconify>
               <Iconify
                 icon="mdi:gender-male-female-variant"
-                sx={{ color: "primary.main", mb: 2 }}
+                sx={{ color: "primary.main", mb: 1 }}
               ></Iconify>
             </Box>
             <Box display="flex" flexDirection="column">
-              <Typography sx={{ color: "grey.600", mb: 2 }}>
-                +977 0889787676
+              <Typography variant="h6" sx={{ color: "grey.600", mb: 1 }}>
+                {email}
               </Typography>
-              <Typography sx={{ color: "grey.600", mb: 2 }}>
-                sudesh7443@gmail.com
+              <Typography variant="h6" sx={{ color: "grey.600", mb: 1 }}>
+                +977 {phone}
               </Typography>
-              <Typography sx={{ color: "grey.600", mb: 2 }}>
-                Jan 02, 2000
+
+              <Typography variant="h6" sx={{ color: "grey.600", mb: 1 }}>
+                {dob}
               </Typography>
-              <Typography sx={{ color: "grey.600", mb: 2 }}>Male</Typography>
+              <Typography variant="h6" sx={{ color: "grey.600", mb: 1 }}>
+                {gender}
+              </Typography>
             </Box>
           </Box>
         </Grid>

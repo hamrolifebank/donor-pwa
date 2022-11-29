@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { alpha, styled } from "@mui/material/styles";
 import { Box, Card, Avatar, Divider, Typography, Stack } from "@mui/material";
 import SvgColor from "./SvgColor";
-import Image from "./image/Image";
+import Image from "./Image";
 
 // utils
 
@@ -26,8 +26,7 @@ UserCard.propTypes = {
 };
 
 export default function UserCard({ user }) {
-  const { name, cover, role, follower, totalPosts, avatarUrl, following } =
-    user;
+  const { fullname, bloodGroup } = user;
 
   return (
     <Card sx={{ textAlign: "center", borderRadius: 0, boxShadow: 0 }}>
@@ -63,15 +62,15 @@ export default function UserCard({ user }) {
         />
 
         <StyledOverlay />
-        <Image src="/assets/images/minions.jpg" alt={cover} ratio="16/9" />
+        <Image src="/assets/images/minions.jpg" alt="cover" ratio="16/9" />
       </Box>
 
       <Typography variant="subtitle1" sx={{ mt: 6, mb: 0.5 }}>
-        {name}
+        {fullname}
       </Typography>
 
       <Typography variant="body2" sx={{ color: "text.secondary" }}>
-        {role}
+        {bloodGroup}
       </Typography>
     </Card>
   );
