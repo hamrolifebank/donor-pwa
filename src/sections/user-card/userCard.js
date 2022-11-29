@@ -30,7 +30,7 @@ export default function UserCard({ user }) {
     user;
 
   return (
-    <Card sx={{ textAlign: "center", borderRadius: 0 }}>
+    <Card sx={{ textAlign: "center", borderRadius: 0, boxShadow: 0 }}>
       <Box sx={{ position: "relative" }}>
         <SvgColor
           src="/assets/shape_avatar.svg"
@@ -73,15 +73,6 @@ export default function UserCard({ user }) {
       <Typography variant="body2" sx={{ color: "text.secondary" }}>
         {role}
       </Typography>
-
-      <Stack
-        direction="row"
-        alignItems="center"
-        justifyContent="center"
-        sx={{ mt: 1, mb: 3 }}
-      ></Stack>
-
-      <Divider sx={{ borderStyle: "dashed" }} />
     </Card>
   );
 }

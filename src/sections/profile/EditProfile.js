@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Box, Container } from "@mui/material";
 import Image from "next/image";
-import UserCard from "./card/userCard";
+import UserCard from "../user-card/userCard";
 
 const Profile = (props) => {
   const user = {

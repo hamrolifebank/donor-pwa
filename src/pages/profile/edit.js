@@ -1,7 +1,7 @@
 import Page from "@components/Page";
 import DashboardlayoutwithFooter from "@layouts/dashboard/DashboardlayoutwithFooter";
 import { UpdateProfileForm } from "@sections/profile";
-import UserCard from "@sections/profile/card/userCard";
+import UserCard from "@sections/user-card/userCard";
 
 const PAGE_TITLE = "Edit Profile";
 

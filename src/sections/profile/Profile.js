@@ -1,8 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Box, Container } from "@mui/material";
+import { Box, Container, Typography } from "@mui/material";
 import Image from "next/image";
-import UserCard from "./card/userCard";
+import UserCard from "../user-card/userCard";
+import UserInformation from "./UserInformation";
 
 const Profile = (props) => {
   const user = {
@@ -17,6 +18,19 @@ const Profile = (props) => {
   return (
     <div>
       <UserCard user={user} />
+      <hr />
+      <UserInformation />
+
+      <Typography
+        variant="h6"
+        sx={{
+          color: "primary.main",
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        Settings
+      </Typography>
     </div>
   );
 };
