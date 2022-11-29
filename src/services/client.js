@@ -1,20 +1,11 @@
-// import axios from "axios";
-// import qs from "query-string";
-// import { HOST_API } from "../config";
+const axios = require("axios");
+import { useEffect } from "react";
 
-// import { getAccessToken } from "../utils/sessionManager";
+import { HOST_API } from "../config";
 
-// const accessToken = getAccessToken();
-
-// const api = axios.create({
-//   //   baseURL: 'https://minimal-assets-api-dev.vercel.app',
-//   baseURL: HOST_API,
-//   headers: {
-//     "Content-Type": "application/json",
-//     accessToken,
-//   },
-//   paramsSerializer: (params) =>
-//     qs.stringify(params, { arrayFormat: "brackets" }),
-// });
-
-// export default api;
+const baseURL = `${HOST_API}/events`;
+const getApi = async () => {
+  const request = await axios.get(baseURL);
+  return request.data;
+};
+export default getApi;
