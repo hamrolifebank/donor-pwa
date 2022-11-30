@@ -6,6 +6,7 @@ import Radial from "./Radial";
 import { Icon } from "@iconify/react";
 import { useAppAuthContext } from "@contexts/AuthContext";
 import { useAppContext } from "@contexts/AppContext";
+import { useOtpContext } from "@contexts/OtpContext";
 
 const EventInformation = ({ clickedEvents }) => {
   const { events } = useAppContext();
@@ -13,6 +14,7 @@ const EventInformation = ({ clickedEvents }) => {
     let eventFromStorage = JSON.parse(localStorage.getItem("slugID"));
     clickedEvents = events.find((event) => event.id === eventFromStorage);
   }
+  const { handleClickOpen } = useOtpContext();
   const { addEventInUser } = useAppAuthContext();
   const [register, setRegister] = useState("Register");
   const [registerColor, setRegisterColor] = useState("primary.main");
@@ -84,7 +86,14 @@ const EventInformation = ({ clickedEvents }) => {
             ""
           ) : (
             <PrimaryButton
-              onClick={() => handleRegister(selectedEvent)}
+              onClick={() => {
+                if (!JSON.parse(localStorage.getItem("user")).isPhoneVerified) {
+                  handleClickOpen();
+                }
+                if (JSON.parse(localStorage.getItem("user")).isPhoneVerified) {
+                  handleRegister(selectedEvent);
+                }
+              }}
               sx={{
                 p: "3px 11px",
                 backgroundColor: `${registerColor}`,
