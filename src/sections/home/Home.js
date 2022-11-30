@@ -20,10 +20,15 @@ import { EventPage } from "../event-lists";
 import { PrimaryButton } from "@components/Button";
 import { set } from "date-fns";
 import { sendRequestForOTP } from "@services/otp/otp";
+import { useOtpApiContext } from "@contexts/otpApiContext";
 
 const Home = () => {
   const { push } = useRouter();
 
+  const { data, msg, getResponseData } = useOtpApiContext();
+  console.log(data);
+  console.log(msg);
+  // console.log(typeof getResponseData);
   const { publicAddress, user } = useAppAuthContext();
 
   const [open, setOpen] = useState(false);
@@ -34,8 +39,10 @@ const Home = () => {
     }
   }, []);
 
-  const handleClickOpen = (phoneNum) => {
-    sendRequestForOTP(phoneNum);
+  const handleClickOpen = async (phoneNum) => {
+    const avialiableData = await sendRequestForOTP(phoneNum);
+    // console.log(avialiableData);
+    getResponseData(avialiableData);
     setOpen(true);
   };
 
