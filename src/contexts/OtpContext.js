@@ -1,3 +1,4 @@
+import { sendRequestForOTP } from "@services/otp";
 import { createContext, useContext, useEffect, useState } from "react";
 
 export const OtpContext = createContext();
@@ -5,7 +6,9 @@ export const OtpContext = createContext();
 export const OtpProvider = ({ children }) => {
   const [open, setOpen] = useState(false);
 
-  const handleClickOpenOtpDialog = (e) => {
+  const handleClickOpenOtpDialog = async (phoneNum) => {
+    const avialiableData = await sendRequestForOTP(phoneNum);
+    console.log(avialiableData);
     setOpen(true);
   };
 

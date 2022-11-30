@@ -7,8 +7,9 @@ import { Container } from "@mui/system";
 import { EventPage } from "../event-lists";
 import { PrimaryButton } from "@components/Button";
 import { set } from "date-fns";
-import { sendRequestForOTP } from "@services/otp/otp";
+import { sendRequestForOTP } from "@services/otp";
 import { useOtpApiContext } from "@contexts/otpApiContext";
+import { useOtpContext } from "@contexts/OtpContext";
 
 const Home = () => {
   const { push } = useRouter();
@@ -21,8 +22,8 @@ const Home = () => {
   const { handleClickOpenOtpDialog } = useOtpContext();
 
   const handleClickOpen = async (phoneNum) => {
-    const avialiableData = await sendRequestForOTP(phoneNum);
-    // console.log(avialiableData);
+    // const avialiableData = await sendRequestForOTP(phoneNum);
+    // // console.log(avialiableData);
     getResponseData(avialiableData);
     setOpen(true);
   };
@@ -43,7 +44,7 @@ const Home = () => {
         <Alert severity="info">You can now donate</Alert>
       ) : (
         <Container>
-          <Button onClick={handleClickOpenOtpDialog}>
+          <Button onClick={() => handleClickOpenOtpDialog(user.phone)}>
             {" "}
             <Alert severity="warning">Click here to verify phone number</Alert>
           </Button>
