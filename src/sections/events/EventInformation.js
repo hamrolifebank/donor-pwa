@@ -1,5 +1,11 @@
 import { PrimaryButton } from "@components/Button";
-import { Typography, Grid, CircularProgress, Chip } from "@mui/material";
+import {
+  Typography,
+  Grid,
+  CircularProgress,
+  Chip,
+  IconButton,
+} from "@mui/material";
 import { Box, Container, display } from "@mui/system";
 import React, { useContext, useEffect, useState } from "react";
 import Radial from "./Radial";
@@ -7,6 +13,8 @@ import { Icon } from "@iconify/react";
 import { useAppAuthContext } from "@contexts/AuthContext";
 import { useAppContext } from "@contexts/AppContext";
 import { useOtpContext } from "@contexts/OtpContext";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import Router from "next/router";
 
 const EventInformation = ({ clickedEvents }) => {
   const { events } = useAppContext();
@@ -59,8 +67,15 @@ const EventInformation = ({ clickedEvents }) => {
     }
   }, []);
 
+  const arrowBack = () => {
+    Router.back();
+  };
+
   return (
     <Container>
+      <IconButton color="primary" onClick={arrowBack}>
+        <ArrowBackIosIcon />
+      </IconButton>
       <Box sx={{ display: "flex", justifyContent: "space-between" }} mb={1}>
         <Typography variant="h6">{selectedEvent.name}</Typography>{" "}
         <Chip
