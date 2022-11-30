@@ -11,7 +11,10 @@ export const sendRequestForOTP = async (phoneNum) => {
 };
 
 export const sendVerificationRequestForOTP = async (otp) => {
-  const response = await axios.post(`${API}/otpVerification`, otp);
+  const response = await axios.post(`${API}/otpVerification`, {
+    method: "POST",
+    otp,
+  });
   return response;
 };
 

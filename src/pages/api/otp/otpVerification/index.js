@@ -1,9 +1,12 @@
 import { otpList } from "src/otpList/otpList";
 
 export default function handler(req, res) {
+  console.log("verification request ", req.body.otp);
   if (req.method === "POST") {
-    const { otpProvidedByUser } = req.body;
+    const otpProvidedByUser = req.body.otp;
     if (otpProvidedByUser) {
+      console.log("if entered", otpProvidedByUser);
+      console.log("otpList verification: ", otpList);
       const matchedOtp = otpList.find((otp) => otp === otpProvidedByUser);
       const tries = [];
       if (!matchedOtp && tries.length < 2) {

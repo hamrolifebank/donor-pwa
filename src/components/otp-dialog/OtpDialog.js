@@ -26,8 +26,8 @@ const OtpDialog = () => {
   const [otpNotification, setotpNotification] = useState("");
   const user = getCurrentUser();
 
-  const handleOtpSubmit = () => {
-    sendVerificationRequestForOTP();
+  const handleOtpSubmit = (otp) => {
+    sendVerificationRequestForOTP(otp);
   };
   const handleResend = () => {
     reSendVerificationRequestForOTP();
@@ -45,6 +45,8 @@ const OtpDialog = () => {
       setotpNotification(`Enter the OTP we sent +${user.phone}`);
     }
   }, []);
+
+  const [otp, setOtp] = useState(null);
 
   return (
     <Dialog open={open} onClose={handleClose}>
@@ -66,10 +68,14 @@ const OtpDialog = () => {
             <TextField
               id="demo-helper-text-aligned"
               label="Please enter your OTP"
+              value={otp}
+              onChange={(e) => setOtp(e.target.value)}
               sx={{ backgroundColor: "white" }}
             />
           </Box>
-          <PrimaryButton onClick={handleOtpSubmit}>Submit</PrimaryButton>
+          <PrimaryButton onClick={() => handleOtpSubmit(otp)}>
+            Submit
+          </PrimaryButton>
           <DialogActions sx={{ justifyContent: "center" }}>
             <ButtonGroup>
               <Button onClick={handleResend}>Resend</Button>
