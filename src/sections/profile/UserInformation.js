@@ -6,7 +6,7 @@ import { Box, Container, Grid, Stack, Typography } from "@mui/material";
 const UserInformation = ({ user }) => {
   const { email, phone, gender, dob } = user;
   return (
-    <Container sx={{ minHeight: 300 }}>
+    <Container>
       <Grid container sx={{ display: "flex", justifyContent: "center" }}>
         <Grid item display="flex" justifyContent="center">
           <Box display="flex" justifyContent="center" gap={2}>
