@@ -10,11 +10,11 @@ import { useOtpContext } from "@contexts/OtpContext";
 const EventCardNotRegistered = ({ event }) => {
   const theme = useTheme();
   const { user, addUser, addEventInUser } = useAppAuthContext();
-  const { handleClickOpen } = useOtpContext();
+  const { handleClickOpenOtpDialog } = useOtpContext();
 
   const handleRegister = (e) => {
     if (!JSON.parse(localStorage.getItem("user")).isPhoneVerified) {
-      handleClickOpen(e);
+      handleClickOpenOtpDialog(e);
     }
     if (JSON.parse(localStorage.getItem("user")).isPhoneVerified) {
       addEventInUser(event);

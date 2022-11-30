@@ -5,14 +5,14 @@ export const OtpContext = createContext();
 export const OtpProvider = ({ children }) => {
   const [open, setOpen] = useState(false);
 
-  const handleClickOpen = (e) => {
+  const handleClickOpenOtpDialog = (e) => {
     setOpen(true);
   };
 
   const contextValue = {
     open,
     setOpen,
-    handleClickOpen,
+    handleClickOpenOtpDialog,
   };
 
   return (

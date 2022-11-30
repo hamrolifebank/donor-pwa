@@ -14,7 +14,7 @@ const EventInformation = ({ clickedEvents }) => {
     let eventFromStorage = JSON.parse(localStorage.getItem("slugID"));
     clickedEvents = events.find((event) => event.id === eventFromStorage);
   }
-  const { handleClickOpen } = useOtpContext();
+  const { handleClickOpenOtpDialog } = useOtpContext();
   const { addEventInUser } = useAppAuthContext();
   const [register, setRegister] = useState("Register");
   const [registerColor, setRegisterColor] = useState("primary.main");
@@ -88,7 +88,7 @@ const EventInformation = ({ clickedEvents }) => {
             <PrimaryButton
               onClick={() => {
                 if (!JSON.parse(localStorage.getItem("user")).isPhoneVerified) {
-                  handleClickOpen();
+                  handleClickOpenOtpDialog();
                 }
                 if (JSON.parse(localStorage.getItem("user")).isPhoneVerified) {
                   handleRegister(selectedEvent);

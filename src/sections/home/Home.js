@@ -13,7 +13,7 @@ const Home = () => {
   const { push } = useRouter();
 
   const { publicAddress, user } = useAppAuthContext();
-  const { handleClickOpen } = useOtpContext();
+  const { handleClickOpenOtpDialog } = useOtpContext();
 
   return (
     <Container>
@@ -21,7 +21,7 @@ const Home = () => {
         <Alert severity="info">You can now donate</Alert>
       ) : (
         <Container>
-          <Button onClick={handleClickOpen}>
+          <Button onClick={handleClickOpenOtpDialog}>
             {" "}
             <Alert severity="warning">Click here to verify phone number</Alert>
           </Button>
