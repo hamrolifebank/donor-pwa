@@ -1,18 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useAppAuthContext } from "@contexts/AuthContext";
-import {
-  Alert,
-  Box,
-  Button,
-  ButtonGroup,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Alert, Box, Button, Typography } from "@mui/material";
 import { useRouter } from "next/router";
 import QRCode from "react-qr-code";
 import { Container } from "@mui/system";
@@ -30,14 +18,7 @@ const Home = () => {
   console.log(msg);
   // console.log(typeof getResponseData);
   const { publicAddress, user } = useAppAuthContext();
-
-  const [open, setOpen] = useState(false);
-  const [otpNotification, setotpNotification] = useState("");
-  useEffect(() => {
-    if (user) {
-      setotpNotification(`Enter the OTP we sent +${user.phone}`);
-    }
-  }, []);
+  const { handleClickOpenOtpDialog } = useOtpContext();
 
   const handleClickOpen = async (phoneNum) => {
     const avialiableData = await sendRequestForOTP(phoneNum);
@@ -62,31 +43,10 @@ const Home = () => {
         <Alert severity="info">You can now donate</Alert>
       ) : (
         <Container>
-          <Button onClick={() => handleClickOpen(user.phone)}>
+          <Button onClick={handleClickOpenOtpDialog}>
             {" "}
             <Alert severity="warning">Click here to verify phone number</Alert>
           </Button>
-          <Dialog open={open} onClose={handleClose}>
-            <DialogTitle>
-              <Alert severity="warning">Verify Phone Number</Alert>
-            </DialogTitle>
-            <DialogContent>
-              <DialogContentText>{otpNotification}</DialogContentText>
-              <TextField
-                autoFocus
-                margin="dense"
-                fullWidth
-                variant="standard"
-              />
-              <PrimaryButton onClick={handleOtpSubmit}>Submit</PrimaryButton>
-            </DialogContent>
-            <DialogActions>
-              <ButtonGroup>
-                <Button onClick={handleResend}>Resend</Button>
-                <Button onClick={handleClose}>Cancel</Button>
-              </ButtonGroup>
-            </DialogActions>
-          </Dialog>
         </Container>
       )}
 

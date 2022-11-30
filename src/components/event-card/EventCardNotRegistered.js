@@ -5,14 +5,20 @@ import { useTheme } from "@emotion/react";
 import { Icon } from "@iconify/react";
 import { PrimaryButton } from "@components/Button";
 import { useAppAuthContext } from "@contexts/AuthContext";
-import Link from "next/link";
+import { useOtpContext } from "@contexts/OtpContext";
 
 const EventCardNotRegistered = ({ event }) => {
   const theme = useTheme();
-  const { user, addUser,addEventInUser } = useAppAuthContext();
+  const { user, addUser, addEventInUser } = useAppAuthContext();
+  const { handleClickOpenOtpDialog } = useOtpContext();
 
-  const handleRegister = (event) => {
-   addEventInUser(event)
+  const handleRegister = (e) => {
+    if (!JSON.parse(localStorage.getItem("user")).isPhoneVerified) {
+      handleClickOpenOtpDialog(e);
+    }
+    if (JSON.parse(localStorage.getItem("user")).isPhoneVerified) {
+      addEventInUser(event);
+    }
   };
   return (
     <>
@@ -70,7 +76,7 @@ const EventCardNotRegistered = ({ event }) => {
             onClick={(e) => {
               e.preventDefault();
               e.stopPropagation();
-              handleRegister(event);
+              handleRegister(e);
             }}
           >
             <Icon icon="material-symbols:arrow-circle-left" />
