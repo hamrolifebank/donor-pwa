@@ -1,4 +1,3 @@
-import { Alert } from "@mui/material";
 import { sendRequestForOTP } from "@services/otp";
 import { getCurrentUser } from "@utils/sessionManager";
 import { createContext, useContext, useEffect, useState } from "react";

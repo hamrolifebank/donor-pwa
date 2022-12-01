@@ -39,11 +39,12 @@ const OtpDialog = () => {
       user.isPhoneVerified = true;
       setTimeout(() => {
         setUserPhoneVerification(
-          <Alert severity="success">Phone number verified</Alert>
+          <Alert severity="info">You can donate now</Alert>
         );
       }, 3000);
+
       setUserPhoneVerification(
-        <Alert severity="info">You can donate now</Alert>
+        <Alert severity="success">Phone number verified</Alert>
       );
       localStorage.setItem("user", JSON.stringify(user));
       setOpen(false);
