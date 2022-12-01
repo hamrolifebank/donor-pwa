@@ -1,4 +1,4 @@
-import { otpList } from "src/otpList/otpList";
+import { otpList } from "../../../../otpList/otpList";
 
 export default function handler(req, res) {
   if (req.method === "POST") {
