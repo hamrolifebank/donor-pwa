@@ -37,7 +37,7 @@ export const FormSchema = Yup.object().shape({
     .integer()
     .moreThan(18, "Age must be greater than or equal to 18")
     .lessThan(120, "Age must be less than or equal to 120"),
-  birthDate: Yup.date().nullable().required("birthDate is required"),
+  dob: Yup.date().nullable().required("birthDate is required"),
   startDate: Yup.date().nullable().required("Start date is required"),
   endDate: Yup.date()
     .required("End date is required")

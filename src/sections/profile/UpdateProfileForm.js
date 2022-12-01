@@ -3,66 +3,99 @@ import { useState, useRef, useEffect } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm, Controller } from "react-hook-form";
 // @mui
-import { Stack, Grid, Container, Box, TextField } from "@mui/material";
+import { Stack, Grid, Container, Box, TextField, Alert } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
-import { DatePicker } from "@mui/x-date-pickers";
+import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+
 // components
 import Iconify from "@components/iconify";
 import { FormProvider, RHFTextField } from "@components/hook-form";
 //
 import { FormSchema, defaultValues } from "../form";
 import ListSelectFilter from "./ListSelectFilter";
+import { useAppAuthContext } from "@contexts/AuthContext";
 
 // ----------------------------------------------------------------------
 
-export default function ReactHookForm() {
+export default function UpdateProfileForm() {
+  const { user, addUser } = useAppAuthContext();
+  const [value, setValue] = useState({
+    bloodGroup: user.bloodGroup,
+    gender: user.gender,
+  });
+  const [showAlert, setShowAlert] = useState(null);
+  useEffect(() => {
+    setShowAlert(false);
+  }, []);
+  const preloadedValues = {
+    fullName: user.fullname,
+    phone: user.phone,
+    email: user.email,
+    dob: user.dob,
+    bloodGroup: user.bloodGroup,
+    gender: user.gender,
+  };
   const methods = useForm({
     mode: "onTouched",
     resolver: yupResolver(FormSchema),
-    defaultValues,
+    defaultValues: preloadedValues,
   });
 
+  const changeBloodGroup = (e) => {
+    e.preventDefault();
+    setValue({ ...value, bloodGroup: e.target.value });
+  };
+  const changeGender = (e) => {
+    e.preventDefault();
+    setValue({ ...value, gender: e.target.value });
+  };
+
   const {
-    // watch,
-    reset,
-    resetField,
     handleSubmit,
+    control,
     formState: { errors, isSubmitting },
   } = methods;
 
-  // const values = watch();
-
-  // useEffect(() => {
-  //   if (values.editor === "<p><br></p>") {
-  //     resetField("editor");
-  //   }
-  // }, [resetField, values.editor]);
-
-  const onSubmit = async (data) => {
-    await new Promise((resolve) => setTimeout(resolve, 500));
-    alert(
-      JSON.stringify(
-        {
-          ...data,
-          birthDate: data.birthDate && fTimestamp(data.birthDate),
-        },
-        null,
-        2
-      )
-    );
-
-    reset();
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    const userData = {
+      fullname: e.target.fullName.value,
+      phone: e.target.phone.value,
+      email: e.target.email.value,
+      dob: e.target.dob.value,
+      bloodGroup: e.target.bloodGroup.value,
+      gender: e.target.gender.value,
+    };
+    const updatedUserDetails = { ...user, ...userData };
+    addUser(updatedUserDetails);
+    setShowAlert(true);
+    setTimeout(() => {
+      setShowAlert(false);
+    }, 5000);
   };
 
   return (
     <Container>
-      <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
+      {showAlert ? (
+        <Box sx={{ m: "10px 0" }}>
+          <Alert severity="success">User updated Sucessfully</Alert>
+        </Box>
+      ) : (
+        <Box sx={{ m: "15px 0" }}></Box>
+      )}
+      <FormProvider methods={methods} onSubmit={handleFormSubmit}>
         <Grid container spacing={2}>
           <Grid item xs={12} md={12}>
             <Stack spacing={3}>
               <RHFTextField name="fullName" label="Full Name" />
-              {/* <RHFTextField type="select" name="Blood Group" /> */}
-              <ListSelectFilter label="Blood Group" />
+              <ListSelectFilter
+                name="bloodGroup"
+                label="Blood Group"
+                options={["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"]}
+                value={value.bloodGroup}
+                onChange={changeBloodGroup}
+              />
               <Box
                 display="flex"
                 gap={3}
@@ -97,16 +130,27 @@ export default function ReactHookForm() {
                   icon="game-icons:candles"
                   sx={{ color: "primary.main" }}
                 ></Iconify>
-                {/* <Controller
-                  name="birthDate"
-                  render={() => (
-                    <DatePicker
-                      label="1/02/2022"
-                      inputFormat="dd/MM/yyyy"
-                      // renderInput={(params) => <TextField fullWidth />}
-                    />
+                <Controller
+                  name="dob"
+                  control={control}
+                  render={({ field, fieldState: { error } }) => (
+                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                      <DatePicker
+                        {...field}
+                        label="Date of Birth"
+                        renderInput={(params) => (
+                          <TextField
+                            name="dob"
+                            fullWidth
+                            {...params}
+                            error={!!error}
+                            helperText={error?.message}
+                          />
+                        )}
+                      />
+                    </LocalizationProvider>
                   )}
-                /> */}
+                />
               </Box>
               <Box
                 display="flex"
@@ -118,7 +162,13 @@ export default function ReactHookForm() {
                   icon="mdi:gender-male-female-variant"
                   sx={{ color: "primary.main" }}
                 ></Iconify>
-                <ListSelectFilter label="Choose Gender" />
+                <ListSelectFilter
+                  name="gender"
+                  label="Choose Gender"
+                  options={["male", "female", "other"]}
+                  value={value.gender}
+                  onChange={changeGender}
+                />
               </Box>
               <LoadingButton
                 fullWidth

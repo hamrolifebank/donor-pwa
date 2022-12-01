@@ -1,14 +1,15 @@
 import { MenuItem, TextField } from "@mui/material";
 import PropTypes from "prop-types";
 
-const ListSelectFilter = ({ label }) => {
+const ListSelectFilter = ({ label, options, value, name, onChange }) => {
   return (
     <TextField
       fullWidth
+      name={name}
       select
       label={label}
-      value={"s"}
-      onChange={() => {}}
+      value={value}
+      onChange={onChange}
       SelectProps={{
         MenuProps: {
           sx: { "& .MuiPaper-root": { maxHeight: 260 } },
@@ -19,10 +20,10 @@ const ListSelectFilter = ({ label }) => {
         textTransform: "capitalize",
       }}
     >
-      {[{ id: 1, tag: "A+" }].map((option) => (
+      {options.map((option, index) => (
         <MenuItem
-          key={option.id}
-          value={option.tag}
+          key={index}
+          value={option}
           sx={{
             mx: 1,
             my: 0.5,
@@ -31,7 +32,7 @@ const ListSelectFilter = ({ label }) => {
             textTransform: "capitalize",
           }}
         >
-          {option.tag}
+          {option}
         </MenuItem>
       ))}
     </TextField>
