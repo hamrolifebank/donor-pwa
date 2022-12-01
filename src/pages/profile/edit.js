@@ -1,7 +1,8 @@
 import Page from "@components/Page";
+import { useAppAuthContext } from "@contexts/AuthContext";
 import DashboardlayoutwithFooter from "@layouts/dashboard/DashboardlayoutwithFooter";
 import { UpdateProfileForm } from "@sections/profile";
-import UserCard from "@sections/profile/card/userCard";
+import UserCard from "@sections/user-card/userCard";
 
 const PAGE_TITLE = "Edit Profile";
 
@@ -12,19 +13,13 @@ EditProfilePage.getLayout = (page) => (
 );
 
 export default function EditProfilePage() {
-  const user = {
-    name: "Katarina Smith",
-    cover: "/assets/cover/cover-1.jpg",
-    role: "UI Designer",
-    follower: 1.2,
-    totalPosts: 1.2,
-    avatarUrl: "/assets/avatar/avatar-1.jpg",
-    following: 1.2,
-  };
+  const { user } = useAppAuthContext();
   return (
     <Page title={PAGE_TITLE}>
-      <UserCard user={user} />
-      <UpdateProfileForm />
+      <div style={{ marginTop: -10 }}>
+        <UserCard user={user} />
+        <UpdateProfileForm />
+      </div>
     </Page>
   );
 }

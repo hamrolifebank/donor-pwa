@@ -1,9 +1,11 @@
 import PropTypes from "prop-types";
 // @mui
 import { alpha, styled } from "@mui/material/styles";
-import { Box, Card, Avatar, Divider, Typography, Stack } from "@mui/material";
+import { Box, Card, Avatar, Typography } from "@mui/material";
 import SvgColor from "./SvgColor";
-import Image from "./image/Image";
+import Image from "./Image";
+import { BorderlessButton } from "@components/Button";
+import { useRouter } from "next/router";
 
 // utils
 
@@ -26,11 +28,17 @@ UserCard.propTypes = {
 };
 
 export default function UserCard({ user }) {
-  const { name, cover, role, follower, totalPosts, avatarUrl, following } =
-    user;
+  const { fullname, bloodGroup } = user;
+  const { push, pathname } = useRouter();
 
   return (
-    <Card sx={{ textAlign: "center", borderRadius: 0 }}>
+    <Card
+      sx={{
+        textAlign: "center",
+        borderRadius: 0,
+        boxShadow: 0,
+      }}
+    >
       <Box sx={{ position: "relative" }}>
         <SvgColor
           src="/assets/shape_avatar.svg"
@@ -48,7 +56,7 @@ export default function UserCard({ user }) {
         />
 
         <Avatar
-          alt={name}
+          alt={fullname}
           src={`https://api-dev-minimal-v4.vercel.app/assets/images/avatars/avatar_2.jpg`}
           sx={{
             width: 64,
@@ -62,26 +70,37 @@ export default function UserCard({ user }) {
           }}
         />
 
-        <StyledOverlay />
-        <Image src="/assets/images/minions.jpg" alt={cover} ratio="16/9" />
+        {/* <StyledOverlay /> */}
+        <Box sx={{ position: "relative" }}>
+          <Image
+            src="/assets/images/minions.jpg"
+            alt="cover"
+            ratio="16/9"
+            sx={{}}
+          />
+          {pathname === "/profile" ? (
+            <BorderlessButton
+              sx={{
+                color: "white",
+                position: "absolute",
+                top: "5%",
+                left: "72%",
+              }}
+              onClick={() => push("/profile/edit")}
+            >
+              Edit profile
+            </BorderlessButton>
+          ) : null}
+        </Box>
       </Box>
 
       <Typography variant="subtitle1" sx={{ mt: 6, mb: 0.5 }}>
-        {name}
+        {fullname}
       </Typography>
 
       <Typography variant="body2" sx={{ color: "text.secondary" }}>
-        {role}
+        {bloodGroup}
       </Typography>
-
-      <Stack
-        direction="row"
-        alignItems="center"
-        justifyContent="center"
-        sx={{ mt: 1, mb: 3 }}
-      ></Stack>
-
-      <Divider sx={{ borderStyle: "dashed" }} />
     </Card>
   );
 }
