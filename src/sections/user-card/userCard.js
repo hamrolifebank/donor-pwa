@@ -29,10 +29,16 @@ UserCard.propTypes = {
 
 export default function UserCard({ user }) {
   const { fullname, bloodGroup } = user;
-  const { push } = useRouter();
+  const { push, pathname } = useRouter();
 
   return (
-    <Card sx={{ textAlign: "center", borderRadius: 0, boxShadow: 0 }}>
+    <Card
+      sx={{
+        textAlign: "center",
+        borderRadius: 0,
+        boxShadow: 0,
+      }}
+    >
       <Box sx={{ position: "relative" }}>
         <SvgColor
           src="/assets/shape_avatar.svg"
@@ -72,17 +78,19 @@ export default function UserCard({ user }) {
             ratio="16/9"
             sx={{}}
           />
-          <BorderlessButton
-            sx={{
-              color: "white",
-              position: "absolute",
-              top: "5%",
-              left: "72%",
-            }}
-            onClick={() => push("/profile/edit")}
-          >
-            Edit profile
-          </BorderlessButton>
+          {pathname === "/profile" ? (
+            <BorderlessButton
+              sx={{
+                color: "white",
+                position: "absolute",
+                top: "5%",
+                left: "72%",
+              }}
+              onClick={() => push("/profile/edit")}
+            >
+              Edit profile
+            </BorderlessButton>
+          ) : null}
         </Box>
       </Box>
 

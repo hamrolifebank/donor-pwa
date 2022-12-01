@@ -15,6 +15,7 @@ import { FormProvider, RHFTextField } from "@components/hook-form";
 import { FormSchema, defaultValues } from "../form";
 import ListSelectFilter from "./ListSelectFilter";
 import { useAppAuthContext } from "@contexts/AuthContext";
+import { PrimaryButton } from "@components/Button";
 
 // ----------------------------------------------------------------------
 
@@ -170,16 +171,9 @@ export default function UpdateProfileForm() {
                   onChange={changeGender}
                 />
               </Box>
-              <LoadingButton
-                fullWidth
-                color="info"
-                size="large"
-                type="submit"
-                variant="contained"
-                loading={isSubmitting}
-              >
-                Submit
-              </LoadingButton>
+              <PrimaryButton type="submit" variant="contained">
+                Update
+              </PrimaryButton>
             </Stack>
           </Grid>
         </Grid>

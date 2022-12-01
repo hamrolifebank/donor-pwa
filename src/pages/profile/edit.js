@@ -23,8 +23,10 @@ export default function EditProfilePage() {
   };
   return (
     <Page title={PAGE_TITLE}>
-      <UserCard user={user} />
-      <UpdateProfileForm />
+      <div style={{ marginTop: -10 }}>
+        <UserCard user={user} />
+        <UpdateProfileForm />
+      </div>
     </Page>
   );
 }
