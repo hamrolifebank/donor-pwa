@@ -1,7 +1,7 @@
 import React from "react";
-import PropTypes from "prop-types";
-import { Box, Container, Typography } from "@mui/material";
-import Image from "next/image";
+
+import { Container } from "@mui/material";
+
 import UserCard from "../user-card/userCard";
 import UserInformation from "./UserInformation";
 import { useAppAuthContext } from "@contexts/AuthContext";

@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 // @mui
 import { alpha, styled } from "@mui/material/styles";
-import { Box, Card, Avatar, Divider, Typography, Stack } from "@mui/material";
+import { Box, Card, Avatar, Typography } from "@mui/material";
 import SvgColor from "./SvgColor";
 import Image from "./Image";
 import { BorderlessButton } from "@components/Button";
