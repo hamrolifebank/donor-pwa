@@ -1,4 +1,4 @@
-import { EventCardRegistered } from "@components/event-card";
+import { EventCardRegistered } from "@sections/event-card";
 import { useAppAuthContext } from "@contexts/AuthContext";
 import { TabPanel } from "@mui/lab";
 import { Button } from "@mui/material";

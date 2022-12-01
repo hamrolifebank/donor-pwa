@@ -50,7 +50,7 @@ export default function Main({ children, sx, ...other }) {
       component="main"
       sx={{
         flexGrow: 1,
-        py: `${HEADER.H_MOBILE}px`,
+        py: `${HEADER.H_MOBILE + SPACING}px`,
         ...(isDesktop && {
           px: 2,
           py: `${HEADER.H_DASHBOARD_DESKTOP + SPACING}px`,
