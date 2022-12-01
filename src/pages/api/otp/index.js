@@ -2,7 +2,7 @@
 
 import { otpList } from "../../../otpList/otpList";
 
-export default function handler(req, res) {
+export default function requestOtp(req, res) {
   if (req.method === "POST") {
     const phoneNumber = req.body.phoneNum;
     if (phoneNumber) {
@@ -25,7 +25,7 @@ export default function handler(req, res) {
 
 // VERIFICATIN REQUEST FOR OTP 
 
-export default function handler(req, res) {
+export default function verificationOtp(req, res) {
     console.log("verification request ", req.body.otp);
     if (req.method === "POST") {
       const otpProvidedByUser = req.body.otp;
@@ -52,7 +52,7 @@ export default function handler(req, res) {
   // RESEND REQUEST FOR OTP 
 
 
-  export default function handler(req, res) {
+  export default function resendOtp(req, res) {
     if (req.method === "POST") {
       const { phoneNumber } = req.body;
       if (phoneNumber) {
