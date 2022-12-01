@@ -16,10 +16,9 @@ export const sendVerificationRequestForOTP = async (otp) => {
       method: "POST",
       otp,
     });
-    return response.data;
+    // console.log("the send verificvation", response.data.msg);
+    return response.data.msg;
   } catch (error) {
-    console.log("catche entered");
-    console.log(error.response.data);
     return error.response.data;
   }
 };

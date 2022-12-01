@@ -17,27 +17,43 @@ import { color, Container } from "@mui/system";
 import React, { useEffect, useState } from "react";
 import { getCurrentUser } from "@utils/sessionManager";
 import {
-  reSendVerificationRequestForOTP,
+  sendRequestForOTP,
   sendVerificationRequestForOTP,
 } from "@services/otp";
 
 const OtpDialog = () => {
-  const { open, setOpen } = useOtpContext();
-  const [otpNotification, setotpNotification] = useState("");
+  const {
+    open,
+    setOpen,
+    otpNotification,
+    setotpNotification,
+    setUserPhoneVerification,
+  } = useOtpContext();
   const user = getCurrentUser();
 
   const handleOtpSubmit = async (otp) => {
-    if (sendVerificationRequestForOTP(otp)) {
+    if (
+      (await sendVerificationRequestForOTP(otp)) ===
+      "Phone number successfully verified"
+    ) {
       user.isPhoneVerified = true;
+      setTimeout(() => {
+        setUserPhoneVerification(
+          <Alert severity="success">Phone number verified</Alert>
+        );
+      }, 3000);
+      setUserPhoneVerification(
+        <Alert severity="info">You can donate now</Alert>
+      );
       localStorage.setItem("user", JSON.stringify(user));
+      setOpen(false);
     } else {
       let response = await sendVerificationRequestForOTP(otp);
-      console.log("in handle otp", response.msg);
       setotpNotification(response.msg);
     }
   };
   const handleResend = () => {
-    reSendVerificationRequestForOTP();
+    sendRequestForOTP(user.phone);
     setotpNotification("We have resent a new OTP");
   };
   const handleClose = () => {

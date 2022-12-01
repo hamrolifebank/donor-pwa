@@ -17,6 +17,7 @@ import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import Router from "next/router";
 
 const EventInformation = ({ clickedEvents }) => {
+  const { user } = useAppAuthContext();
   const { events } = useAppContext();
   if (!clickedEvents) {
     let eventFromStorage = JSON.parse(localStorage.getItem("slugID"));
@@ -103,7 +104,7 @@ const EventInformation = ({ clickedEvents }) => {
             <PrimaryButton
               onClick={() => {
                 if (!JSON.parse(localStorage.getItem("user")).isPhoneVerified) {
-                  handleClickOpenOtpDialog();
+                  handleClickOpenOtpDialog(user.phone);
                 }
                 if (JSON.parse(localStorage.getItem("user")).isPhoneVerified) {
                   handleRegister(selectedEvent);

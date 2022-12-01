@@ -5,48 +5,38 @@ import { useRouter } from "next/router";
 import QRCode from "react-qr-code";
 import { Container } from "@mui/system";
 import { EventPage } from "../event-lists";
-import { PrimaryButton } from "@components/Button";
-import { set } from "date-fns";
-import { sendRequestForOTP } from "@services/otp";
 import { useOtpApiContext } from "@contexts/otpApiContext";
 import { useOtpContext } from "@contexts/OtpContext";
 
 const Home = () => {
   const { push } = useRouter();
-
   const { data, msg, getResponseData } = useOtpApiContext();
-  console.log(data);
-  console.log(msg);
-  // console.log(typeof getResponseData);
   const { publicAddress, user } = useAppAuthContext();
-  const { handleClickOpenOtpDialog } = useOtpContext();
-
-  const handleClickOpen = async (phoneNum) => {
-    // const avialiableData = await sendRequestForOTP(phoneNum);
-    // // console.log(avialiableData);
-    getResponseData(avialiableData);
-    setOpen(true);
-  };
-
-  const handleOtpSubmit = () => {};
-  const handleResend = () => {
-    setotpNotification("We have resent a new OTP");
-  };
-  const handleClose = () => {
-    setOpen(false);
-    if (user) {
-      setotpNotification(`Enter the OTP we sent to +${user.phone}`);
+  const {
+    handleClickOpenOtpDialog,
+    userPhoneVerification,
+    setUserPhoneVerification,
+  } = useOtpContext();
+  useEffect(() => {
+    if (user?.isPhoneVerified) {
+      setUserPhoneVerification(
+        <Alert severity="info">You can donate now</Alert>
+      );
+    } else {
+      setUserPhoneVerification(
+        <Alert severity="warning">Click here to verify phone number</Alert>
+      );
     }
-  };
+  }, []);
+
   return (
     <Container>
       {user?.isPhoneVerified === true ? (
-        <Alert severity="info">You can now donate</Alert>
+        <>{userPhoneVerification}</>
       ) : (
         <Container>
           <Button onClick={() => handleClickOpenOtpDialog(user.phone)}>
-            {" "}
-            <Alert severity="warning">Click here to verify phone number</Alert>
+            {userPhoneVerification}
           </Button>
         </Container>
       )}
