@@ -5,22 +5,20 @@ import Image from "next/image";
 import UserCard from "../user-card/userCard";
 import UserInformation from "./UserInformation";
 import { useAppAuthContext } from "@contexts/AuthContext";
-import { PrimaryButton } from "@components/Button";
+import { SecondaryButton } from "@components/Button";
 
 const Profile = (props) => {
   const { user } = useAppAuthContext();
   return (
-    <div>
+    <div style={{ marginTop: -10 }}>
       <UserCard user={user} />
       <hr />
       <UserInformation user={user} />
       <Container sx={{ mb: 4 }}>
-        <PrimaryButton sx={{ mb: 2 }}>Create/update passcode</PrimaryButton>
-        <PrimaryButton sx={{ mb: 2 }}>Backup secret words</PrimaryButton>
-        <PrimaryButton sx={{ mb: 2 }}>
-          Backup wallet to Google Drive
-        </PrimaryButton>
-        <PrimaryButton sx={{ mb: 2 }}>Advanced Settings</PrimaryButton>
+        <SecondaryButton>Create/update passcode</SecondaryButton>
+        <SecondaryButton>Backup secret words</SecondaryButton>
+        <SecondaryButton>Backup wallet to Google Drive</SecondaryButton>
+        <SecondaryButton>Advanced Settings</SecondaryButton>
       </Container>
     </div>
   );
