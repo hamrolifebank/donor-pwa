@@ -11,11 +11,17 @@ export const sendRequestForOTP = async (phoneNum) => {
 };
 
 export const sendVerificationRequestForOTP = async (otp) => {
-  const response = await axios.post(`${API}/otpVerification`, {
-    method: "POST",
-    otp,
-  });
-  return response;
+  try {
+    const response = await axios.post(`${API}/otpVerification`, {
+      method: "POST",
+      otp,
+    });
+    return response.data;
+  } catch (error) {
+    console.log("catche entered");
+    console.log(error.response.data);
+    return error.response.data;
+  }
 };
 
 export const reSendVerificationRequestForOTP = async (otp) => {

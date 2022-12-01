@@ -26,8 +26,15 @@ const OtpDialog = () => {
   const [otpNotification, setotpNotification] = useState("");
   const user = getCurrentUser();
 
-  const handleOtpSubmit = (otp) => {
-    sendVerificationRequestForOTP(otp);
+  const handleOtpSubmit = async (otp) => {
+    if (sendVerificationRequestForOTP(otp)) {
+      user.isPhoneVerified = true;
+      localStorage.setItem("user", JSON.stringify(user));
+    } else {
+      let response = await sendVerificationRequestForOTP(otp);
+      console.log("in handle otp", response.msg);
+      setotpNotification(response.msg);
+    }
   };
   const handleResend = () => {
     reSendVerificationRequestForOTP();
