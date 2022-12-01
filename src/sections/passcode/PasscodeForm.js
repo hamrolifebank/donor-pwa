@@ -12,20 +12,29 @@ import { FormSchema, defaultValues } from "../form";
 import { MuiOtpInput } from "mui-one-time-password-input";
 
 import { OTPLENGTH } from "@config";
+import { useAppContext } from "@contexts/AppContext";
 
 // ----------------------------------------------------------------------
 
 export default function PasscodeFrom() {
-  const [value, setValue] = useState("");
+  const { isPasscodeSet } = useAppContext();
+  const [value, setValue] = useState({ current: "", new: "", confirm: "" });
+  const [passcodeMatch, setpasscodeMatch] = useState("");
 
-  const handleChange1 = (newValue) => {
-    setValue(newValue);
+  const handleCurrent = (newValue) => {
+    setValue({ ...value, current: newValue });
   };
-  const handleChange2 = (newValue) => {
-    setValue(newValue);
+  const handleNew = (newValue) => {
+    setValue({ ...value, new: newValue });
   };
-  const handleChange3 = (newValue) => {
-    setValue(newValue);
+  const handleconfirm = (newValue) => {
+    setValue({ ...value, confirm: newValue });
+
+    if (value.new === newValue) {
+      setpasscodeMatch("Matching");
+    } else {
+      setpasscodeMatch("Passcode not matching");
+    }
   };
 
   return (
@@ -42,25 +51,64 @@ export default function PasscodeFrom() {
                 Create/Update passcode
               </Typography>
             </Box>
-            <Stack spacing={3}>
-              <Typography variant="subtitle1">Current Passcode</Typography>
-              <MuiOtpInput
-                length={OTPLENGTH}
-                value={value}
-                onChange={handleChange1}
-              />
-              <Typography variant="subtitle1">New Passcode</Typography>
-              <MuiOtpInput
-                length={OTPLENGTH}
-                value={value}
-                onChange={handleChange2}
-              />
-              <Typography variant="subtitle1">Confirm Passcode</Typography>
-              <MuiOtpInput
-                length={OTPLENGTH}
-                value={value}
-                onChange={handleChange3}
-              />
+            <Stack gap={1}>
+              {isPasscodeSet ? (
+                <Box>
+                  <Typography
+                    variant="subtitle1"
+                    sx={{ mb: 1, color: "grey.600" }}
+                  >
+                    Current Passcode
+                  </Typography>
+                  <MuiOtpInput
+                    length={OTPLENGTH}
+                    value={value.current}
+                    onChange={handleCurrent}
+                  />
+                </Box>
+              ) : null}
+              <Box>
+                <Typography
+                  variant="subtitle1"
+                  sx={{ mb: 1, color: "grey.600" }}
+                >
+                  Enter New Passcode
+                </Typography>
+                <MuiOtpInput
+                  length={OTPLENGTH}
+                  value={value.new}
+                  onChange={handleNew}
+                />
+              </Box>
+              {value.new.length === OTPLENGTH ? (
+                <Box>
+                  <Typography
+                    variant="subtitle1"
+                    sx={{ mb: 1, color: "grey.600" }}
+                  >
+                    Confirm Passcode
+                  </Typography>
+                  <MuiOtpInput
+                    length={OTPLENGTH}
+                    value={value.confirm}
+                    onChange={handleconfirm}
+                  />
+                  <Box
+                    variant="body2"
+                    sx={{
+                      color: `${
+                        passcodeMatch === "Matching"
+                          ? "success.main"
+                          : "warning.main"
+                      }`,
+                      textAlign: "center",
+                      mt: 1,
+                    }}
+                  >
+                    {passcodeMatch}
+                  </Box>
+                </Box>
+              ) : null}
             </Stack>
           </Grid>
         </Grid>

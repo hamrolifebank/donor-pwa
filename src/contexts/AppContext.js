@@ -207,6 +207,7 @@ const initialState = {
     },
   ],
   isGraphDataAvailable: true,
+  isPasscodeSet: false,
 };
 const AppContext = createContext(initialState);
 
