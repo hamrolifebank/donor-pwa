@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import {
   EventCardRegistered,
   EventCardNotRegistered,
-} from "@components/event-card";
+} from "@sections/event-card";
 import { Container, Typography } from "@mui/material";
 import { useAppContext } from "@contexts/AppContext";
 import Link from "next/link";
