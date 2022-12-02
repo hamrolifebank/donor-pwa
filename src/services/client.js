@@ -1,8 +1,10 @@
-// import axios from "axios";
-// import qs from "query-string";
-// import { HOST_API } from "../config";
+const axios = require("axios");
 
-// import { getAccessToken } from "../utils/sessionManager";
+const baseURL = `/api/events`;
+const getApiEvents = async () => {
+  const request = await axios.get(baseURL);
+  return request.data;
+};
 
 // const accessToken = getAccessToken();
 
@@ -19,4 +21,4 @@
 
 // export default api;
 
-import axios from "axios";
+export default getApiEvents;
