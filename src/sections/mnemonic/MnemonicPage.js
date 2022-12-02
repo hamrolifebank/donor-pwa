@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 import { Box, Container } from "@mui/system";
-import React from "react";
+import React, { useState } from "react";
 import { Grid, InputLabel, TextField, Typography } from "@mui/material";
 import { PrimaryButton, SecondaryButton } from "@components/Button";
 
@@ -13,8 +13,9 @@ import { deleteWalletFromLocal } from "@utils/sessionManager";
 export default function Mnemonic() {
   const { push } = useRouter();
   const { wallet } = useAppAuthContext();
+  const [copied, setCopied] = useState("Copy all mnemonics");
+
   if (!wallet || !wallet.mnemonic || wallet.mnemonic.length === 0) {
-    console.log("No mnemonic found");
     push(PATH_DASHBOARD.root);
   } else {
     const words = wallet && wallet.mnemonic.phrase.split(" ");
@@ -22,8 +23,20 @@ export default function Mnemonic() {
     const handlewritten = () => {
       push(PATH_DASHBOARD.root);
     };
-    const handlecancel = () => {
-      return console.log("handlecancel");
+
+    const handleCopy = async (e) => {
+      e.preventDefault();
+      const myArray = [...words];
+
+      const mappedArray = myArray.map((word, index) => {
+        return `word${index + 1} = ${word}\n`;
+      });
+      let joinedString = mappedArray.join("");
+      await navigator.clipboard.writeText(joinedString);
+      setCopied("Mnemonics Copied!");
+      setTimeout(() => {
+        setCopied("Copy Again?");
+      }, 5000);
     };
     return (
       <Container>
@@ -51,10 +64,7 @@ export default function Mnemonic() {
                 </PrimaryButton>
               </Grid>
               <Grid item xs={12} md={4}>
-                <SecondaryButton onClick={handlecancel}>
-                  {" "}
-                  Copy all mnemonics{" "}
-                </SecondaryButton>
+                <SecondaryButton onClick={handleCopy}>{copied}</SecondaryButton>
               </Grid>
             </Grid>
           </Box>

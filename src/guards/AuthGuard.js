@@ -16,12 +16,10 @@ AuthGuard.propTypes = {
   children: PropTypes.node,
 };
 
-// Wrap this for all pages that require authentication
-
 export default function AuthGuard({ children }) {
   const { isAuthenticated, isInitialized } = useAppAuthContext();
 
-  const { push } = useRouter();
+  const { push, pathname } = useRouter();
 
   useEffect(() => {
     if (!isAuthenticated && isInitialized) {
@@ -30,9 +28,15 @@ export default function AuthGuard({ children }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAuthenticated, isInitialized]);
 
-  if (!isInitialized) {
+  if (isAuthenticated === undefined) {
     return <LoadingScreen />;
+  } else if (isAuthenticated === false) {
+    if (pathname === PATH_AUTH.login) {
+      return <>{children}</>;
+    } else {
+      return <LoadingScreen />;
+    }
+  } else {
+    return <>{children}</>;
   }
-
-  return <>{children}</>;
 }

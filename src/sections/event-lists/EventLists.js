@@ -26,7 +26,7 @@ export default function EventsPage(props) {
     return Number(dateArray[0] + dateArray[1] + dateArray[2]);
   };
 
-  const filteredEvents = events.filter((event) => {
+  const filteredEvents = events?.filter((event) => {
     return (
       convertDateToNumber(event.date) >=
       convertDateToNumber(new Date().toISOString())
