@@ -3,7 +3,7 @@ import DashboardlayoutwithFooter from "@layouts/dashboard/DashboardlayoutwithFoo
 import { useRouter } from "next/router";
 import { DisplayGraph } from "@sections/event-details";
 import { EventInformation } from "@sections/events";
-import { useAppContext } from "@contexts/AppContext";
+import { EventContext } from "@contexts/EventContext";
 
 const PAGE_TITLE = "Event Details";
 
@@ -24,9 +24,11 @@ export default function EventDetails() {
   let clickedEvents = events.find((event) => event.id === String(slug));
 
   return (
-    <Page title={PAGE_TITLE}>
-      <EventInformation clickedEvents={clickedEvents} />
-      <DisplayGraph />
-    </Page>
+    <EventContext>
+      <Page title={PAGE_TITLE}>
+        <EventInformation clickedEvents={clickedEvents} />
+        <DisplayGraph />
+      </Page>
+    </EventContext>
   );
 }

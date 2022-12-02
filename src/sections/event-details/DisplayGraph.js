@@ -11,12 +11,16 @@ import { PieChart } from "@components/charts";
 // import { LegendButton } from "@components/Button";
 import { useAppContext } from "@contexts/AppContext";
 import { PIECHARTCOLORS } from "@config";
+import { useRouter } from "next/router";
 
 export default function DisplayGraph(props) {
-  const { events, stats, isGraphDataAvailable } = useAppContext();
-  const [value, setValue] = React.useState(stats[0].groupBy);
+  const { events, stats, isGraphDataAvailable , getBys } = useAppContext();
+  const [value, setValue] = React.useState('bloodgroup');
+  const {query:{slug}} = useRouter()
   const handleChange = (event, newValue) => {
     setValue(newValue);
+    await getById(slug,value)
+
   };
 
   return (
