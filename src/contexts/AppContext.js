@@ -10,7 +10,6 @@ import PropTypes from "prop-types";
 import { arEG } from "date-fns/locale";
 import getApi from "@services/client";
 
-const events = getApi();
 const initialState = {
   events: [],
   stats: [
