@@ -33,6 +33,7 @@ const AppAuthContext = createContext({
   addUser: () => {},
   deleteToken: () => {},
   addEventInUser: () => {},
+  changeUserPhoneVerified: () => {},
 });
 
 // ----------------------------------------------------------------------
@@ -104,6 +105,11 @@ function AppAuthProvider({ children }) {
     addUser(user);
   };
 
+  const changeUserPhoneVerified = () => {
+    const user = getCurrentUser();
+    setCurrentUser({ ...user, isPhoneVerified: true });
+  };
+
   useEffect(() => {
     const initialize = async () => {
       setAuthState((prev) => ({ ...prev, isInitialized: true }));
@@ -148,6 +154,7 @@ function AppAuthProvider({ children }) {
     deleteWallet,
     addUser,
     addEventInUser,
+    changeUserPhoneVerified,
   };
 
   return (

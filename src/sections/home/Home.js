@@ -1,16 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useAppAuthContext } from "@contexts/AuthContext";
 import { Alert, Box, Button, Typography } from "@mui/material";
-import { useRouter } from "next/router";
 import QRCode from "react-qr-code";
 import { Container } from "@mui/system";
 import { EventPage } from "../event-lists";
-import { useOtpApiContext } from "@contexts/otpApiContext";
 import { useOtpContext } from "@contexts/OtpContext";
 
 const Home = () => {
-  const { push } = useRouter();
-  const { data, msg, getResponseData } = useOtpApiContext();
   const { publicAddress, user } = useAppAuthContext();
   const {
     handleClickOpenOtpDialog,
@@ -27,7 +23,7 @@ const Home = () => {
         <Alert severity="warning">Click here to verify phone number</Alert>
       );
     }
-  }, []);
+  }, [user]);
 
   return (
     <Container>
@@ -35,7 +31,9 @@ const Home = () => {
         <>{userPhoneVerification}</>
       ) : (
         <Container>
-          <Button onClick={() => handleClickOpenOtpDialog(user.phone)}>
+          <Button
+            onClick={() => handleClickOpenOtpDialog(user.phone, publicAddress)}
+          >
             {userPhoneVerification}
           </Button>
         </Container>

@@ -15,28 +15,23 @@ import {
 } from "@mui/material";
 import { color, Container } from "@mui/system";
 import React, { useEffect, useState } from "react";
-import { getCurrentUser } from "@utils/sessionManager";
 import {
   sendRequestForOTP,
   sendVerificationRequestForOTP,
 } from "@services/otp";
 
 const OtpDialog = () => {
-  const {
-    open,
-    setOpen,
-    otpNotification,
-    setotpNotification,
-    setUserPhoneVerification,
-  } = useOtpContext();
-  const user = getCurrentUser();
+  const { open, setOpen, setUserPhoneVerification } = useOtpContext();
+  const { user, changeUserPhoneVerified } = useAppAuthContext();
+  const [otpNotification, setotpNotification] = useState(
+    `Enter the OTP we sent to +${user?.phone}`
+  );
+  const [otp, setOtp] = useState(null);
 
   const handleOtpSubmit = async (otp) => {
-    if (
-      (await sendVerificationRequestForOTP(otp)) ===
-      "Phone number successfully verified"
-    ) {
-      user.isPhoneVerified = true;
+    let response = await sendVerificationRequestForOTP(otp);
+    if (response.status === 200) {
+      changeUserPhoneVerified();
       setTimeout(() => {
         setUserPhoneVerification(
           <Alert severity="info">You can donate now</Alert>
@@ -46,10 +41,9 @@ const OtpDialog = () => {
       setUserPhoneVerification(
         <Alert severity="success">Phone number verified</Alert>
       );
-      localStorage.setItem("user", JSON.stringify(user));
+      setotpNotification("");
       setOpen(false);
     } else {
-      let response = await sendVerificationRequestForOTP(otp);
       setotpNotification(response.msg);
     }
   };
@@ -65,12 +59,8 @@ const OtpDialog = () => {
   };
 
   useEffect(() => {
-    if (user) {
-      setotpNotification(`Enter the OTP we sent +${user.phone}`);
-    }
-  }, []);
-
-  const [otp, setOtp] = useState(null);
+    setotpNotification(`Enter the OTP we sent +${user?.phone}`);
+  }, [user]);
 
   return (
     <Dialog open={open} onClose={handleClose}>

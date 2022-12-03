@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { Box, Button, Paper, Typography } from "@mui/material";
 import { useTheme } from "@emotion/react";
@@ -6,6 +6,7 @@ import { Icon } from "@iconify/react";
 import { PrimaryButton } from "@components/Button";
 import { useAppAuthContext } from "@contexts/AuthContext";
 import { useOtpContext } from "@contexts/OtpContext";
+import { getCurrentUser } from "@utils/sessionManager";
 
 const EventCardNotRegistered = ({ event }) => {
   const theme = useTheme();
@@ -13,13 +14,14 @@ const EventCardNotRegistered = ({ event }) => {
   const { handleClickOpenOtpDialog } = useOtpContext();
 
   const handleRegister = () => {
-    if (!JSON.parse(localStorage.getItem("user")).isPhoneVerified) {
+    if (!getCurrentUser().isPhoneVerified) {
       handleClickOpenOtpDialog(user.phone);
     }
-    if (JSON.parse(localStorage.getItem("user")).isPhoneVerified) {
+    if (getCurrentUser().isPhoneVerified) {
       addEventInUser(event);
     }
   };
+
   return (
     <>
       <Paper

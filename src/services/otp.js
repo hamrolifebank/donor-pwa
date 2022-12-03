@@ -2,12 +2,17 @@ import axios from "axios";
 
 const API = "/api/otp";
 
-export const sendRequestForOTP = async (phoneNum) => {
-  const response = await axios.post(`${API}/requestOtp`, {
-    method: "POST",
-    phoneNum,
-  });
-  return response;
+export const sendRequestForOTP = async (phoneNum, publicAddress) => {
+  try {
+    const response = await axios.post(`${API}/requestOtp`, {
+      method: "POST",
+      phoneNum,
+      publicAddress,
+    });
+    return response;
+  } catch (error) {
+    return error.response.data;
+  }
 };
 
 export const sendVerificationRequestForOTP = async (otp) => {
@@ -16,8 +21,7 @@ export const sendVerificationRequestForOTP = async (otp) => {
       method: "POST",
       otp,
     });
-    // console.log("the send verificvation", response.data.msg);
-    return response.data.msg;
+    return response;
   } catch (error) {
     return error.response.data;
   }

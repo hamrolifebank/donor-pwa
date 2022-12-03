@@ -15,6 +15,7 @@ import { useAppContext } from "@contexts/AppContext";
 import { useOtpContext } from "@contexts/OtpContext";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import Router from "next/router";
+import { getCurrentUser } from "@utils/sessionManager";
 
 const EventInformation = ({ clickedEvents }) => {
   const { user } = useAppAuthContext();
@@ -66,7 +67,7 @@ const EventInformation = ({ clickedEvents }) => {
     } else {
       changeGraphData();
     }
-  }, []);
+  }, [user]);
 
   const arrowBack = () => {
     Router.back();
@@ -103,10 +104,10 @@ const EventInformation = ({ clickedEvents }) => {
           ) : (
             <PrimaryButton
               onClick={() => {
-                if (!JSON.parse(localStorage.getItem("user")).isPhoneVerified) {
+                if (!getCurrentUser().isPhoneVerified) {
                   handleClickOpenOtpDialog(user.phone);
                 }
-                if (JSON.parse(localStorage.getItem("user")).isPhoneVerified) {
+                if (getCurrentUser().isPhoneVerified) {
                   handleRegister(selectedEvent);
                 }
               }}
