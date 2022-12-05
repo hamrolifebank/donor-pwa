@@ -9,7 +9,7 @@ export default function handler(req, res) {
           msg: "We have resent a new OTP",
         },
       });
-      otpList.push(otp);
+      // otpList.push(otp);
     } else {
       res.status(400).json({ msg: "Please specificy your phone number" });
     }
