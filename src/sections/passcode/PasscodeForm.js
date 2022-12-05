@@ -13,13 +13,19 @@ import { MuiOtpInput } from "mui-one-time-password-input";
 
 import { OTPLENGTH } from "@config";
 import { useAppContext } from "@contexts/AppContext";
+import { isMatch } from "date-fns";
+import { useRouter } from "next/router";
 
 // ----------------------------------------------------------------------
 
 export default function PasscodeFrom() {
+  const router = useRouter();
   const { isPasscodeSet } = useAppContext();
   const [value, setValue] = useState({ current: "", new: "", confirm: "" });
-  const [passcodeMatch, setpasscodeMatch] = useState("");
+  const [passcodeMatch, setpasscodeMatch] = useState({
+    isMatch: false,
+    displayText: "",
+  });
 
   const handleCurrent = (newValue) => {
     setValue({ ...value, current: newValue });
@@ -32,17 +38,42 @@ export default function PasscodeFrom() {
 
     if (value.new === newValue) {
       setpasscodeMatch("Matching");
+      setpasscodeMatch({ isMatch: true, displayText: "Passcode Matched" });
     } else {
-      setpasscodeMatch("Passcode not matching");
+      setpasscodeMatch({
+        ...passcodeMatch,
+        displayText: "Passcode not Matching",
+      });
     }
+  };
+
+  const handlePasscodeSave = (e) => {
+    console.log(value.confirm);
   };
 
   return (
     <Container>
       <Stack gap={2}>
         <Box display="flex" justifyContent="space-between">
-          <Typography>Cancel</Typography>
-          <Typography>Done</Typography>
+          <Typography
+            variant="body2"
+            sx={{ color: "info.main" }}
+            onClick={() => router.back()}
+          >
+            Cancel
+          </Typography>
+          {passcodeMatch.isMatch ? (
+            <Typography variant="body2" onClick={handlePasscodeSave}>
+              Done
+            </Typography>
+          ) : (
+            <Typography
+              variant="body2"
+              sx={{ color: "grey.400", fontWeight: "body2.fontWeight" }}
+            >
+              Done
+            </Typography>
+          )}
         </Box>
         <Grid container spacing={2}>
           <Grid item xs={12} md={12}>
@@ -97,15 +128,13 @@ export default function PasscodeFrom() {
                     variant="body2"
                     sx={{
                       color: `${
-                        passcodeMatch === "Matching"
-                          ? "success.main"
-                          : "warning.main"
+                        passcodeMatch.isMatch ? "success.main" : "warning.main"
                       }`,
                       textAlign: "center",
                       mt: 1,
                     }}
                   >
-                    {passcodeMatch}
+                    {passcodeMatch.displayText}
                   </Box>
                 </Box>
               ) : null}
