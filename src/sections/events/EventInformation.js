@@ -1,7 +1,7 @@
 import { PrimaryButton } from "@components/Button";
 import { Typography, Grid, CircularProgress, Chip } from "@mui/material";
-import { Box, Container, display } from "@mui/system";
-import React, { useContext, useEffect, useState } from "react";
+import { Box, Container } from "@mui/system";
+import React, { useEffect, useState } from "react";
 import Radial from "./Radial";
 import { Icon } from "@iconify/react";
 import { useAppAuthContext } from "@contexts/AuthContext";
@@ -24,7 +24,7 @@ const EventInformation = ({ clickedEvents }) => {
     addEventInUser(selectedEvent);
   };
 
-  const selectedEvent = clickedEvents;
+  const selectedEvent = clickedEvents ? clickedEvents : [];
   const currentDate = new Date();
   const eventdate = new Date(selectedEvent.date);
   if (currentDate >= eventdate) {
@@ -37,7 +37,11 @@ const EventInformation = ({ clickedEvents }) => {
     day: "numeric",
   };
 
-  let chipLabel = selectedEvent.is_closed ? "Closed" : "Active";
+  let chipLabel = selectedEvent
+    ? selectedEvent.is_closed
+      ? "Closed"
+      : "Active"
+    : null;
   let chipColor = chipLabel === "Active" ? "success.main" : "warning.main";
   let chipTextColor = chipLabel === "Active" ? "grey.0" : "grey.800";
 
@@ -53,7 +57,7 @@ const EventInformation = ({ clickedEvents }) => {
     if (currentDate >= eventdate) {
       events.is_closed = true;
     } else {
-      changeGraphData();
+      changeGraphData;
     }
   }, []);
 
