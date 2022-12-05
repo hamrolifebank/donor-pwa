@@ -1,4 +1,4 @@
-import { EventService } from "@services";
+import { EventService } from "@services/index.js";
 import PropTypes from "prop-types";
 import { createContext, useCallback, useContext, useState } from "react";
 const initialState = {
@@ -21,6 +21,7 @@ const initialState = {
   ],
   isGraphDataAvailable: true,
 };
+
 const EventContext = createContext(initialState);
 
 EventProvider.propTypes = {
@@ -30,11 +31,25 @@ EventProvider.propTypes = {
 function EventProvider({ children }) {
   const [eventState, setEventState] = useState(initialState);
 
-  const fetchEventDetails = useCallback(async () => {
-    const response = await EventService.getSingleEvent();
-    const formatted = response.data;
-    console.log(formatted);
-    setEventState((prev) => ({ ...prev, stats: formatted }));
+  const changeGraphData = useCallback(() => {
+    setAppState((prev) => ({ ...prev, isGraphDataAvailable: false }));
+  });
+
+  const fetchEventDetails = useCallback(async (id) => {
+    const bloodGroupRes = await EventService.getStats(id, "bloodgroup");
+    const ageRes = await EventService.getStats(id, "age");
+    const genderRes = await EventService.getStats(id, "gender");
+    const Stats = initialState.stats;
+    Stats[0].data = bloodGroupRes.data;
+
+    Stats[1].data = ageRes.data;
+
+    Stats[2].data = genderRes.data;
+
+    setEventState((prev) => ({
+      ...prev,
+      stats: Stats,
+    }));
   }, []);
 
   const contextValue = {
