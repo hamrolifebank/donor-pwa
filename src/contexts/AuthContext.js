@@ -49,12 +49,12 @@ const wallet = getWallet();
 function AppAuthProvider({ children }) {
   const [authState, setAuthState] = useState(initialState);
 
-  const addWallet = async (payload) => {
-    // setAuthState((prev) => ({
-    //   ...prev,
-    //   wallet: payload,
-    // }));
-    const encryptedWallet = await encryptWallet("", payload);
+  const addWallet = async (payload, passcode = "") => {
+    const encryptedWallet = await encryptWallet(passcode, payload);
+    setAuthState((prev) => ({
+      ...prev,
+      wallet: encryptedWallet,
+    }));
 
     setWallet(encryptedWallet);
   };

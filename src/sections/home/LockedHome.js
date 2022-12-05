@@ -18,6 +18,7 @@ import QRCode from "react-qr-code";
 import { Container } from "@mui/system";
 
 import { usePasscodeContext } from "@contexts/PasscodeContext";
+import { PrimaryButton } from "@components/Button";
 
 const LockedHome = () => {
   const { push } = useRouter();
@@ -56,6 +57,9 @@ const LockedHome = () => {
           </Box>
         </Box>
       </Box>
+      <PrimaryButton onClick={() => push("/passcode")}>
+        Unlock wallet
+      </PrimaryButton>
     </Container>
   );
 };

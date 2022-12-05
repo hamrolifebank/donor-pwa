@@ -15,17 +15,25 @@ import { OTPLENGTH } from "@config";
 import { useAppContext } from "@contexts/AppContext";
 import { isMatch } from "date-fns";
 import { useRouter } from "next/router";
+import { useAppAuthContext } from "@contexts/AuthContext";
+import { encryptWallet, restoreFromEncryptedWallet } from "@utils/wallet";
+import { usePasscodeContext } from "@contexts/PasscodeContext";
+import { getWallet, setIsPasscodeSet, setWallet } from "@utils/sessionManager";
 
 // ----------------------------------------------------------------------
 
 export default function PasscodeFrom() {
   const router = useRouter();
-  const { isPasscodeSet } = useAppContext();
+
   const [value, setValue] = useState({ current: "", new: "", confirm: "" });
   const [passcodeMatch, setpasscodeMatch] = useState({
     isMatch: false,
     displayText: "",
   });
+
+  const { addWallet } = useAppAuthContext();
+  const { isPasscodeSet, changeIsPasscodeSet, changeIsAppLocked } =
+    usePasscodeContext();
 
   const handleCurrent = (newValue) => {
     setValue({ ...value, current: newValue });
@@ -47,8 +55,13 @@ export default function PasscodeFrom() {
     }
   };
 
-  const handlePasscodeSave = (e) => {
-    console.log(value.confirm);
+  const handlePasscodeSave = async () => {
+    const wallet = await getWallet();
+    const decryptedWallet = await restoreFromEncryptedWallet(wallet, "");
+
+    await addWallet(decryptedWallet, value.new);
+    changeIsPasscodeSet();
+    changeIsAppLocked();
   };
 
   return (
