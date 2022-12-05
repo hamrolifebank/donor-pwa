@@ -1,6 +1,7 @@
 import Page from "@components/Page";
 import { RegisterPage } from "@sections/register";
 import DashboardLayout from "@layouts/dashboard/DashboardLayout";
+import UpdateProfileForm from "@sections/register/Register";
 
 const PAGE_TITLE = "Register";
 
@@ -11,7 +12,7 @@ register.getLayout = (page) => (
 export default function register() {
   return (
     <Page title={PAGE_TITLE}>
-      <RegisterPage />
+      <UpdateProfileForm />
     </Page>
   );
 }
