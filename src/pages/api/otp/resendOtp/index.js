@@ -1,5 +1,3 @@
-import { otpList } from "src/otpList/otpList";
-
 export default function handler(req, res) {
   if (req.method === "POST") {
     const { phoneNumber } = req.body;
