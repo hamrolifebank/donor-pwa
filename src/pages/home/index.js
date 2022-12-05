@@ -1,4 +1,5 @@
 import Page from "@components/Page";
+import { OtpApiProvider } from "@contexts/otpApiContext";
 import DashboardlayoutwithFooter from "@layouts/dashboard/DashboardlayoutwithFooter";
 import { Home } from "@sections/home";
 
@@ -13,7 +14,9 @@ HomePage.getLayout = (page) => (
 export default function HomePage() {
   return (
     <Page title={PAGE_TITLE}>
-      <Home />
+      <OtpApiProvider>
+        <Home />
+      </OtpApiProvider>
     </Page>
   );
 }

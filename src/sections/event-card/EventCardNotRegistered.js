@@ -1,19 +1,27 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { Box, Button, Paper, Typography } from "@mui/material";
 import { useTheme } from "@emotion/react";
 import { Icon } from "@iconify/react";
 import { PrimaryButton } from "@components/Button";
 import { useAppAuthContext } from "@contexts/AuthContext";
-import Link from "next/link";
+import { useOtpContext } from "@contexts/OtpContext";
+import { getCurrentUser } from "@utils/sessionManager";
 
 const EventCardNotRegistered = ({ event }) => {
   const theme = useTheme();
-  const { user, addUser,addEventInUser } = useAppAuthContext();
+  const { user, addUser, addEventInUser } = useAppAuthContext();
+  const { handleClickOpenOtpDialog } = useOtpContext();
 
-  const handleRegister = (event) => {
-   addEventInUser(event)
+  const handleRegister = () => {
+    if (!getCurrentUser().isPhoneVerified) {
+      handleClickOpenOtpDialog(user.phone);
+    }
+    if (getCurrentUser().isPhoneVerified) {
+      addEventInUser(event);
+    }
   };
+
   return (
     <>
       <Paper
@@ -70,7 +78,7 @@ const EventCardNotRegistered = ({ event }) => {
             onClick={(e) => {
               e.preventDefault();
               e.stopPropagation();
-              handleRegister(event);
+              handleRegister(e);
             }}
           >
             <Icon icon="material-symbols:arrow-circle-left" />
