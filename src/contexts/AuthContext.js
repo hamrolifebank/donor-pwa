@@ -1,3 +1,4 @@
+import { encryptWallet, restoreFromEncryptedWallet } from "@utils/wallet";
 import { isValid } from "date-fns";
 import PropTypes from "prop-types";
 import { createContext, useContext, useEffect, useState } from "react";
@@ -49,12 +50,14 @@ const wallet = getWallet();
 function AppAuthProvider({ children }) {
   const [authState, setAuthState] = useState(initialState);
 
-  const addWallet = (payload) => {
-    setAuthState((prev) => ({
-      ...prev,
-      wallet: payload,
-    }));
-    setWallet(payload);
+  const addWallet = async (payload) => {
+    // setAuthState((prev) => ({
+    //   ...prev,
+    //   wallet: payload,
+    // }));
+    const encryptedWallet = await encryptWallet("", payload);
+
+    setWallet(encryptedWallet);
   };
 
   const addPublicAddress = (payload) => {

@@ -16,6 +16,7 @@ import { AppProvider } from "@contexts/AppContext";
 import { OtpProvider, useOtpContext } from "@contexts/OtpContext";
 import OtpDialog from "@components/otp-dialog/OtpDialog";
 import { OtpApiProvider } from "@contexts/otpApiContext";
+import { PasscodeProvider } from "@contexts/PasscodeContext";
 
 // locales
 // components
@@ -49,16 +50,18 @@ export default function MyApp(props) {
         <AppProvider>
           <OtpProvider>
             <OtpApiProvider>
-              <SettingsProvider>
-                {/* <AuthProvider> */}
-                <ThemeProvider>
-                  <AuthGuard>
-                    {getLayout(<Component {...pageProps} />)}
-                  </AuthGuard>
-                  <OtpDialog />
-                </ThemeProvider>
-                {/* </AuthProvider> */}
-              </SettingsProvider>
+              <PasscodeProvider>
+                <SettingsProvider>
+                  {/* <AuthProvider> */}
+                  <ThemeProvider>
+                    <AuthGuard>
+                      {getLayout(<Component {...pageProps} />)}
+                    </AuthGuard>
+                    <OtpDialog />
+                  </ThemeProvider>
+                  {/* </AuthProvider> */}
+                </SettingsProvider>
+              </PasscodeProvider>
             </OtpApiProvider>
           </OtpProvider>
         </AppProvider>

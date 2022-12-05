@@ -5,8 +5,15 @@ import QRCode from "react-qr-code";
 import { Container } from "@mui/system";
 import { EventPage } from "../event-lists";
 import { useOtpContext } from "@contexts/OtpContext";
+import { PrimaryButton } from "@components/Button";
+import { set } from "date-fns";
+import { usePasscodeContext } from "@contexts/PasscodeContext";
+import { useRouter } from "next/router";
 
 const Home = () => {
+  const { push } = useRouter();
+  const { isAppLocked } = usePasscodeContext();
+
   const { publicAddress, user } = useAppAuthContext();
   const {
     handleClickOpenOtpDialog,

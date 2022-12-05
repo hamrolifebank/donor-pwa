@@ -20,7 +20,7 @@ const core = {
   },
 
   async restoreFromEncryptedWallet(encryptedWallet, passCode) {
-    const wallet = await ethers.Wallet.fromEncryptedWallet(
+    const wallet = await ethers.Wallet.fromEncryptedJson(
       encryptedWallet,
       passCode
     );
