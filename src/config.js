@@ -43,6 +43,8 @@ export const STORAGE = {
   INDEX_DB: "indexDB",
 };
 
+export const OTPLENGTH = 6;
+
 //COLORS
 // export const PIECHARTCOLORS = {
 //   "A+": "#FFAB00",

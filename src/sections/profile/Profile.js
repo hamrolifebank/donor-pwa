@@ -17,7 +17,9 @@ const Profile = (props) => {
       <hr />
       <UserInformation user={user} />
       <Container sx={{ mb: 4 }}>
-        <SecondaryButton>Create/update passcode</SecondaryButton>
+        <SecondaryButton onClick={() => push("/profile/passcode")}>
+          Create/update passcode
+        </SecondaryButton>
         <SecondaryButton onClick={() => push("/profile/backupmnemonic")}>
           Backup secret words
         </SecondaryButton>
