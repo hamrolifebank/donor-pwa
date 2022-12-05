@@ -1,4 +1,5 @@
 import Page from "@components/Page";
+import PasscodeGuard from "@guards/PasscodeGuard";
 import DashboardlayoutwithFooter from "@layouts/dashboard/DashboardlayoutwithFooter";
 import { Profile } from "@sections/profile";
 
@@ -13,7 +14,9 @@ ProfilePage.getLayout = (page) => (
 export default function ProfilePage() {
   return (
     <Page title={PAGE_TITLE}>
-      <Profile />
+      <PasscodeGuard>
+        <Profile />
+      </PasscodeGuard>
     </Page>
   );
 }

@@ -13,6 +13,7 @@ import { AppAuthProvider } from "@contexts/AuthContext";
 
 import AuthGuard from "@guards/AuthGuard";
 import { AppProvider } from "@contexts/AppContext";
+import { PasscodeProvider } from "@contexts/PasscodeContext";
 
 // locales
 // components
@@ -44,13 +45,15 @@ export default function MyApp(props) {
       </Head>
       <AppAuthProvider>
         <AppProvider>
-          <SettingsProvider>
-            {/* <AuthProvider> */}
-            <ThemeProvider>
-              <AuthGuard>{getLayout(<Component {...pageProps} />)}</AuthGuard>
-            </ThemeProvider>
-            {/* </AuthProvider> */}
-          </SettingsProvider>
+          <PasscodeProvider>
+            <SettingsProvider>
+              {/* <AuthProvider> */}
+              <ThemeProvider>
+                <AuthGuard>{getLayout(<Component {...pageProps} />)}</AuthGuard>
+              </ThemeProvider>
+              {/* </AuthProvider> */}
+            </SettingsProvider>
+          </PasscodeProvider>
         </AppProvider>
       </AppAuthProvider>
     </CacheProvider>

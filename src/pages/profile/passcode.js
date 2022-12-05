@@ -1,4 +1,5 @@
 import Page from "@components/Page";
+import PasscodeGuard from "@guards/PasscodeGuard";
 import DashboardlayoutwithFooter from "@layouts/dashboard/DashboardlayoutwithFooter";
 import { PasscodeForm } from "@sections/passcode";
 const PAGE_TITLE = "Create/Update Passcode";
@@ -11,7 +12,9 @@ Passcode.getLayout = (page) => (
 export default function Passcode() {
   return (
     <Page title={PAGE_TITLE}>
-      <PasscodeForm />
+      <PasscodeGuard>
+        <PasscodeForm />
+      </PasscodeGuard>
     </Page>
   );
 }

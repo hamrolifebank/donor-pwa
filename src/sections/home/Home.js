@@ -19,9 +19,11 @@ import { Container } from "@mui/system";
 import { EventPage } from "../event-lists";
 import { PrimaryButton } from "@components/Button";
 import { set } from "date-fns";
+import { usePasscodeContext } from "@contexts/PasscodeContext";
 
 const Home = () => {
   const { push } = useRouter();
+  const { isAppLocked } = usePasscodeContext();
 
   const { publicAddress, user } = useAppAuthContext();
   const [open, setOpen] = useState(false);
