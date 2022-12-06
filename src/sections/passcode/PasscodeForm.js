@@ -19,12 +19,12 @@ import { useAppAuthContext } from "@contexts/AuthContext";
 import { encryptWallet, restoreFromEncryptedWallet } from "@utils/wallet";
 import { usePasscodeContext } from "@contexts/PasscodeContext";
 import { getWallet, setIsPasscodeSet, setWallet } from "@utils/sessionManager";
+import NewLoadingScreen from "@components/NewLoadingScreen";
 
 // ----------------------------------------------------------------------
 
 export default function PasscodeFrom() {
-  const { push } = useRouter();
-
+  const [showLoadingScreen, setShowLoadingScreen] = useState(false);
   const [value, setValue] = useState({ current: "", new: "", confirm: "" });
   const [passcodeMatch, setpasscodeMatch] = useState({
     isMatch: false,
@@ -57,19 +57,29 @@ export default function PasscodeFrom() {
 
   const handlePasscodeSave = async () => {
     try {
-      const wallet = await getWallet();
+      setShowLoadingScreen(true);
+      const wallet = getWallet();
       const decryptedWallet = await restoreFromEncryptedWallet(
         wallet,
         value.current
       );
       addWallet(decryptedWallet, value.new);
+      setShowLoadingScreen(false);
       changeIsPasscodeSet();
       changeIsAppLocked();
-      push("/");
     } catch (err) {
+      setShowLoadingScreen(false);
       setError(true);
     }
   };
+
+  if (showLoadingScreen) {
+    return (
+      <div>
+        <NewLoadingScreen />
+      </div>
+    );
+  }
 
   return (
     <Container>

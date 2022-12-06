@@ -19,10 +19,12 @@ import { useAppAuthContext } from "@contexts/AuthContext";
 import { encryptWallet, restoreFromEncryptedWallet } from "@utils/wallet";
 import { usePasscodeContext } from "@contexts/PasscodeContext";
 import { PATH_DASHBOARD } from "@routes/paths";
+import NewLoadingScreen from "@components/NewLoadingScreen";
 
 // ----------------------------------------------------------------------
 
 export default function EnterPasscode({ pathname = PATH_DASHBOARD.root }) {
+  const [showLoadingScreen, setShowLoadingScreen] = useState(false);
   const [passcode, setPasscode] = useState("");
   const [error, setError] = useState(false);
   const { wallet } = useAppAuthContext();
@@ -31,15 +33,18 @@ export default function EnterPasscode({ pathname = PATH_DASHBOARD.root }) {
 
   const verifyPasscode = async (passcode) => {
     try {
+      setShowLoadingScreen(true);
       const decryptedWallet = await restoreFromEncryptedWallet(
         wallet,
         passcode
       );
       if (decryptedWallet) {
         changeIsAppLocked();
+        setShowLoadingScreen(false);
         push(pathname);
       }
     } catch (err) {
+      setShowLoadingScreen(false);
       setPasscode("");
       setError(true);
     }
@@ -52,6 +57,9 @@ export default function EnterPasscode({ pathname = PATH_DASHBOARD.root }) {
       verifyPasscode(newValue);
     }
   };
+  if (showLoadingScreen) {
+    return <NewLoadingScreen />;
+  }
 
   return (
     <Container>

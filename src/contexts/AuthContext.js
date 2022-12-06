@@ -20,7 +20,7 @@ import {
 const initialState = {
   isAuthenticated: false, // should be false by default,
   isInitialized: false,
-  isMnemonicWritten: false,
+
   wallet: null,
   publicAddress: null,
   user: null,
@@ -58,6 +58,7 @@ function AppAuthProvider({ children }) {
     }));
 
     setWallet(encryptedWallet);
+    return 1;
   };
 
   const addPublicAddress = (payload) => {
