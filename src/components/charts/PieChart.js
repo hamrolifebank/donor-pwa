@@ -20,11 +20,9 @@ export default function ChartPie({ data, labels }) {
         useSeriesColors: true,
       },
       markers: {
-        width: 15,
-        height: 15,
         strokeWidth: 0,
         strokeColor: "#fff",
-        radius: 0,
+        radius: 10,
         offsetX: 0,
         offsetY: 0,
       },
@@ -50,7 +48,7 @@ export default function ChartPie({ data, labels }) {
       type="pie"
       series={CHART_DATA}
       options={chartOptions}
-      width={250}
+      width={300}
     />
   );
 }

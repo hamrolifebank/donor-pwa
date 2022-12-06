@@ -1,30 +1,18 @@
 import { PrimaryButton } from "@components/Button";
-import {
-  Typography,
-  Grid,
-  CircularProgress,
-  Chip,
-  IconButton,
-} from "@mui/material";
-import { Box, Container, display } from "@mui/system";
-import React, { useContext, useEffect, useState } from "react";
+import { Typography, Grid, CircularProgress, Chip } from "@mui/material";
+import { Box, Container } from "@mui/system";
+import React, { useEffect, useState } from "react";
 import Radial from "./Radial";
 import { Icon } from "@iconify/react";
 import { useAppAuthContext } from "@contexts/AuthContext";
 import { useAppContext } from "@contexts/AppContext";
-import { useOtpContext } from "@contexts/OtpContext";
-import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
-import Router from "next/router";
-import { getCurrentUser } from "@utils/sessionManager";
 
 const EventInformation = ({ clickedEvents }) => {
-  const { user } = useAppAuthContext();
   const { events } = useAppContext();
   if (!clickedEvents) {
     let eventFromStorage = JSON.parse(localStorage.getItem("slugID"));
     clickedEvents = events.find((event) => event.id === eventFromStorage);
   }
-  const { handleClickOpenOtpDialog } = useOtpContext();
   const { addEventInUser } = useAppAuthContext();
   const [register, setRegister] = useState("Register");
   const [registerColor, setRegisterColor] = useState("primary.main");
@@ -36,7 +24,7 @@ const EventInformation = ({ clickedEvents }) => {
     addEventInUser(selectedEvent);
   };
 
-  const selectedEvent = clickedEvents;
+  const selectedEvent = clickedEvents ? clickedEvents : [];
   const currentDate = new Date();
   const eventdate = new Date(selectedEvent.date);
   if (currentDate >= eventdate) {
@@ -49,7 +37,11 @@ const EventInformation = ({ clickedEvents }) => {
     day: "numeric",
   };
 
-  let chipLabel = selectedEvent.is_closed ? "Closed" : "Active";
+  let chipLabel = selectedEvent
+    ? selectedEvent.is_closed
+      ? "Closed"
+      : "Active"
+    : null;
   let chipColor = chipLabel === "Active" ? "success.main" : "warning.main";
   let chipTextColor = chipLabel === "Active" ? "grey.0" : "grey.800";
 
@@ -65,19 +57,12 @@ const EventInformation = ({ clickedEvents }) => {
     if (currentDate >= eventdate) {
       events.is_closed = true;
     } else {
-      changeGraphData();
+      changeGraphData;
     }
-  }, [user]);
-
-  const arrowBack = () => {
-    Router.back();
-  };
+  }, []);
 
   return (
     <Container>
-      <IconButton color="primary" onClick={arrowBack}>
-        <ArrowBackIosIcon />
-      </IconButton>
       <Box sx={{ display: "flex", justifyContent: "space-between" }} mb={1}>
         <Typography variant="h6">{selectedEvent.name}</Typography>{" "}
         <Chip
@@ -103,14 +88,7 @@ const EventInformation = ({ clickedEvents }) => {
             ""
           ) : (
             <PrimaryButton
-              onClick={() => {
-                if (!getCurrentUser().isPhoneVerified) {
-                  handleClickOpenOtpDialog(user.phone);
-                }
-                if (getCurrentUser().isPhoneVerified) {
-                  handleRegister(selectedEvent);
-                }
-              }}
+              onClick={() => handleRegister(selectedEvent)}
               sx={{
                 p: "3px 11px",
                 backgroundColor: `${registerColor}`,
