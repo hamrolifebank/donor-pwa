@@ -37,7 +37,6 @@ function EventProvider({ children }) {
 
   const fetchEventDetails = useCallback(async (id) => {
     const bloodGroupRes = await EventService.getStats(id, "bloodgroup");
-    console.log(bloodGroupRes);
     const ageRes = await EventService.getStats(id, "age");
     const genderRes = await EventService.getStats(id, "gender");
     const Stats = initialState.stats;
