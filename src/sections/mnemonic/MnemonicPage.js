@@ -11,6 +11,7 @@ import { PATH_DASHBOARD } from "@routes/paths";
 import { deleteWalletFromLocal, getWallet } from "@utils/sessionManager";
 import LoadingScreen from "@components/LoadingScreen";
 import { restoreFromEncryptedWallet } from "@utils/wallet";
+import NewLoadingScreen from "@components/NewLoadingScreen";
 
 export default function Mnemonic() {
   const { push } = useRouter();
@@ -32,7 +33,7 @@ export default function Mnemonic() {
   const [copied, setCopied] = useState("Copy all mnemonics");
 
   if (!wallet || !wallet.mnemonic || wallet.mnemonic.length === 0) {
-    return <LoadingScreen />;
+    return <NewLoadingScreen />;
   } else {
     const words = wallet && wallet.mnemonic.phrase.split(" ");
 

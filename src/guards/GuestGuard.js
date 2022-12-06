@@ -7,6 +7,7 @@ import LoadingScreen from "@components/LoadingScreen";
 //
 import { useAppAuthContext } from "@contexts/AuthContext";
 import { PATH_AUTH, PATH_DASHBOARD } from "@routes/paths";
+import NewLoadingScreen from "@components/NewLoadingScreen";
 
 // ----------------------------------------------------------------------
 
@@ -32,7 +33,7 @@ export default function GuestGuard({ children }) {
   }, [isAuthenticated, user]);
 
   if (isInitialized === isAuthenticated) {
-    return <LoadingScreen />;
+    return <NewLoadingScreen />;
   }
 
   return <> {children} </>;
