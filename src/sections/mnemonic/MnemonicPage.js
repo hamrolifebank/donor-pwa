@@ -12,16 +12,25 @@ import { deleteWalletFromLocal, getWallet } from "@utils/sessionManager";
 import LoadingScreen from "@components/LoadingScreen";
 import { restoreFromEncryptedWallet } from "@utils/wallet";
 
-export default function Mnemonic() {
+export default function Mnemonic({ passcode }) {
+  if (!passcode) {
+    passcode = "";
+  }
+  console.log(passcode);
   const { push } = useRouter();
   const [wallet, setWallet] = useState(null);
   const encryptedWallet = getWallet();
 
-  const getDecryptedWallet = async () => {
-    return await restoreFromEncryptedWallet(encryptedWallet, "");
+  const getDecryptedWallet = async (passcode) => {
+    const decryptedWallet = await restoreFromEncryptedWallet(
+      encryptedWallet,
+      passcode
+    );
+    setWallet(decryptedWallet);
   };
   useEffect(() => {
-    setWallet(getDecryptedWallet());
+    console.log("useEffect");
+    getDecryptedWallet(passcode);
   }, []);
 
   const [copied, setCopied] = useState("Copy all mnemonics");
