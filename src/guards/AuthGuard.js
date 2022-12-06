@@ -9,7 +9,6 @@ import LoadingScreen from "../components/LoadingScreen";
 import { useAppAuthContext } from "@contexts/AuthContext";
 
 import { PATH_AUTH } from "@routes/paths";
-import NewLoadingScreen from "@components/NewLoadingScreen";
 
 // ----------------------------------------------------------------------
 
@@ -30,12 +29,12 @@ export default function AuthGuard({ children }) {
   }, [isAuthenticated, isInitialized]);
 
   if (isAuthenticated === undefined) {
-    return <NewLoadingScreen />;
+    return <LoadingScreen />;
   } else if (isAuthenticated === false) {
     if (pathname === PATH_AUTH.login) {
       return <>{children}</>;
     } else {
-      return <NewLoadingScreen />;
+      return <LoadingScreen />;
     }
   } else {
     return <>{children}</>;
