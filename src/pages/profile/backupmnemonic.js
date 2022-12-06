@@ -34,7 +34,6 @@ export default function Mnemonic(props) {
   //     setError(true);
   //   }
   // };
-  console.log(passcodeEntered, passcode);
 
   const handleInput = (newValue) => {
     setPasscode(newValue);

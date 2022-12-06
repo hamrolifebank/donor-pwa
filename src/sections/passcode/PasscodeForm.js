@@ -23,7 +23,7 @@ import { getWallet, setIsPasscodeSet, setWallet } from "@utils/sessionManager";
 // ----------------------------------------------------------------------
 
 export default function PasscodeFrom() {
-  const router = useRouter();
+  const { push } = useRouter();
 
   const [value, setValue] = useState({ current: "", new: "", confirm: "" });
   const [passcodeMatch, setpasscodeMatch] = useState({
@@ -32,7 +32,7 @@ export default function PasscodeFrom() {
   });
 
   const { addWallet } = useAppAuthContext();
-  const { isPasscodeSet, changeIsPasscodeSet, changeIsAppLocked } =
+  const { isPasscodeset, changeIsPasscodeSet, changeIsAppLocked } =
     usePasscodeContext();
 
   const handleCurrent = (newValue) => {
@@ -57,11 +57,15 @@ export default function PasscodeFrom() {
 
   const handlePasscodeSave = async () => {
     const wallet = await getWallet();
-    const decryptedWallet = await restoreFromEncryptedWallet(wallet, "");
+    const decryptedWallet = await restoreFromEncryptedWallet(
+      wallet,
+      value.current
+    );
 
-    await addWallet(decryptedWallet, value.new);
+    addWallet(decryptedWallet, value.new);
     changeIsPasscodeSet();
     changeIsAppLocked();
+    push("/");
   };
 
   return (
@@ -96,7 +100,7 @@ export default function PasscodeFrom() {
               </Typography>
             </Box>
             <Stack gap={1}>
-              {isPasscodeSet ? (
+              {isPasscodeset ? (
                 <Box>
                   <Typography
                     variant="subtitle1"
