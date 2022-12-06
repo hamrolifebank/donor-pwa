@@ -19,7 +19,6 @@ PasscodeGuard.propTypes = {
 
 export default function PasscodeGuard({ children }) {
   const { push, pathname } = useRouter();
-  console.log("PasscodeGuard");
 
   const { isPasscodeset, isAppLocked } = usePasscodeContext();
 
@@ -39,7 +38,6 @@ export default function PasscodeGuard({ children }) {
       return <LoadingScreen />;
     }
   } else {
-    console.log("isApplocked false");
     return <>{children}</>;
   }
 }

@@ -22,8 +22,9 @@ import { PATH_DASHBOARD } from "@routes/paths";
 
 // ----------------------------------------------------------------------
 
-export default function EnterPasscode() {
+export default function EnterPasscode({ pathname = PATH_DASHBOARD.root }) {
   const [passcode, setPasscode] = useState("");
+  const [error, setError] = useState(false);
   const { wallet } = useAppAuthContext();
   const { changeIsAppLocked } = usePasscodeContext();
   const { push } = useRouter();
@@ -35,18 +36,18 @@ export default function EnterPasscode() {
         passcode
       );
       if (decryptedWallet) {
-        console.log("passcode verified");
         changeIsAppLocked();
-        push(PATH_DASHBOARD.root);
+        push(pathname);
       }
     } catch (err) {
-      console.log(err);
+      setPasscode("");
+      setError(true);
     }
   };
 
   const handleInput = (newValue) => {
     setPasscode(newValue);
-    console.log(newValue.length, OTPLENGTH);
+
     if (newValue.length === OTPLENGTH) {
       verifyPasscode(newValue);
     }
@@ -76,6 +77,13 @@ export default function EnterPasscode() {
           </Grid>
         </Grid>
       </Stack>
+      {error && (
+        <Box display="flex" justifyContent="center" mt={2}>
+          <Typography variant="body2" sx={{ color: "error.main" }}>
+            Passcode is incorrect. Please enter valid password.
+          </Typography>
+        </Box>
+      )}
     </Container>
   );
 }

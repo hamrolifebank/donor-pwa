@@ -17,16 +17,11 @@ export default function Mnemonic() {
   const [wallet, setWallet] = useState(null);
   const encryptedWallet = getWallet();
 
+  const getDecryptedWallet = async () => {
+    return await restoreFromEncryptedWallet(encryptedWallet, "");
+  };
   useEffect(() => {
-    const getDecryptedWallet = async () => {
-      const decryptedWallet = await restoreFromEncryptedWallet(
-        encryptedWallet,
-        ""
-      );
-
-      setWallet(decryptedWallet);
-    };
-    getDecryptedWallet();
+    setWallet(getDecryptedWallet());
   }, []);
 
   const [copied, setCopied] = useState("Copy all mnemonics");
