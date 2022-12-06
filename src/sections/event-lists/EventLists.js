@@ -17,16 +17,8 @@ export default function EventsPage(props) {
 
   const [noOfEventsToDisplay, setNoOfEventsToDisplay] =
     useState(NO_OF_EVENTS_TO_SHOW);
-  // const { events ,functiobn} = useEventContext();
 
-  // useEffect(()=>{
-  //   function()
-  // },[function])
   const { events } = useAppContext();
-
-  // useEffect(() => {
-  //   fetchEvents();
-  // }, [fetchEvents]);
   const { user } = useAppAuthContext();
   const { push } = useRouter();
 

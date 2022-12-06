@@ -12,6 +12,7 @@ import Radial from "./Radial";
 import { Icon } from "@iconify/react";
 import { useAppAuthContext } from "@contexts/AuthContext";
 import { useAppContext } from "@contexts/AppContext";
+import { getCurrentUser } from "@utils/sessionManager";
 
 const EventInformation = ({ clickedEvents }) => {
   const { events } = useAppContext();
@@ -52,9 +53,8 @@ const EventInformation = ({ clickedEvents }) => {
   let chipTextColor = chipLabel === "Active" ? "grey.0" : "grey.800";
 
   useEffect(() => {
-    let alreadyRegistered = JSON.parse(
-      localStorage.getItem("user")
-    ).events?.find((event) => event.id === selectedEvent.id);
+    let alreadyRegistered = 
+      getCurrentUser("user").events?.find((event) => event.id === selectedEvent.id);
 
     if (alreadyRegistered) {
       setRegister("Registered");
