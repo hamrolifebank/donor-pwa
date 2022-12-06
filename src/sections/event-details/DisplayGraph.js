@@ -16,8 +16,8 @@ export default function DisplayGraph(props) {
   const [value, setValue] = React.useState(stats[0].groupBy);
 
   React.useEffect(() => {
-    fetchEventDetails(router.query.slug);
-  }, []);
+    if (router.isReady) fetchEventDetails(router.query.slug);
+  }, [router.isReady]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
