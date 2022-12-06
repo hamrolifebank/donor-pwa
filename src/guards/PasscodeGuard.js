@@ -8,6 +8,7 @@ import LoadingScreen from "@components/LoadingScreen";
 import { useAppAuthContext } from "@contexts/AuthContext";
 import { PATH_AUTH, PATH_DASHBOARD } from "@routes/paths";
 import { usePasscodeContext } from "@contexts/PasscodeContext";
+import NewLoadingScreen from "@components/NewLoadingScreen";
 
 // ----------------------------------------------------------------------
 
@@ -30,12 +31,12 @@ export default function PasscodeGuard({ children }) {
   }, [isAppLocked]);
 
   if (isAppLocked === undefined) {
-    return <LoadingScreen />;
+    return <NewLoadingScreen />;
   } else if (isAppLocked === true) {
     if (pathname === PATH_DASHBOARD.root) {
       return <>{children}</>;
     } else {
-      return <LoadingScreen />;
+      return <NewLoadingScreen />;
     }
   } else {
     return <>{children}</>;
