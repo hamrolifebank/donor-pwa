@@ -30,7 +30,7 @@ export default function PasscodeFrom() {
     isMatch: false,
     displayText: "",
   });
-
+  const [error, setError] = useState(false);
   const { addWallet } = useAppAuthContext();
   const { isPasscodeset, changeIsPasscodeSet, changeIsAppLocked } =
     usePasscodeContext();
@@ -56,16 +56,19 @@ export default function PasscodeFrom() {
   };
 
   const handlePasscodeSave = async () => {
-    const wallet = await getWallet();
-    const decryptedWallet = await restoreFromEncryptedWallet(
-      wallet,
-      value.current
-    );
-
-    addWallet(decryptedWallet, value.new);
-    changeIsPasscodeSet();
-    changeIsAppLocked();
-    push("/");
+    try {
+      const wallet = await getWallet();
+      const decryptedWallet = await restoreFromEncryptedWallet(
+        wallet,
+        value.current
+      );
+      addWallet(decryptedWallet, value.new);
+      changeIsPasscodeSet();
+      changeIsAppLocked();
+      push("/");
+    } catch (err) {
+      setError(true);
+    }
   };
 
   return (
@@ -159,6 +162,13 @@ export default function PasscodeFrom() {
           </Grid>
         </Grid>
       </Stack>
+      {error && (
+        <Box display="flex" justifyContent="center" mt={2}>
+          <Typography variant="body2" sx={{ color: "error.main" }}>
+            Current passcode is incorrect. Please enter correct passcode.
+          </Typography>
+        </Box>
+      )}
     </Container>
   );
 }

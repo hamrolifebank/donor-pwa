@@ -16,7 +16,7 @@ export default function Mnemonic({ passcode }) {
   if (!passcode) {
     passcode = "";
   }
-  console.log(passcode);
+
   const { push } = useRouter();
   const [wallet, setWallet] = useState(null);
   const encryptedWallet = getWallet();
@@ -29,7 +29,6 @@ export default function Mnemonic({ passcode }) {
     setWallet(decryptedWallet);
   };
   useEffect(() => {
-    console.log("useEffect");
     getDecryptedWallet(passcode);
   }, []);
 

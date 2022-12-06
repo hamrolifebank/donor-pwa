@@ -24,10 +24,8 @@ PasscodeProvider.propTypes = {
 
 function PasscodeProvider({ children }) {
   const [appState, setAppState] = useState(initialState);
-  console.log("PasscodeProvider", appState);
 
   useEffect(() => {
-    console.log("PasscodeProvider useEffect");
     const isPasscodeset = getIsPasscodeSet();
     if (isPasscodeset) {
       setAppState((prev) => ({
