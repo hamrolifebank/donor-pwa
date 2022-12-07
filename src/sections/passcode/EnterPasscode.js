@@ -1,13 +1,13 @@
 import { useState, useRef, useEffect } from "react";
-// form
+
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-// @mui
+
 import { Stack, Grid, Container, Box, Typography } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
-// components
+
 import { FormProvider, RHFTextField } from "@components/hook-form";
-//onChange={handleChange}
+
 import { FormSchema, defaultValues } from "../form";
 import { MuiOtpInput } from "mui-one-time-password-input";
 
@@ -20,8 +20,6 @@ import { encryptWallet, restoreFromEncryptedWallet } from "@utils/wallet";
 import { usePasscodeContext } from "@contexts/PasscodeContext";
 import { PATH_DASHBOARD } from "@routes/paths";
 import NewLoadingScreen from "@components/NewLoadingScreen";
-
-// ----------------------------------------------------------------------
 
 export default function EnterPasscode({ pathname = PATH_DASHBOARD.root }) {
   const [showLoadingScreen, setShowLoadingScreen] = useState(false);

@@ -1,13 +1,13 @@
 import { useState, useRef, useEffect } from "react";
-// form
+
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-// @mui
+
 import { Stack, Grid, Container, Box, Typography } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
-// components
+
 import { FormProvider, RHFTextField } from "@components/hook-form";
-//onChange={handleChange}
+
 import { FormSchema, defaultValues } from "../form";
 import { MuiOtpInput } from "mui-one-time-password-input";
 
@@ -20,8 +20,6 @@ import { encryptWallet, restoreFromEncryptedWallet } from "@utils/wallet";
 import { usePasscodeContext } from "@contexts/PasscodeContext";
 import { getWallet, setIsPasscodeSet, setWallet } from "@utils/sessionManager";
 import NewLoadingScreen from "@components/NewLoadingScreen";
-
-// ----------------------------------------------------------------------
 
 export default function PasscodeFrom() {
   const [showLoadingScreen, setShowLoadingScreen] = useState(false);
@@ -63,7 +61,7 @@ export default function PasscodeFrom() {
         wallet,
         value.current
       );
-      addWallet(decryptedWallet, value.new);
+      await addWallet(decryptedWallet, value.new);
       setShowLoadingScreen(false);
       changeIsPasscodeSet();
       changeIsAppLocked();

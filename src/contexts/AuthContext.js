@@ -58,7 +58,6 @@ function AppAuthProvider({ children }) {
     }));
 
     setWallet(encryptedWallet);
-    return 1;
   };
 
   const addPublicAddress = (payload) => {

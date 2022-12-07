@@ -19,22 +19,6 @@ export default function Mnemonic(props) {
   const [error, setError] = useState(false);
   const [passcodeEntered, setPasscodeEntered] = useState(false);
 
-  // const verifyPasscode = async (passcode) => {
-  //   try {
-  //     const decryptedWallet = await restoreFromEncryptedWallet(
-  //       wallet,
-  //       passcode
-  //     );
-  //     if (decryptedWallet) {
-  //       changeIsAppLocked();
-  //       push(pathname);
-  //     }
-  //   } catch (err) {
-  //     setPasscode("");
-  //     setError(true);
-  //   }
-  // };
-
   const handleInput = (newValue) => {
     setPasscode(newValue);
 
