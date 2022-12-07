@@ -17,9 +17,17 @@ const handler = async (req, res) => {
 
       const otp = Math.floor(1000 + Math.random() * 9000);
 
-      otpObj.otpNum = otp;
+      const newOtp = {
+        otp,
+      };
 
-      console.log(otpObj);
+      fs.writeFile("./otp.json", JSON.stringify(newOtp), (err) => {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log("file sucess written");
+        }
+      });
 
       const { data } = await axios.post(
         `https://services.rumsan.net/sms`,
