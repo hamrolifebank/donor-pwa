@@ -15,18 +15,25 @@ import { useAppContext } from "@contexts/AppContext";
 import { useEventContext } from "@contexts/EventContext";
 
 import { getCurrentUser } from "@utils/sessionManager";
+import { useRouter } from "next/router";
 
 const EventInformation = ({ clickedEvents }) => {
-  const { events } = useAppContext();
-  if (!clickedEvents) {
-    let eventFromStorage = getCurrentUser("slugID");
-    clickedEvents = events.find((event) => event.id === eventFromStorage);
-  }
+  const router = useRouter();
+  const { events, callEvent } = useAppContext();
+
+  useEffect(() => {
+    callEvent();
+  }, []);
+
   const { addEventInUser } = useAppAuthContext();
   const [register, setRegister] = useState("Register");
   const [registerColor, setRegisterColor] = useState("primary.main");
   const { changeGraphData } = useEventContext();
 
+  if (!clickedEvents) {
+    let eventFromStorage = getCurrentUser("slugID");
+    clickedEvents = events.find((event) => event.id === eventFromStorage);
+  }
   const handleRegister = (selectedEvent) => {
     setRegister("Registered");
     setRegisterColor("grey.400");
@@ -65,10 +72,13 @@ const EventInformation = ({ clickedEvents }) => {
     }
     if (currentDate >= eventdate) {
       events.is_closed = true;
+      if (router.isReady) {
+        fetchEventDetails(router.query.slug);
+      }
     } else {
       changeGraphData();
     }
-  }, []);
+  }, [router.isReady]);
 
   return (
     <Container>
