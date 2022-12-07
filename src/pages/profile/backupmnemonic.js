@@ -4,6 +4,7 @@ import { MnemonicPage } from "@sections/mnemonic";
 import { Box, Container, Grid, Stack, Typography } from "@mui/material";
 import { MuiOtpInput } from "mui-one-time-password-input";
 import { OTPLENGTH } from "@config";
+import { usePasscodeContext } from "@contexts/PasscodeContext";
 const PAGE_TITLE = "Backup your mnemonic";
 
 Mnemonic.getLayout = (page) => (
@@ -17,6 +18,8 @@ export default function Mnemonic(props) {
   const [error, setError] = useState(false);
   const [passcodeEntered, setPasscodeEntered] = useState(false);
 
+  const { isPasscodeSet } = usePasscodeContext();
+
   const handleInput = (newValue) => {
     setPasscode(newValue);
 
@@ -25,6 +28,9 @@ export default function Mnemonic(props) {
     }
   };
 
+  if (!isPasscodeSet) {
+    return <MnemonicPage />;
+  }
   return (
     <div>
       {passcodeEntered ? (
