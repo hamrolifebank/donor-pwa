@@ -2,6 +2,7 @@ import { otpObj } from "../otpObj";
 
 const ethers = require("ethers");
 const axios = require("axios");
+const fs = require("fs");
 
 const handler = async (req, res) => {
   if (req.method === "POST") {
