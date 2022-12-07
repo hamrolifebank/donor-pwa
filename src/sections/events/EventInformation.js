@@ -17,7 +17,7 @@ import { getCurrentUser } from "@utils/sessionManager";
 const EventInformation = ({ clickedEvents }) => {
   const { events } = useAppContext();
   if (!clickedEvents) {
-    let eventFromStorage = JSON.parse(localStorage.getItem("slugID"));
+    let eventFromStorage = getCurrentUser("slugID");
     clickedEvents = events.find((event) => event.id === eventFromStorage);
   }
   const { addEventInUser } = useAppAuthContext();
