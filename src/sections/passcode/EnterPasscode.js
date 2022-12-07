@@ -1,22 +1,12 @@
 import { useState, useRef, useEffect } from "react";
 
-import { yupResolver } from "@hookform/resolvers/yup";
-import { useForm } from "react-hook-form";
-
 import { Stack, Grid, Container, Box, Typography } from "@mui/material";
-import { LoadingButton } from "@mui/lab";
 
-import { FormProvider, RHFTextField } from "@components/hook-form";
-
-import { FormSchema, defaultValues } from "../form";
 import { MuiOtpInput } from "mui-one-time-password-input";
 
 import { OTPLENGTH } from "@config";
-import { useAppContext } from "@contexts/AppContext";
-import { isMatch } from "date-fns";
 import { useRouter } from "next/router";
 import { useAppAuthContext } from "@contexts/AuthContext";
-import { encryptWallet, restoreFromEncryptedWallet } from "@utils/wallet";
 import { usePasscodeContext } from "@contexts/PasscodeContext";
 import { PATH_DASHBOARD } from "@routes/paths";
 import NewLoadingScreen from "@components/NewLoadingScreen";

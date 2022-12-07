@@ -1,8 +1,6 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
 import DashboardlayoutwithFooter from "@layouts/dashboard/DashboardlayoutwithFooter";
 import { MnemonicPage } from "@sections/mnemonic";
-import PasscodeGuard from "@guards/PasscodeGuard";
 import { Box, Container, Grid, Stack, Typography } from "@mui/material";
 import { MuiOtpInput } from "mui-one-time-password-input";
 import { OTPLENGTH } from "@config";
@@ -24,7 +22,6 @@ export default function Mnemonic(props) {
 
     if (newValue.length === OTPLENGTH) {
       setPasscodeEntered(true);
-      // verifyPasscode(newValue);
     }
   };
 
