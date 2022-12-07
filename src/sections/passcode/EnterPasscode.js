@@ -10,6 +10,7 @@ import { useAppAuthContext } from "@contexts/AuthContext";
 import { usePasscodeContext } from "@contexts/PasscodeContext";
 import { PATH_DASHBOARD } from "@routes/paths";
 import NewLoadingScreen from "@components/NewLoadingScreen";
+import { restoreFromEncryptedWallet } from "@utils/wallet";
 
 export default function EnterPasscode({ pathname = PATH_DASHBOARD.root }) {
   const [showLoadingScreen, setShowLoadingScreen] = useState(false);
@@ -22,6 +23,7 @@ export default function EnterPasscode({ pathname = PATH_DASHBOARD.root }) {
   const verifyPasscode = async (passcode) => {
     try {
       setShowLoadingScreen(true);
+
       const decryptedWallet = await restoreFromEncryptedWallet(
         wallet,
         passcode
