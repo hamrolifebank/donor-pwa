@@ -1,9 +1,13 @@
+import { otpObj } from "../otpObj";
+
 let tries = 5;
 export default function handler(req, res) {
   if (req.method === "POST") {
     const otpProvidedByUser = req.body.otp;
+    console.log(otpObj);
+
     if (otpProvidedByUser) {
-      const matchedOtp = 1234 === Number(otpProvidedByUser);
+      const matchedOtp = otpObj.otpNum === Number(otpProvidedByUser);
 
       if (!matchedOtp && tries !== 0) {
         tries--;

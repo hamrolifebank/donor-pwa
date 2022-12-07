@@ -1,3 +1,5 @@
+import { otpObj } from "../otpObj";
+
 const ethers = require("ethers");
 const axios = require("axios");
 
@@ -14,6 +16,10 @@ const handler = async (req, res) => {
       const signature = await wallet.signMessage("rumsan");
 
       const otp = Math.floor(1000 + Math.random() * 9000);
+
+      otpObj.otpNum = otp;
+
+      console.log(otpObj);
 
       const { data } = await axios.post(
         `https://services.rumsan.net/sms`,
