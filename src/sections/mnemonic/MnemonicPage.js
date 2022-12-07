@@ -12,21 +12,24 @@ import { deleteWalletFromLocal, getWallet } from "@utils/sessionManager";
 import { restoreFromEncryptedWallet } from "@utils/wallet";
 import NewLoadingScreen from "@components/NewLoadingScreen";
 
-export default function Mnemonic() {
+export default function Mnemonic({ passcode }) {
+  if (!passcode) {
+    passcode = "";
+  }
+
   const { push } = useRouter();
   const [wallet, setWallet] = useState(null);
   const encryptedWallet = getWallet();
 
+  const getDecryptedWallet = async (passcode) => {
+    const decryptedWallet = await restoreFromEncryptedWallet(
+      encryptedWallet,
+      passcode
+    );
+    setWallet(decryptedWallet);
+  };
   useEffect(() => {
-    const getDecryptedWallet = async () => {
-      const decryptedWallet = await restoreFromEncryptedWallet(
-        encryptedWallet,
-        ""
-      );
-
-      setWallet(decryptedWallet);
-    };
-    getDecryptedWallet();
+    getDecryptedWallet(passcode);
   }, []);
 
   const [copied, setCopied] = useState("Copy all mnemonics");

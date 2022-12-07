@@ -8,6 +8,7 @@ import {
 } from "react";
 import PropTypes from "prop-types";
 import { arEG } from "date-fns/locale";
+import { getIsPasscodeSet, setIsPasscodeSet } from "@utils/sessionManager";
 
 const initialState = {
   isPasscodeset: false,
@@ -23,12 +24,25 @@ PasscodeProvider.propTypes = {
 
 function PasscodeProvider({ children }) {
   const [appState, setAppState] = useState(initialState);
+
+  useEffect(() => {
+    const isPasscodeset = getIsPasscodeSet();
+    if (isPasscodeset) {
+      setAppState((prev) => ({
+        ...prev,
+        isPasscodeset: true,
+        isAppLocked: true,
+      }));
+    }
+  }, []);
+
   const changeIsPasscodeSet = useCallback(() => {
     setAppState((prev) => ({ ...prev, isPasscodeset: true }));
+    setIsPasscodeSet(true);
   }, []);
 
   const changeIsAppLocked = useCallback(() => {
-    setAppState((prev) => ({ ...prev, isAppLocked: !isAppLocked }));
+    setAppState((prev) => ({ ...prev, isAppLocked: !prev.isAppLocked }));
   }, []);
   const contextValue = {
     ...appState,

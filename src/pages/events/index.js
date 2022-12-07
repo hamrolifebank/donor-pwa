@@ -1,7 +1,7 @@
 import Page from "@components/Page";
+import PasscodeGuard from "@guards/PasscodeGuard";
 import DashboardlayoutwithFooter from "@layouts/dashboard/DashboardlayoutwithFooter";
 import { EventPage } from "@sections/event-lists";
-import { EventProvider } from "@contexts/EventContext";
 const PAGE_TITLE = "Events";
 
 Events.getLayout = (page) => (
@@ -12,10 +12,10 @@ Events.getLayout = (page) => (
 
 export default function Events() {
   return (
-    <EventProvider>
-      <Page title={PAGE_TITLE}>
+    <Page title={PAGE_TITLE}>
+      <PasscodeGuard>
         <EventPage />
-      </Page>
-    </EventProvider>
+      </PasscodeGuard>
+    </Page>
   );
 }

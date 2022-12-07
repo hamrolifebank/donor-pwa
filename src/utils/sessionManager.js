@@ -47,3 +47,11 @@ export const deleteUserLocal = () =>
 
 export const deleteWalletFromLocal = () =>
   typeof window !== "undefined" ? localStorage.removeItem("wallet") : null;
+
+export const getIsPasscodeSet = () => {
+  return localData.getFromStorage("isPasscodeset");
+};
+
+export const setIsPasscodeSet = (value) => {
+  localData.setInStorage("isPasscodeset", value);
+};
