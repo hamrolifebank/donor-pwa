@@ -12,6 +12,8 @@ import Radial from "./Radial";
 import { Icon } from "@iconify/react";
 import { useAppAuthContext } from "@contexts/AuthContext";
 import { useAppContext } from "@contexts/AppContext";
+import { useEventContext } from "@contexts/EventContext";
+
 import { getCurrentUser } from "@utils/sessionManager";
 
 const EventInformation = ({ clickedEvents }) => {
@@ -23,7 +25,7 @@ const EventInformation = ({ clickedEvents }) => {
   const { addEventInUser } = useAppAuthContext();
   const [register, setRegister] = useState("Register");
   const [registerColor, setRegisterColor] = useState("primary.main");
-  const { changeGraphData } = useAppContext();
+  const { changeGraphData } = useEventContext();
 
   const handleRegister = (selectedEvent) => {
     setRegister("Registered");
@@ -53,8 +55,9 @@ const EventInformation = ({ clickedEvents }) => {
   let chipTextColor = chipLabel === "Active" ? "grey.0" : "grey.800";
 
   useEffect(() => {
-    let alreadyRegistered = 
-      getCurrentUser("user").events?.find((event) => event.id === selectedEvent.id);
+    let alreadyRegistered = getCurrentUser("user").events?.find(
+      (event) => event.id === selectedEvent.id
+    );
 
     if (alreadyRegistered) {
       setRegister("Registered");
@@ -63,7 +66,7 @@ const EventInformation = ({ clickedEvents }) => {
     if (currentDate >= eventdate) {
       events.is_closed = true;
     } else {
-      changeGraphData;
+      changeGraphData();
     }
   }, []);
 
