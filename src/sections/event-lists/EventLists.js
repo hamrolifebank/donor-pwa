@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import {
   EventCardRegistered,
@@ -17,6 +17,7 @@ export default function EventsPage(props) {
 
   const [noOfEventsToDisplay, setNoOfEventsToDisplay] =
     useState(NO_OF_EVENTS_TO_SHOW);
+
   const { events } = useAppContext();
   const { user } = useAppAuthContext();
   const { push } = useRouter();
