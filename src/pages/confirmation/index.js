@@ -1,20 +1,22 @@
 import Page from "@components/Page";
+import { OtpApiProvider } from "@contexts/otpApiContext";
 import PasscodeGuard from "@guards/PasscodeGuard";
 import DashboardlayoutwithFooter from "@layouts/dashboard/DashboardlayoutwithFooter";
-import { EventPage } from "@sections/event-lists";
-const PAGE_TITLE = "Events";
+import { Confirmation } from "@sections/confirmation";
 
-Events.getLayout = (page) => (
+const PAGE_TITLE = "";
+
+ConfirmationPage.getLayout = (page) => (
   <DashboardlayoutwithFooter pageTitle={PAGE_TITLE}>
     {page}
   </DashboardlayoutwithFooter>
 );
 
-export default function Events() {
+export default function ConfirmationPage() {
   return (
     <Page title={PAGE_TITLE}>
       <PasscodeGuard>
-        <EventPage />
+        <Confirmation />
       </PasscodeGuard>
     </Page>
   );
