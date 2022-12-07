@@ -45,7 +45,7 @@ export default function UpdateProfileForm() {
     gender: "",
   });
   const methods = useForm({
-    mode: "onTouched",
+    mode: "onSubmit",
     resolver: yupResolver(FormSchema),
     defaultValues: preloadedValues,
   });
@@ -62,10 +62,10 @@ export default function UpdateProfileForm() {
   const { push } = useRouter();
 
   const handleFormSubmit = (e) => {
+    e.preventDefault();
     try {
       console.log("the hande form submit entered");
       console.log("the fullname is", e.target.fullName.value);
-      e.preventDefault();
 
       const userData = {
         fullname: e.target.fullName.value,
