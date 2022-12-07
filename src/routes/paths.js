@@ -51,13 +51,13 @@ export const BOTTOM_NAVIGATION_OPTIONS = [
     path: PATH_DASHBOARD.root,
     // label: "Home",
     icon: "eva:home-outline",
-    // icon: <DashboardIcon />,
+    sx: { color: "white" },
   },
   {
     path: PATH_EVENTS.root,
     label: "",
     icon: "eva:calendar-outline",
-    sx: {},
+    sx: { color: "white" },
   },
   {
     path: PATH_ASSETS.root,
@@ -68,11 +68,8 @@ export const BOTTOM_NAVIGATION_OPTIONS = [
       background: "#ffffff",
       borderRadius: "50%",
       height: "80px",
-      top: "-35px",
+      top: "-22px",
       boxShadow: 5,
-      "&:hover": {
-        border: "1px solid red",
-      },
     },
 
     iconStyle: {
@@ -83,11 +80,12 @@ export const BOTTOM_NAVIGATION_OPTIONS = [
     path: PATH_DONATIONS.root,
     // label: "Donations",
     icon: "eva:droplet-outline",
-    sx: {},
+    sx: { color: "white" },
   },
   {
     path: PATH_PROFILE.root,
     // label: "Profile",
     icon: "eva:person-outline",
+    sx: { color: "white" },
   },
 ];

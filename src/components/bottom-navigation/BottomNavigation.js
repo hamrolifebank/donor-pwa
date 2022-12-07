@@ -42,55 +42,63 @@ const BottomNavigationBar = () => {
   };
 
   return (
-    <Paper
-      sx={{
-        position: "fixed",
-        zIndex: 1000,
-        bottom: 0,
-        left: 0,
-        right: 0,
-      }}
-      elevation={4}
-    >
-      <BottomNavigation
-        sx={{ backgroundColor: theme.palette.grey[200] }}
-        showLabels
-        value={value}
-        onChange={(event, newValue) => {
-          setValue(newValue);
-          router.push(newValue);
+    <div>
+      <Paper
+        sx={{
+          position: "fixed",
+          zIndex: 1000,
+          bottom: 0,
+          left: 0,
+          right: 0,
         }}
       >
-        {BOTTOM_NAVIGATION_OPTIONS.map((option, index) => (
-          <BottomNavigationAction
-            icon={
-              option.icon ? (
-                <Iconify
-                  sx={{ transform: "scale(1.2)", mb: 0.05 }}
-                  {...option?.iconStyle}
-                  icon={
-                    // option.icon === "fluent:qr-code-24-filled"
-                    //   ? handleQR(option.icon)
-                    //   :
-                    option.icon
-                  }
-                />
-              ) : (
-                ""
-              )
-            }
-            key={index}
-            label={
-              <Typography sx={{ typography: "body1" }}>
-                {option.label}
-              </Typography>
-            }
-            value={option.path}
-            sx={option?.sx}
-          />
-        ))}
-      </BottomNavigation>
-    </Paper>
+        <div>&nbsp;</div>
+        <BottomNavigation
+          sx={{
+            backgroundColor: theme.palette.primary.main,
+            "& .Mui-selected, .Mui-selected > svg": {
+              backgroundColor: theme.palette.primary.darker,
+              color: "white",
+            },
+          }}
+          showLabels
+          value={value}
+          onChange={(event, newValue) => {
+            setValue(newValue);
+            router.push(newValue);
+          }}
+        >
+          {BOTTOM_NAVIGATION_OPTIONS.map((option, index) => (
+            <BottomNavigationAction
+              icon={
+                option.icon ? (
+                  <Iconify
+                    sx={{ transform: "scale(1.2)", mb: 0.09 }}
+                    {...option?.iconStyle}
+                    icon={
+                      // option.icon === "fluent:qr-code-24-filled"
+                      //   ? handleQR(option.icon)
+                      //   :
+                      option.icon
+                    }
+                  />
+                ) : (
+                  ""
+                )
+              }
+              key={index}
+              label={
+                <Typography sx={{ typography: "body1" }}>
+                  {option.label}
+                </Typography>
+              }
+              value={option.path}
+              sx={option?.sx}
+            />
+          ))}
+        </BottomNavigation>
+      </Paper>
+    </div>
   );
 };
 
