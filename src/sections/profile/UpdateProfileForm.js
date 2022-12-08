@@ -95,7 +95,7 @@ export default function UpdateProfileForm() {
                 value={value.bloodGroup}
                 onChange={changeBloodGroup}
               />
-              {user.isVerified ? null : (
+              {user.isPhoneVerified ? null : (
                 <Box
                   display="flex"
                   gap={3}
