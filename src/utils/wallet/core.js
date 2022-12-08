@@ -15,7 +15,13 @@ const core = {
   },
 
   async encryptWallet(passCode, wallet) {
-    const encryptedWallet = await wallet.encrypt(passCode);
+    let options = {
+      //change scrypt value to speed up decryption
+      scrypt: {
+        N: 1 << 16,
+      },
+    };
+    const encryptedWallet = await wallet.encrypt(passCode, options);
     return encryptedWallet;
   },
 

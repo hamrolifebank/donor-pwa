@@ -20,7 +20,7 @@ import {
 const initialState = {
   isAuthenticated: false, // should be false by default,
   isInitialized: false,
-  isMnemonicWritten: false,
+
   wallet: null,
   publicAddress: null,
   user: null,
@@ -50,12 +50,12 @@ const wallet = getWallet();
 function AppAuthProvider({ children }) {
   const [authState, setAuthState] = useState(initialState);
 
-  const addWallet = async (payload) => {
-    // setAuthState((prev) => ({
-    //   ...prev,
-    //   wallet: payload,
-    // }));
-    const encryptedWallet = await encryptWallet("", payload);
+  const addWallet = async (payload, passcode = "") => {
+    const encryptedWallet = await encryptWallet(passcode, payload);
+    setAuthState((prev) => ({
+      ...prev,
+      wallet: encryptedWallet,
+    }));
 
     setWallet(encryptedWallet);
   };

@@ -1,13 +1,13 @@
 import { useState, useRef, useEffect } from "react";
-// form
+
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-// @mui
+
 import { Stack, Grid, Container, Box, Typography } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
-// components
+
 import { FormProvider, RHFTextField } from "@components/hook-form";
-//onChange={handleChange}
+
 import { FormSchema, defaultValues } from "../form";
 import { MuiOtpInput } from "mui-one-time-password-input";
 
@@ -15,17 +15,23 @@ import { OTPLENGTH } from "@config";
 import { useAppContext } from "@contexts/AppContext";
 import { isMatch } from "date-fns";
 import { useRouter } from "next/router";
-
-// ----------------------------------------------------------------------
+import { useAppAuthContext } from "@contexts/AuthContext";
+import { encryptWallet, restoreFromEncryptedWallet } from "@utils/wallet";
+import { usePasscodeContext } from "@contexts/PasscodeContext";
+import { getWallet, setIsPasscodeSet, setWallet } from "@utils/sessionManager";
+import NewLoadingScreen from "@components/NewLoadingScreen";
 
 export default function PasscodeFrom() {
-  const router = useRouter();
-  const { isPasscodeSet } = useAppContext();
+  const [showLoadingScreen, setShowLoadingScreen] = useState(false);
   const [value, setValue] = useState({ current: "", new: "", confirm: "" });
   const [passcodeMatch, setpasscodeMatch] = useState({
     isMatch: false,
     displayText: "",
   });
+  const [error, setError] = useState(false);
+  const { addWallet } = useAppAuthContext();
+  const { isPasscodeset, changeIsPasscodeSet, changeIsAppLocked } =
+    usePasscodeContext();
 
   const handleCurrent = (newValue) => {
     setValue({ ...value, current: newValue });
@@ -47,9 +53,31 @@ export default function PasscodeFrom() {
     }
   };
 
-  const handlePasscodeSave = (e) => {
-    console.log(value.confirm);
+  const handlePasscodeSave = async () => {
+    try {
+      setShowLoadingScreen(true);
+      const wallet = getWallet();
+      const decryptedWallet = await restoreFromEncryptedWallet(
+        wallet,
+        value.current
+      );
+      await addWallet(decryptedWallet, value.new);
+      setShowLoadingScreen(false);
+      changeIsPasscodeSet();
+      changeIsAppLocked();
+    } catch (err) {
+      setShowLoadingScreen(false);
+      setError(true);
+    }
   };
+
+  if (showLoadingScreen) {
+    return (
+      <div>
+        <NewLoadingScreen />
+      </div>
+    );
+  }
 
   return (
     <Container>
@@ -83,7 +111,7 @@ export default function PasscodeFrom() {
               </Typography>
             </Box>
             <Stack gap={1}>
-              {isPasscodeSet ? (
+              {isPasscodeset ? (
                 <Box>
                   <Typography
                     variant="subtitle1"
@@ -142,6 +170,13 @@ export default function PasscodeFrom() {
           </Grid>
         </Grid>
       </Stack>
+      {error && (
+        <Box display="flex" justifyContent="center" mt={2}>
+          <Typography variant="body2" sx={{ color: "error.main" }}>
+            Current passcode is incorrect. Please enter correct passcode.
+          </Typography>
+        </Box>
+      )}
     </Container>
   );
 }
