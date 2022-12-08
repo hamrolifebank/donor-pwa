@@ -1,23 +1,20 @@
 import { useState, useRef, useEffect } from "react";
-// form
+
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm, Controller } from "react-hook-form";
-// @mui
+
 import { Stack, Grid, Container, Box, TextField, Alert } from "@mui/material";
 
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 
-// components
 import Iconify from "@components/iconify";
 import { FormProvider, RHFTextField } from "@components/hook-form";
-//
-import { FormSchema, defaultValues } from "../form";
+
+import { FormSchema } from "../form";
 import ListSelectFilter from "./ListSelectFilter";
 import { useAppAuthContext } from "@contexts/AuthContext";
 import { PrimaryButton } from "@components/Button";
-
-// ----------------------------------------------------------------------
 
 export default function UpdateProfileForm() {
   const { user, addUser } = useAppAuthContext();
