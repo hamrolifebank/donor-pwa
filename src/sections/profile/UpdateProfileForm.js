@@ -21,6 +21,7 @@ import { PrimaryButton } from "@components/Button";
 
 export default function UpdateProfileForm() {
   const { user, addUser } = useAppAuthContext();
+
   const [value, setValue] = useState({
     bloodGroup: user.bloodGroup,
     gender: user.gender,
@@ -97,18 +98,21 @@ export default function UpdateProfileForm() {
                 value={value.bloodGroup}
                 onChange={changeBloodGroup}
               />
-              <Box
-                display="flex"
-                gap={3}
-                justifyContent="center"
-                alignItems="center"
-              >
-                <Iconify
-                  icon="eva:phone-call-fill"
-                  sx={{ color: "primary.main" }}
-                ></Iconify>
-                <RHFTextField name="phone" label="9860365404" />
-              </Box>
+              {user.isVerified ? null : (
+                <Box
+                  display="flex"
+                  gap={3}
+                  justifyContent="center"
+                  alignItems="center"
+                >
+                  <Iconify
+                    icon="eva:phone-call-fill"
+                    sx={{ color: "primary.main" }}
+                  ></Iconify>
+                  <RHFTextField name="phone" label="Phone no." />
+                </Box>
+              )}
+
               <Box
                 display="flex"
                 gap={3}
@@ -119,7 +123,7 @@ export default function UpdateProfileForm() {
                   icon="material-symbols:mail"
                   sx={{ color: "primary.main" }}
                 ></Iconify>
-                <RHFTextField name="email" label="something@gmail.com" />
+                <RHFTextField name="email" label="Email" />
               </Box>
               <Box
                 display="flex"
