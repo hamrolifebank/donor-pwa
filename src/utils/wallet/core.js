@@ -15,12 +15,18 @@ const core = {
   },
 
   async encryptWallet(passCode, wallet) {
-    const encryptedWallet = await wallet.encrypt(passCode);
+    let options = {
+      //change scrypt value to speed up decryption
+      scrypt: {
+        N: 1 << 16,
+      },
+    };
+    const encryptedWallet = await wallet.encrypt(passCode, options);
     return encryptedWallet;
   },
 
   async restoreFromEncryptedWallet(encryptedWallet, passCode) {
-    const wallet = await ethers.Wallet.fromEncryptedWallet(
+    const wallet = await ethers.Wallet.fromEncryptedJson(
       encryptedWallet,
       passCode
     );

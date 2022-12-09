@@ -1,16 +1,23 @@
 import { PrimaryButton } from "@components/Button";
-import { Typography, Grid, CircularProgress, Chip } from "@mui/material";
-import { Box, Container, display } from "@mui/system";
-import React, { useContext, useEffect, useState } from "react";
+import {
+  Typography,
+  Grid,
+  CircularProgress,
+  Chip,
+  IconButton,
+} from "@mui/material";
+import { Box, Container } from "@mui/system";
+import React, { useEffect, useState } from "react";
 import Radial from "./Radial";
 import { Icon } from "@iconify/react";
 import { useAppAuthContext } from "@contexts/AuthContext";
 import { useAppContext } from "@contexts/AppContext";
+import { getCurrentUser } from "@utils/sessionManager";
 
 const EventInformation = ({ clickedEvents }) => {
   const { events } = useAppContext();
   if (!clickedEvents) {
-    let eventFromStorage = JSON.parse(localStorage.getItem("slugID"));
+    let eventFromStorage = getCurrentUser("slugID");
     clickedEvents = events.find((event) => event.id === eventFromStorage);
   }
   const { addEventInUser } = useAppAuthContext();
@@ -24,7 +31,7 @@ const EventInformation = ({ clickedEvents }) => {
     addEventInUser(selectedEvent);
   };
 
-  const selectedEvent = clickedEvents;
+  const selectedEvent = clickedEvents ? clickedEvents : [];
   const currentDate = new Date();
   const eventdate = new Date(selectedEvent.date);
   if (currentDate >= eventdate) {
@@ -37,14 +44,17 @@ const EventInformation = ({ clickedEvents }) => {
     day: "numeric",
   };
 
-  let chipLabel = selectedEvent.is_closed ? "Closed" : "Active";
+  let chipLabel = selectedEvent
+    ? selectedEvent.is_closed
+      ? "Closed"
+      : "Active"
+    : null;
   let chipColor = chipLabel === "Active" ? "success.main" : "warning.main";
   let chipTextColor = chipLabel === "Active" ? "grey.0" : "grey.800";
 
   useEffect(() => {
-    let alreadyRegistered = JSON.parse(
-      localStorage.getItem("user")
-    ).events?.find((event) => event.id === selectedEvent.id);
+    let alreadyRegistered = 
+      getCurrentUser("user").events?.find((event) => event.id === selectedEvent.id);
 
     if (alreadyRegistered) {
       setRegister("Registered");
@@ -53,7 +63,7 @@ const EventInformation = ({ clickedEvents }) => {
     if (currentDate >= eventdate) {
       events.is_closed = true;
     } else {
-      changeGraphData();
+      changeGraphData;
     }
   }, []);
 

@@ -1,3 +1,4 @@
+import { encryptWallet, restoreFromEncryptedWallet } from "@utils/wallet";
 import { isValid } from "date-fns";
 import PropTypes from "prop-types";
 import { createContext, useContext, useEffect, useState } from "react";
@@ -19,7 +20,7 @@ import {
 const initialState = {
   isAuthenticated: false, // should be false by default,
   isInitialized: false,
-  isMnemonicWritten: false,
+
   wallet: null,
   publicAddress: null,
   user: null,
@@ -33,6 +34,7 @@ const AppAuthContext = createContext({
   addUser: () => {},
   deleteToken: () => {},
   addEventInUser: () => {},
+  changeUserPhoneVerified: () => {},
 });
 
 // ----------------------------------------------------------------------
@@ -48,12 +50,14 @@ const wallet = getWallet();
 function AppAuthProvider({ children }) {
   const [authState, setAuthState] = useState(initialState);
 
-  const addWallet = (payload) => {
+  const addWallet = async (payload, passcode = "") => {
+    const encryptedWallet = await encryptWallet(passcode, payload);
     setAuthState((prev) => ({
       ...prev,
-      wallet: payload,
+      wallet: encryptedWallet,
     }));
-    setWallet(payload);
+
+    setWallet(encryptedWallet);
   };
 
   const addPublicAddress = (payload) => {
@@ -104,6 +108,11 @@ function AppAuthProvider({ children }) {
     addUser(user);
   };
 
+  const changeUserPhoneVerified = () => {
+    const user = getCurrentUser();
+    setCurrentUser({ ...user, isPhoneVerified: true });
+  };
+
   useEffect(() => {
     const initialize = async () => {
       setAuthState((prev) => ({ ...prev, isInitialized: true }));
@@ -148,6 +157,7 @@ function AppAuthProvider({ children }) {
     deleteWallet,
     addUser,
     addEventInUser,
+    changeUserPhoneVerified,
   };
 
   return (

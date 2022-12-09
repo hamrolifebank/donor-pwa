@@ -3,7 +3,9 @@ import DashboardlayoutwithFooter from "@layouts/dashboard/DashboardlayoutwithFoo
 import { useRouter } from "next/router";
 import { DisplayGraph } from "@sections/event-details";
 import { EventInformation } from "@sections/events";
+import { EventProvider } from "@contexts/EventContext";
 import { useAppContext } from "@contexts/AppContext";
+import { setCurrentUser } from "@utils/sessionManager";
 
 const PAGE_TITLE = "Event Details";
 
@@ -18,15 +20,16 @@ export default function EventDetails() {
   const router = useRouter();
   const { slug } = router.query;
   if (slug) {
-    localStorage.setItem("slugID", JSON.stringify(slug));
+    setCurrentUser("slugID",slug);
   }
-
   let clickedEvents = events.find((event) => event.id === String(slug));
 
   return (
-    <Page title={PAGE_TITLE}>
-      <EventInformation clickedEvents={clickedEvents} />
-      <DisplayGraph />
-    </Page>
+    <EventProvider>
+      <Page title={PAGE_TITLE}>
+        <EventInformation clickedEvents={clickedEvents} />
+        <DisplayGraph />
+      </Page>
+    </EventProvider>
   );
 }

@@ -3,18 +3,24 @@ import Tab from "@mui/material/Tab";
 import TabPanel from "@mui/lab/TabPanel";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
-
-import Typography from "@mui/material/Typography";
 import { Container, Box } from "@mui/system";
 import { PieChart } from "@components/charts";
 // import { Grid } from "@mui/material";
 // import { LegendButton } from "@components/Button";
-import { useAppContext } from "@contexts/AppContext";
-import { PIECHARTCOLORS } from "@config";
+import { useRouter } from "next/router";
+import { useEventContext } from "@contexts/EventContext";
 
 export default function DisplayGraph(props) {
-  const { events, stats, isGraphDataAvailable } = useAppContext();
+  const { stats, isGraphDataAvailable, fetchEventDetails } = useEventContext();
+  const router = useRouter();
   const [value, setValue] = React.useState(stats[0].groupBy);
+
+  React.useEffect(() => {
+    if (router.isReady) {
+      fetchEventDetails(router.query.slug);
+    }
+  }, [router.isReady]);
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -37,8 +43,16 @@ export default function DisplayGraph(props) {
               <TabPanel key={index} value={group.groupBy}>
                 <Box sx={{ display: "flex", justifyContent: "center" }}>
                   <PieChart
-                    data={group.data.map((data) => data.value)}
-                    labels={group.data.map((data) => data.label)}
+                    data={group.data.map((data) => data.count)}
+                    labels={group.data.map((data) => {
+                      if (data.group) {
+                        return data.group;
+                      } else if (data.range) {
+                        return data.range;
+                      } else if (data.display) {
+                        return data.display;
+                      }
+                    })}
                   />
                 </Box>
               </TabPanel>

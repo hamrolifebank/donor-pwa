@@ -1,21 +1,22 @@
 import Page from "@components/Page";
+import { OtpApiProvider } from "@contexts/otpApiContext";
 import PasscodeGuard from "@guards/PasscodeGuard";
 import DashboardlayoutwithFooter from "@layouts/dashboard/DashboardlayoutwithFooter";
-import { Profile } from "@sections/profile";
+import { Confirmation } from "@sections/confirmation";
 
-const PAGE_TITLE = "Profile";
+const PAGE_TITLE = "";
 
-ProfilePage.getLayout = (page) => (
+ConfirmationPage.getLayout = (page) => (
   <DashboardlayoutwithFooter pageTitle={PAGE_TITLE}>
     {page}
   </DashboardlayoutwithFooter>
 );
 
-export default function ProfilePage() {
+export default function ConfirmationPage() {
   return (
     <Page title={PAGE_TITLE}>
       <PasscodeGuard>
-        <Profile />
+        <Confirmation />
       </PasscodeGuard>
     </Page>
   );

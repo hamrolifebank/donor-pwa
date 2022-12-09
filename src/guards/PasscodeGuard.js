@@ -3,36 +3,37 @@ import { useEffect } from "react";
 // next
 import { useRouter } from "next/router";
 // components
-import LoadingScreen from "../components/LoadingScreen";
+import LoadingScreen from "@components/LoadingScreen";
 //
-
 import { useAppAuthContext } from "@contexts/AuthContext";
-
-import { PATH_AUTH } from "@routes/paths";
+import { PATH_AUTH, PATH_DASHBOARD } from "@routes/paths";
+import { usePasscodeContext } from "@contexts/PasscodeContext";
 import NewLoadingScreen from "@components/NewLoadingScreen";
 
 // ----------------------------------------------------------------------
 
-AuthGuard.propTypes = {
+PasscodeGuard.propTypes = {
   children: PropTypes.node,
 };
 
-export default function AuthGuard({ children }) {
-  const { isAuthenticated, isInitialized } = useAppAuthContext();
+// Wrap this for all pages that donot require authentication(guest user)
 
+export default function PasscodeGuard({ children }) {
   const { push, pathname } = useRouter();
 
+  const { isPasscodeset, isAppLocked } = usePasscodeContext();
+
   useEffect(() => {
-    if (!isAuthenticated && isInitialized) {
-      push(PATH_AUTH.login);
+    if (isPasscodeset && isAppLocked) {
+      push(PATH_DASHBOARD.root);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isAuthenticated, isInitialized]);
+  }, [isAppLocked]);
 
-  if (isAuthenticated === undefined) {
+  if (isAppLocked === undefined) {
     return <NewLoadingScreen />;
-  } else if (isAuthenticated === false) {
-    if (pathname === PATH_AUTH.login) {
+  } else if (isAppLocked === true) {
+    if (pathname === PATH_DASHBOARD.root) {
       return <>{children}</>;
     } else {
       return <NewLoadingScreen />;

@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 import { Box, Container } from "@mui/system";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Grid, InputLabel, TextField, Typography } from "@mui/material";
 import { PrimaryButton, SecondaryButton } from "@components/Button";
 
@@ -8,15 +8,34 @@ import { useAppAuthContext } from "@contexts/AuthContext";
 import { useRouter } from "next/router";
 
 import { PATH_DASHBOARD } from "@routes/paths";
-import { deleteWalletFromLocal } from "@utils/sessionManager";
+import { deleteWalletFromLocal, getWallet } from "@utils/sessionManager";
+import { restoreFromEncryptedWallet } from "@utils/wallet";
+import NewLoadingScreen from "@components/NewLoadingScreen";
 
-export default function Mnemonic() {
+export default function Mnemonic({ passcode }) {
+  if (!passcode) {
+    passcode = "";
+  }
+
   const { push } = useRouter();
-  const { wallet } = useAppAuthContext();
+  const [wallet, setWallet] = useState(null);
+  const encryptedWallet = getWallet();
+
+  const getDecryptedWallet = async (passcode) => {
+    const decryptedWallet = await restoreFromEncryptedWallet(
+      encryptedWallet,
+      passcode
+    );
+    setWallet(decryptedWallet);
+  };
+  useEffect(() => {
+    getDecryptedWallet(passcode);
+  }, []);
+
   const [copied, setCopied] = useState("Copy all mnemonics");
 
   if (!wallet || !wallet.mnemonic || wallet.mnemonic.length === 0) {
-    push(PATH_DASHBOARD.root);
+    return <NewLoadingScreen />;
   } else {
     const words = wallet && wallet.mnemonic.phrase.split(" ");
 
