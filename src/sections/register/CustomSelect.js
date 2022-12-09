@@ -1,6 +1,6 @@
 import React from "react";
 import { useField } from "formik";
-import { TextField } from "@mui/material";
+import { InputLabel, Select, TextField } from "@mui/material";
 
 const CustomSelect = ({ label, ...props }) => {
   const [field, meta] = useField(props);
@@ -10,9 +10,11 @@ const CustomSelect = ({ label, ...props }) => {
   return (
     <>
       {/* <label>{label}</label> */}
-      <select {...field} {...props} />
+      <InputLabel>{label}</InputLabel>
       {/* <TextField {...props} /> */}
-      {meta.touched && meta.error && <div>{meta.error}</div>}
+      <Select sx={{mb:2}} {...field} {...props} fullWidth  />
+      {/* <select style={{height:60, borderRadius:5, width:350 }} {...field} {...props} /> */}
+      {meta.touched && meta.error && <div style={{color:"red"}}>{meta.error}</div>}
     </>
   );
 };

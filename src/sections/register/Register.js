@@ -14,6 +14,8 @@ import {
   TextField,
   Alert,
   Typography,
+  MenuItem,
+  InputLabel,
 } from "@mui/material";
 
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
@@ -32,10 +34,19 @@ import { PATH_AUTH, PATH_WALLET } from "@routes/paths";
 import CustomInput from "./CustomInput";
 import { RegisterFormSchema } from "./RegisterFormSchema";
 import CustomSelect from "./CustomSelect";
+import InputAdornment from "@mui/material/InputAdornment";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import EmailIcon from "@mui/icons-material/Email";
+import CallIcon from "@mui/icons-material/Call";
+import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+
 
 // ----------------------------------------------------------------------
 
 export default function UpdateProfileForm() {
+  const [type, setType] = useState("text");
+
+
   const preloadedValues = {
     fullName: "",
     phone: "",
@@ -110,7 +121,7 @@ export default function UpdateProfileForm() {
         fullName: "",
         phone: "",
         email: "",
-        // dob: "",
+        dob: "",
         bloodGroup: "",
         gender: "",
       }}
@@ -120,7 +131,7 @@ export default function UpdateProfileForm() {
           fullname: values.fullName,
           phone: values.phone,
           email: values.email,
-          // dob: values.dob,
+          dob: values.dob,
           bloodGroup: values.bloodGroup,
           gender: values.gender,
         };
@@ -131,53 +142,112 @@ export default function UpdateProfileForm() {
       }}
     >
       {(props) => (
+     <Container>
+    <Typography variant="h3" sx={{mb:2, mt:2}}>Register</Typography>
+   
         <Form>
+          <Grid container item xs={12} sx={{p:"0px 5px"}}>
+          <Grid  item xs={12}>
           <CustomInput
-            label="Fullname"
+            label="Full name"
             name="fullName"
             type="text"
             placeholder="Enter your fullname"
             value={props.values.fullName}
             onChange={props.handleChange}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <AccountCircleIcon />
+                </InputAdornment>
+              ),
+            }}
           />
+          </Grid>
+          <Grid item xs={12}>
           <CustomInput
-            label="Phone"
+            label="Date of Birth"
+            name="dob"
+            placeholder="Enter your Date of birth"
+            type={type}
+            value={props.values.dob}
+            onFocus={() => setType("date")}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <CalendarMonthIcon />
+                </InputAdornment>
+              ),
+            }}
+         
+          />
+          </Grid>
+          <Grid  item xs={12}>
+          <CustomInput
+            label="Phone number"
             name="phone"
             type="text"
             placeholder="Enter your Phone Number"
             // onChange={props.handleChange}
             value={props.values.phone}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <CallIcon />
+                </InputAdornment>
+              ),
+            }}
           />
+          </Grid>
+          <Grid  item xs={12}>
           <CustomInput
-            label="Email"
+            label="E-mail"
             name="email"
             type="text"
             placeholder="Enter your Email"
             // onChange={props.handleChange}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <EmailIcon />
+                </InputAdornment>
+              ),
+            }}
           />
+          </Grid>
+          <Grid  item xs={12}>
+
           <CustomSelect
-            label="BloodGroup"
+            label="Blood Group"
             name="bloodGroup"
-            placeholder="Please select a BloodGroup"
+            displayEmpty
+            renderValue={(value) => (value !== '' ? value : 'Please select a BloodGroup')}
+                
             // onChange={props.handleChange}
           >
-            <option value="">Please select a Blood Group</option>
-            <option value="A+">A+</option>
-            <option value="B+">B+</option>
-            <option value="O+">O+</option>
-            <option value="O-">O-</option>
+            {/* <MenuItem value="none" disabled>Please select a Blood Group</MenuItem> */}
+            <MenuItem value="A+">A+</MenuItem>
+            <MenuItem value="B+">B+</MenuItem>
+            <MenuItem value="O+">O+</MenuItem>
+            <MenuItem value="O-">O-</MenuItem>
           </CustomSelect>
+          </Grid>
+          <Grid  item xs={12}>
+
           <CustomSelect
             label="Gender"
             name="gender"
-            placeholder="Please select a gender"
+            displayEmpty
+            renderValue={(value) => (value !== '' ? value : 'Please select a Gender')}
             // onChange={props.handleChange}
           >
-            <option value="">Please select a Gender</option>
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-            <option value="Other">Other</option>
+            {/* <MenuItem value="none" disabled>Please select a Gender</MenuItem> */}
+            <MenuItem value="Male">Male</MenuItem>
+            <MenuItem value="Female">Female</MenuItem>
+            <MenuItem value="Other">Other</MenuItem>
           </CustomSelect>
+          </Grid>
+    
           {/* <Controller
             name="dob"
             control={control}
@@ -199,8 +269,16 @@ export default function UpdateProfileForm() {
               </LocalizationProvider>
             )}
           /> */}
-          <PrimaryButton type="submit">Submit</PrimaryButton>
+          <Grid  item xs={12}>
+          <PrimaryButton sx={{height:40, mb:2, mt:1}} type="submit">Submit</PrimaryButton>
+          </Grid>
+          <Grid  item xs={12}>
+
+          <SecondaryButton> Cancel </SecondaryButton>
+          </Grid>
+          </Grid>
         </Form>
+        </Container>
       )}
     </Formik>
     // <Container>
