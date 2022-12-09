@@ -30,9 +30,7 @@ const OtpDialog = () => {
   const [otp, setOtp] = useState(null);
 
   const handleOtpSubmit = async (otp) => {
-    const email = getCurrentUser().email;
-
-    let response = await sendVerificationRequestForOTP(otp, email);
+    let response = await sendVerificationRequestForOTP(otp);
     if (response.status === 200) {
       changeUserPhoneVerified();
       setTimeout(() => {
@@ -51,9 +49,8 @@ const OtpDialog = () => {
     }
   };
   const handleResend = () => {
-    const email = getCurrentUser().email;
     const phoneNum = getCurrentUser().phone;
-    sendRequestForOTP(phoneNum, email);
+    sendRequestForOTP(phoneNum);
     setotpNotification("We have resent a new OTP");
   };
   const handleClose = () => {

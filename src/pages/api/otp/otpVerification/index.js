@@ -2,7 +2,6 @@ import { withIronSessionApiRoute } from "iron-session/next";
 export default withIronSessionApiRoute(verifyOtp, {
   cookieName: "secret_otp",
   password: process.env.password,
-  // secure: true should be used in production (HTTPS) but can't be used in development (HTTP)
   cookieOptions: {
     secure: process.env.NODE_ENV === "production",
   },
