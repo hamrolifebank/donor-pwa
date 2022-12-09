@@ -14,8 +14,10 @@ const CustomInput = ({ label, ...props }) => {
       {/* <label>{label}</label> */}
       {/* <input {...field} {...props} /> */}
       <InputLabel>{label}</InputLabel>
-      <TextField sx={{mb:2}} {...field} {...props} fullWidth />
-      {meta.touched && meta.error && <div style={{color:"red"}} >{meta.error}</div>}
+      <TextField sx={{ mb: 2 }} {...field} {...props} fullWidth />
+      {meta.touched && meta.error && (
+        <div style={{ color: "red" }}>{meta.error}</div>
+      )}
     </Box>
   );
 };
