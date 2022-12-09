@@ -1,10 +1,6 @@
 const ethers = require("ethers");
 const axios = require("axios");
-<<<<<<< HEAD
 import { withIronSessionApiRoute } from "iron-session/next";
-=======
-const fs = require("fs");
->>>>>>> 649f3a288243b890597045a6d85cbae75ab7fe3d
 
 export default withIronSessionApiRoute(otpRoute, {
   cookieName: "secret_otp",
@@ -16,7 +12,6 @@ export default withIronSessionApiRoute(otpRoute, {
 });
 
 async function otpRoute(req, res) {
-  console.log("the line 20", req.session);
   if (req.method === "POST") {
     const phoneNumber = req.body.phoneNum;
     const email = req.body.emailaddress;
@@ -31,9 +26,7 @@ async function otpRoute(req, res) {
 
       const otp = Math.floor(1000 + Math.random() * 9000);
 
-<<<<<<< HEAD
       if (Object.keys(req.session).includes(email)) {
-        console.log("the if entered");
         req.session[email] = {
           ...req.session[email],
           otp,
@@ -44,22 +37,8 @@ async function otpRoute(req, res) {
           tries: 5,
         };
       }
-      console.log("the re.session", req.session);
       await req.session.save();
       res.send({ ok: true });
-=======
-      const newOtp = {
-        otp,
-      };
-
-      fs.writeFile("./otp.json", JSON.stringify(newOtp), (err) => {
-        if (err) {
-          console.log(err);
-        } else {
-          console.log("file sucess written");
-        }
-      });
->>>>>>> 649f3a288243b890597045a6d85cbae75ab7fe3d
 
       const { data } = await axios.post(
         `https://services.rumsan.net/sms`,
@@ -76,6 +55,3 @@ async function otpRoute(req, res) {
     }
   }
 }
-
-// export default sessionExpress(handler);
-// export default handler;
