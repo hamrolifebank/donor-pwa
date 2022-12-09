@@ -4,11 +4,11 @@ import { Alert, Box, Button, Typography } from "@mui/material";
 import QRCode from "react-qr-code";
 import { Container } from "@mui/system";
 import { EventPage } from "../event-lists";
-import { useOtpContext } from "@contexts/OtpContext";
 import { PrimaryButton } from "@components/Button";
 import { set } from "date-fns";
 import { usePasscodeContext } from "@contexts/PasscodeContext";
 import { useRouter } from "next/router";
+import { useAppContext } from "@contexts/AppContext";
 
 const Home = () => {
   const { push } = useRouter();
@@ -19,29 +19,21 @@ const Home = () => {
     handleClickOpenOtpDialog,
     userPhoneVerification,
     setUserPhoneVerification,
-  } = useOtpContext();
-  useEffect(() => {
-    if (user?.isPhoneVerified) {
-      setUserPhoneVerification(
-        <Alert severity="info">You can donate now</Alert>
-      );
-    } else {
-      setUserPhoneVerification(
-        <Alert severity="warning">Click here to verify phone number</Alert>
-      );
-    }
-  }, [user]);
+  } = useAppContext();
 
   return (
     <Container>
       {user?.isPhoneVerified === true ? (
-        <>{userPhoneVerification}</>
+        <>
+          {" "}
+          <Alert severity="info">You can donate now</Alert>
+        </>
       ) : (
         <Container>
           <Button
             onClick={() => handleClickOpenOtpDialog(user.phone, publicAddress)}
           >
-            {userPhoneVerification}
+            <Alert severity="warning">Click here to verify phone number</Alert>
           </Button>
         </Container>
       )}

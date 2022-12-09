@@ -1,6 +1,5 @@
 import { PrimaryButton } from "@components/Button";
 import { useAppAuthContext } from "@contexts/AuthContext";
-import { useOtpContext } from "@contexts/OtpContext";
 import {
   Box,
   Alert,
@@ -19,9 +18,11 @@ import {
   sendRequestForOTP,
   sendVerificationRequestForOTP,
 } from "@services/otp";
+import { useAppContext } from "@contexts/AppContext";
 
 const OtpDialog = () => {
-  const { open, setOpen, setUserPhoneVerification } = useOtpContext();
+  const { open, handleClickCloseOtpDialog, handleClickOpenOtpDialog } =
+    useAppContext();
   const { user, changeUserPhoneVerified } = useAppAuthContext();
   const [otpNotification, setotpNotification] = useState(
     `Enter the OTP we sent to +${user?.phone}`
@@ -32,17 +33,8 @@ const OtpDialog = () => {
     let response = await sendVerificationRequestForOTP(otp);
     if (response.status === 200) {
       changeUserPhoneVerified();
-      setTimeout(() => {
-        setUserPhoneVerification(
-          <Alert severity="info">You can donate now</Alert>
-        );
-      }, 3000);
-
-      setUserPhoneVerification(
-        <Alert severity="success">Phone number verified</Alert>
-      );
       setotpNotification("");
-      setOpen(false);
+      handleClickCloseOtpDialog();
     } else {
       setotpNotification(response.msg);
     }
@@ -52,13 +44,14 @@ const OtpDialog = () => {
     setotpNotification("We have resent a new OTP");
   };
   const handleClose = () => {
-    setOpen(false);
+    handleClickCloseOtpDialog();
     if (user) {
       setotpNotification(`Enter the OTP we sent to +${user.phone}`);
     }
   };
 
   useEffect(() => {
+    console.log("the useeffect user", user);
     setotpNotification(`Enter the OTP we sent +${user?.phone}`);
   }, [user]);
 

@@ -5,13 +5,13 @@ import { useTheme } from "@emotion/react";
 import { Icon } from "@iconify/react";
 import { PrimaryButton } from "@components/Button";
 import { useAppAuthContext } from "@contexts/AuthContext";
-import { useOtpContext } from "@contexts/OtpContext";
 import { getCurrentUser } from "@utils/sessionManager";
+import { useAppContext } from "@contexts/AppContext";
 
 const EventCardNotRegistered = ({ event }) => {
   const theme = useTheme();
   const { user, addUser, addEventInUser } = useAppAuthContext();
-  const { handleClickOpenOtpDialog } = useOtpContext();
+  const { handleClickOpenOtpDialog } = useAppContext();
 
   const handleRegister = () => {
     if (!getCurrentUser().isPhoneVerified) {
