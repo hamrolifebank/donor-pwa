@@ -9,7 +9,6 @@ import { PrimaryButton, SecondaryButton } from "@components/Button";
 import { useRouter } from "next/router";
 import { PATH_AUTH, PATH_WALLET } from "@routes/paths";
 import CustomInput from "./CustomInput";
-import { RegisterFormSchema } from "./RegisterFormSchema";
 import CustomSelect from "./CustomSelect";
 import InputAdornment from "@mui/material/InputAdornment";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
@@ -17,6 +16,8 @@ import EmailIcon from "@mui/icons-material/Email";
 import CallIcon from "@mui/icons-material/Call";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import { useAppAuthContext } from "@contexts/AuthContext";
+import { RegisterFormSchema } from "@sections/form";
+import { BloodGroups, Genders } from "@config";
 
 // ----------------------------------------------------------------------
 
@@ -31,6 +32,7 @@ export default function Register() {
     push(PATH_AUTH.login);
   };
 
+  console.log("the values is", BloodGroups, Genders);
   return (
     <Formik
       initialValues={{
@@ -140,14 +142,13 @@ export default function Register() {
                   }
                   onChange={props.handleChange}
                 >
-                  <MenuItem value="A+">A+</MenuItem>
-                  <MenuItem value="B+">B+</MenuItem>
-                  <MenuItem value="O+">O+</MenuItem>
-                  <MenuItem value="O-">O-</MenuItem>
-                  <MenuItem value="A+">A-</MenuItem>
-                  <MenuItem value="B+">B-</MenuItem>
-                  <MenuItem value="O+">AB+</MenuItem>
-                  <MenuItem value="O-">AB-</MenuItem>
+                  {BloodGroups.map((key, index) => {
+                    return (
+                      <MenuItem value={key} key={index}>
+                        {key}
+                      </MenuItem>
+                    );
+                  })}
                 </CustomSelect>
               </Grid>
               <Grid item xs={12}>
@@ -160,9 +161,13 @@ export default function Register() {
                   }
                   onChange={props.handleChange}
                 >
-                  <MenuItem value="Male">Male</MenuItem>
-                  <MenuItem value="Female">Female</MenuItem>
-                  <MenuItem value="Other">Other</MenuItem>
+                  {Genders.map((key, index) => {
+                    return (
+                      <MenuItem value={key} key={index}>
+                        {key}
+                      </MenuItem>
+                    );
+                  })}
                 </CustomSelect>
               </Grid>
 
