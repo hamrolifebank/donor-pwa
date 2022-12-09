@@ -1,5 +1,4 @@
 import { withIronSessionApiRoute } from "iron-session/next";
-let tries = 5;
 export default withIronSessionApiRoute(verifyOtp, {
   cookieName: "secret_otp",
   password: "password@12345678910112231123213213",
@@ -11,22 +10,22 @@ export default withIronSessionApiRoute(verifyOtp, {
 async function verifyOtp(req, res) {
   if (req.method === "POST") {
     const otpProvidedByUser = req.body.otp;
-    const email = req.body.email;
     if (otpProvidedByUser) {
-      const matchedOtp = req.session[email].otp === Number(otpProvidedByUser);
-      if (!matchedOtp && req.session[email].tries !== 0) {
-        req.session[email] = {
-          ...req.session[email],
-          tries: req.session[email].tries - 1,
+      const matchedOtp = req.session.otp === Number(otpProvidedByUser);
+      if (!matchedOtp && req.session.tries !== 0) {
+        req.session = {
+          ...req.session,
+          tries: req.session.tries - 1,
         };
         await req.session.save();
 
         res.status(400).json({
-          msg: `You entered wrong otp, you have ${req.session[email].tries} more tries`,
+          msg: `You entered wrong otp, you have ${req.session.tries} more tries`,
         });
-      } else if (!matchedOtp && req.session[email].tries <= 1) {
+      } else if (!matchedOtp && req.session.tries <= 1) {
         res.status(400).json({ msg: "Please contact our team" });
       } else {
+        await req.session.destroy();
         res.status(200).json({ msg: "Phone number successfully verified" });
       }
     }

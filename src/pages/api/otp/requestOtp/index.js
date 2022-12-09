@@ -14,8 +14,7 @@ export default withIronSessionApiRoute(otpRoute, {
 async function otpRoute(req, res) {
   if (req.method === "POST") {
     const phoneNumber = req.body.phoneNum;
-    const email = req.body.emailaddress;
-
+    console.log("the req session is", req.session);
     if (phoneNumber) {
       let wallet = new ethers.Wallet(
         "0x8fb2d8e49fdc7bb4cc946e41813f335024eb766300cada35f80545341d19273f"
@@ -26,17 +25,20 @@ async function otpRoute(req, res) {
 
       const otp = Math.floor(1000 + Math.random() * 9000);
 
-      if (Object.keys(req.session).includes(email)) {
-        req.session[email] = {
-          ...req.session[email],
+      if (Object.keys(req.session).length) {
+        console.log("the if entered");
+        req.session = {
+          ...req.session,
           otp,
         };
       } else {
-        req.session[email] = {
+        console.log("the else entered");
+        req.session = {
           otp,
           tries: 5,
         };
       }
+      console.log("the line 40 ", req.session);
       await req.session.save();
       res.send({ ok: true });
 
