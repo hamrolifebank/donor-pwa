@@ -21,8 +21,10 @@ export default class MyDocument extends Document {
           {/* PWA primary color */}
           <meta name='theme-color' content={palette("light").primary.main} />
 
+          <link rel="apple-touch-icon" href="/icon.png"></link>
+
           {/* Favicon */}
-          <link
+          {/* <link
             rel='apple-touch-icon'
             sizes='180x180'
             href='/favicon/apple-touch-icon.png'
@@ -38,7 +40,7 @@ export default class MyDocument extends Document {
             type='image/png'
             sizes='16x16'
             href='/favicon/favicon-16x16.png'
-          />
+          /> */}
 
           {/* Fonts */}
           <link rel='preconnect' href='https://fonts.googleapis.com' />
