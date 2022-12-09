@@ -1,10 +1,6 @@
-/* eslint-disable react/no-unescaped-entities */
 import { useState } from "react";
-// Formik
 import { Form, Formik } from "formik";
-//@mui
 import { Grid, Container, Typography, MenuItem } from "@mui/material";
-
 import { PrimaryButton, SecondaryButton } from "@components/Button";
 import { useRouter } from "next/router";
 import { PATH_AUTH, PATH_WALLET } from "@routes/paths";
@@ -19,11 +15,8 @@ import { useAppAuthContext } from "@contexts/AuthContext";
 import { RegisterFormSchema } from "@sections/form";
 import { BloodGroups, Genders } from "@config";
 
-// ----------------------------------------------------------------------
-
 export default function Register() {
   const [type, setType] = useState("text");
-
   const { addUser, deleteWallet } = useAppAuthContext();
   const { push } = useRouter();
 
@@ -32,7 +25,6 @@ export default function Register() {
     push(PATH_AUTH.login);
   };
 
-  console.log("the values is", BloodGroups, Genders);
   return (
     <Formik
       initialValues={{
