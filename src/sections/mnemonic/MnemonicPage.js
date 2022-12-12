@@ -48,9 +48,9 @@ export default function Mnemonic({ passcode }) {
       const myArray = [...words];
 
       const mappedArray = myArray.map((word, index) => {
-        return `word${index + 1} = ${word}\n`;
+        return word;
       });
-      let joinedString = mappedArray.join("");
+      let joinedString = mappedArray.join(" ");
       await navigator.clipboard.writeText(joinedString);
       setCopied("Mnemonics Copied!");
       setTimeout(() => {

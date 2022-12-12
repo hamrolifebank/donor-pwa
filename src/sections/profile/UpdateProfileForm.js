@@ -1,26 +1,24 @@
 import { useState, useRef, useEffect } from "react";
-// form
+
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm, Controller } from "react-hook-form";
-// @mui
+
 import { Stack, Grid, Container, Box, TextField, Alert } from "@mui/material";
 
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 
-// components
 import Iconify from "@components/iconify";
 import { FormProvider, RHFTextField } from "@components/hook-form";
-//
-import { FormSchema, defaultValues } from "../form";
+
+import { FormSchema } from "../form";
 import ListSelectFilter from "./ListSelectFilter";
 import { useAppAuthContext } from "@contexts/AuthContext";
 import { PrimaryButton } from "@components/Button";
 
-// ----------------------------------------------------------------------
-
 export default function UpdateProfileForm() {
   const { user, addUser } = useAppAuthContext();
+
   const [value, setValue] = useState({
     bloodGroup: user.bloodGroup,
     gender: user.gender,
@@ -97,18 +95,21 @@ export default function UpdateProfileForm() {
                 value={value.bloodGroup}
                 onChange={changeBloodGroup}
               />
-              <Box
-                display="flex"
-                gap={3}
-                justifyContent="center"
-                alignItems="center"
-              >
-                <Iconify
-                  icon="eva:phone-call-fill"
-                  sx={{ color: "primary.main" }}
-                ></Iconify>
-                <RHFTextField name="phone" label="9860365404" />
-              </Box>
+              {user.isPhoneVerified ? null : (
+                <Box
+                  display="flex"
+                  gap={3}
+                  justifyContent="center"
+                  alignItems="center"
+                >
+                  <Iconify
+                    icon="eva:phone-call-fill"
+                    sx={{ color: "primary.main" }}
+                  ></Iconify>
+                  <RHFTextField name="phone" label="Phone no." />
+                </Box>
+              )}
+
               <Box
                 display="flex"
                 gap={3}
@@ -119,7 +120,7 @@ export default function UpdateProfileForm() {
                   icon="material-symbols:mail"
                   sx={{ color: "primary.main" }}
                 ></Iconify>
-                <RHFTextField name="email" label="something@gmail.com" />
+                <RHFTextField name="email" label="Email" />
               </Box>
               <Box
                 display="flex"
