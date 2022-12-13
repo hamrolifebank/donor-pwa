@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import PropTypes from "prop-types";
 import { EventService } from "@services/index";
 
@@ -13,18 +13,17 @@ AppProvider.propTypes = {
 
 function AppProvider({ children }) {
   const [appState, setAppState] = useState(initialState);
-  useEffect(() => {
-    const callEvent = async () => {
-      const events = await EventService.getEvents();
-      const eventList = events.data;
-      setAppState((prev) => ({ ...prev, events: [...eventList] }));
-    };
-    callEvent();
-  }, []);
 
-  const contextValue = {
-    ...appState,
+  const callEvent = async () => {
+    const events = await EventService.getEvents();
+    const eventList = events.data;
+    setAppState((prev) => ({ ...prev, events: [...eventList] }));
   };
+
+  const contextValue = useMemo(() => ({
+    ...appState,
+    callEvent,
+  }));
 
   return (
     <AppContext.Provider value={contextValue}>{children}</AppContext.Provider>
