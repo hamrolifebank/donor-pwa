@@ -13,13 +13,13 @@ import { Icon } from "@iconify/react";
 import { useAppAuthContext } from "@contexts/AuthContext";
 import { useAppContext } from "@contexts/AppContext";
 import { useEventContext } from "@contexts/EventContext";
-
 import { getCurrentUser } from "@utils/sessionManager";
 import { useRouter } from "next/router";
 
 const EventInformation = ({ clickedEvents }) => {
   const router = useRouter();
   const { events, callEvent } = useAppContext();
+  const {fetchEventDetails} = useEventContext()
 
   useEffect(() => {
     callEvent();
@@ -72,6 +72,7 @@ const EventInformation = ({ clickedEvents }) => {
     }
     if (currentDate >= eventdate) {
       events.is_closed = true;
+
       if (router.isReady) {
         fetchEventDetails(router.query.slug);
       }
