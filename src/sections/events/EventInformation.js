@@ -12,19 +12,28 @@ import Radial from "./Radial";
 import { Icon } from "@iconify/react";
 import { useAppAuthContext } from "@contexts/AuthContext";
 import { useAppContext } from "@contexts/AppContext";
+import { useEventContext } from "@contexts/EventContext";
 import { getCurrentUser } from "@utils/sessionManager";
+import { useRouter } from "next/router";
 
 const EventInformation = ({ clickedEvents }) => {
-  const { events } = useAppContext();
+  const router = useRouter();
+  const { events, callEvent } = useAppContext();
+  const {fetchEventDetails} = useEventContext()
+
+  useEffect(() => {
+    callEvent();
+  }, []);
+
+  const { addEventInUser } = useAppAuthContext();
+  const [register, setRegister] = useState("Register");
+  const [registerColor, setRegisterColor] = useState("primary.main");
+  const { changeGraphData } = useEventContext();
+
   if (!clickedEvents) {
     let eventFromStorage = getCurrentUser("slugID");
     clickedEvents = events.find((event) => event.id === eventFromStorage);
   }
-  const { addEventInUser } = useAppAuthContext();
-  const [register, setRegister] = useState("Register");
-  const [registerColor, setRegisterColor] = useState("primary.main");
-  const { changeGraphData } = useAppContext();
-
   const handleRegister = (selectedEvent) => {
     setRegister("Registered");
     setRegisterColor("grey.400");
@@ -53,8 +62,9 @@ const EventInformation = ({ clickedEvents }) => {
   let chipTextColor = chipLabel === "Active" ? "grey.0" : "grey.800";
 
   useEffect(() => {
-    let alreadyRegistered = 
-      getCurrentUser("user").events?.find((event) => event.id === selectedEvent.id);
+    let alreadyRegistered = getCurrentUser("user").events?.find(
+      (event) => event.id === selectedEvent.id
+    );
 
     if (alreadyRegistered) {
       setRegister("Registered");
@@ -62,10 +72,14 @@ const EventInformation = ({ clickedEvents }) => {
     }
     if (currentDate >= eventdate) {
       events.is_closed = true;
+
+      if (router.isReady) {
+        fetchEventDetails(router.query.slug);
+      }
     } else {
-      changeGraphData;
+      changeGraphData();
     }
-  }, []);
+  }, [router.isReady]);
 
   return (
     <Container>

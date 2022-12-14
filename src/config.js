@@ -65,3 +65,5 @@ export const walletSign = process.env.wallet_secret_sign;
 //   Unknown: "#00B8D9",
 //   default: "#000000",
 // };
+export const BloodGroups = ["A+", "B+", "O+", "O-", "A-", "B-", "AB+", "AB-"];
+export const Genders = ["Male", "Female", "Others"];

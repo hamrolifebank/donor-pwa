@@ -32,7 +32,7 @@ function EventProvider({ children }) {
   const [eventState, setEventState] = useState(initialState);
 
   const changeGraphData = useCallback(() => {
-    setAppState((prev) => ({ ...prev, isGraphDataAvailable: false }));
+    setEventState((prev) => ({ ...prev, isGraphDataAvailable: false }));
   });
 
   const fetchEventDetails = useCallback(async (id) => {
