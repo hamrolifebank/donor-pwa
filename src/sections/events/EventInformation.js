@@ -19,21 +19,13 @@ import { useRouter } from "next/router";
 const EventInformation = ({ clickedEvents }) => {
   const router = useRouter();
   const { events, callEvent } = useAppContext();
-  const {fetchEventDetails} = useEventContext()
-
-  useEffect(() => {
-    callEvent();
-  }, []);
+  const { fetchEventDetails } = useEventContext();
 
   const { addEventInUser } = useAppAuthContext();
   const [register, setRegister] = useState("Register");
   const [registerColor, setRegisterColor] = useState("primary.main");
   const { changeGraphData } = useEventContext();
 
-  if (!clickedEvents) {
-    let eventFromStorage = getCurrentUser("slugID");
-    clickedEvents = events.find((event) => event.id === eventFromStorage);
-  }
   const handleRegister = (selectedEvent) => {
     setRegister("Registered");
     setRegisterColor("grey.400");

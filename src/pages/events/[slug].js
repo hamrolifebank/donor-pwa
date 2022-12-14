@@ -20,9 +20,6 @@ export default function EventDetails() {
   const { events, callEvent } = useAppContext();
   const router = useRouter();
   const { slug } = router.query;
-  if (slug) {
-    setCurrentUser("slugID", slug);
-  }
   useEffect(() => {
     callEvent();
   }, []);
