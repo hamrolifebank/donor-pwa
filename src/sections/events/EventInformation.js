@@ -18,7 +18,6 @@ import { useRouter } from "next/router";
 
 const EventInformation = ({ clickedEvents }) => {
   const router = useRouter();
-  const { events, callEvent } = useAppContext();
   const { fetchEventDetails } = useEventContext();
 
   const { addEventInUser } = useAppAuthContext();
@@ -63,7 +62,7 @@ const EventInformation = ({ clickedEvents }) => {
       setRegisterColor("grey.400");
     }
     if (currentDate >= eventdate) {
-      events.is_closed = true;
+      selectedEvent.is_closed = true;
 
       if (router.isReady) {
         fetchEventDetails(router.query.slug);

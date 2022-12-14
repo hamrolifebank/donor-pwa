@@ -18,26 +18,25 @@ export default function ChartRadialBar() {
 
   const allPintsVerified = () => {
     events.map((event) =>
-      event.isVerified ? pintsOfVerified.push(event.pintsDonated) : null
+      event.isVerified ? pintsOfVerified.push(Number(event.pintsDonated)) : null
     );
   };
   const allPintsUnVerified = () => {
     events.map((event) =>
-      event.manuallyAdded ? pintsOfUnVerified.push(event.pintsDonated) : null
+      event.manuallyAdded
+        ? pintsOfUnVerified.push(Number(event.pintsDonated))
+        : null
     );
   };
   allPintsVerified();
   allPintsUnVerified();
 
   const totalVerifiedPints =
-    pintsOfVerified.length !== 0
-      ? pintsOfUnVerified.reduce((a, b) => a + b)
-      : pintsOfVerified.push(0);
+    pintsOfVerified.length !== 0 ? pintsOfVerified.reduce((a, b) => a + b) : 0;
   const totalUnVerifiedPints =
     pintsOfUnVerified.length !== 0
       ? pintsOfUnVerified.reduce((a, b) => a + b)
-      : pintsOfVerified.push(0);
-  console.log(totalUnVerifiedPints);
+      : 0;
   const total = totalUnVerifiedPints + totalVerifiedPints;
   const percentOfVerified = ((totalVerifiedPints / total) * 100).toFixed(2);
   const percentOfUnVerified = ((totalUnVerifiedPints / total) * 100).toFixed(2);

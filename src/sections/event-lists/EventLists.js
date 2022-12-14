@@ -18,13 +18,10 @@ export default function EventsPage(props) {
   const [noOfEventsToDisplay, setNoOfEventsToDisplay] =
     useState(NO_OF_EVENTS_TO_SHOW);
 
-  const { events, callEvent } = useAppContext();
+  const { events } = useAppContext();
   const { user } = useAppAuthContext();
   const { push } = useRouter();
 
-  useEffect(() => {
-    callEvent();
-  }, []);
   const convertDateToNumber = (date) => {
     const dateArray = date.split("T")[0].split("-");
     return Number(dateArray[0] + dateArray[1] + dateArray[2]);

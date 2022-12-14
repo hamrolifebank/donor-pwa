@@ -17,12 +17,9 @@ EventDetails.getLayout = (page) => (
 );
 
 export default function EventDetails() {
-  const { events, callEvent } = useAppContext();
+  const { events } = useAppContext();
   const router = useRouter();
   const { slug } = router.query;
-  useEffect(() => {
-    callEvent();
-  }, []);
 
   let clickedEvents = events.find((event) => event.id === String(slug));
 

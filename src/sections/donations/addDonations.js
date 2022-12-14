@@ -32,7 +32,7 @@ const AddDonations = () => {
     name: "",
     date: "",
     location: "",
-    pintsDonated: "",
+    pintsDonated: 0,
     isRegistered: false,
     isDonated: true,
     isVerified: false,
@@ -45,7 +45,10 @@ const AddDonations = () => {
   };
 
   const handleSubmit = () => {
-    user.events.push(manuallyAddedEvent);
+    user.events.push({
+      ...manuallyAddedEvent,
+      pintsDonated: Number(manuallyAddedEvent.pintsDonated),
+    });
     addUser(user);
     push(PATH_DONATIONS.root);
   };
