@@ -44,6 +44,8 @@ export default function Register() {
           dob: values.dob,
           bloodGroup: values.bloodGroup,
           gender: values.gender,
+          isPhoneVerified: false,
+          events: [],
         };
         addUser(userData);
         push(PATH_WALLET.mnemonic);
