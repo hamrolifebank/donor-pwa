@@ -2,12 +2,11 @@ import axios from "axios";
 
 const API = "/api/otp";
 
-export const sendRequestForOTP = async (phoneNum, publicAddress) => {
+export const sendRequestForOTP = async (phoneNum) => {
   try {
     const response = await axios.post(`${API}/requestOtp`, {
       method: "POST",
       phoneNum,
-      publicAddress,
     });
     return response;
   } catch (error) {

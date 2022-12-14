@@ -45,6 +45,9 @@ export const STORAGE = {
 
 export const OTPLENGTH = 6;
 
+export const walletKey = process.env.wallet_private_key;
+export const walletSign = process.env.wallet_secret_sign;
+
 //COLORS
 // export const PIECHARTCOLORS = {
 //   "A+": "#FFAB00",
@@ -62,3 +65,5 @@ export const OTPLENGTH = 6;
 //   Unknown: "#00B8D9",
 //   default: "#000000",
 // };
+export const BloodGroups = ["A+", "B+", "O+", "O-", "A-", "B-", "AB+", "AB-"];
+export const Genders = ["Male", "Female", "Others"];
