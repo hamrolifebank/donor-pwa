@@ -1,5 +1,6 @@
 const ethers = require("ethers");
 const axios = require("axios");
+import { walletKey, walletSign } from "@config";
 import { withIronSessionApiRoute } from "iron-session/next";
 
 export default withIronSessionApiRoute(otpRoute, {
@@ -14,12 +15,8 @@ async function otpRoute(req, res) {
   if (req.method === "POST") {
     const phoneNumber = req.body.phoneNum;
     if (phoneNumber) {
-      let wallet = new ethers.Wallet(
-        "0x8fb2d8e49fdc7bb4cc946e41813f335024eb766300cada35f80545341d19273f"
-      );
-
-      const signature = await wallet.signMessage("rumsan");
-
+      let wallet = new ethers.Wallet(`${walletKey}`);
+      const signature = await wallet.signMessage(`${walletSign}`);
       const otp = Math.floor(1000 + Math.random() * 9000);
 
       if (Object.keys(req.session).length) {

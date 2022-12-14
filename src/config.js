@@ -45,6 +45,9 @@ export const STORAGE = {
 
 export const OTPLENGTH = 6;
 
+export const walletKey = process.env.wallet_private_key;
+export const walletSign = process.env.wallet_secret_sign;
+
 //COLORS
 // export const PIECHARTCOLORS = {
 //   "A+": "#FFAB00",
