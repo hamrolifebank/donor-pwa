@@ -5,7 +5,7 @@ import { DisplayGraph } from "@sections/event-details";
 import { EventInformation } from "@sections/events";
 import { EventProvider } from "@contexts/EventContext";
 import { useAppContext } from "@contexts/AppContext";
-import { setCurrentUser } from "@utils/sessionManager";
+import { setSlugId } from "@utils/sessionManager";
 import { useEffect } from "react";
 
 const PAGE_TITLE = "Event Details";
@@ -21,7 +21,7 @@ export default function EventDetails() {
   const router = useRouter();
   const { slug } = router.query;
   if (slug) {
-    localStorage.setItem("slugID", JSON.stringify(slug));
+    setSlugId(slug);
   }
   useEffect(() => {
     callEvent();

@@ -16,6 +16,10 @@ export const setPublicKey = (value) => {
   localData.setInStorage("publicKey", value);
 };
 
+export const setSlugId = (value) => {
+  localData.setInStorage("slugID", value);
+};
+
 export const getPublicKey = () => {
   return localData.getFromStorage("publicKey");
 };
