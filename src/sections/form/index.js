@@ -10,6 +10,4 @@ export const RegisterFormSchema = Yup.object().shape({
     .required("Email is required")
     .email("That is not an email"),
   dob: Yup.date().nullable().required("Birth Date is required"),
-  bloodGroup: Yup.string().nullable().required("Please select a BloodGroup"),
-  gender: Yup.string().required("Gender is required"),
 });
