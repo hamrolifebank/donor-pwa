@@ -45,5 +45,25 @@ export const STORAGE = {
 
 export const OTPLENGTH = 6;
 
+export const walletKey = process.env.wallet_private_key;
+export const walletSign = process.env.wallet_secret_sign;
+
+//COLORS
+// export const PIECHARTCOLORS = {
+//   "A+": "#FFAB00",
+//   "B+": "#CF3D3C",
+//   "AB+": "#00B8D9",
+//   "O+": "#FF5630",
+//   "Under 18": "#FFAB00",
+//   "18 - 29": "#CF3D3C",
+//   "30 - 39": "#00B8D9",
+//   "40 - 49": "#FF5630",
+//   "50 - 59": "#FF4579",
+//   Male: "#FFAB00",
+//   Female: "#CF3D3C",
+//   Others: "#FF4579",
+//   Unknown: "#00B8D9",
+//   default: "#000000",
+// };
 export const BloodGroups = ["A+", "B+", "O+", "O-", "A-", "B-", "AB+", "AB-"];
 export const Genders = ["Male", "Female", "Others"];

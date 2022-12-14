@@ -1,18 +1,30 @@
-let tries = 5;
-export default function handler(req, res) {
+import { withIronSessionApiRoute } from "iron-session/next";
+export default withIronSessionApiRoute(verifyOtp, {
+  cookieName: "secret_otp",
+  password: process.env.password,
+  cookieOptions: {
+    secure: process.env.NODE_ENV === "production",
+  },
+});
+async function verifyOtp(req, res) {
   if (req.method === "POST") {
     const otpProvidedByUser = req.body.otp;
     if (otpProvidedByUser) {
-      const matchedOtp = 1234 === Number(otpProvidedByUser);
+      const matchedOtp = req.session.otp === Number(otpProvidedByUser);
+      if (!matchedOtp && req.session.tries !== 0) {
+        req.session = {
+          ...req.session,
+          tries: req.session.tries - 1,
+        };
+        await req.session.save();
 
-      if (!matchedOtp && tries !== 0) {
-        tries--;
-        res
-          .status(400)
-          .json({ msg: `You entered wrong otp, you have ${tries} more tries` });
-      } else if (!matchedOtp && tries <= 1) {
+        res.status(400).json({
+          msg: `You entered wrong otp, you have ${req.session.tries} more tries`,
+        });
+      } else if (!matchedOtp && req.session.tries <= 1) {
         res.status(400).json({ msg: "Please contact our team" });
       } else {
+        await req.session.destroy();
         res.status(200).json({ msg: "Phone number successfully verified" });
       }
     }

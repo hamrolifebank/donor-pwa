@@ -19,6 +19,7 @@ import {
   sendRequestForOTP,
   sendVerificationRequestForOTP,
 } from "@services/otp";
+import { getCurrentUser } from "@utils/sessionManager";
 
 const OtpDialog = () => {
   const { open, setOpen, setUserPhoneVerification } = useOtpContext();
@@ -48,7 +49,8 @@ const OtpDialog = () => {
     }
   };
   const handleResend = () => {
-    sendRequestForOTP(user.phone);
+    const phoneNum = getCurrentUser().phone;
+    sendRequestForOTP(phoneNum);
     setotpNotification("We have resent a new OTP");
   };
   const handleClose = () => {

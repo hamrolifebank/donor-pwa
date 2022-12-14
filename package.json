@@ -29,6 +29,7 @@
     "ethers": "^5.7.2",
     "formik": "^2.2.9",
     "framer-motion": "^7.6.4",
+    "iron-session": "^6.3.1",
     "jwt-decode": "^3.1.2",
     "mui-image": "^1.0.7",
     "mui-one-time-password-input": "^1.0.3",
