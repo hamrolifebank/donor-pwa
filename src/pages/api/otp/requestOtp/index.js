@@ -31,17 +31,25 @@ async function otpRoute(req, res) {
         };
       }
       await req.session.save();
-      res.send({ ok: true });
 
-      const { data } = await axios.post(
-        `https://services.rumsan.net/sms`,
-        { phone: 9991109671, message: JSON.stringify(otp) },
-        {
-          headers: {
-            signature,
-          },
+      try {
+        const { data } = await axios.post(
+          `https://services.rumsan.net/sms`,
+          { phone: 9991109671, message: JSON.stringify(otp) },
+          {
+            headers: {
+              signature,
+            },
+          }
+        );
+        if (data.success) {
+          return res.send({ ok: true });
+        } else {
+          return res.send({ ok: false, message: data.message });
         }
-      );
+      } catch (e) {
+        return res.json({ ok: false, ...e.response.data });
+      }
     } else {
       res.status(400).json({ msg: "Please specificy your phone number" });
     }
