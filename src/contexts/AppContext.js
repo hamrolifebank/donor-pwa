@@ -14,20 +14,16 @@ AppProvider.propTypes = {
 function AppProvider({ children }) {
   const [appState, setAppState] = useState(initialState);
 
-  const callEvent = async () => {
-    const events = await EventService.getEvents();
-    const eventList = events.data;
-    setAppState((prev) => ({ ...prev, events: [...eventList] }));
-  };
+  useEffect(() => {
+    const fetchEvents = async () => {
+      const events = await EventService.getEvents();
+      const eventList = events.data;
+      setAppState((prev) => ({ ...prev, events: eventList }));
+    };
+    fetchEvents();
+  }, []);
 
-  const contextValue = useMemo(() => ({
-    ...appState,
-    callEvent,
-  }));
-
-  return (
-    <AppContext.Provider value={contextValue}>{children}</AppContext.Provider>
-  );
+  return <AppContext.Provider value={appState}>{children}</AppContext.Provider>;
 }
 export { AppContext, AppProvider };
 export const useAppContext = () => useContext(AppContext);
