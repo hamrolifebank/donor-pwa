@@ -30,6 +30,7 @@ const Home = () => {
         <Alert severity="warning">Click here to verify phone number</Alert>
       );
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
   return (
