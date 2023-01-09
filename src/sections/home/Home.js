@@ -56,7 +56,7 @@ const Home = () => {
       >
         <Box display="flex" justifyContent="center">
           <QRCode
-            title="GeeksForGeeks"
+            title="DonorQRCode"
             value={`${publicAddress}`}
             level="M"
             bgColor={"#FFFFFF"}
