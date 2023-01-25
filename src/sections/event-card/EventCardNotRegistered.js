@@ -6,20 +6,28 @@ import { Icon } from "@iconify/react";
 import { PrimaryButton } from "@components/Button";
 import { useAppAuthContext } from "@contexts/AuthContext";
 import { useOtpContext } from "@contexts/OtpContext";
-import { getCurrentUser } from "@utils/sessionManager";
+import {
+  encryptUserForRegistryApp,
+  getCurrentUser,
+  getPublicKey,
+} from "@utils/sessionManager";
+import { sendDonorInfoInRegistryApp } from "@services/eventPledgers";
 
 const EventCardNotRegistered = ({ event }) => {
   const theme = useTheme();
   const { user, addUser, addEventInUser } = useAppAuthContext();
   const { handleClickOpenOtpDialog } = useOtpContext();
 
-  const handleRegister = () => {
-    if (!getCurrentUser().isPhoneVerified) {
-      handleClickOpenOtpDialog(user.phone);
-    }
-    if (getCurrentUser().isPhoneVerified) {
-      addEventInUser(event);
-    }
+  const handleRegister = async (e, eventEthAddress, eventid) => {
+    // if (!getCurrentUser().isPhoneVerified) {
+    //   handleClickOpenOtpDialog(user.phone);
+    // }
+    // if (getCurrentUser().isPhoneVerified) {
+    //   addEventInUser(event);
+    // }
+    let pledgerinfo = await encryptUserForRegistryApp(eventEthAddress);
+    sendDonorInfoInRegistryApp(getPublicKey(), pledgerinfo, eventid);
+    // addEventInUser(event);
   };
 
   return (
@@ -44,7 +52,7 @@ const EventCardNotRegistered = ({ event }) => {
               lineHeight: "subtitle1.lineHeight",
             }}
           >
-            {event.name}
+            {event.eventName}
           </Typography>
           <Typography
             sx={{
@@ -56,7 +64,7 @@ const EventCardNotRegistered = ({ event }) => {
             }}
           >
             <Icon icon="mdi:clock-time-eight-outline" />
-            {event.date.slice(0, 10)}
+            {event.startTimeStamp.slice(0, 10)}
           </Typography>
 
           <Typography
@@ -78,7 +86,7 @@ const EventCardNotRegistered = ({ event }) => {
             onClick={(e) => {
               e.preventDefault();
               e.stopPropagation();
-              handleRegister(e);
+              handleRegister(e, event.eventEthAddress, event.id);
             }}
           >
             <Icon icon="material-symbols:arrow-circle-left" />

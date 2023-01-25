@@ -1,11 +1,24 @@
+import { ethers } from "ethers";
 import jwtDecode from "jwt-decode";
 import localData from "./localData";
+import EthCrypto from "eth-crypto";
 
 export const getCurrentUser = () => {
   let user = null;
   const data = localData.getFromStorage("user");
   if (data) user = data;
   return user;
+};
+
+export const encryptUserForRegistryApp = async (eventEthAddress) => {
+  let user = JSON.stringify(getCurrentUser());
+  eventEthAddress = eventEthAddress.substring(2);
+  const encryptedUser = await EthCrypto.encryptWithPublicKey(
+    eventEthAddress,
+    user
+  );
+
+  return JSON.stringify(encryptedUser);
 };
 
 export const setCurrentUser = (value) => {
