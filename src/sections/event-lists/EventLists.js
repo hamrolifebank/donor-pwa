@@ -21,17 +21,14 @@ export default function EventsPage(props) {
   const { events } = useAppContext();
   const { user } = useAppAuthContext();
   const { push } = useRouter();
-
+  const currentDate = new Date();
   const convertDateToNumber = (date) => {
     const dateArray = date.split("T")[0].split("-");
     return Number(dateArray[0] + dateArray[1] + dateArray[2]);
   };
 
   const filteredEvents = events?.filter((event) => {
-    return (
-      convertDateToNumber(event.date) >=
-      convertDateToNumber(new Date().toISOString())
-    );
+    return new Date(event.startTimeStamp) >= currentDate;
   });
 
   const registeredEvents = filteredEvents
@@ -46,7 +43,8 @@ export default function EventsPage(props) {
       }
     })
     .sort((a, b) => {
-      return convertDateToNumber(a.date) - convertDateToNumber(b.date);
+      // return convertDateToNumber(a.date) - convertDateToNumber(b.date);
+      return new Date(a.startTimeStamp) - new Date(b.startTimeStamp);
     });
 
   const notRegisteredEvents = filteredEvents
@@ -61,7 +59,8 @@ export default function EventsPage(props) {
       }
     })
     .sort((a, b) => {
-      return convertDateToNumber(a.date) - convertDateToNumber(b.date);
+      // return convertDateToNumber(a.date) - convertDateToNumber(b.date);
+      return new Date(a.startTimeStamp) - new Date(b.startTimeStamp);
     });
 
   return (

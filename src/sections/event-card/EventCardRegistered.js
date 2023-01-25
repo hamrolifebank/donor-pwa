@@ -42,7 +42,7 @@ const EventCardRegistered = ({ event }) => {
             }}
           >
             <Icon icon="mdi:clock-time-eight-outline" />
-            {event.date.slice(0, 10)}
+            {event?.date?.slice(0, 10)}
           </Typography>
 
           <Typography
