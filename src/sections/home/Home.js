@@ -5,7 +5,6 @@ import QRCode from "react-qr-code";
 import { Container } from "@mui/system";
 import { EventPage } from "../event-lists";
 import { useOtpContext } from "@contexts/OtpContext";
-import { PrimaryButton } from "@components/Button";
 import { set } from "date-fns";
 import { usePasscodeContext } from "@contexts/PasscodeContext";
 import { useRouter } from "next/router";
@@ -34,7 +33,7 @@ const Home = () => {
   }, [user]);
 
   return (
-    <Container>
+    <Container sx={{ mb: 4 }}>
       {user?.isPhoneVerified === true ? (
         <>{userPhoneVerification}</>
       ) : (
@@ -66,8 +65,16 @@ const Home = () => {
           />
         </Box>
 
-        <Box display="flex" justifyContent="center">
-          <Typography variant="caption" sx={{}}>
+        <Box
+          display="flex"
+          justifyContent="center"
+          sx={{ wordWrap: "inherit" }}
+        >
+          <Typography
+            variant="subtitle2"
+            noWrap
+            sx={{ textDecorationLine: "underline" }}
+          >
             {publicAddress}
           </Typography>
         </Box>

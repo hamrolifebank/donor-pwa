@@ -32,7 +32,7 @@ export default function PasscodeFrom() {
   const { addWallet } = useAppAuthContext();
   const { isPasscodeset, changeIsPasscodeSet, changeIsAppLocked } =
     usePasscodeContext();
-
+  const router = useRouter();
   const handleCurrent = (newValue) => {
     setValue({ ...value, current: newValue });
   };

@@ -58,7 +58,7 @@ export default function Mnemonic({ passcode }) {
       }, 5000);
     };
     return (
-      <Container>
+      <Container sx={{ mb: 4 }}>
         <Typography variant="h3"> Let's secure your account.</Typography>
         <Typography variant="subtitle3">
           Please save this 12 word mnemonic safely.

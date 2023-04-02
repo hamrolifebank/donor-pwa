@@ -75,7 +75,7 @@ export default function UpdateProfileForm() {
   };
 
   return (
-    <Container>
+    <Container sx={{ mb: 4 }}>
       {showAlert ? (
         <Box sx={{ m: "10px 0" }}>
           <Alert severity="success">User updated Sucessfully</Alert>
