@@ -51,7 +51,7 @@ export default function Register() {
       }}
     >
       {(props) => (
-        <Container>
+        <Container sx={{ mb: 4 }}>
           <Typography variant="h3" sx={{ mb: 2, mt: 2 }}>
             Register
           </Typography>

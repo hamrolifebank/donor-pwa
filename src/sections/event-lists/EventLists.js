@@ -65,7 +65,7 @@ export default function EventsPage(props) {
     });
 
   return (
-    <Container display="flex">
+    <Container sx={{ mb: 4 }} display="flex">
       <Typography
         sx={{
           mb: 1,

@@ -87,7 +87,11 @@ export default function ReactHookForm() {
   };
 
   return (
-    <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
+    <FormProvider
+      methods={methods}
+      onSubmit={handleSubmit(onSubmit)}
+      sx={{ mb: 4 }}
+    >
       <Grid container spacing={3}>
         <Grid item xs={12} md={12}>
           <Stack spacing={3}>

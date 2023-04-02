@@ -25,7 +25,7 @@ const Donations = () => {
   };
 
   return (
-    <Container>
+    <Container sx={{ mb: 4 }}>
       <Grid container item xs={12} gap={2}>
         <Grid item xs={7} sx={{ mt: 5 }}>
           <Typography variant="h3" sx={{ mb: 2 }}>
